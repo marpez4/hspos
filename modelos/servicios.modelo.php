@@ -1,0 +1,231 @@
+<?php
+
+require_once "conexion.php";
+
+class ModeloServicios{
+
+	/*=============================================
+	CREAR SERVICIO
+	=============================================*/
+
+	static public function mdlIngresarServicios($tabla, $datos){
+
+		$stmtC = Conexion::conectar()->prepare("SELECT * FROM cajas WHERE estatus = 1");
+
+		if($stmtC->execute()){
+
+			foreach ($stmtC as $key => $value) {
+
+				$idCaja = $value["id"];
+			}
+
+		}
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha_llegada, cliente, id_empleado, equipo, marca, procesador, ram, dd, so, falla, solucion, obs, fecha_entrega, tipo_servicio, total, estatus, id_caja ) VALUES (:fecha_llegada, :id_cliente, :id_empleado, :equipo, :marca, :procesador, :ram, :dd, :so, :falla, :solucion, :obs, :fecha_entrega, :tipo_servicio, :total, :estatus, :idCaja)");
+
+		$tipoServicio = $datos["tipo_servicio"];
+
+		($tipoServicio == 1 ? $precio = 100.00 :
+		($tipoServicio == 2 ? $precio = 200.00 :
+		($tipoServicio == 3 ? $precio = 300.00 :
+		($tipoServicio == 4 ? $precio = 400.00 :
+		($tipoServicio == 5 ? $precio = 500.00 : 00.00 )))));
+
+		$stmt->bindParam(":fecha_llegada", $datos["fecha_llegada"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_empleado", $datos["id_empleado"], PDO::PARAM_INT);
+		$stmt->bindParam(":equipo", $datos["equipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
+		$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
+		$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
+		$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
+		$stmt->bindParam(":so", $datos["so"], PDO::PARAM_STR);
+		$stmt->bindParam(":falla", $datos["falla"], PDO::PARAM_STR);
+		$stmt->bindParam(":solucion", $datos["solucion"], PDO::PARAM_STR);
+		$stmt->bindParam(":obs", $datos["obs"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_entrega", $datos["fecha_entrega"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_servicio", $datos["tipo_servicio"], PDO::PARAM_STR);
+		$stmt->bindParam(":total", $precio, PDO::PARAM_INT);
+		$stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_STR);
+		$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);
+
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	MOSTRAR SERVICIOS
+	=============================================*/
+
+	static public function mdlMostrarServicios($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	EDITAR CATEGORIA
+	=============================================*/
+
+	static public function mdlEditarServicio($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha_llegada = :fecha_llegada, cliente = :id_cliente, equipo = :equipo, marca = :marca, procesador = :procesador, ram = :ram, dd = :dd, so = :so, falla = :falla, solucion = :solucion, obs = :obs, fecha_entrega = :fecha_entrega, tipo_servicio = :tipo_servicio, total = :total, estatus = :estatus WHERE id = :id");
+
+		$tipoServicio = $datos["tipo_servicio"];
+
+		($tipoServicio == 1 ? $precio = 100.00 :
+		($tipoServicio == 2 ? $precio = 200.00 :
+		($tipoServicio == 3 ? $precio = 300.00 :
+		($tipoServicio == 4 ? $precio = 400.00 :
+		($tipoServicio == 5 ? $precio = 500.00 : 00.00 )))));
+
+
+		// id_cliente = :id_cliente, equipo = :equipo, marca = :marca, procesador = :procesador, ram = :ram, dd = :dd, so = :so, falla = :falla, solucion = :solucion, obs = :obs, fecha_entrega = :fecha_entrega, tipo_servicio = :tipo_servicio, total = :total, estatus = :estatus
+		$stmt->bindParam(":fecha_llegada", $datos["fecha_llegada"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_STR);
+		$stmt->bindParam(":equipo", $datos["equipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
+		$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
+		$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
+		$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
+		$stmt->bindParam(":so", $datos["so"], PDO::PARAM_STR);
+		$stmt->bindParam(":falla", $datos["falla"], PDO::PARAM_STR);
+		$stmt->bindParam(":solucion", $datos["solucion"], PDO::PARAM_STR);
+		$stmt->bindParam(":obs", $datos["obs"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_entrega", $datos["fecha_entrega"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_servicio", $datos["tipo_servicio"], PDO::PARAM_STR);
+		$stmt->bindParam(":total", $precio, PDO::PARAM_INT);
+		$stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	BORRAR CATEGORIA
+	=============================================*/
+
+	static public function mdlBorrarServicio($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	RANGO FECHAS
+	=============================================*/	
+
+	static public function mdlRangoFechasServicios($tabla, $fechaInicial, $fechaFinal){
+
+		if($fechaInicial == null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();	
+
+
+		}else if($fechaInicial == $fechaFinal){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada like '%$fechaFinal%'");
+
+			$stmt -> bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}else{
+
+			$fechaActual = new DateTime();
+			$fechaActual ->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2 ->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if($fechaFinalMasUno == $fechaActualMasUno){
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+
+			}else{
+
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinal'");
+
+			}
+		
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+	}
+
+}
+
