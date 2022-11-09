@@ -61,3 +61,16 @@ $(".tablas").on("click", ".btnEliminaPedidoPaqueteria", function(){
     })
 
 })
+
+/*=============================================
+IMPRIMIR SERVICIO
+=============================================*/
+
+$(".tablas").on("click", ".btnImprimirPaqueteria", function () {
+
+	
+	var codigoPaqueteria = $(this).attr("codigoPaqueteria");
+
+	window.open("extensiones/tcpdf/pdf/envio-paqueteria.php?codigo=" + codigoPaqueteria, "_blank");
+
+})

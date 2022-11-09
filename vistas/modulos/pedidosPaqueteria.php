@@ -95,6 +95,9 @@ if ($_SESSION["perfil"] == "Vendedor") {
                     <td>
 
                       <div class="btn-group">
+
+                        <button class="btn btn-info btnImprimirPaqueteria" codigoPaqueteria="' . $value["id"] . '"><i class="fa fa-print"></i>
+                         </button>
                           
                         <button class="btn btn-warning btnEditarPedidoPaqueteria" idPedidoPaqueteria="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarPedidoPaqueteria"><i class="fa fa-pencil"></i></button>';
 
