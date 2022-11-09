@@ -23,6 +23,7 @@ class ControladorServicios
 
 				$datos = array(
 					"fecha_llegada" => $_POST["nuevaFechaLl"],
+					"folio" => $_POST["nuevoFolio"],
 					"id_cliente" => $_POST["nuevoCliente"],
 					"id_empleado" => $_POST["nuevoEmpleado"],
 					"equipo" => $_POST["nuevaEquipo"],

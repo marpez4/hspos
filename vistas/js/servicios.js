@@ -4,7 +4,8 @@ IMPRIMIR SERVICIO
 
 $(".tablas").on("click", ".btnImprimirServcio", function () {
 
-	var codigoServicio = $(this).attr("codigoServicio");
+	
+	var codigoServicio = $(this).attr("idServicio");
 
 	window.open("extensiones/tcpdf/pdf/servicio-carta.php?codigo=" + codigoServicio, "_blank");
 
@@ -34,6 +35,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#idServicio").val(respuesta["id"]);
 			// var fecha2 = moment(respuesta["fecha_entrega"], 'YYYY-MM-DD').format('DD-MM-YYYY');
 
+			$("#editarFolio").val(respuesta["folio"]);
 			$("#editarFechaLl").val(respuesta["fecha_llegada"]);
 			$("#editarCliente").val(respuesta["cliente"]);
 			$("#editarEmpleado").val(respuesta["id_empleado"]);
@@ -47,7 +49,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#editarSolucion").val(respuesta["solucion"]);
 			$("#editarObs").val(respuesta["obs"]);
 			$("#editarFechaEn").val(respuesta["fecha_entrega"]);
-			$("#editarServicio").val(respuesta["tipo_servicio"]);
+			$("#editarServicio").val(respuesta["total"]);
 			$("#editarEstatus").val(respuesta["estatus"]);
 
 

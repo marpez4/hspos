@@ -78,6 +78,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                         <tr>
 
                             <th style="width:10px">#</th>
+                            <th>Folio</th>
                             <th>Fecha llegada</th>
                             <th>Cliente</th>
                             <th>Empleado</th>
@@ -113,6 +114,8 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             echo ' <tr>
 
                                     <td>' . ($key + 1) . '</td>
+
+                                    <td class="text-uppercase">' . $value["folio"] . '</td>
 
                                     <td class="text-uppercase">' . $fechaLlegada . '</td>';
 
@@ -154,7 +157,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                 <button class="btn btn-info btnImprimirServcio" codigoServicio="' . $value["id"] . '"><i class="fa fa-print"></i>
                                 </button>
   
-                                <button class="btn btn-warning btnEditarServicio" idServicio="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarServicio"><i class="fa fa-pencil"></i></button>';
+                                <button class="btn btn-warning btnEditarServicio" idServicio="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>';
 
                             if ($_SESSION["perfil"] == "Administrador") {
 
@@ -214,28 +217,65 @@ MODAL AGREGAR SERVICIO
 
                     <div class="box-body">
 
+                        <div class="form-group col-md-6">
+
+                            <label for="">No. Folio</label>
+
+
+                            <!-- NUMERO DE FOLIO -->
+
+                            <?php
+
+                            $item = null;
+                            $valor = null;
+
+                            $servicios = ControladorServicios::ctrMostrarServicios($item, $valor);
+
+                            if (!$servicios) {
+
+                                echo '<input type="text" class="form-control" id="nuevoFolio" name="nuevoFolio" value="10001" readonly>';
+                            } else {
+
+                                foreach ($servicios as $key => $value) {
+                                }
+
+                                $folio = $value["folio"] + 1;
+
+                                echo '<input type="text" class="form-control" id="nuevoFolio" name="nuevoFolio" value="' . $folio . '" readonly>';
+                            }
+
+
+                            ?>
+
+                        </div>
+
                         <!-- ENTRADA PARA FECHA LLEGADA -->
 
                         <div class="form-group col-md-12">
 
+                            <label for="">Ingresar fecha de llegada</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="date" class="form-control input-lg" name="nuevaFechaLl" placeholder="Ingresar fecha de llegada" required>
+                                <input type="date" class="form-control input-lg" name="nuevaFechaLl" required>
 
                             </div>
 
                         </div>
+
                         <!-- ENTRADA PARA CLIENTE -->
 
                         <div class="form-group col-md-12">
+
+                            <label for="">Ingresar nombre del cliente</label>
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre del cliente" required>
+                                <input type="text" class="form-control input-lg" name="nuevoCliente" required>
 
                             </div>
 
@@ -243,6 +283,8 @@ MODAL AGREGAR SERVICIO
                         <!-- ENTRADA PARA EMPLEADO -->
 
                         <div class="form-group col-md-12">
+
+                            <label for="">Nombre de empleado</label>
 
                             <div class="input-group">
 
@@ -279,11 +321,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Equipo</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaEquipo" placeholder="Ingresar Equipo" required>
+                                <input type="text" class="form-control input-lg" name="nuevaEquipo" required>
 
                             </div>
 
@@ -292,11 +336,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Marca</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaMarca" placeholder="Ingresar Marca" required>
+                                <input type="text" class="form-control input-lg" name="nuevaMarca" required>
 
                             </div>
 
@@ -305,11 +351,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Procesador</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoProcesador" placeholder="Ingresar Procesador" required>
+                                <input type="text" class="form-control input-lg" name="nuevoProcesador" required>
 
                             </div>
 
@@ -318,11 +366,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar RAM</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaRam" placeholder="Ingresar RAM" required>
+                                <input type="text" class="form-control input-lg" name="nuevaRam" required>
 
                             </div>
 
@@ -331,11 +381,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar DD</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaDd" placeholder="Ingresar DD" required>
+                                <input type="text" class="form-control input-lg" name="nuevaDd" required>
 
                             </div>
 
@@ -344,11 +396,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar SO</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoSo" placeholder="Ingresar SO" required>
+                                <input type="text" class="form-control input-lg" name="nuevoSo" required>
 
                             </div>
 
@@ -357,11 +411,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-12">
 
+                            <label for="">¿Cuál es la falla?</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="¿Cuál es la falla?" name="nuevaFalla" required></textarea>
+                                <textarea class="form-control" rows="3" name="nuevaFalla" required></textarea>
 
                             </div>
 
@@ -370,11 +426,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-12">
 
+                            <label for="">¿Cuál fue la solución?</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="¿Cuál fue la solución?" name="nuevaSolución"></textarea>
+                                <textarea class="form-control" rows="3" name="nuevaSolución"></textarea>
 
                             </div>
 
@@ -384,11 +442,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-12">
 
+                            <label for="">Observaciones</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="Observaciones" name="nuevaObs"></textarea>
+                                <textarea class="form-control" rows="3" name="nuevaObs"></textarea>
 
                             </div>
 
@@ -397,34 +457,13 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-12">
 
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
-
-                                <input type="date" class="form-control input-lg" name="nuevaFechaEn" placeholder="Fecha de entrega" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA PRECIO DEL SERVICIO -->
-
-                        <div class="form-group col-md-6">
+                            <label for="">Fecha de entrega</label>
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <select class="form-control input-lg" name="nuevoServicio" id="nuevoServicio" required>
-
-                                    <option value="">Tipo de servicio</option>
-                                    <option value="1">Servicio 1</option>
-                                    <option value="2">Servicio 2</option>
-                                    <option value="3">Servicio 3</option>
-                                    <option value="4">Servicio 4</option>
-                                    <option value="5">Servicio 5</option>
-
-                                </select>
+                                <input type="date" class="form-control input-lg" name="nuevaFechaEn">
 
                             </div>
 
@@ -434,13 +473,15 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Estado del servicio</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                                 <select class="form-control input-lg" name="nuevoEstatus" id="nuevoEstatus" required>
 
-                                    <option value="">Estado del servicio</option>
+                                    <option value="">Seleccione </option>
                                     <option value="1">Abierto</option>
                                     <option value="2">En proceso(Trabajando)</option>
                                     <option value="3">Terminado</option>
@@ -449,6 +490,22 @@ MODAL AGREGAR SERVICIO
                                     <option value="6">Entregado</option>
 
                                 </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA PRECIO DEL SERVICIO -->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">Costo del servicio</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+
+                                <input type="number" class="form-control input-lg" name="nuevoServicio">
 
                             </div>
 
@@ -517,9 +574,21 @@ MODAL EDITAR CATEGORÍA
 
                     <div class="box-body">
 
+                        <!-- FOLIO -->
+
+                        <div class="form-group col-md-6">
+
+                        <label for="">No. Folio</label>
+
+                            <input type="text" class="form-control input-lg" name="editarFolio" id="editarFolio" readonly>
+
+                        </div>
+
                         <!-- ENTRADA PARA FECHA LLEGADA -->
 
                         <div class="form-group col-md-12">
+
+                            <label for="">Ingresar fecha de llegada</label>
 
                             <input type="hidden" name="idServicio" id="idServicio" required>
 
@@ -527,7 +596,7 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarFechaLl" id="editarFechaLl" placeholder="Ingresar fecha de llegada" required>
+                                <input type="text" class="form-control input-lg" name="editarFechaLl" id="editarFechaLl" placeholder="" required>
 
                             </div>
 
@@ -536,6 +605,8 @@ MODAL EDITAR CATEGORÍA
                         <!-- ENTRADA PARA CLIENTE -->
 
                         <div class="form-group col-md-12">
+
+                            <label for="">Nombre del cliente</label>
 
                             <div class="input-group">
 
@@ -565,11 +636,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Equipo</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarEquipo" id="editarEquipo" placeholder="Ingresar Equipo" required>
+                                <input type="text" class="form-control input-lg" name="editarEquipo" id="editarEquipo" required>
 
                             </div>
 
@@ -579,11 +652,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Marca</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarMarca" id="editarMarca" placeholder="Ingresar Marca" required>
+                                <input type="text" class="form-control input-lg" name="editarMarca" id="editarMarca" required>
 
                             </div>
 
@@ -593,11 +668,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Ingresar Procesador</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarProcesador" id="editarProcesador" placeholder="Ingresar Procesador" required>
+                                <input type="text" class="form-control input-lg" name="editarProcesador" id="editarProcesador" required>
 
                             </div>
 
@@ -607,11 +684,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Editar Ram</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarRam" id="editarRam" placeholder="Editar Ram" required>
+                                <input type="text" class="form-control input-lg" name="editarRam" id="editarRam" required>
 
                             </div>
 
@@ -621,11 +700,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Editar DD</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarDd" id="editarDd" placeholder="Editar DD" required>
+                                <input type="text" class="form-control input-lg" name="editarDd" id="editarDd" required>
 
                             </div>
 
@@ -634,11 +715,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Editar SO</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarSo" id="editarSo" placeholder="Editar SO" required>
+                                <input type="text" class="form-control input-lg" name="editarSo" id="editarSo" required>
 
                             </div>
 
@@ -648,11 +731,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-12">
 
+                            <label for="">¿Cuál es la falla?</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="¿Cuál es la falla?" name="editarFalla" id="editarFalla" required></textarea>
+                                <textarea class="form-control" rows="3" name="editarFalla" id="editarFalla" required></textarea>
 
                             </div>
 
@@ -662,11 +747,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-12">
 
+                            <label for="">¿Cuál fue la solución?</label>
+
                             <div class="input-group col-md-12">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="¿Cuál fue la solución?" name="editarSolucion" id="editarSolucion"></textarea>
+                                <textarea class="form-control" rows="3" name="editarSolucion" id="editarSolucion"></textarea>
 
                             </div>
 
@@ -676,11 +763,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-12">
 
+                            <label for="">Observaciones</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <textarea class="form-control" rows="3" placeholder="Observaciones" name="editarObs" id="editarObs"></textarea>
+                                <textarea class="form-control" rows="3" name="editarObs" id="editarObs"></textarea>
 
                             </div>
 
@@ -690,34 +779,13 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-12">
 
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="editarFechaEn" id="editarFechaEn" placeholder="Fecha de entrega" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA PRECIO DEL SERVICIO -->
-
-                        <div class="form-group col-md-6">
+                            <label for="">Fecha de entrega</label>
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <select class="form-control input-lg" name="editarServicio" id="editarServicio" required>
-
-                                    <option value="">Tipo de servicio</option>
-                                    <option value="1">Servicio 1</option>
-                                    <option value="2">Servicio 2</option>
-                                    <option value="3">Servicio 3</option>
-                                    <option value="4">Servicio 4</option>
-                                    <option value="5">Servicio 5</option>
-
-                                </select>
+                                <input type="date" class="form-control input-lg" name="editarFechaEn" id="editarFechaEn" required>
 
                             </div>
 
@@ -727,13 +795,15 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
+                            <label for="">Estado del servicio</label>
+
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                                 <select class="form-control input-lg" name="editarEstatus" id="editarEstatus" required>
 
-                                    <option value="">Estado del servicio</option>
+                                    <option value="">Selecciona</option>
                                     <option value="1">Abierto</option>
                                     <option value="2">En proceso(Trabajando)</option>
                                     <option value="3">Terminado</option>
@@ -742,6 +812,22 @@ MODAL EDITAR CATEGORÍA
                                     <option value="6">Entregado</option>
 
                                 </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA PRECIO DEL SERVICIO -->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">Costo Servicio</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+
+                                <input type="number" class="form-control input-lg" name="editarServicio" id="editarServicio">
 
                             </div>
 
