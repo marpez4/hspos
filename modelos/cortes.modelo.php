@@ -206,7 +206,7 @@ class ModeloCierreCortes
 
 					<tbody>';
 
-		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja");
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja ORDER BY metodo_pago ASC");
 
 		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
 
@@ -242,7 +242,6 @@ class ModeloCierreCortes
 
 							<th style="width:10px">#</th>
 							<th>Cliente</th>
-							<th>Tipo de servicio</th>
 							<th>Monto Total</th>
 							<th>Fecha llegada</th>
 							<th>Fecha entrega</th>
@@ -265,7 +264,6 @@ class ModeloCierreCortes
 
 						<td>' . ($key + 1) . '</td>						
 						<td class="text-uppercase">' . $value["cliente"] . '</td>
-						<td class="text-uppercase">' . $value["tipo_servicio"] . '</td>
 						<td class="text-uppercase">$' . number_format($value["total"], 2) . '</td>
 						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha_llegada"])) . '</td> 
 						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha_llegada"])) . '</td> 

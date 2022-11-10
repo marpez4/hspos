@@ -157,7 +157,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                 <button class="btn btn-info btnImprimirServcio" codigoServicio="' . $value["id"] . '"><i class="fa fa-print"></i>
                                 </button>
   
-                                <button class="btn btn-warning btnEditarServicio" idServicio="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>';
+                                <button class="btn btn-warning btnEditarServicio" idServicio="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarServicio"><i class="fa fa-pencil"></i></button>';
 
                             if ($_SESSION["perfil"] == "Administrador") {
 

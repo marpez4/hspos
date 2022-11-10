@@ -22,7 +22,7 @@ class ControladorCierreCortes
 
 		if (isset($_POST["nuevoMonto"])) {
 
-			if (preg_match('/^[0-9]+$/', $_POST["nuevoMonto"])) {
+			if (preg_match('/^[0-9.]+$/', $_POST["nuevoMonto"])) {
 
 				$tabla = "corte_caja";
 

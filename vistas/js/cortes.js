@@ -38,17 +38,43 @@ $(".btnCerrarCaja").on("click", function () {
 			// 	maximumFractionDigits: 2
 			// });
 
-			$("#idCajaCierre").val(respuesta["idCaja"])
+			$("#idCajaCierre").val(respuesta["idCaja"]);
 
 			$("#montoInicial").val(respuesta["montoInicial"]);
 
-			$("#totalVentas").val(respuesta["totalVentas"]);
-			$("#totalServicios").val(respuesta["totalServicios"]);
+			if (respuesta["totalVentas"] == 0) {
 
-			var montoFinal = respuesta["totalPVentas"] + respuesta["totalPServicios"];
+				$("#totalVentas").val(0);
+
+				totalPVentas = 0;
+
+			} else {
+
+				$("#totalVentas").val(respuesta["totalVentas"]);
+
+				totalPVentas = Number(respuesta["totalPVentas"]);
+
+			}
+
+			if(respuesta["totalServicios"] == 0){
+
+				$("#totalServicios").val(0);
+
+				totalPServicios = 0;
+
+			}else{
+				
+				$("#totalServicios").val(respuesta["totalServicios"]);
+
+				totalPServicios = Number(respuesta["totalPServicios"]);
+
+			}
+			
+			var montoFinal = totalPVentas + totalPServicios;
+
 			$("#montoFinal").val(montoFinal);
 
-			var montoGeneral = montoFinal + respuesta["montoInicial"];
+			var montoGeneral = montoFinal + Number(respuesta["montoInicial"]);
 
 			$("#montoGeneral").val(montoGeneral);
 		}
@@ -67,23 +93,32 @@ $(".btnVerDetalleCierreCaja").on("click", function () {
 	datos.append("caja", caja);
 
 	$.ajax({
-	    url:"ajax/cortesVerVentas.ajax.php",
-	    method:"POST",
-	    data: datos,
-	    cache: false,
-	    contentType: false,
-	    processData: false,
-	    success:function(respuesta){
-	    	
-	    	if(respuesta){
+		url: "ajax/cortesVerVentas.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function (respuesta) {
 
-	    		// alert("Entro", respuesta);
+			if (respuesta) {
+
+				// alert("Entro", respuesta);
 				$("#modalDetalleCaja .modal-body .box-body .tableVentas").html(respuesta);
 
-	    	}
+			}
 
-	    }
+		}
 
 	})
 
 })
+
+function currencyFormatter({ currency, value }) {
+	const formatter = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		minimumFractionDigits: 2,
+		currency
+	})
+	return formatter.format(value)
+}

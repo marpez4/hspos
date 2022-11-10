@@ -30,26 +30,16 @@ class imprimirFactura
 
 		$respuestaVendedor = ControladorUsuarios::ctrMostrarUsuarios($itemVendedor, $valorVendedor);
 
-		if ($respuestaServicio["estatus"] == 1) {
+		if ($respuestaServicio["estatus"] == 5) {
 
-			$estatus = "Abierto";
+			$estatus = " Estatus del servicio: Cancelado";
 
-		} else if ($respuestaServicio["estatus"] == 2) {
-
-			$estatus = "En proceso";
-
-		} else if ($respuestaServicio["estatus"] == 3) {
-
-			$estatus = "Terminado";
-		} else if ($respuestaServicio["estatus"] == 4) {
-
-			$estatus = "Suspendido";
-		} else if ($respuestaServicio["estatus"] == 5) {
-
-			$estatus = "Cancelado";
 		} else if ($respuestaServicio["estatus"] == 6) {
 
-			$estatus = "Entregado";
+			$estatus = "Estatus del servicio: Entregado";
+		}else{
+
+			$estatus = "";
 		}
 
 		//REQUERIMOS LA CLASE TCPDF
@@ -102,7 +92,7 @@ class imprimirFactura
 
 			<td style="background-color:white; width:110px; text-align:center; color:red">
 				<br><br> &nbsp; &nbsp; NO. FOLIO $respuestaServicio[folio]
-				<br><small color:black>Estatus del servicio: $estatus</small>
+				<br><small color:black>$estatus</small>
 			</td>
 
 		</tr>

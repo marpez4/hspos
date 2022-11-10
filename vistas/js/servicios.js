@@ -5,7 +5,7 @@ IMPRIMIR SERVICIO
 $(".tablas").on("click", ".btnImprimirServcio", function () {
 
 	
-	var codigoServicio = $(this).attr("idServicio");
+	var codigoServicio = $(this).attr("codigoServicio");
 
 	window.open("extensiones/tcpdf/pdf/servicio-carta.php?codigo=" + codigoServicio, "_blank");
 

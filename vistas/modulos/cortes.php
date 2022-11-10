@@ -246,7 +246,7 @@ MODAL AGREGAR CAJA
 
                 <span class="input-group-addon"><i class="fa fa-money"></i></span>
 
-                <input type="number" class="form-control input-lg" name="nuevoMonto" placeholder="Ingresar monto" required>
+                <input type="number" step="any" class="form-control input-lg" name="nuevoMonto" placeholder="Ingresar monto" required>
 
               </div>
 
