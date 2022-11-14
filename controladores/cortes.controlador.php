@@ -151,4 +151,64 @@ class ControladorCierreCortes
 
 
 	}
+
+	static public function ctrMostrarVentasEfectivo($item, $valor){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnEfectivo($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrMostrarVentasTarjetas($item, $valor){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnTarjetas($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrMostrarVentasDepositos($item, $valor){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnDepositos($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrMostrarVentasDepositosElectronicos($item, $valor){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnDepositosElectronicos($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrMostrarVentasOtros($item, $valor){
+
+		$tabla = "ventas";
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnOtros($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrMostrarVentasServicios($item, $valor){
+
+		$respuesta = ModeloCierreCortes::mdlVentasEnServicios($item, $valor);
+
+		return $respuesta;
+
+	}
+
+
 }

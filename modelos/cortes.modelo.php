@@ -188,6 +188,14 @@ class ModeloCierreCortes
 		  				<h4>Ventas</h4>
 					</div>';
 
+		$table .= '<hr>		
+					<div style="text-align: center;">
+		  				<h4><strong>Efectivo</strong></h4>
+					</div>';
+
+
+		// VENTAS EN EFECTIVO 
+
 		$table .= '<table class="table table-bordered table-striped dt-responsive tablas tablaVentas" width="100%">
 
 					<thead>
@@ -206,7 +214,7 @@ class ModeloCierreCortes
 
 					<tbody>';
 
-		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja ORDER BY metodo_pago ASC");
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja AND metodo_pago = 'Efectivo'");
 
 		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
 
@@ -227,6 +235,206 @@ class ModeloCierreCortes
 
 		$table .= '</tbody>
 				</table>';
+
+		// VENTAS EN TARJETA 
+		$table .= '<hr>		
+					<div style="text-align: center;">
+		  				<h4><strong>Tarjetas</strong></h4>
+					</div>';
+
+		$table .= '<table class="table table-bordered table-striped dt-responsive tablas tablaVentas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Código</th>
+						<th>Metodo de pago</th>
+						<th>Monto Total</th>
+						<th>Fecha</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja AND metodo_pago LIKE 'TC%'
+												OR metodo_pago LIKE 'TD%'
+												AND $item = :id_caja
+												ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		foreach ($stmtV as $key => $value) {
+
+			$table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["codigo"] . '</td>
+						<td class="text-uppercase">' . $value["metodo_pago"] . '</td>
+						<td class="text-uppercase">$' . number_format($value["total"], 2) . '</td>
+						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha"])) . '</td> 
+
+					   </tr>';
+		}
+
+		$table .= '</tbody>
+				</table>';
+		// VENTAS EN DEPOSITOS 
+
+		$table .= '<hr>		
+					<div style="text-align: center;">
+		  				<h4><strong>Depositos</strong></h4>
+					</div>';
+
+		$table .= '<table class="table table-bordered table-striped dt-responsive tablas tablaVentas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Código</th>
+						<th>Metodo de pago</th>
+						<th>Monto Total</th>
+						<th>Fecha</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja	
+												AND metodo_pago LIKE 'DOXXO%'
+												OR metodo_pago LIKE 'DBV%'
+												ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		foreach ($stmtV as $key => $value) {
+
+			$table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["codigo"] . '</td>
+						<td class="text-uppercase">' . $value["metodo_pago"] . '</td>
+						<td class="text-uppercase">$' . number_format($value["total"], 2) . '</td>
+						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha"])) . '</td> 
+
+					   </tr>';
+		}
+
+		$table .= '</tbody>
+				</table>';
+
+		// VENTAS EN ELECTRONICAS
+
+		$table .= '<hr>		
+					<div style="text-align: center;">
+		  				<h4><strong>Depósitos electrónicos</strong></h4>
+					</div>';
+
+		$table .= '<table class="table table-bordered table-striped dt-responsive tablas tablaVentas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Código</th>
+						<th>Metodo de pago</th>
+						<th>Monto Total</th>
+						<th>Fecha</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja	
+												AND metodo_pago LIKE 'MP%'
+												OR metodo_pago LIKE 'PY%'
+												ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		foreach ($stmtV as $key => $value) {
+
+			$table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["codigo"] . '</td>
+						<td class="text-uppercase">' . $value["metodo_pago"] . '</td>
+						<td class="text-uppercase">$' . number_format($value["total"], 2) . '</td>
+						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha"])) . '</td> 
+
+					   </tr>';
+		}
+
+		$table .= '</tbody>
+				</table>';
+
+		// VENTAS EN OTROS
+
+		$table .= '<hr>		
+					<div style="text-align: center;">
+		  				<h4><strong>Otros</strong></h4>
+					</div>';
+
+		$table .= '<table class="table table-bordered table-striped dt-responsive tablas tablaVentas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Código</th>
+						<th>Metodo de pago</th>
+						<th>Monto Total</th>
+						<th>Fecha</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja .
+												AND metodo_pago LIKE 'TF%'
+												OR metodo_pago LIKE 'CH%'
+												ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		foreach ($stmtV as $key => $value) {
+
+			$table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["codigo"] . '</td>
+						<td class="text-uppercase">' . $value["metodo_pago"] . '</td>
+						<td class="text-uppercase">$' . number_format($value["total"], 2) . '</td>
+						<td class="text-uppercase">' . date("d-m-Y", strtotime($value["fecha"])) . '</td> 
+
+					   </tr>';
+		}
+
+		$table .= '</tbody>
+				</table>';
+
+		// SERVICIOS 
 
 		$table .= '<hr>
 		
@@ -276,5 +484,89 @@ class ModeloCierreCortes
 
 
 		echo $table;
+	}
+
+	static public function mdlVentasEnEfectivo($tabla, $item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja AND metodo_pago = 'Efectivo'");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
+	}
+
+	static public function mdlVentasEnTarjetas($tabla, $item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja AND metodo_pago LIKE 'TC%'
+		OR metodo_pago LIKE 'TD%'
+		AND $item = :id_caja
+		ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
+	}
+
+	static public function mdlVentasEnDepositos($tabla, $item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja	
+		AND metodo_pago LIKE 'DOXXO%'
+		OR metodo_pago LIKE 'DBV%'
+		ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
+	}
+
+	static public function mdlVentasEnDepositosElectronicos($tabla, $item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja	
+		AND metodo_pago LIKE 'MP%'
+		OR metodo_pago LIKE 'PY%'
+		ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
+	}
+
+	static public function mdlVentasEnOtros($tabla, $item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_caja .
+		AND metodo_pago LIKE 'TF%'
+		OR metodo_pago LIKE 'CH%'
+		ORDER BY metodo_pago ASC");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
+	}
+
+	static public function mdlVentasEnServicios($item, $valor)
+	{
+
+		$stmtV = Conexion::conectar()->prepare("SELECT * FROM servicios WHERE $item = :id_caja AND estatus = 6");
+
+		$stmtV->bindParam(":id_caja", $valor, PDO::PARAM_INT);
+
+		$stmtV->execute();
+
+		return $stmtV->fetchAll();
 	}
 }

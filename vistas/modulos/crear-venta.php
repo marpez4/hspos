@@ -264,7 +264,7 @@ if($_SESSION["perfil"] == "Especial"){
                         <option value="TC">Tarjeta Crédito</option>
                         <option value="TD">Tarjeta Débito</option>                  
                         <option value="TF">Transferencia</option>                  
-                        <option value="TD">Mercado pago </option>                  
+                        <option value="MP">Mercado pago </option>                  
                         <option value="CH">Cheque </option>                  
                         <option value="PY">Paypal</option>                  
                         <option value="DOXXO">Deposito oxxo</option>                  

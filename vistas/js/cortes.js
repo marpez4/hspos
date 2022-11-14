@@ -122,3 +122,16 @@ function currencyFormatter({ currency, value }) {
 	})
 	return formatter.format(value)
 }
+
+/*=============================================
+IMPRIMIR SERVICIO
+=============================================*/
+
+$(".tablas").on("click", ".btnImprimirCorte", function () {
+
+	
+	var idCaja = $(this).attr("idCaja");
+
+	window.open("extensiones/tcpdf/pdf/corte-pdf.php?idCaja=" + idCaja, "_blank");
+
+})

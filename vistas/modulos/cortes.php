@@ -163,7 +163,11 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                 if ($value["estatus"] != 1) {
 
-                  echo '<button class="btn btn-primary btnVerDetalleCierreCaja" idCaja="' . $value["id_caja"] . '" data-toggle="modal" data-target="#modalDetalleCaja"><i class="fa fa-search"></i></button>';
+                  echo '<button class="btn btn-primary btnVerDetalleCierreCaja" idCaja="' . $value["id_caja"] . '" data-toggle="modal" data-target="#modalDetalleCaja"><i class="fa fa-search"></i></button>
+
+                  <button class="btn btn-info btnImprimirCorte" idCaja="' . $value["id_caja"] . '"><i class="fa fa-print"></i>
+                  </button>';
+
                 } else {
 
                   echo '<button class="btn btn-default"><i class="fa fa-search"></i></button>';
