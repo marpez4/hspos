@@ -93,7 +93,7 @@ class ControladorPedidosPaqueteria
     static public function ctrMostrarPaqueteria($item, $valor)
     {
 
-        $tabla = "pedidosPaqueteria";
+        $tabla = "pedidospaqueteria";
 
         $respuesta = ModeloPedidosPaqueteriasAdmn::mdlMostrarPedidosPaqueterias($tabla, $item, $valor);
 
