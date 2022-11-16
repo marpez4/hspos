@@ -33,11 +33,10 @@ class imprimirFactura
 		if ($respuestaServicio["estatus"] == 5) {
 
 			$estatus = " Estatus del servicio: Cancelado";
-
 		} else if ($respuestaServicio["estatus"] == 6) {
 
 			$estatus = "Estatus del servicio: Entregado";
-		}else{
+		} else {
 
 			$estatus = "";
 		}
@@ -104,7 +103,6 @@ EOF;
 		$pdf->writeHTML($bloque1, false, false, false, false, '');
 
 		$bloque2 = <<<EOF
-
 	<table>
 		
 		<tr>
@@ -187,9 +185,9 @@ EOF;
 		
 					SO: $respuestaServicio[so] <br>
 		
-					Falla: $respuestaServicio[falla] <br>
+					<b>Falla:</b> $respuestaServicio[falla] <br>
 		
-					Solución: $respuestaServicio[solucion]
+					<b>Solución:</b> $respuestaServicio[solucion]
 			
 				</td>
 		
@@ -271,7 +269,11 @@ EOF;
 	
 			<td style="border: 1px solid #666; background-color:white; width:540px">
 	
-				
+			<div style="text-align:justify;">
+			 	<small>
+					Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.
+				</small>
+			</div>
 		
 			</td>
 	
