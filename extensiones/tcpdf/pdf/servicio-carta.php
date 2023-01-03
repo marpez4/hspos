@@ -23,6 +23,23 @@ class imprimirFactura
 
 		$fechaEntrega = date("d-m-Y", strtotime($respuestaServicio["fecha_entrega"]));
 
+		if ($fechaEntrega  == "0000-00-00") {
+
+			$impFechaEntrega = "Fecha de entrega: " . $fechaEntrega;
+		} else {
+
+			$impFechaEntrega = "";
+		}
+
+		if ($respuestaServicio["solucion"] == null) {
+
+			$impSolucion = "";
+		} else {
+
+			$impSolucion = "Solución: " . $respuestaServicio["solucion"];
+		}
+
+
 		$totalServicio = number_format($respuestaServicio["total"], 2);
 
 		$itemVendedor = "id";
@@ -30,15 +47,25 @@ class imprimirFactura
 
 		$respuestaVendedor = ControladorUsuarios::ctrMostrarUsuarios($itemVendedor, $valorVendedor);
 
-		if ($respuestaServicio["estatus"] == 5) {
+
+		if ($respuestaServicio["estatus"] == 1) {
+
+			$estatus = " Estatus del servicio: Abierto";
+		} else if ($respuestaServicio["estatus"] == 2) {
+
+			$estatus = " Estatus del servicio: En proceso (Trabajando)";
+		} else if ($respuestaServicio["estatus"] == 3) {
+
+			$estatus = " Estatus del servicio: Terminado";
+		} else if ($respuestaServicio["estatus"] == 4) {
+
+			$estatus = " Estatus del servicio: Suspendido";
+		} else if ($respuestaServicio["estatus"] == 5) {
 
 			$estatus = " Estatus del servicio: Cancelado";
 		} else if ($respuestaServicio["estatus"] == 6) {
 
-			$estatus = "Estatus del servicio: Entregado";
-		} else {
-
-			$estatus = "";
+			$estatus = " Estatus del servicio: Entregado";
 		}
 
 		//REQUERIMOS LA CLASE TCPDF
@@ -47,248 +74,466 @@ class imprimirFactura
 
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
+		$pdf->SetTitle('Nota de servicio');
+
 		$pdf->startPageGroup();
 
 		$pdf->AddPage();
 
+
 		// ---------------------------------------------------------
+		$html = <<<EOF
+		<!-- EXAMPLE OF CSS STYLE -->
+		<style>
+			h1 {
+				color: navy;
+				font-family: times;
+				font-size: 24pt;
+				text-decoration: underline;
+			}
+			p.first {
+				color: #003300;
+				font-family: helvetica;
+				font-size: 12pt;
+			}
+			p.first span {
+				color: #006600;
+				font-style: italic;
+			}
+			p#second {
+				color: #CC0000;
+				font-family: times;
+				font-size: 12pt;
+				text-align: justify;
+			}
+			p#second > span {
+				background-color: #fff;
+			}
+			table.first {
+				color: #003300;
+				font-family: helvetica;
+				font-size: 8pt;
+				border-left: 3px solid red;
+				border-right: 3px solid #CC0000;
+				border-top: 3px solid red;
+				border-bottom: 3px solid red;
+				background-color: #fff;
+			}
+			td {
+				border: 2px solid #ff4f30;
+				background-color: #fff;
+			}
+			td.second {
+				border: 2px dashed green;
+			}
+			div.test {
+				color: #CC0000;
+				background-color: #FFFF66;
+				font-family: helvetica;
+				font-size: 10pt;
+				border-style: solid solid solid solid;
+				border-width: 2px 2px 2px 2px;
+				border-color: green #FF00FF #ff4f30 red;
+				text-align: center;
+			}
+			.lowercase {
+				text-transform: lowercase;
+			}
+			.uppercase {
+				text-transform: uppercase;
+			}
+			.capitalize {
+				text-transform: capitalize;
+				text-align:center;
+			}
+			.img {
 
-		$bloque1 = <<<EOF
+				width:100px;
+			}
+			.folio{
 
-	<table>
-		
-		<tr>
-			
-			<td style="width:80px"><img src="images/logo-negro-bloque.png"></td>
+				color: red;
+				font-size:10px;
+			}
+			.estatus{
 
-			<td style="background-color:white; width:140px">
-				
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
-					
-					<br>
-					 León Gto, México
+				color:#930000;
 
-					<br>
-					Dirección: Blvd. Vicente Valtierra #2703 Col. San Manuel
+			}
+		</style>		
 
-				</div>
-
-			</td>
-
-			<td style="background-color:white; width:140px">
-
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
-					
-					<br>
-					Teléfonos: (477) 3112875 ó 4776632304
-					
-					<br>
-					soporte_hell@hotmail.com
-
-				</div>
-				
-			</td>
-
-			<td style="background-color:white; width:110px; text-align:center; color:red">
-				<br><br> &nbsp; &nbsp; NO. FOLIO $respuestaServicio[folio]
-				<br><small color:black>$estatus</small>
-			</td>
-
-		</tr>
-
-	</table>
-
-EOF;
-
-		$pdf->writeHTML($bloque1, false, false, false, false, '');
-
-		$bloque2 = <<<EOF
-	<table>
-		
-		<tr>
-			
-			<td style="width:540px"><img src="images/back.jpg"></td>
-		
-		</tr>
-
-	</table>
-
-	<table style="font-size:10px; padding:5px 10px;">
-	
-		<tr>
-		
-			<td style="border: 1px solid #666; background-color:white; width:390px">
-
-				Cliente: $respuestaServicio[cliente]
-
-			</td>
-
-			<td style="border: 1px solid #666; background-color:white; width:150px; text-align:right">
-			
-				Fecha de llegada: $fechaLlegada
-
-			</td>
-
-		</tr>
-
-		<tr>
-		
-			<td style="border: 1px solid #666; background-color:white; width:390px">Vendedor: $respuestaVendedor[nombre]</td>
-
-			<td style="border: 1px solid #666; background-color:white; width:150px; text-align:right">
-			
-				Fecha de entrega: $fechaEntrega
-
-			</td>
-
-		</tr>
+		<table class="first" cellpadding="4" cellspacing="6">
 
 		<tr>
-		
-		<td style="border-bottom: 1px solid #666; background-color:white; width:540px"></td>
+			<td width="540" align="center"><b>Nota de servicio</b></td>
+	   </tr>
 
-		</tr>
+	   <tr>
+	   <td width="130" align="center">
 
-	</table>
-
-EOF;
-
-		$pdf->writeHTML($bloque2, false, false, false, false, '');
-
-		$bloque3 = <<<EOF
-
-		<table style="font-size:10px; padding:5px 10px;">
-		
-			<tr>
-		
-				<td style="border: 1px solid #666; background-color:white; width:540px; text-align:center;">
-		
-					DETALLES
-		
-			</td>
-		
-			</tr>
-		
-			<tr>
-		
-				<td style="border: 1px solid #666; background-color:white; width:540px">
-		
-					Equipo: $respuestaServicio[equipo],
-		
-					Marca: $respuestaServicio[marca],
-		
-					Procesador: $respuestaServicio[procesador],
-		
-					RAM: $respuestaServicio[ram],
-		
-					DD: $respuestaServicio[dd],
-		
-					SO: $respuestaServicio[so] <br>
-		
-					<b>Falla:</b> $respuestaServicio[falla] <br>
-		
-					<b>Solución:</b> $respuestaServicio[solucion]
+	   <img class="img" src="images/logo-negro2.png">
+	   
+	   </td>
+	   <td width="130" align="center">
 			
-				</td>
-		
-			</tr>
-		
-			<tr>
-		
-				<td style="border-bottom: 1px solid #666; background-color:white; width:540px"></td>
-		
-			</tr>
-		
-		</table>
-EOF;
-		$pdf->writeHTML($bloque3, false, false, false, false, '');
-
-		$bloque4 = <<<EOF
-
-		<table style="font-size:10px; padding:5px 10px;">
-	
-			<tr>
-	
-				<td style="color:#333; background-color:white; width:340px; text-align:center"></td>
-	
-				<td style="border-bottom: 1px solid #666; background-color:white; width:100px; text-align:center"></td>
-	
-				<td style="border-bottom: 1px solid #666; color:#333; background-color:white; width:100px; text-align:center"></td>
-	
-			</tr>
+	   		&nbsp;	
 			
-			<tr>
-			
-				<td style="border-right: 1px solid #666; color:#333; background-color:white; width:340px; text-align:center"></td>
-	
-				<td style="border: 1px solid #666;  background-color:white; width:100px; text-align:center">
-					<b>Total servicio</b>
-				</td>
-	
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:100px; text-align:center">
-					$ $totalServicio
-				</td>
-	
-			</tr>	
-	
-		</table>
-		<br> <br>
-EOF;
+	   		<br>
 
-		$pdf->writeHTML($bloque4, false, false, false, false, '');
+	   		<b>León Gto, México
+
+	   		<br>
+	   		Dirección: Blvd. Vicente Valtierra #2703 Col. San Manuel</b>
+	   
+	   </td>
+	   <td width="130" align="center">
+	   &nbsp;
+	   <br>
+	   	<b>
+		   Teléfonos: (477) 3112875 o Whatsapp:; 4776632304
+		   
+		   <br>
+		   Email: soporte_hell@hotmail.com	   
+	   </b>
+	   
+	   </td>
+
+	   <td width="130" align="center">
+	   	<b class="folio">
+		   NO. FOLIO $respuestaServicio[folio]
+		</b>
+
+		<br>
+
+		<b class="estatus">
+			$estatus
+	 	</b>
+
+		 <br>
+
+	   	<b>
+		  Horarios L-V 10 am - 7 pm, Sab 10 am- 4 pm horario corrido
+	   </b>
+	   
+	   </td>
+	  </tr>
+
+	  <tr>
+
+	  <td width="266" align="center">
+
+	   	<b>
+		   Cliente: $respuestaServicio[cliente]
+		</b>
+
+		<br>
+
+		<b>
+			Vendedor: $respuestaVendedor[nombre]
+		</b>
+	   
+	   </td>
+	   <td width="266" align="center">
+
+	   	<b>
+		   Fecha de llegada: $fechaLlegada
+		</b>
+
+		<br>
+
+			 $impFechaEntrega
+	   
+	   </td>
+	  </tr>
 
 
 
-		$bloque5 = <<<EOF
-	
-	<br>
+	  <tr>
 
-	<table>
+	  	<td width="540" align="justify">
+
+		<h3>Detalles</h3>
+
+		  Equipo: $respuestaServicio[equipo],
 		
-		<tr>
-	
-			<td style="width:540px"><img src="images/back.jpg"></td>
+		  Marca: $respuestaServicio[marca],
 
-		</tr>
+		  Procesador: $respuestaServicio[procesador],
 
-	</table>
+		  RAM: $respuestaServicio[ram],
 
-	<table style="font-size:10px; padding:5px 10px;">
-	
-		<tr>
-	
-			<td style="border: 1px solid #666; background-color:white; width:540px; text-align:center;">
-	
-				<b>Notas</b>
-	
+		  DD: $respuestaServicio[dd],
+
+		  SO: $respuestaServicio[so] <br>
+
+		  Falla: $respuestaServicio[falla] <br>
+
+			 $impSolucion <br>
+			 
+			Notas: $respuestaServicio[obs] 
+
+	  	</td>
+	  </tr>
+
+	  <tr>
+
+	  	<td width="266" align="justify">
+
+		<h3>Total del servicio sin IVA:</h3>
+
+	  	</td>
+
+		<td width="266" align="center">
+
+			$ $totalServicio
+  
 		</td>
-	
-		</tr>
-	
-		<tr>
-	
-			<td style="border: 1px solid #666; background-color:white; width:540px">
-	
-			<div style="text-align:justify;">
-			 	<small>
-					Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.
-				</small>
-			</div>
+	  </tr>
+
+	  <tr>
+
+	  	<td width="540" align="justify">
+
+		<b>Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.</b>
+
+	  	</td>
+	  </tr>
+
+			
+	</table>
+
+	<br> <br>  <img style="width: 12px" src="images/recortar.png">
+EOF;
+
+		// output the HTML content
+		$pdf->writeHTML($html, true, false, true, false, '');
+
+		$htmlCopy = <<<EOF
+		<!-- EXAMPLE OF CSS STYLE -->
+		<style>
+			h1 {
+				color: navy;
+				font-family: times;
+				font-size: 24pt;
+				text-decoration: underline;
+			}
+			p.first {
+				color: #003300;
+				font-family: helvetica;
+				font-size: 12pt;
+			}
+			p.first span {
+				color: #006600;
+				font-style: italic;
+			}
+			p#second {
+				color: #CC0000;
+				font-family: times;
+				font-size: 12pt;
+				text-align: justify;
+			}
+			p#second > span {
+				background-color: #fff;
+			}
+			table.first {
+				color: #003300;
+				font-family: helvetica;
+				font-size: 8pt;
+				border-left: 3px solid red;
+				border-right: 3px solid #CC0000;
+				border-top: 3px solid red;
+				border-bottom: 3px solid red;
+				background-color: #fff;
+			}
+			td {
+				border: 2px solid #ff4f30;
+				background-color: #fff;
+			}
+			td.second {
+				border: 2px dashed green;
+			}
+			div.test {
+				color: #CC0000;
+				background-color: #FFFF66;
+				font-family: helvetica;
+				font-size: 10pt;
+				border-style: solid solid solid solid;
+				border-width: 2px 2px 2px 2px;
+				border-color: green #FF00FF #ff4f30 red;
+				text-align: center;
+			}
+			.lowercase {
+				text-transform: lowercase;
+			}
+			.uppercase {
+				text-transform: uppercase;
+			}
+			.capitalize {
+				text-transform: capitalize;
+				text-align:center;
+			}
+			.img {
+
+				width:100px;
+			}
+			.folio{
+
+				color: red;
+				font-size:10px;
+			}
+			.estatus{
+
+				color:#930000;
+
+			}
+		</style>
 		
-			</td>
-	
-		</tr>
-	
+		<br>
+
+		<table class="first" cellpadding="4" cellspacing="6">
+
 		<tr>
-	
-			<td style="border-bottom: 1px solid #666; background-color:white; width:540px"></td>
-	
-		</tr>
-	
+			<td width="540" align="center"><b>Nota de servicio</b></td>
+	   </tr>
+
+	   <tr>
+	   <td width="130" align="center">
+
+	   <img class="img" src="images/logo-negro2.png">
+	   
+	   </td>
+	   <td width="130" align="center">
+			
+	   		&nbsp;	
+			
+	   		<br>
+
+	   		<b>León Gto, México
+
+	   		<br>
+	   		Dirección: Blvd. Vicente Valtierra #2703 Col. San Manuel</b>
+	   
+	   </td>
+	   <td width="130" align="center">
+	   &nbsp;
+	   <br>
+	   	<b>
+		   Teléfonos: (477) 3112875 o Whatsapp:; 4776632304
+		   
+		   <br>
+		   Email: soporte_hell@hotmail.com	   
+	   </b>
+	   
+	   </td>
+
+	   <td width="130" align="center">
+	   	<b class="folio">
+		   NO. FOLIO $respuestaServicio[folio]
+		</b>
+
+		<br>
+
+		<b class="estatus">
+			$estatus
+	 	</b>
+
+		 <br>
+
+	   	<b>
+		  Horarios L-V 10 am - 7 pm, Sab 10 am- 4 pm horario corrido
+	   </b>
+	   
+	   </td>
+	  </tr>
+
+	  <tr>
+
+	  <td width="266" align="center">
+
+	   	<b>
+		   Cliente: $respuestaServicio[cliente]
+		</b>
+
+		<br>
+
+		<b>
+			Vendedor: $respuestaVendedor[nombre]
+		</b>
+	   
+	   </td>
+	   <td width="266" align="center">
+
+	   	<b>
+		   Fecha de llegada: $fechaLlegada
+		</b>
+
+		<br>
+
+			 $impFechaEntrega
+	   
+	   </td>
+	  </tr>
+
+
+
+	  <tr>
+
+	  	<td width="540" align="justify">
+
+		<h3>Detalles</h3>
+
+		  Equipo: $respuestaServicio[equipo],
+		
+		  Marca: $respuestaServicio[marca],
+
+		  Procesador: $respuestaServicio[procesador],
+
+		  RAM: $respuestaServicio[ram],
+
+		  DD: $respuestaServicio[dd],
+
+		  SO: $respuestaServicio[so] <br>
+
+		  Falla: $respuestaServicio[falla] <br>
+
+			 $impSolucion <br>
+			 
+			Notas: $respuestaServicio[obs] 
+
+	  	</td>
+	  </tr>
+
+	  <tr>
+
+	  	<td width="266" align="justify">
+
+		<h3>Total del servicio sin IVA:</h3>
+
+	  	</td>
+
+		<td width="266" align="center">
+
+			$ $totalServicio
+  
+		</td>
+	  </tr>
+
+	  <tr>
+
+	  	<td width="540" align="justify">
+
+		<b>Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.</b>
+
+	  	</td>
+	  </tr>
+
+			
 	</table>
 EOF;
 
-		$pdf->writeHTML($bloque5, false, false, false, false, '');
+		// output the HTML content
+		$pdf->writeHTML($htmlCopy, true, false, true, false, '');
+
 
 		// ---------------------------------------------------------
 		//SALIDA DEL ARCHIVO 
