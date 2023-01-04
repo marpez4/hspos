@@ -19,7 +19,7 @@ class ModeloComponentes{
 
         }else{
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY capacidad ASC");
 
 			$stmt -> execute();
 
