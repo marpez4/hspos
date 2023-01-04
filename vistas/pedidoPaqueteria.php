@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Calle" name="calle" required>
+                            <input type="text" class="form-control" placeholder="Calle/Número" name="calle" required>
                             <span class="glyphicon glyphicon-home form-control-feedback"></span>
                         </div>
 
