@@ -1,14 +1,14 @@
 <aside class="main-sidebar">
 
-	 <section class="sidebar">
+	<section class="sidebar">
 
 		<ul class="sidebar-menu">
 
-		<?php
+			<?php
 
-		if($_SESSION["perfil"] == "Administrador"){
+			if ($_SESSION["perfil"] == "Administrador") {
 
-			echo '<li class="active">
+				echo '<li class="active">
 
 				<a href="inicio">
 
@@ -29,12 +29,11 @@
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
-
-			echo '<li>
+				echo '<li>
 
 				<a href="categorias">
 
@@ -55,12 +54,11 @@
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
-
-			echo '<li>
+				echo '<li>
 
 				<a href="clientes">
 
@@ -70,12 +68,11 @@
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
-
-			echo '<li class="treeview">
+				echo '<li class="treeview">
 
 				<a href="#">
 
@@ -115,7 +112,7 @@
 
 					</li>';
 
-					if($_SESSION["perfil"] == "Administrador"){
+				if ($_SESSION["perfil"] == "Administrador") {
 
 					echo '<li>
 
@@ -127,18 +124,16 @@
 						</a>
 
 					</li>';
-
-					}				
+				}
 
 				echo '</ul>
 
-			</li>';		
+			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
-
-			echo '<li class="treeview">
+				echo '<li class="treeview">
 
 				<a href="#">
 
@@ -166,27 +161,49 @@
 						</a>
 
 					</li>
+					
+					</ul>
+			</li>';
+			}
 
-					<li>
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-						<a href="pedidosPaqueteria">
-							
-							<i class="fa fa-circle-o"></i>
-							<span>Admon.Env.Paquetería</span>
+				echo '<li class="treeview">
 
-						</a>
+				<a href="#">
 
-					</li>';
+					<i class="fa fa-archive"></i>
+					
+					<span>Admon. Paquetería</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
 
-				echo '</ul>
+					</span>
 
-			</li>';		
+				</a>
 
-		}
+				<ul class="treeview-menu">
+					
+				<li>
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
+				<a href="pedidosPaqueteria">
+					
+					<i class="fa fa-circle-o"></i>
+					<span>Env. Paquetería</span>
 
-			echo '<li class="treeview">
+				</a>
+
+			</li>
+					
+					</ul>
+			</li>';
+			}
+
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
+
+				echo '<li class="treeview">
 
 				<a href="#">
 
@@ -224,17 +241,16 @@
 
 						</a>
 
-					</li>';				
+					</li>';
 
 				echo '</ul>
 
-			</li>';		
-
-		}
-		?>
+			</li>';
+			}
+			?>
 
 		</ul>
 
-	 </section>
+	</section>
 
 </aside>

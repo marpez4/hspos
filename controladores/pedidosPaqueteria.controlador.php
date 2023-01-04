@@ -120,7 +120,7 @@ class ControladorPedidosPaqueteria
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarReferencia"])
             ) {
 
-                $tabla = "pedidosPaqueteria";
+                $tabla = "pedidospaqueteria";
 
                 $datos = array(
                     "nombre" => $_POST["editarNombre"],
@@ -196,7 +196,7 @@ class ControladorPedidosPaqueteria
 
             if(isset($_GET["idPedidoPaqueteria"])){
 
-                $tabla = "pedidosPaqueteria";
+                $tabla = "pedidospaqueteria";
 
                 $datos = $_GET["idPedidoPaqueteria"];
 

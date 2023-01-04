@@ -24,7 +24,7 @@ class ControladorExt{
             preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["entreCalles"]) &&
             preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["referencias"])){
 
-            $tabla = "pedidosPaqueteria";
+            $tabla = "pedidospaqueteria";
 
             $datos = array("nombre" => $_POST["nombre"],
                             "calle" => $_POST["calle"],
