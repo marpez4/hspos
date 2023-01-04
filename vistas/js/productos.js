@@ -265,8 +265,6 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
 			$("#editarRam").val(respuesta["ram"]);
 
-			$("#editarDd").val(respuesta["dd"]);
-
 			$("#editarProcesedor").val(respuesta["procesador"]);
 
 			$("#editarPantalla").val(respuesta["tam_pantalla"]);
@@ -282,8 +280,6 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 			$("#editarMarca").attr("required", true);
 
 			$("#editarRam").attr("required", true);
-
-			$("#editarDd").attr("required", true);
 
 			$("#editarProcesedor").attr("required", true);
 
@@ -304,8 +300,6 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 			$("#editarMarca").attr("required", false);
 
 			$("#editarRam").attr("required", false);
-
-			$("#editarDd").attr("required", false);
 
 			$("#editarProcesedor").attr("required", false);
 
@@ -374,7 +368,6 @@ $("#nuevaCategoria").change(function(){
 	
 		$("#nuevaMarca").attr("required", true);
 		$("#nuevaRam").attr("required", true);
-		$("#nuevaDd").attr("required", true);
 		$("#nuevaProcesedor").attr("required", true);
 		$("#nuevaPantalla").attr("required", true);
 		$("#nuevaGraficos").attr("required", true);
@@ -387,7 +380,6 @@ $("#nuevaCategoria").change(function(){
 
 		$("#nuevaMarca").attr("required", false);
 		$("#nuevaRam").attr("required", false);
-		$("#nuevaDd").attr("required", false);
 		$("#nuevaProcesedor").attr("required", false);
 		$("#nuevaPantalla").attr("required", false);
 		$("#nuevaGraficos").attr("required", false);
@@ -396,7 +388,6 @@ $("#nuevaCategoria").change(function(){
 
 		$("#nuevaMarca").val("");
 		$("#nuevaRam").val("");
-		$("#nuevaDd").val("");
 		$("#nuevaProcesedor").val("");
 		$("#nuevaPantalla").val("");
 		$("#nuevaGraficos").val("");

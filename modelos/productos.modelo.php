@@ -58,7 +58,10 @@ class ModeloProductos{
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta, precio_cliente, marca, ram, dd, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta, :precio_cliente, :marca, :ram, :dd, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
+			// $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta, precio_cliente, marca, ram, dd, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta, :precio_cliente, :marca, :ram, :dd, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta, precio_cliente, precio_ml, marca, ram, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta, :precio_cliente, :precio_ml, :marca, :ram, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
+
 
 			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
@@ -71,7 +74,6 @@ class ModeloProductos{
 			$stmt->bindParam(":precio_ml", $datos["precio_ml"], PDO::PARAM_STR);
 			$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
 			$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
-			$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
 			$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
 			$stmt->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
 			$stmt->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);
@@ -117,7 +119,7 @@ class ModeloProductos{
 
 		}else{
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml marca = :marca, ram = :ram, dd = :dd, procesador = :procesador, tam_pantalla = :tam_pantalla, graficos = :graficos, ssd = :ssd, hhd = :hhd WHERE codigo = :codigo");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml, marca = :marca, ram = :ram, procesador = :procesador, tam_pantalla = :tam_pantalla, graficos = :graficos, ssd = :ssd, hhd = :hhd WHERE codigo = :codigo");
 
 		$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
@@ -130,7 +132,6 @@ class ModeloProductos{
 		$stmt->bindParam(":precio_ml", $datos["precio_ml"], PDO::PARAM_STR);
 		$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
 		$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
-		$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
 		$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
 		$stmt->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
 		$stmt->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);

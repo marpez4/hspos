@@ -225,7 +225,7 @@ MODAL AGREGAR PRODUCTO
 
                   </div>
                   <!-- DD -->
-                  <div class="form-group">
+                  <!-- <div class="form-group">
               
                     <div class="input-group">
                     
@@ -237,15 +237,15 @@ MODAL AGREGAR PRODUCTO
 
                         <?php
 
-                        $item = "tipo";
-                        $valor = "DD";
+                        // $item = "tipo";
+                        // $valor = "DD";
 
-                        $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
+                        // $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
 
-                        foreach ($componentes as $key => $value) {
+                        // foreach ($componentes as $key => $value) {
                           
-                          echo '<option value="'.$value["id"].'">'.$value["capacidad"].' '.$value["acron"].'</option>';
-                        }
+                        //   echo '<option value="'.$value["id"].'">'.$value["capacidad"].' '.$value["acron"].'</option>';
+                        // }
 
                         ?>
         
@@ -253,7 +253,7 @@ MODAL AGREGAR PRODUCTO
 
                     </div>
 
-                  </div>
+                  </div> -->
                   <!-- PROCESADOR -->
                   <div class="form-group">
               
@@ -656,7 +656,7 @@ MODAL EDITAR PRODUCTO
             </div> 
 
             <!-- DD -->
-            <div class="form-group">
+            <!-- <div class="form-group">
         
               <div class="input-group">
               
@@ -668,15 +668,15 @@ MODAL EDITAR PRODUCTO
 
                   <?php
 
-                  $item = "tipo";
-                  $valor = "DD";
+                  // $item = "tipo";
+                  // $valor = "DD";
 
-                  $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
+                  // $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
 
-                  foreach ($componentes as $key => $value) {
+                  // foreach ($componentes as $key => $value) {
                     
-                    echo '<option value="'.$value["id"].'">'.$value["capacidad"].' '.$value["acron"].'</option>';
-                  }
+                  //   echo '<option value="'.$value["id"].'">'.$value["capacidad"].' '.$value["acron"].'</option>';
+                  // }
 
                   ?>
   
@@ -684,7 +684,7 @@ MODAL EDITAR PRODUCTO
 
               </div>
 
-            </div>     
+            </div>      -->
 
             <!-- PROCESADOR -->
             
