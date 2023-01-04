@@ -1,6 +1,6 @@
 <footer class="main-footer">
 	
-	<strong>2021, Developed by Marpez Software</strong>
+	<strong>2023, Developed by Marpez Software</strong>
 
 	Todos los derechos reservados.
 
