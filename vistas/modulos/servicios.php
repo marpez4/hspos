@@ -280,6 +280,22 @@ MODAL AGREGAR SERVICIO
                             </div>
 
                         </div>
+
+                        <!-- ENTRADA PARA TELEFONO CLIENTE -->
+
+                        <div class="form-group col-md-12">
+
+                            <label for="">Ingresar teléfono del cliente</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="number" class="form-control input-lg" name="nuevoTel" required>
+
+                            </div>
+
+                        </div>
                         <!-- ENTRADA PARA EMPLEADO -->
 
                         <div class="form-group col-md-12">
@@ -387,7 +403,7 @@ MODAL AGREGAR SERVICIO
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaDd" required>
+                                <input type="text" class="form-control input-lg" name="nuevaDd">
 
                             </div>
 
@@ -403,6 +419,22 @@ MODAL AGREGAR SERVICIO
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                                 <input type="text" class="form-control input-lg" name="nuevoSo" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA CONTRASEÑA COMPUTADORA-->
+
+                        <div class="form-group col-md-12">
+
+                            <label for="">Ingresar Contraseña de la computadora</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="nuevoPass" required>
 
                             </div>
 
@@ -578,7 +610,7 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
-                        <label for="">No. Folio</label>
+                            <label for="">No. Folio</label>
 
                             <input type="text" class="form-control input-lg" name="editarFolio" id="editarFolio" readonly>
 
@@ -613,6 +645,22 @@ MODAL EDITAR CATEGORÍA
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                                 <input type="text" class="form-control input-lg" name="editarCliente" id="editarCliente">
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA TELEFONO CLIENTE -->
+
+                        <div class="form-group col-md-12">
+
+                            <label for="">Editar teléfono del cliente</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="number" class="form-control input-lg" name="editarTel" id="editarTel">
 
                             </div>
 
@@ -722,6 +770,22 @@ MODAL EDITAR CATEGORÍA
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                                 <input type="text" class="form-control input-lg" name="editarSo" id="editarSo" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA CONTRASEÑA COMPUTADORA-->
+
+                        <div class="form-group col-md-12">
+
+                            <label for="">Editar Contraseña de la computadora</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="editarPass" id="editarPass" required>
 
                             </div>
 

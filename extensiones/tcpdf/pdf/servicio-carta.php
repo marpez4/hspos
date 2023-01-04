@@ -294,15 +294,17 @@ class imprimirFactura
 
 	  	<td width="540" align="justify">
 
-		<b>Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.</b>
+		<b>IMPORTANTE: USTED TIENE 10 DÍAS PARA RECOGER SU EQUIPO A PARTIR DE LA FECHA DE NOTA DE LO CONTRARIO NO NOS HACEMOS RESPONSABLES DE SU EQUIPO.NO SOMOS BODEGA COSTO $10 X DÍA. <br>
+		1.– El servicio se paga hasta que se entregue su equipo.<br>
+		2.– Garantía en servicio de 15 días, en cambio de piezas de acuerdo a proveedor.<br>
+		3.– No nos hacemos responsables por problemas que no tengan que ver con lo reparado.<br>
+		4.– Toda revisión  tiene un costo de $100 pesos.</b>
 
 	  	</td>
 	  </tr>
 
 			
 	</table>
-
-	<br> <br>  <img style="width: 12px" src="images/recortar.png">
 EOF;
 
 		// output the HTML content
@@ -522,7 +524,11 @@ EOF;
 
 	  	<td width="540" align="justify">
 
-		<b>Garantía 90 días con nosotros (15 días en accesorios), únicamente por defecto de fábrica, no aplican en: caídas, derrames de líquidos, descargas eléctricas, (Conecte a un regulador o no break forzosamente), sistema operativo, ni en la pila de laptop o cargador (Pila puede retener o no carga). En caso de devolución aplica un 20% del valor total de la compra. Nota válida para aplicar garantía sin excepciones, No nos hacemos responsables por daños de traslado o robos, garantía solamente aplica en equipos. (No nos hacemos responsables por daños de envió.) En equipos, monitores o accesorios con defecto no aplica ninguna garantía.</b>
+		<b>IMPORTANTE: USTED TIENE 10 DÍAS PARA RECOGER SU EQUIPO A PARTIR DE LA FECHA DE NOTA DE LO CONTRARIO NO NOS HACEMOS RESPONSABLES DE SU EQUIPO.NO SOMOS BODEGA COSTO $10 X DÍA. <br>
+		1.– El servicio se paga hasta que se entregue su equipo.<br>
+		2.– Garantía en servicio de 15 días, en cambio de piezas de acuerdo a proveedor.<br>
+		3.– No nos hacemos responsables por problemas que no tengan que ver con lo reparado.<br>
+		4.– Toda revisión  tiene un costo de $100 pesos.</b>
 
 	  	</td>
 	  </tr>

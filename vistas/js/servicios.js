@@ -38,6 +38,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#editarFolio").val(respuesta["folio"]);
 			$("#editarFechaLl").val(respuesta["fecha_llegada"]);
 			$("#editarCliente").val(respuesta["cliente"]);
+			$("#editarTel").val(respuesta["telefono"]);
 			$("#editarEmpleado").val(respuesta["id_empleado"]);
 			$("#editarEquipo").val(respuesta["equipo"]);
 			$("#editarMarca").val(respuesta["marca"]);
@@ -45,6 +46,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#editarRam").val(respuesta["ram"]);
 			$("#editarDd").val(respuesta["dd"]);
 			$("#editarSo").val(respuesta["so"]);
+			$("#editarPass").val(respuesta["contrasena"]);
 			$("#editarFalla").val(respuesta["falla"]);
 			$("#editarSolucion").val(respuesta["solucion"]);
 			$("#editarObs").val(respuesta["obs"]);
