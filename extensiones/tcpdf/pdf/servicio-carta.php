@@ -74,6 +74,8 @@ class imprimirFactura
 
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
+		$pdf->SetAutoPageBreak($margin = 0 );
+
 		$pdf->SetTitle('Nota de servicio');
 
 		$pdf->startPageGroup();
@@ -85,10 +87,10 @@ class imprimirFactura
 		$html = <<<EOF
 		<!-- EXAMPLE OF CSS STYLE -->
 		<style>
-			h1 {
-				color: navy;
+			h3 {
+				color: #000;
 				font-family: times;
-				font-size: 24pt;
+				font-size: 11pt;
 				text-decoration: underline;
 			}
 			p.first {
@@ -148,7 +150,7 @@ class imprimirFactura
 			}
 			.img {
 
-				width:100px;
+				width:65px;
 			}
 			.folio{
 
@@ -159,6 +161,10 @@ class imprimirFactura
 
 				color:#930000;
 
+			}
+			.hrStyle{
+				width:200px;
+				padding-top: 10px;
 			}
 		</style>		
 
@@ -223,7 +229,7 @@ class imprimirFactura
 	  <td width="266" align="center">
 
 	   	<b>
-		   Cliente: $respuestaServicio[cliente]
+		   Cliente: $respuestaServicio[cliente], Tel: $respuestaServicio[telefono]
 		</b>
 
 		<br>
@@ -254,23 +260,13 @@ class imprimirFactura
 
 		<h3>Detalles</h3>
 
-		  Equipo: $respuestaServicio[equipo],
-		
-		  Marca: $respuestaServicio[marca],
+		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SO: $respuestaServicio[so]
 
-		  Procesador: $respuestaServicio[procesador],
-
-		  RAM: $respuestaServicio[ram],
-
-		  DD: $respuestaServicio[dd],
-
-		  SO: $respuestaServicio[so] <br>
-
-		  Falla: $respuestaServicio[falla] <br>
-
-			 $impSolucion <br>
-			 
-			Notas: $respuestaServicio[obs] 
+		  <br>Falla: $respuestaServicio[falla]
+			
+		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena]
+		  <br>$impSolucion
+		  
 
 	  	</td>
 	  </tr>
@@ -285,7 +281,7 @@ class imprimirFactura
 
 		<td width="266" align="center">
 
-			$ $totalServicio
+			<h4>$ $totalServicio</h4>
   
 		</td>
 	  </tr>
@@ -303,20 +299,29 @@ class imprimirFactura
 	  	</td>
 	  </tr>
 
+	  <tr>
+
+	  	<td width="540" align="center">
 			
+			<div width="530"></div>
+			<hr class="hrStyle">
+			<br><b>Firma de conformidad</b>
+
+	  	</td>
+	  </tr>			
 	</table>
 EOF;
 
 		// output the HTML content
 		$pdf->writeHTML($html, true, false, true, false, '');
 
-		$htmlCopy = <<<EOF
-		<!-- EXAMPLE OF CSS STYLE -->
+$htmlCopy = <<<EOF
+<!-- EXAMPLE OF CSS STYLE -->
 		<style>
-			h1 {
-				color: navy;
+			h3 {
+				color: #000;
 				font-family: times;
-				font-size: 24pt;
+				font-size: 11pt;
 				text-decoration: underline;
 			}
 			p.first {
@@ -376,7 +381,7 @@ EOF;
 			}
 			.img {
 
-				width:100px;
+				width:65px;
 			}
 			.folio{
 
@@ -388,9 +393,11 @@ EOF;
 				color:#930000;
 
 			}
-		</style>
-		
-		<br>
+			.hrStyle{
+				width:200px;
+				padding-top: 10px;
+			}
+		</style>		
 
 		<table class="first" cellpadding="4" cellspacing="6">
 
@@ -453,7 +460,7 @@ EOF;
 	  <td width="266" align="center">
 
 	   	<b>
-		   Cliente: $respuestaServicio[cliente]
+		   Cliente: $respuestaServicio[cliente], Tel: $respuestaServicio[telefono]
 		</b>
 
 		<br>
@@ -484,23 +491,13 @@ EOF;
 
 		<h3>Detalles</h3>
 
-		  Equipo: $respuestaServicio[equipo],
-		
-		  Marca: $respuestaServicio[marca],
+		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SO: $respuestaServicio[so]
 
-		  Procesador: $respuestaServicio[procesador],
-
-		  RAM: $respuestaServicio[ram],
-
-		  DD: $respuestaServicio[dd],
-
-		  SO: $respuestaServicio[so] <br>
-
-		  Falla: $respuestaServicio[falla] <br>
-
-			 $impSolucion <br>
-			 
-			Notas: $respuestaServicio[obs] 
+		  <br>Falla: $respuestaServicio[falla]
+			
+		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena]
+		  <br>$impSolucion
+		  
 
 	  	</td>
 	  </tr>
@@ -515,7 +512,7 @@ EOF;
 
 		<td width="266" align="center">
 
-			$ $totalServicio
+			<h4>$ $totalServicio</h4>
   
 		</td>
 	  </tr>
@@ -533,12 +530,22 @@ EOF;
 	  	</td>
 	  </tr>
 
+	  <tr>
+
+	  	<td width="540" align="center">
 			
+			<div width="530"></div>
+			<hr class="hrStyle">
+			<br><b>Firma de conformidad</b>
+
+	  	</td>
+	  </tr>			
 	</table>
+		
 EOF;
 
-		// output the HTML content
-		$pdf->writeHTML($htmlCopy, true, false, true, false, '');
+// output the HTML content
+$pdf->writeHTML($htmlCopy, true, false, true, false, '');
 
 
 		// ---------------------------------------------------------
