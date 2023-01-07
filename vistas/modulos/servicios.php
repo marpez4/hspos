@@ -537,7 +537,7 @@ MODAL AGREGAR SERVICIO
 
                                 <span class="input-group-addon"><i class="fa fa-usd"></i></span>
 
-                                <input type="number" class="form-control input-lg" name="nuevoServicio">
+                                <input type="number" step="any" class="form-control input-lg" name="nuevoServicio">
 
                             </div>
 
@@ -891,7 +891,7 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-usd"></i></span>
 
-                                <input type="number" class="form-control input-lg" name="editarServicio" id="editarServicio">
+                                <input type="number" step="any" class="form-control input-lg" name="editarServicio" id="editarServicio">
 
                             </div>
 
