@@ -397,7 +397,7 @@ MODAL AGREGAR SERVICIO
 
                         <div class="form-group col-md-6">
 
-                            <label for="">Ingresar DD</label>
+                            <label for="">Ingresar HDD</label>
 
                             <div class="input-group">
 
@@ -408,6 +408,23 @@ MODAL AGREGAR SERVICIO
                             </div>
 
                         </div>
+
+                        <!-- ENTRADA PARA SSD-->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">Ingresar SDD</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="nuevoSsd">
+
+                            </div>
+
+                        </div>
+
                         <!-- ENTRADA PARA SO-->
 
                         <div class="form-group col-md-6">
@@ -748,17 +765,34 @@ MODAL EDITAR CATEGORÍA
 
                         <div class="form-group col-md-6">
 
-                            <label for="">Editar DD</label>
+                            <label for="">Editar HDD</label>
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarDd" id="editarDd" required>
+                                <input type="text" class="form-control input-lg" name="editarDd" id="editarDd">
 
                             </div>
 
                         </div>
+
+                        <!-- ENTRADA PARA SO-->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">Editar SSD</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="editarSsd" id="editarSsd">
+
+                            </div>
+
+                        </div>
+                        
                         <!-- ENTRADA PARA SO-->
 
                         <div class="form-group col-md-6">
@@ -849,7 +883,7 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="date" class="form-control input-lg" name="editarFechaEn" id="editarFechaEn" required>
+                                <input type="date" class="form-control input-lg" name="editarFechaEn" id="editarFechaEn">
 
                             </div>
 

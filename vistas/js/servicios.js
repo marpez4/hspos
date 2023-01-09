@@ -45,6 +45,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#editarProcesador").val(respuesta["procesador"]);
 			$("#editarRam").val(respuesta["ram"]);
 			$("#editarDd").val(respuesta["dd"]);
+			$("#editarSsd").val(respuesta["ssd"]);
 			$("#editarSo").val(respuesta["so"]);
 			$("#editarPass").val(respuesta["contrasena"]);
 			$("#editarFalla").val(respuesta["falla"]);

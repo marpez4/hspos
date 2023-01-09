@@ -74,7 +74,7 @@ class imprimirFactura
 
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-		$pdf->SetAutoPageBreak($margin = 0 );
+		$pdf->SetAutoPageBreak($margin = 0);
 
 		$pdf->SetTitle('Nota de servicio');
 
@@ -164,7 +164,6 @@ class imprimirFactura
 			}
 			.hrStyle{
 				width:200px;
-				padding-top: 10px;
 			}
 		</style>		
 
@@ -260,7 +259,7 @@ class imprimirFactura
 
 		<h3>Detalles</h3>
 
-		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SO: $respuestaServicio[so]
+		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], HDD: $respuestaServicio[dd], SSD: $respuestaServicio[ssd], SO: $respuestaServicio[so]
 
 		  <br>Falla: $respuestaServicio[falla]
 			
@@ -301,21 +300,31 @@ class imprimirFactura
 
 	  <tr>
 
-	  	<td width="540" align="center">
-			
-			<div width="530"></div>
-			<hr class="hrStyle">
-			<br><b>Firma de conformidad</b>
+			<td width="266" align="center">
+					
+				<div width="264"></div>
+				<hr class="hrStyle">
+				<br><b>Firma de conformidad cliente</b>
 
-	  	</td>
+			</td>
+
+			<td width="266" align="center">
+			
+				<div width="264"></div>
+				<hr class="hrStyle">
+				<br><b>Firma de conformidad técnico</b>
+
+			</td>
+
 	  </tr>			
+
 	</table>
 EOF;
 
 		// output the HTML content
 		$pdf->writeHTML($html, true, false, true, false, '');
 
-$htmlCopy = <<<EOF
+		$htmlCopy = <<<EOF
 <!-- EXAMPLE OF CSS STYLE -->
 		<style>
 			h3 {
@@ -395,7 +404,6 @@ $htmlCopy = <<<EOF
 			}
 			.hrStyle{
 				width:200px;
-				padding-top: 10px;
 			}
 		</style>		
 
@@ -491,7 +499,7 @@ $htmlCopy = <<<EOF
 
 		<h3>Detalles</h3>
 
-		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SO: $respuestaServicio[so]
+		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SSD: $respuestaServicio[ssd], SO: $respuestaServicio[so]
 
 		  <br>Falla: $respuestaServicio[falla]
 			
@@ -530,22 +538,31 @@ $htmlCopy = <<<EOF
 	  	</td>
 	  </tr>
 
-	  <tr>
+		<tr>
 
-	  	<td width="540" align="center">
+			<td width="266" align="center">
+					
+				<div width="264"></div>
+				<hr class="hrStyle">
+				<br><b>Firma de conformidad cliente</b>
+
+			</td>
+
+			<td width="266" align="center">
 			
-			<div width="530"></div>
-			<hr class="hrStyle">
-			<br><b>Firma de conformidad</b>
+				<div width="264"></div>
+				<hr class="hrStyle">
+				<br><b>Firma de conformidad técnico</b>
 
-	  	</td>
-	  </tr>			
+			</td>
+
+		</tr>				
 	</table>
 		
 EOF;
 
-// output the HTML content
-$pdf->writeHTML($htmlCopy, true, false, true, false, '');
+		// output the HTML content
+		$pdf->writeHTML($htmlCopy, true, false, true, false, '');
 
 
 		// ---------------------------------------------------------

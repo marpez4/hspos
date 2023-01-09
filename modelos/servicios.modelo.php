@@ -22,7 +22,7 @@ class ModeloServicios
 			}
 		}
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha_llegada, folio, cliente, telefono, id_empleado, equipo, marca, procesador, ram, dd, so, contrasena, falla, solucion, obs, fecha_entrega, total, estatus, id_caja ) VALUES (:fecha_llegada, :folio, :id_cliente, :telefono, :id_empleado, :equipo, :marca, :procesador, :ram, :dd, :so, :contrasena, :falla, :solucion, :obs, :fecha_entrega, :total, :estatus, :idCaja)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha_llegada, folio, cliente, telefono, id_empleado, equipo, marca, procesador, ram, dd, ssd, so, contrasena, falla, solucion, obs, fecha_entrega, total, estatus, id_caja ) VALUES (:fecha_llegada, :folio, :id_cliente, :telefono, :id_empleado, :equipo, :marca, :procesador, :ram, :dd, :ssd, :so, :contrasena, :falla, :solucion, :obs, :fecha_entrega, :total, :estatus, :idCaja)");
 
 		$stmt->bindParam(":fecha_llegada", $datos["fecha_llegada"], PDO::PARAM_STR);
 		$stmt->bindParam(":folio", $datos["folio"], PDO::PARAM_INT);
@@ -34,6 +34,7 @@ class ModeloServicios
 		$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
 		$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
 		$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
+		$stmt->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
 		$stmt->bindParam(":so", $datos["so"], PDO::PARAM_STR);
 		$stmt->bindParam(":contrasena", $datos["contrasena"], PDO::PARAM_STR);
 		$stmt->bindParam(":falla", $datos["falla"], PDO::PARAM_STR);
@@ -94,7 +95,7 @@ class ModeloServicios
 	static public function mdlEditarServicio($tabla, $datos)
 	{
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha_llegada = :fecha_llegada, cliente = :id_cliente, telefono = :telefono, equipo = :equipo, marca = :marca, procesador = :procesador, ram = :ram, dd = :dd, so = :so, contrasena = :contrasena, falla = :falla, solucion = :solucion, obs = :obs, fecha_entrega = :fecha_entrega, total = :tipo_servicio, estatus = :estatus WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha_llegada = :fecha_llegada, cliente = :id_cliente, telefono = :telefono, equipo = :equipo, marca = :marca, procesador = :procesador, ram = :ram, dd = :dd, ssd = :ssd, so = :so, contrasena = :contrasena, falla = :falla, solucion = :solucion, obs = :obs, fecha_entrega = :fecha_entrega, total = :tipo_servicio, estatus = :estatus WHERE id = :id");
 
 		// id_cliente = :id_cliente, equipo = :equipo, marca = :marca, procesador = :procesador, ram = :ram, dd = :dd, so = :so, falla = :falla, solucion = :solucion, obs = :obs, fecha_entrega = :fecha_entrega, tipo_servicio = :tipo_servicio, total = :total, estatus = :estatus
 		$stmt->bindParam(":fecha_llegada", $datos["fecha_llegada"], PDO::PARAM_STR);
@@ -105,6 +106,7 @@ class ModeloServicios
 		$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
 		$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
 		$stmt->bindParam(":dd", $datos["dd"], PDO::PARAM_STR);
+		$stmt->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
 		$stmt->bindParam(":so", $datos["so"], PDO::PARAM_STR);
 		$stmt->bindParam(":contrasena", $datos["contrasena"], PDO::PARAM_STR);
 		$stmt->bindParam(":falla", $datos["falla"], PDO::PARAM_STR);
