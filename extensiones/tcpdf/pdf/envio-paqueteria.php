@@ -44,22 +44,19 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 $pdf->SetDisplayMode('fullpage', 'SinglePage', 'UseNone');
 
 // set font
-$pdf->SetFont('times', 'B', 20);
+$pdf->SetFont('times', 'B', 22);
 
 $pdf->AddPage('L', 'A4');
 $bloque1 = <<<EOF
-
-	NOMBRE: $respuestaPaqueteria[nombreCompleto]<br><br>
-    CALLE: $respuestaPaqueteria[calle]<br><br>
-    COLONIA: $respuestaPaqueteria[colonia]<br><br>
-    CP: $respuestaPaqueteria[cp]<br><br>
-    CIUDAD: $respuestaPaqueteria[idCiudad]<br><br>
-    ESTADO: $respuestaPaqueteria[idEstado]<br><br>
-    TELÉFONO: $respuestaPaqueteria[telefono]<br><br>
-    ENTRE CALLES: $respuestaPaqueteria[entreCalles]<br><br>
-    REFERENCIAS: $respuestaPaqueteria[referencias]<br>
-
-
+NOMBRE: $respuestaPaqueteria[nombreCompleto]<br>
+CALLE: $respuestaPaqueteria[calle]<br>
+COLONIA: $respuestaPaqueteria[colonia]<br>
+CP: $respuestaPaqueteria[cp]<br>
+CIUDAD: $respuestaPaqueteria[idCiudad]<br>
+ESTADO: $respuestaPaqueteria[idEstado]<br>
+TELÉFONO: $respuestaPaqueteria[telefono]<br>
+ENTRE CALLES: $respuestaPaqueteria[entreCalles]<br>
+REFERENCIAS: $respuestaPaqueteria[referencias]
 EOF;
 
 $pdf->writeHTML($bloque1, false, false, false, false, '');
