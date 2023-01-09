@@ -499,7 +499,7 @@ EOF;
 
 		<h3>Detalles</h3>
 
-		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], DD: $respuestaServicio[dd], SSD: $respuestaServicio[ssd], SO: $respuestaServicio[so]
+		  Equipo: $respuestaServicio[equipo], Marca: $respuestaServicio[marca], Procesador: $respuestaServicio[procesador], RAM: $respuestaServicio[ram], HDD: $respuestaServicio[dd], SSD: $respuestaServicio[ssd], SO: $respuestaServicio[so]
 
 		  <br>Falla: $respuestaServicio[falla]
 			
