@@ -7,113 +7,130 @@ require_once "../controladores/categorias.controlador.php";
 require_once "../modelos/categorias.modelo.php";
 
 
-class TablaProductos{
+class TablaProductos
+{
 
- 	/*=============================================
+	/*=============================================
  	 MOSTRAR LA TABLA DE PRODUCTOS
-  	=============================================*/ 
+  	=============================================*/
 
-	public function mostrarTablaProductos(){
+	public function mostrarTablaProductos()
+	{
 
 		$item = null;
-    	$valor = null;
-    	$orden = "id";
+		$valor = null;
+		$orden = "id";
 
-  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);	
+		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
-  		if(count($productos) == 0){
+		if (count($productos) == 0) {
 
-  			echo '{"data": []}';
+			echo '{"data": []}';
 
-		  	return;
-  		}
-		
-  		$datosJson = '{
+			return;
+		}
+
+		$datosJson = '{
 		  "data": [';
 
-		  for($i = 0; $i < count($productos); $i++){
+		for ($i = 0; $i < count($productos); $i++) {
 
-		  	/*=============================================
+			/*=============================================
  	 		TRAEMOS LA IMAGEN
-  			=============================================*/ 
+  			=============================================*/
 
-		  	$imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
+			$imagen = "<img src='" . $productos[$i]["imagen"] . "' width='40px'>";
 
-		  	/*=============================================
+			/*=============================================
  	 		TRAEMOS LA CATEGORÍA
-  			=============================================*/ 
+  			=============================================*/
 
-		  	$item = "id";
-		  	$valor = $productos[$i]["id_categoria"];
+			$item = "id";
+			$valor = $productos[$i]["id_categoria"];
 
-		  	$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+			$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
-		  	/*=============================================
+			/*=============================================
  	 		STOCK
-  			=============================================*/ 
+  			=============================================*/
 
-  			if($productos[$i]["stock"] <= 10){
+			if ($productos[$i]["stock"] <= 10) {
 
-  				$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+				$stock = "<button class='btn btn-danger'>" . $productos[$i]["stock"] . "</button>";
+			} else if ($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15) {
 
-  			}else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
+				$stock = "<button class='btn btn-warning'>" . $productos[$i]["stock"] . "</button>";
+			} else {
 
-  				$stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+				$stock = "<button class='btn btn-success'>" . $productos[$i]["stock"] . "</button>";
+			}
 
-  			}else{
+			/*=============================================
+ 	 		Mostrar bodega del producto 
+  			=============================================*/
 
-  				$stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+			$valorB = $productos[$i]["id"];
 
-  			}
+			$bodegas = ControladorProductos::ctrMostrarBodega($valorB);
 
-		  	/*=============================================
+			/*=============================================
+ 	 			BODEGA
+  				=============================================*/
+			if ($bodegas == null) {
+
+				$bodega = "<button class='btn btn-success'>0</button>";
+			} else {
+
+				$bodega = "<button class='btn btn-success'>" . $bodegas["cantidad"] . "</button>";
+			}
+
+			/*=============================================
  	 		TRAEMOS LAS ACCIONES
-  			=============================================*/ 
+  			=============================================*/
 
-  			if(isset($_GET["perfilOculto"]) && $_GET["perfilOculto"] == "Especial"){
+			if (isset($_GET["perfilOculto"]) && $_GET["perfilOculto"] == "Especial") {
 
-  				$botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button></div>"; 
+				$botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='" . $productos[$i]["id"] . "' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button></div>";
+			} else {
 
-  			}else{
+				$botones =  "<div class='btn-group'><button class='btn btn-primary btnMovBodega' idBodega='" . $bodegas["id"] . "' idProducto='" . $productos[$i]["id"] . "' data-toggle='modal' data-target='#modalMovBodega'><i class='fa fa-archive'></i></button><button class='btn btn-warning btnEditarProducto' idProducto='" . $productos[$i]["id"] . "' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='" . $productos[$i]["id"] . "' codigo='" . $productos[$i]["codigo"] . "' imagen='" . $productos[$i]["imagen"] . "'><i class='fa fa-times'></i></button></div>";
+			}
 
-  				 $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
 
-  			}
 
-		 
-		  	$datosJson .='[
-			      "'.($i+1).'",
-			      "'.$imagen.'",
-			      "'.$productos[$i]["codigo"].'",
-			      "'.$productos[$i]["descripcion"].'",
-			      "'.$categorias["categoria"].'",
-			      "'.$stock.'",
-			      "'.$productos[$i]["precio_compra"].'",
-			      "'.$productos[$i]["precio_venta"].'",
-			      "'.$productos[$i]["fecha"].'",
-			      "'.$botones.'"
+
+
+			$compra = number_format($productos[$i]["precio_compra"], 2);
+			$venta = number_format($productos[$i]["precio_venta"], 2);
+
+
+			$datosJson .= '[
+			      "' . ($i + 1) . '",
+			      "' . $imagen . '",
+			      "' . $productos[$i]["codigo"] . '",
+			      "' . $productos[$i]["descripcion"] . '",
+			      "' . $categorias["categoria"] . '",
+			      "' . $stock . '",
+			      "' . $bodega . '",
+			      "$' . $compra . '",
+			      "$' . $venta . '",
+			      "' . $productos[$i]["fecha"] . '",
+			      "' . $botones . '"
 			    ],';
+		}
 
-		  }
+		$datosJson = substr($datosJson, 0, -1);
 
-		  $datosJson = substr($datosJson, 0, -1);
-
-		 $datosJson .=   '] 
+		$datosJson .=   '] 
 
 		 }';
-		
+
 		echo $datosJson;
-
-
 	}
-
-
-
 }
 
 /*=============================================
 ACTIVAR TABLA DE PRODUCTOS
-=============================================*/ 
+=============================================*/
 $activarProductos = new TablaProductos();
-$activarProductos -> mostrarTablaProductos();
-
+$activarProductos->mostrarTablaProductos();

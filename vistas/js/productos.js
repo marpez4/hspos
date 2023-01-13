@@ -5,8 +5,8 @@ CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 $.ajax({
 
 	url: "ajax/datatable-productos.ajax.php",
-	success:function(respuesta){
-		
+	success: function (respuesta) {
+
 		console.log("respuesta", respuesta);
 
 	}
@@ -15,39 +15,39 @@ $.ajax({
 
 var perfilOculto = $("#perfilOculto").val();
 
-$('.tablaProductos').DataTable( {
-    "ajax": "ajax/datatable-productos.ajax.php?perfilOculto="+perfilOculto,
-    "deferRender": true,
+$('.tablaProductos').DataTable({
+	"ajax": "ajax/datatable-productos.ajax.php?perfilOculto=" + perfilOculto,
+	"deferRender": true,
 	"retrieve": true,
 	"processing": true,
-	 "language": {
+	"language": {
 
-			"sProcessing":     "Procesando...",
-			"sLengthMenu":     "Mostrar _MENU_ registros",
-			"sZeroRecords":    "No se encontraron resultados",
-			"sEmptyTable":     "Ningún dato disponible en esta tabla",
-			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix":    "",
-			"sSearch":         "Buscar:",
-			"sUrl":            "",
-			"sInfoThousands":  ",",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate": {
-			"sFirst":    "Primero",
-			"sLast":     "Último",
-			"sNext":     "Siguiente",
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
 			"sPrevious": "Anterior"
-			},
-			"oAria": {
-				"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-			}
+		},
+		"oAria": {
+			"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		}
 
 	}
 
-} );
+});
 
 /*=============================================
 CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
@@ -81,7 +81,7 @@ CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
 //           	$("#nuevoCodigo").val(nuevoCodigo);
 
 //       	}
-                
+
 //       }
 
 //   	})
@@ -91,21 +91,21 @@ CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
 /*=============================================
 AGREGANDO PRECIO DE VENTA
 =============================================*/
-$("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
+$("#nuevoPrecioCompra, #editarPrecioCompra").change(function () {
 
-	if($(".porcentaje").prop("checked")){
+	if ($(".porcentaje").prop("checked")) {
 
 		var valorPorcentaje = $(".nuevoPorcentaje").val();
-		
-		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
 
-		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
+		var porcentaje = Number(($("#nuevoPrecioCompra").val() * valorPorcentaje / 100)) + Number($("#nuevoPrecioCompra").val());
+
+		var editarPorcentaje = Number(($("#editarPrecioCompra").val() * valorPorcentaje / 100)) + Number($("#editarPrecioCompra").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
-		$("#nuevoPrecioVenta").prop("readonly",true);
+		$("#nuevoPrecioVenta").prop("readonly", true);
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
-		$("#editarPrecioVenta").prop("readonly",true);
+		$("#editarPrecioVenta").prop("readonly", true);
 
 	}
 
@@ -114,37 +114,37 @@ $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 /*=============================================
 CAMBIO DE PORCENTAJE
 =============================================*/
-$(".nuevoPorcentaje").change(function(){
+$(".nuevoPorcentaje").change(function () {
 
-	if($(".porcentaje").prop("checked")){
+	if ($(".porcentaje").prop("checked")) {
 
 		var valorPorcentaje = $(this).val();
-		
-		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
 
-		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
+		var porcentaje = Number(($("#nuevoPrecioCompra").val() * valorPorcentaje / 100)) + Number($("#nuevoPrecioCompra").val());
+
+		var editarPorcentaje = Number(($("#editarPrecioCompra").val() * valorPorcentaje / 100)) + Number($("#editarPrecioCompra").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
-		$("#nuevoPrecioVenta").prop("readonly",true);
+		$("#nuevoPrecioVenta").prop("readonly", true);
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
-		$("#editarPrecioVenta").prop("readonly",true);
+		$("#editarPrecioVenta").prop("readonly", true);
 
 	}
 
 })
 
-$(".porcentaje").on("ifUnchecked",function(){
+$(".porcentaje").on("ifUnchecked", function () {
 
-	$("#nuevoPrecioVenta").prop("readonly",false);
-	$("#editarPrecioVenta").prop("readonly",false);
+	$("#nuevoPrecioVenta").prop("readonly", false);
+	$("#editarPrecioVenta").prop("readonly", false);
 
 })
 
-$(".porcentaje").on("ifChecked",function(){
+$(".porcentaje").on("ifChecked", function () {
 
-	$("#nuevoPrecioVenta").prop("readonly",true);
-	$("#editarPrecioVenta").prop("readonly",true);
+	$("#nuevoPrecioVenta").prop("readonly", true);
+	$("#editarPrecioVenta").prop("readonly", true);
 
 })
 
@@ -152,178 +152,178 @@ $(".porcentaje").on("ifChecked",function(){
 SUBIENDO LA FOTO DEL PRODUCTO
 =============================================*/
 
-$(".nuevaImagen").change(function(){
+$(".nuevaImagen").change(function () {
 
 	var imagen = this.files[0];
-	
+
 	/*=============================================
-  	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-  	=============================================*/
+		VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+		=============================================*/
 
-  	if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+	if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
 
-  		$(".nuevaImagen").val("");
+		$(".nuevaImagen").val("");
 
-  		 swal({
-		      title: "Error al subir la imagen",
-		      text: "¡La imagen debe estar en formato JPG o PNG!",
-		      type: "error",
-		      confirmButtonText: "¡Cerrar!"
-		    });
+		swal({
+			title: "Error al subir la imagen",
+			text: "¡La imagen debe estar en formato JPG o PNG!",
+			type: "error",
+			confirmButtonText: "¡Cerrar!"
+		});
 
-  	}else if(imagen["size"] > 2000000){
+	} else if (imagen["size"] > 2000000) {
 
-  		$(".nuevaImagen").val("");
+		$(".nuevaImagen").val("");
 
-  		 swal({
-		      title: "Error al subir la imagen",
-		      text: "¡La imagen no debe pesar más de 2MB!",
-		      type: "error",
-		      confirmButtonText: "¡Cerrar!"
-		    });
+		swal({
+			title: "Error al subir la imagen",
+			text: "¡La imagen no debe pesar más de 2MB!",
+			type: "error",
+			confirmButtonText: "¡Cerrar!"
+		});
 
-  	}else{
+	} else {
 
-  		var datosImagen = new FileReader;
-  		datosImagen.readAsDataURL(imagen);
+		var datosImagen = new FileReader;
+		datosImagen.readAsDataURL(imagen);
 
-  		$(datosImagen).on("load", function(event){
+		$(datosImagen).on("load", function (event) {
 
-  			var rutaImagen = event.target.result;
+			var rutaImagen = event.target.result;
 
-  			$(".previsualizar").attr("src", rutaImagen);
+			$(".previsualizar").attr("src", rutaImagen);
 
-  		})
+		})
 
-  	}
+	}
 })
 
 /*=============================================
 EDITAR PRODUCTO
 =============================================*/
 
-$(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
+$(".tablaProductos tbody").on("click", "button.btnEditarProducto", function () {
 
 	var idProducto = $(this).attr("idProducto");
-	
+
 	var datos = new FormData();
-    datos.append("idProducto", idProducto);
+	datos.append("idProducto", idProducto);
 
-     $.ajax({
+	$.ajax({
 
-      url:"ajax/productos.ajax.php",
-      method: "POST",
-      data: datos,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType:"json",
-      success:function(respuesta){
-          
-          var datosCategoria = new FormData();
-          datosCategoria.append("idCategoria",respuesta["id_categoria"]);
+		url: "ajax/productos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function (respuesta) {
 
-           $.ajax({
+			var datosCategoria = new FormData();
+			datosCategoria.append("idCategoria", respuesta["id_categoria"]);
 
-              url:"ajax/categorias.ajax.php",
-              method: "POST",
-              data: datosCategoria,
-              cache: false,
-              contentType: false,
-              processData: false,
-              dataType:"json",
-              success:function(respuesta){
-                  
-                  $("#editarCategoria").val(respuesta["id"]);
-                  $("#editarCategoria").html(respuesta["categoria"]);
+			$.ajax({
 
-              }
+				url: "ajax/categorias.ajax.php",
+				method: "POST",
+				data: datosCategoria,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function (respuesta) {
 
-          })
+					$("#editarCategoria").val(respuesta["id"]);
+					$("#editarCategoria").html(respuesta["categoria"]);
 
-           $("#editarCodigo").val(respuesta["codigo"]);
+				}
 
-           $("#editarDescripcion").val(respuesta["descripcion"]);
+			})
 
-           $("#editarStock").val(respuesta["stock"]);
+			$("#editarCodigo").val(respuesta["codigo"]);
 
-           $("#editarPrecioCompra").val(respuesta["precio_compra"]);
+			$("#editarDescripcion").val(respuesta["descripcion"]);
 
-           $("#editarPrecioVenta").val(respuesta["precio_venta"]);
+			$("#editarStock").val(respuesta["stock"]);
 
-           $("#editarPrecioClienteF").val(respuesta["precio_cliente"]);
-		   
-           $("#editarPrecioMl").val(respuesta["precio_ml"]);
+			$("#editarPrecioCompra").val(respuesta["precio_compra"]);
 
-		//    alert(respuesta["marca"]);
+			$("#editarPrecioVenta").val(respuesta["precio_venta"]);
 
-		   if(respuesta["marca"] != null){
+			$("#editarPrecioClienteF").val(respuesta["precio_cliente"]);
 
-			$("#computadorasEditar").removeClass("hidden");
+			$("#editarPrecioMl").val(respuesta["precio_ml"]);
 
-			$("#editarMarca").val(respuesta["marca"]);
+			//    alert(respuesta["marca"]);
 
-			$("#editarRam").val(respuesta["ram"]);
+			if (respuesta["marca"] != null) {
 
-			$("#editarProcesedor").val(respuesta["procesador"]);
+				$("#computadorasEditar").removeClass("hidden");
 
-			$("#editarPantalla").val(respuesta["tam_pantalla"]);
-			
-			$("#editarGraficos").val(respuesta["graficos"]);
+				$("#editarMarca").val(respuesta["marca"]);
 
-			$("#editarSsd").val(respuesta["ssd"]);
+				$("#editarRam").val(respuesta["ram"]);
 
-			$("#editarHhd").val(respuesta["hhd"]);
+				$("#editarProcesedor").val(respuesta["procesador"]);
 
-			// AGREGAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
+				$("#editarPantalla").val(respuesta["tam_pantalla"]);
 
-			$("#editarMarca").attr("required", true);
+				$("#editarGraficos").val(respuesta["graficos"]);
 
-			$("#editarRam").attr("required", true);
+				$("#editarSsd").val(respuesta["ssd"]);
 
-			$("#editarProcesedor").attr("required", true);
+				$("#editarHhd").val(respuesta["hhd"]);
 
-			$("#editarPantalla").attr("required", true);
+				// AGREGAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
 
-			$("#editarGraficos").attr("required", true);
+				$("#editarMarca").attr("required", true);
 
-			$("#editarSsd").attr("required", true);
+				$("#editarRam").attr("required", true);
 
-			$("#editarHhd").attr("required", true);
-			
-		   }else if(respuesta["marca"] == null){
+				$("#editarProcesedor").attr("required", true);
 
-			$("#computadorasEditar").addClass("hidden");
+				$("#editarPantalla").attr("required", true);
 
-			// QUITAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
+				$("#editarGraficos").attr("required", true);
 
-			$("#editarMarca").attr("required", false);
+				$("#editarSsd").attr("required", true);
 
-			$("#editarRam").attr("required", false);
+				$("#editarHhd").attr("required", true);
 
-			$("#editarProcesedor").attr("required", false);
+			} else if (respuesta["marca"] == null) {
 
-			$("#editarPantalla").attr("required", false);
+				$("#computadorasEditar").addClass("hidden");
 
-			$("#editarGraficos").attr("required", false);
+				// QUITAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
 
-			$("#editarSsd").attr("required", false);
-			
-			$("#editarHhd").attr("required", false);
+				$("#editarMarca").attr("required", false);
 
-		   }
+				$("#editarRam").attr("required", false);
 
-           if(respuesta["imagen"] != ""){
+				$("#editarProcesedor").attr("required", false);
 
-           	$("#imagenActual").val(respuesta["imagen"]);
+				$("#editarPantalla").attr("required", false);
 
-           	$(".previsualizar").attr("src",  respuesta["imagen"]);
+				$("#editarGraficos").attr("required", false);
 
-           }
+				$("#editarSsd").attr("required", false);
 
-      }
+				$("#editarHhd").attr("required", false);
 
-  })
+			}
+
+			if (respuesta["imagen"] != "") {
+
+				$("#imagenActual").val(respuesta["imagen"]);
+
+				$(".previsualizar").attr("src", respuesta["imagen"]);
+
+			}
+
+		}
+
+	})
 
 })
 
@@ -331,28 +331,28 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 ELIMINAR PRODUCTO
 =============================================*/
 
-$(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
+$(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function () {
 
 	var idProducto = $(this).attr("idProducto");
 	var codigo = $(this).attr("codigo");
 	var imagen = $(this).attr("imagen");
-	
+
 	swal({
 
 		title: '¿Está seguro de borrar el producto?',
 		text: "¡Si no lo está puede cancelar la accíón!",
 		type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, borrar producto!'
-        }).then(function(result) {
-        if (result.value) {
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Si, borrar producto!'
+	}).then(function (result) {
+		if (result.value) {
 
-        	window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&codigo="+codigo;
+			window.location = "index.php?ruta=productos&idProducto=" + idProducto + "&imagen=" + imagen + "&codigo=" + codigo;
 
-        }
+		}
 
 	})
 
@@ -360,12 +360,12 @@ $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
 
 // HABILITAR DIV PARA VER COMPUTADORAS
 
-$("#nuevaCategoria").change(function(){
+$("#nuevaCategoria").change(function () {
 
-	if($("#nuevaCategoria").val() == 7 || $("#nuevaCategoria").val() == 8 || $("#nuevaCategoria").val() == 9 ){
+	if ($("#nuevaCategoria").val() == 7 || $("#nuevaCategoria").val() == 8 || $("#nuevaCategoria").val() == 9) {
 
 		$("#computadoras").removeClass("hidden");
-	
+
 		$("#nuevaMarca").attr("required", true);
 		$("#nuevaRam").attr("required", true);
 		$("#nuevaProcesedor").attr("required", true);
@@ -374,9 +374,9 @@ $("#nuevaCategoria").change(function(){
 		$("#nuevaSsd").attr("required", true);
 		$("#nuevaHhd").attr("required", true);
 
-	}else{
+	} else {
 
-		$("#computadoras").addClass("hidden");	
+		$("#computadoras").addClass("hidden");
 
 		$("#nuevaMarca").attr("required", false);
 		$("#nuevaRam").attr("required", false);
@@ -394,10 +394,33 @@ $("#nuevaCategoria").change(function(){
 		$("#nuevaSsd").val("");
 		$("#nuevaHhd").val("");
 
-	}	
+	}
 
 });
 
+// OBTENIENDO ID DEL PRODUCTO PARA EL MOVIMIENTO DE LA BODEGA
 
+$(".tablaProductos tbody").on('click', 'button.btnMovBodega', function () {
 
 	
+	var idProducto = $(this).attr("idProducto");
+
+	$("#idProductoMov").val(idProducto);
+
+	var idBodega = $(this).attr("idBodega");
+
+	if (idBodega != "") {
+
+		$("#idBodegaMov").val(idBodega);
+
+	} else {
+
+		$("#idBodegaMov").val(0);
+	}
+
+
+})
+
+
+
+
