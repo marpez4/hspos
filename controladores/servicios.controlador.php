@@ -13,10 +13,7 @@ class ControladorServicios
 		if (isset($_POST["nuevaEquipo"])) {
 
 			if (
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaEquipo"]) &&
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaMarca"]) &&
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoProcesador"]) &&
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoSo"])
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,-_. ]+$/', $_POST["nuevaEquipo"])
 			) {
 
 				$tabla = "servicios";
@@ -76,8 +73,6 @@ class ControladorServicios
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "servicios";
-
 							}
 						})
 
@@ -109,7 +104,7 @@ class ControladorServicios
 
 		if (isset($_POST["editarEquipo"])) {
 
-			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarEquipo"])) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,-_. ]+$/', $_POST["editarEquipo"])) {
 
 				$tabla = "servicios";
 
@@ -167,7 +162,7 @@ class ControladorServicios
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "servicios";
+							
 
 							}
 						})
