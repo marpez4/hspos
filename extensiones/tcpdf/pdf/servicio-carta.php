@@ -263,7 +263,7 @@ class imprimirFactura
 
 		  <br>Falla: $respuestaServicio[falla]
 			
-		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena]
+		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena], Entrega de cargador: $respuestaServicio[cargador]
 		  <br>$impSolucion
 		  
 
@@ -503,7 +503,7 @@ EOF;
 
 		  <br>Falla: $respuestaServicio[falla]
 			
-		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena]
+		  <br>Notas: $respuestaServicio[obs]. Contraseña del equipo: $respuestaServicio[contrasena], Entrega de cargador: $respuestaServicio[cargador]
 		  <br>$impSolucion
 		  
 

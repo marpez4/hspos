@@ -47,6 +47,7 @@ $(".tablas").on("click", ".btnEditarServicio", function () {
 			$("#editarDd").val(respuesta["dd"]);
 			$("#editarSsd").val(respuesta["ssd"]);
 			$("#editarSo").val(respuesta["so"]);
+			$("#editarCargador").val(respuesta["cargador"]);
 			$("#editarPass").val(respuesta["contrasena"]);
 			$("#editarFalla").val(respuesta["falla"]);
 			$("#editarSolucion").val(respuesta["solucion"]);

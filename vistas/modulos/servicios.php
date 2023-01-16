@@ -373,7 +373,7 @@ MODAL AGREGAR SERVICIO
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoProcesador" required>
+                                <input type="text" class="form-control input-lg" name="nuevoProcesador">
 
                             </div>
 
@@ -388,7 +388,7 @@ MODAL AGREGAR SERVICIO
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaRam" required>
+                                <input type="text" class="form-control input-lg" name="nuevaRam">
 
                             </div>
 
@@ -435,7 +435,29 @@ MODAL AGREGAR SERVICIO
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevoSo" required>
+                                <input type="text" class="form-control input-lg" name="nuevoSo">
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA SO-->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">¿Entrega cargador?</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <select class="form-control input-lg" name="nuevoCargador" id="nuevoCargador" required>
+
+                                    <option value="">Selecciona</option>
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+
+                                </select>
 
                             </div>
 
@@ -739,7 +761,7 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarProcesador" id="editarProcesador" required>
+                                <input type="text" class="form-control input-lg" name="editarProcesador" id="editarProcesador">
 
                             </div>
 
@@ -755,7 +777,7 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarRam" id="editarRam" required>
+                                <input type="text" class="form-control input-lg" name="editarRam" id="editarRam">
 
                             </div>
 
@@ -792,7 +814,7 @@ MODAL EDITAR CATEGORÍA
                             </div>
 
                         </div>
-                        
+
                         <!-- ENTRADA PARA SO-->
 
                         <div class="form-group col-md-6">
@@ -803,7 +825,29 @@ MODAL EDITAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="editarSo" id="editarSo" required>
+                                <input type="text" class="form-control input-lg" name="editarSo" id="editarSo">
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA SO-->
+
+                        <div class="form-group col-md-6">
+
+                            <label for="">Editar ¿Entrega cargador?</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                                <select class="form-control input-lg" name="editarCargador" id="editarCargador" required>
+
+                                    <option value="">Selecciona</option>
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+
+                                </select>
 
                             </div>
 
