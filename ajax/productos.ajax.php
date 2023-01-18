@@ -74,7 +74,6 @@ class AjaxProductos{
     }
 
   }
-
 }
 
 
@@ -124,10 +123,6 @@ if(isset($_POST["nombreProducto"])){
   $traerProductos -> ajaxEditarProducto();
 
 }
-
-
-
-
 
 
 

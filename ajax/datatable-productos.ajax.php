@@ -81,7 +81,18 @@ class TablaProductos
 				$bodega = "<button class='btn btn-success'>0</button>";
 			} else {
 
-				$bodega = "<button class='btn btn-success'>" . $bodegas["cantidad"] . "</button>";
+				$bodega = "<button class='btn btn-success btnHistorial' idBodega='" . $bodegas["id"] . "'>" . $bodegas["cantidad"] . "</button>";
+			}
+
+			/*=============================================
+ 	 			BODEGA
+  				=============================================*/
+			if ($bodegas["cantidadLlegadas"] == null) {
+
+				$bodegaLl = "<button class='btn btn-success'>0</button>";
+			} else {
+
+				$bodegaLl = "<button class='btn btn-info btnHistorial' idBodega='" . $bodegas["id"] . "'>" . $bodegas["cantidadLlegadas"] . "</button>";
 			}
 
 			/*=============================================
@@ -103,15 +114,16 @@ class TablaProductos
 			$compra = number_format($productos[$i]["precio_compra"], 2);
 			$venta = number_format($productos[$i]["precio_venta"], 2);
 
-
+			
 			$datosJson .= '[
 			      "' . ($i + 1) . '",
 			      "' . $imagen . '",
 			      "' . $productos[$i]["codigo"] . '",
 			      "' . $productos[$i]["descripcion"] . '",
 			      "' . $categorias["categoria"] . '",
-			      "' . $stock . '",
+			      "' . $bodegaLl . '",
 			      "' . $bodega . '",
+			      "' . $stock . '",
 			      "$' . $compra . '",
 			      "$' . $venta . '",
 			      "' . $productos[$i]["fecha"] . '",

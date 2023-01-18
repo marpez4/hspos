@@ -425,6 +425,7 @@ class ControladorProductos
 				"idProducto" => $_POST["idProductoMov"],
 				"tipoMov" => $_POST["tipoMov"],
 				"cantidad" => $_POST["cantidadMov"],
+				"cantidadLlegadas" => $_POST["cantidadLlegadas"],
 				"descripcion" => $_POST["descripcionMov"],
 				"idBodega" => $_POST["idBodegaMov"],
 				"idUsuario" => $_POST["idUsuario"]
@@ -482,6 +483,20 @@ class ControladorProductos
 		$tabla = "bodega";
 
 		$respuesta = ModeloProductos::mdlMostrarBodega($tabla, $valor);
+
+		return $respuesta;
+	}
+
+	/*=============================================
+	MOSTRAR BODEGA DEL PRODUCTO
+	=============================================*/
+
+	static public function ctrVerHistorialBodega($valor)
+	{
+
+		$tabla = "historial_mov_bodega";
+
+		$respuesta = ModeloProductos::mdlMostrarHistorialBodega($tabla, $valor);
 
 		return $respuesta;
 	}

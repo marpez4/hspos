@@ -237,13 +237,12 @@ class ModeloProductos
 
 		if ($resCheck == null) {
 
-			echo "resCheck" . $resCheck;
-
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion, id_producto, cantidad, tipo) VALUES (:descripcion, :id_producto, :cantidad, :tipo)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(descripcion, id_producto, cantidad, cantidadLlegadas, tipo) VALUES (:descripcion, :id_producto, :cantidad, :cantidadLlegadas, :tipo)");
 
 			$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_producto", $datos["idProducto"], PDO::PARAM_INT);
 			$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+			$stmt->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo", $datos["tipoMov"], PDO::PARAM_INT);
 
 			$stmt->execute();
@@ -260,10 +259,11 @@ class ModeloProductos
 
 			// AGREGAR HISTORIAL DE BODEGAS
 
-			$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :tipo_movimiento, :id_usuario)");
+			$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
 
 			$movBode->bindParam(":id_bodega", $resBodeIdR, PDO::PARAM_INT);
 			$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+			$movBode->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 			$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
 			$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
@@ -281,19 +281,21 @@ class ModeloProductos
 			if ($datos["tipoMov"] == 1) {
 
 
-				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET cantidad = cantidad + :cantidad  WHERE id_producto = :id_producto");
+				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET cantidad = cantidad + :cantidad, cantidadLlegadas = cantidadLlegadas + :cantidadLlegadas WHERE id_producto = :id_producto");
 
 				$stmt->bindParam(":id_producto", $datos["idProducto"], PDO::PARAM_INT);
 				$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+				$stmt->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 
 				$stmt->execute();
 
 				// AGREGAR HISTORIAL DE BODEGAS
 
-				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :tipo_movimiento, :id_usuario)");
+				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
 
 				$movBode->bindParam(":id_bodega", $datos["idBodega"], PDO::PARAM_INT);
 				$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+				$movBode->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 				$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
 				$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
@@ -322,10 +324,13 @@ class ModeloProductos
 
 				// AGREGAR HISTORIAL DE BODEGAS
 
-				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :tipo_movimiento, :id_usuario)");
+				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
+				
+				$valor = 0;
 
 				$movBode->bindParam(":id_bodega", $datos["idBodega"], PDO::PARAM_INT);
 				$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
+				$movBode->bindParam(":cantidadLlegadas", $valor, PDO::PARAM_INT);
 				$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
 				$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
@@ -350,5 +355,21 @@ class ModeloProductos
 		$check->execute();
 
 		return $check->fetch();
+	}
+
+	static public function mdlMostrarHistorialBodega($tabla, $valor)
+	{
+
+		$item = "id_bodega";
+        $valor = $valor;
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = " . $valor . "");
+		// $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = 5");
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();      
+
+		// echo $table;
 	}
 }

@@ -59,8 +59,9 @@ if ($_SESSION["perfil"] == "Vendedor") {
               <th>Código</th>
               <th>Descripción</th>
               <th>Categoría</th>
-              <th>Stock</th>
+              <th>Llegadas</th>
               <th>Bodega</th>
+              <th>Stock</th>
               <th>Precio de compra</th>
               <th>Precio de venta</th>
               <th>Agregado</th>
@@ -997,13 +998,13 @@ MODAL EDITAR PRODUCTO
 
             <input type="number" class="form-control input-lg hidden" name="idProductoMov" id="idProductoMov" hidden>
 
-             <!-- ENTRADA DEL ID DE LA BODEGA -->
+            <!-- ENTRADA DEL ID DE LA BODEGA -->
 
-             <input type="number" class="form-control input-lg hidden" name="idBodegaMov" id="idBodegaMov" hidden>
+            <input type="number" class="form-control input-lg hidden" name="idBodegaMov" id="idBodegaMov" hidden>
 
-             <!-- ENTRADA DEL USUARIO -->
+            <!-- ENTRADA DEL USUARIO -->
 
-             <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["id"]; ?>">
+            <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["id"]; ?>">
 
             <!-- ENTRADA PARA FECHA LLEGADA -->
 
@@ -1012,10 +1013,10 @@ MODAL EDITAR PRODUCTO
               <label for="">Tipo de movimiento</label>
 
               <div class="input-group">
-                  
-              <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
-                <select class="form-control input-lg" id="tipoMov" name="tipoMov" required>
+                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                <select class="form-control input-lg" id="tipoMov" name="tipoMov" id="tipoMov" onChange="mostrarInLlegadas()" required>
 
                   <option value="">Selecciona</option>
                   <option value="1">Entrada a bodega</option>
@@ -1038,6 +1039,22 @@ MODAL EDITAR PRODUCTO
                 <span class="input-group-addon"><i class="fa fa-gear"></i></span>
 
                 <input type="number" class="form-control input-lg" min="0" name="cantidadMov" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LLEGADAS -->
+
+            <div id="divCantidadLlegadas" class="form-group col-md-6 hidden">
+
+              <label for="">Cantidad de llegadas</label>
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-gear"></i></span>
+
+                <input type="number" class="form-control input-lg" min="0" name="cantidadLlegadas" id="cantidadLlegadas">
 
               </div>
 
@@ -1079,8 +1096,8 @@ MODAL EDITAR PRODUCTO
 
       <?php
 
-        $movBodega = new ControladorProductos();
-        $movBodega->ctrMovBodega();
+      $movBodega = new ControladorProductos();
+      $movBodega->ctrMovBodega();
 
       ?>
 

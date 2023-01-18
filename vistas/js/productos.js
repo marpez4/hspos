@@ -2,16 +2,16 @@
 CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 =============================================*/
 
-$.ajax({
+// $.ajax({
 
-	url: "ajax/datatable-productos.ajax.php",
-	success: function (respuesta) {
+// 	url: "ajax/datatable-productos.ajax.php",
+// 	success: function (respuesta) {
 
-		console.log("respuesta", respuesta);
+// 		console.log("respuesta", respuesta);
 
-	}
+// 	}
 
-})
+// })
 
 var perfilOculto = $("#perfilOculto").val();
 
@@ -48,6 +48,9 @@ $('.tablaProductos').DataTable({
 	}
 
 });
+
+// TABLA MOVIMIENTOS DE LA BODEGA
+
 
 /*=============================================
 CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
@@ -421,6 +424,32 @@ $(".tablaProductos tbody").on('click', 'button.btnMovBodega', function () {
 
 })
 
+// VER EL HISTORIAL DE LOS MOVIMIENTOS llegados, bodega, stock de tienda
 
+$(".tablaProductos tbody").on("click", 'button.btnHistorial', function () {
+
+	var idBodega = $(this).attr("idBodega");
+
+	window.location = "index.php?ruta=bodega_mv_detalle&idBodega="+idBodega;
+
+
+})
+
+function mostrarInLlegadas(){
+
+	const getValue = document.getElementById("tipoMov").value;
+
+	if(getValue == 1){
+
+		$("#divCantidadLlegadas").removeClass("hidden");
+		$("#cantidadLlegadas").addClass("required");
+
+	}else{
+
+		$("#divCantidadLlegadas").addClass("hidden");
+		$("#cantidadLlegadas").removeClass("required");
+	}
+
+}
 
 
