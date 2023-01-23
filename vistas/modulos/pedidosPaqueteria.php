@@ -63,6 +63,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             <th>Ciudad</th>
                             <th>Estado</th>
                             <th>Teléfono</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
 
                         </tr>
@@ -90,7 +91,51 @@ if ($_SESSION["perfil"] == "Vendedor") {
                     <td class="text-uppercase">' . $value["colonia"] . '</td>
                     <td class="text-uppercase">' . $value["idCiudad"] . '</td>
                     <td class="text-uppercase">' . $value["idEstado"] . '</td>
-                    <td class="text-uppercase">' . $value["telefono"] . '</td>
+                    <td class="text-uppercase">' . $value["telefono"] . '</td>';
+
+                            switch ($value["estatus"]) {
+
+                                case 1:
+                                    $estatus = "Recibido";
+                                    $color = "primary";
+                                    break;
+                                case 2:
+                                    $estatus = "Empaquetado";
+                                    $color = "warning";
+                                    break;
+                                case 3:
+                                    $estatus = "Enviado";
+                                    $color = "info";
+                                    break;
+                                case 4:
+                                    $estatus = "Entregado";
+                                    $color = "success";
+                                    break;
+                                case 5:
+                                    $estatus = "Terminado";
+                                    $color = "danger";
+                                    break;
+                            }
+
+
+                            echo '<td class="text-uppercase">
+                    
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-' . $color . ' dropdown-toggle" data-toggle="dropdown">
+                            ' . $estatus . ' <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" class="actionEstatus" estatus="1" idPedidoPaqueteria="' . $value["id"] . '" usuario="' . $_SESSION["usuario"] . '">Recibido</a></li>
+                                <li><a href="#" class="actionEstatus" estatus="2" idPedidoPaqueteria="' . $value["id"] . '" usuario="' . $_SESSION["usuario"] . '">Empaquetado</a></li>
+                                <li><a href="#" class="actionEstatus" estatus="3" idPedidoPaqueteria="' . $value["id"] . '" usuario="' . $_SESSION["usuario"] . '">Enviado</a></li>
+                                <li><a href="#" class="actionEstatus" estatus="4" idPedidoPaqueteria="' . $value["id"] . '" usuario="' . $_SESSION["usuario"] . '">Entregado</a></li>
+                                <li><a href="#" class="actionEstatus" estatus="5" idPedidoPaqueteria="' . $value["id"] . '" usuario="' . $_SESSION["usuario"] . '">Terminado</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" class="verHistorial" data-toggle="modal" data-target="#modalVerHistorialPaq" idPedidoPaqueteria="' . $value["id"] . '">Historial</a></li>
+                            </ul>
+                        </div>
+                    
+                    </td>
 
                     <td>
 
@@ -515,3 +560,59 @@ $borrarPedidoPaqueteria = new ControladorPedidosPaqueteria();
 $borrarPedidoPaqueteria->ctrBorrarPedidoPaqueteria();
 
 ?>
+
+<!--=====================================
+MODAL AGREGAR CATEGORÍA
+======================================-->
+
+<div id="modalVerHistorialPaq" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form role="form" method="post">
+
+                <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+                <div class="modal-header" style="background:#3c8dbc; color:white">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    <h4 class="modal-title">Historial de movimientos del paquete</h4>
+
+                </div>
+
+                <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+                        <div class="tableHistorial"></div>
+
+                    </div>
+
+                </div>
+
+                <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

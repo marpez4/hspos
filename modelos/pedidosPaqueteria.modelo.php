@@ -104,4 +104,35 @@ class ModeloPedidosPaqueteriasAdmn
 
         $stmt = null;
     }
+
+    static public function mdlCambiarEstatusPedido($tabla, $datos)
+    {
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET estatus = :estatus WHERE id = :id");
+
+        $stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_INT);
+        $stmt->bindParam(":id", $datos["idPaqueteria"], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $tabla2 = "pedido_paqueteria_hmov";
+        
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(id_paqueteria, estatus, id_usuario) VALUES (:id, :estatus, :id_usuario)");
+
+        $stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_INT);
+        $stmt->bindParam(":id", $datos["idPaqueteria"], PDO::PARAM_INT);
+        $stmt->bindParam(":id_usuario", $datos["usuario"], PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+        $stmt = null;
+
+    }
 }

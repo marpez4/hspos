@@ -104,7 +104,8 @@ class ControladorPedidosPaqueteria
 	EDITAR PEDIDO CATEGORIA
 	=============================================*/
 
-    static public function ctrEditarPedidoPaqueteria(){
+    static public function ctrEditarPedidoPaqueteria()
+    {
 
         if (isset($_POST["editarNombre"])) {
 
@@ -185,26 +186,23 @@ class ControladorPedidosPaqueteria
 
             </script>';
             }
-
-
-
         }
-
     }
 
-        static public function ctrBorrarPedidoPaqueteria(){
+    static public function ctrBorrarPedidoPaqueteria()
+    {
 
-            if(isset($_GET["idPedidoPaqueteria"])){
+        if (isset($_GET["idPedidoPaqueteria"])) {
 
-                $tabla = "pedidospaqueteria";
+            $tabla = "pedidospaqueteria";
 
-                $datos = $_GET["idPedidoPaqueteria"];
+            $datos = $_GET["idPedidoPaqueteria"];
 
-                $respuesta = ModeloPedidosPaqueteriasAdmn::mdlBorrarPedidoPaqueteria($tabla, $datos);
+            $respuesta = ModeloPedidosPaqueteriasAdmn::mdlBorrarPedidoPaqueteria($tabla, $datos);
 
-                if($respuesta == "ok"){
+            if ($respuesta == "ok") {
 
-                    echo'<script>
+                echo '<script>
     
                         swal({
                               type: "success",
@@ -220,11 +218,73 @@ class ControladorPedidosPaqueteria
                                     })
     
                         </script>';
-                }
-                
+            }
         }
     }
 
+    static public function ctrCambiarEstatus($valor1, $valor2, $valor3)
+    {
 
+        $tabla = "pedidospaqueteria";
+
+        $datos = array(
+            "idPaqueteria" => $valor1,
+            "estatus" => $valor2,
+            "usuario" => $valor3
+        );
+
+        $respuesta = ModeloPedidosPaqueteriasAdmn::mdlCambiarEstatusPedido($tabla, $datos);
+
+        return $respuesta;
     }
-    
+
+    static public function verHistoryPaq($item, $valor)
+    {
+
+        $tabla = "pedido_paqueteria_hmov";
+
+        $table = '<hr>
+		
+        <div style="text-align: center;">
+              <h4>Ventas</h4>
+        </div>';
+
+        $table .= '<table class="table table-bordered table-striped dt-responsive tablas tablas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Fecha del movimiento</th>
+						<th>Estatus</th>
+						<th>Usuario</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+        $stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_paqueteria ORDER BY fecha_mov DESC");
+
+        $stmtV->bindParam(":id_paqueteria", $valor, PDO::PARAM_INT);
+
+        $stmtV->execute();
+
+        foreach ($stmtV as $key => $value) {
+            $table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["fecha_moc"] . '</td>
+						<td class="text-uppercase">' . $value["estatus"] . '</td>
+						<td class="text-uppercase">$' . $value["idUsuario"] . '</td>
+					   </tr>';
+        }
+
+        $table .= '</tbody>
+				</table>';
+
+        echo $table;
+    }
+}
