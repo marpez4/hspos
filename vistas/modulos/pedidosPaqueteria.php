@@ -115,6 +115,10 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                     $estatus = "Terminado";
                                     $color = "danger";
                                     break;
+                                default:
+                                    $estatus = "Nuevo";
+                                    $color = "default";
+                                    break;
                             }
 
 

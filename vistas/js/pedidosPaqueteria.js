@@ -106,6 +106,8 @@ $(".tablas").on("click", ".actionEstatus", function () {
 
 		estatusNew = "Terminado";
 
+	}else {
+		estatusNew = "Nuevo";
 	}
 
 	swal({
