@@ -8,9 +8,10 @@ class Conexion
 
         $link = new PDO(
             "mysql:host=localhost;
-             dbname=u369022823_pos", 
-             "root",
-             "4776632304Etropos1BD");
+             dbname=u369022823_pos",
+            "u369022823_pos",
+            "4776632304Etropos1BD*"
+        );
 
         $link->exec("set names utf8");
 
