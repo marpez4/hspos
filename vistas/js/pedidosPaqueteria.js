@@ -162,7 +162,7 @@ $(".tablas").on("click", ".verHistorial", function () {
 	var datos = new FormData();
 
 	datos.append("idPaqueteriaH", idPedidoPaqueteria);
-	datos.append("vervHistorial", verHistorial);
+	datos.append("verHistorial", verHistorial);
 
 	$.ajax({
 		url: "ajax/pedidoPaqueteria.ajax.php",
@@ -174,8 +174,7 @@ $(".tablas").on("click", ".verHistorial", function () {
 		success: function (respuesta) {
 
 			if (respuesta) {
-
-				// alert("Entro", respuesta);
+				
 				$("#modalVerHistorialPaq .modal-body .box-body .tableHistorial").html(respuesta);
 
 			}

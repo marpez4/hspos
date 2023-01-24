@@ -116,11 +116,14 @@ class ModeloPedidosPaqueteriasAdmn
         $stmt->execute();
 
         $tabla2 = "pedido_paqueteria_hmov";
-        
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(id_paqueteria, estatus, id_usuario) VALUES (:id, :estatus, :id_usuario)");
+
+        $hoy = date("Y-m-d H:i:s");
+
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla2(id_paqueteria, fecha_mov, estatus, id_usuario) VALUES (:id, :fecha_mov, :estatus, :id_usuario)");
 
         $stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_INT);
         $stmt->bindParam(":id", $datos["idPaqueteria"], PDO::PARAM_INT);
+        $stmt->bindParam(":fecha_mov", $hoy, PDO::PARAM_STR);
         $stmt->bindParam(":id_usuario", $datos["usuario"], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
@@ -133,6 +136,71 @@ class ModeloPedidosPaqueteriasAdmn
 
         $stmt->close();
         $stmt = null;
+    }
 
+    static public function mdlVerHistory($tabla, $item, $valor)
+    {
+
+        $table = '<hr>
+		
+        <div style="text-align: center;">
+              <h4>Ventas</h4>
+        </div>';
+
+        $table .= '<table class="table table-bordered table-striped dt-responsive tablas tablas" width="100%">
+
+					<thead>
+
+					<tr>
+
+						<th style="width:10px">#</th>
+						<th>Fecha del movimiento</th>
+						<th>Estatus</th>
+						<th>Usuario</th>
+
+					</tr>
+
+					</thead>
+
+					<tbody>';
+
+        $stmtV = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :id_paqueteria ORDER BY fecha_mov DESC");
+
+        $stmtV->bindParam(":id_paqueteria", $valor, PDO::PARAM_INT);
+
+        $stmtV->execute();
+
+        foreach ($stmtV as $key => $value) {
+
+            if ($value["estatus"] == 1) {
+
+                $est = "Recibido";
+            } else if ($value["estatus"] == 2) {
+
+                $est = "Empaquetado";
+            } else if ($value["estatus"] == 3) {
+
+                $est = "Enviado";
+            } else if ($value["estatus"] == 4) {
+
+                $est = "Entregado";
+            } else if ($value["estatus"] == 5) {
+
+                $est = "Terminado";
+            }
+
+            $table .= '<tr>
+
+						<td>' . ($key + 1) . '</td>						
+						<td class="text-uppercase">' . $value["fecha_mov"] . '</td>
+						<td class="text-uppercase">' . $est . '</td>
+						<td class="text-uppercase">' . $value["id_usuario"] . '</td>
+					   </tr>';
+        }
+
+        $table .= '</tbody>
+				</table>';
+
+        echo $table;
     }
 }

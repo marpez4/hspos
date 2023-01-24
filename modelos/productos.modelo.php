@@ -259,12 +259,15 @@ class ModeloProductos
 
 			// AGREGAR HISTORIAL DE BODEGAS
 
-			$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
+			$hoy = date("Y-m-d H:i:s");
+
+			$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, fecha_mov, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :fecha_mov, :id_usuario)");
 
 			$movBode->bindParam(":id_bodega", $resBodeIdR, PDO::PARAM_INT);
 			$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
 			$movBode->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 			$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
+			$movBode->bindParam(":fecha_mov", $hoy, PDO::PARAM_STR);
 			$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
 			$movBode->execute();
@@ -291,12 +294,15 @@ class ModeloProductos
 
 				// AGREGAR HISTORIAL DE BODEGAS
 
-				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
+				$hoy = date("Y-m-d H:i:s");
+
+				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, fecha_mov, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :fecha_mov, :id_usuario)");
 
 				$movBode->bindParam(":id_bodega", $datos["idBodega"], PDO::PARAM_INT);
 				$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
 				$movBode->bindParam(":cantidadLlegadas", $datos["cantidadLlegadas"], PDO::PARAM_INT);
 				$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
+				$movBode->bindParam(":fecha_mov", $hoy, PDO::PARAM_STR);
 				$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
 				$movBode->execute();
@@ -324,7 +330,9 @@ class ModeloProductos
 
 				// AGREGAR HISTORIAL DE BODEGAS
 
-				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :id_usuario)");
+				$hoy = date("Y-m-d H:i:s");
+
+				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, fecha_mov, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :fecha_mov, :id_usuario)");
 				
 				$valor = 0;
 
@@ -332,6 +340,7 @@ class ModeloProductos
 				$movBode->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_INT);
 				$movBode->bindParam(":cantidadLlegadas", $valor, PDO::PARAM_INT);
 				$movBode->bindParam(":tipo_movimiento", $datos["tipoMov"], PDO::PARAM_INT);
+				$movBode->bindParam(":fecha_mov", $hoy, PDO::PARAM_STR);
 				$movBode->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
 
 				$movBode->execute();
