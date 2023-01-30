@@ -44,9 +44,10 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini pedido-paqueteria">
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini pedido-paqueteria anyClass">
 
-    <section class="content">
+    <div class="container-fluid">
+        <section class="content">
 
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -149,6 +150,9 @@
         <div class="col-md-4"></div>
 
     </section>
+    </div>
+
+    
 
 </body>
 

@@ -3408,11 +3408,17 @@ table.text-center th {
   background-size:cover;
   background-repeat: no-repeat; 
   background-position: center center;
+  background-attachment: fixed;
   overflow:hidden;
   z-index:-1;
   scroll-behavior: initial;
   
   
+}
+
+.anyClass {
+  height:150px;
+  overflow-y: scroll;
 }
 
 .login-page #back{
