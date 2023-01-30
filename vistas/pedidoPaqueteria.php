@@ -36,8 +36,11 @@
 
     <!-- SweetAlert 2 -->
     <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
+
     <!-- By default SweetAlert2 doesn't support IE. To enable IE 11 support, include Promise polyfill:-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+    
 
 </head>
 
@@ -62,51 +65,56 @@
                 </div>
                 <div class="box-body">
 
-                    <form method="post">
+                    <form enctype="multipart/form-data" method="post" id="formularioPedidos">
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Nombre completo" name="nombre" required>
+                            <input type="text" class="form-control" placeholder="Nombre completo" name="nombre" id="nombre" required >
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Calle" name="calle" required>
+                            <input type="text" class="form-control" placeholder="Calle" name="calle" id="calle" required >
                             <span class="glyphicon glyphicon-home form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Colonia" name="colonia" required>
+                            <input type="text" class="form-control" placeholder="Colonia" name="colonia" id="colonia" required >
                             <span class="glyphicon glyphicon glyphicon-road form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="number" class="form-control" placeholder="CP" name="cp" required>
+                            <input type="number" class="form-control" placeholder="CP" name="cp" id="cp" required >
                             <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Ciudad" name="ciudad" required>
+                            <input type="text" class="form-control" placeholder="Ciudad" name="ciudad" id="ciudad" required >
                             <span class="glyphicon glyphicon-bookmark form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" placeholder="Estado" name="estado" required>
+                            <input type="text" class="form-control" placeholder="Estado" name="estado" id="estado" required >
                             <span class="glyphicon glyphicon-flag form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input type="number" class="form-control" placeholder="Teléfono" name="telefono" required>
+                            <input type="number" class="form-control" placeholder="Teléfono" name="telefono" id="telefono" required >
                             <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <textarea class="form-control" id="" rows="2" placeholder="Entre calles" name="entreCalles" required></textarea>
+                            <textarea class="form-control" id="" rows="2" placeholder="Entre calles" name="entreCalles" id="entreCalles" required ></textarea>
                             <span class="glyphicon glyphicon-sort form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <textarea class="form-control" id="" rows="2" placeholder="Referencias" name="referencias" required></textarea>
+                            <textarea class="form-control" id="" rows="2" placeholder="Referencias" name="referencias" id="referencias" required ></textarea>
                             <span class="glyphicon glyphicon-pushpin form-control-feedback"></span>
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <input type="file" class="form-control" placeholder="Archivo" name="archivo" id="archivo" required >
+                            <span class="glyphicon glyphicon-folder-open form-control-feedback"></span>
                         </div>
 
                         <div class="row">
@@ -119,7 +127,7 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <button type="submit" class="btn btn-danger btn-block btn-flat">Enviar</button>
+                                <button type="submit" class="btn btn-danger btn-block btn-flat btnPedidoPaqueteria">Enviar</button>
                             </div>
 
                         </div>
@@ -145,3 +153,6 @@
 </body>
 
 </html>
+
+<!-- pedidosPaqueteria js -->
+<!-- <script src="vistas/js/pedidosPaqueteria.js"></script> -->
