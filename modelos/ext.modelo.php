@@ -8,7 +8,7 @@ class ModeloPedidosPaqueteria{
 
     static public function mdlIngresarPedidoPaqueteria($tabla, $datos){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreCompleto, calle, colonia, cp, idCiudad, idEstado, telefono, entreCalles, referencias ) VALUES (:nombreCompleto, :calle, :colonia, :cp, :ciudad, :estado, :telefono, :entreCalles, :referencias)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreCompleto, calle, colonia, cp, idCiudad, idEstado, telefono, entreCalles, referencias, archivo ) VALUES (:nombreCompleto, :calle, :colonia, :cp, :ciudad, :estado, :telefono, :entreCalles, :referencias, :archivo)");
 
 			$stmt->bindParam(":nombreCompleto", $datos["nombre"], PDO::PARAM_STR);
 			$stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
@@ -19,6 +19,7 @@ class ModeloPedidosPaqueteria{
             $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
             $stmt->bindParam(":entreCalles", $datos["entreCalles"], PDO::PARAM_STR);
             $stmt->bindParam(":referencias", $datos["referencias"], PDO::PARAM_STR);
+            $stmt->bindParam(":archivo", $datos["archivo"], PDO::PARAM_STR);
 
             if($stmt->execute()){
 

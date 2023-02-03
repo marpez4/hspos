@@ -64,6 +64,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             <th>Estado</th>
                             <th>Teléfono</th>
                             <th>Estatus</th>
+                            <th>Archivo</th>
                             <th>Acciones</th>
 
                         </tr>
@@ -140,6 +141,12 @@ if ($_SESSION["perfil"] == "Vendedor") {
                         </div>
                     
                     </td>
+                    <td class="text-uppercase">
+                    <div class="text-center">
+                        <a class="btn btn-info" href="descargar.php?file=' . $value["archivo"] . '"><i class="fa fa-download"></i></a>
+                    </div>
+                    </td>
+
 
                     <td>
 
@@ -186,7 +193,7 @@ MODAL AGREGAR CATEGORÍA
 
         <div class="modal-content">
 
-            <form role="form" method="post">
+            <form enctype="multipart/form-data" role="form" method="post">
 
                 <!--=====================================
         CABEZA DEL MODAL
@@ -330,6 +337,21 @@ MODAL AGREGAR CATEGORÍA
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
 
                                 <textarea class="form-control input-lg" id="" rows="2" placeholder="Ingresar referencias" name="nuevaReferencia" required></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA EL ARCHIVO -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                 <span class="glyphicon glyphicon-folder-open form-control-feedback"></span>
+
+                                <input type="file" class="form-control input-lg" placeholder="Archivo" name="archivo" id="archivo" required >
+                                
 
                             </div>
 

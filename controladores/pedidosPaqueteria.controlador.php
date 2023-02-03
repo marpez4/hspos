@@ -23,6 +23,37 @@ class ControladorPedidosPaqueteria
 
                 $tabla = "pedidosPaqueteria";
 
+
+                $directorio = "./uploads/";
+
+                $archivo = $directorio . basename($_FILES["archivo"]["name"]);
+                $tipoArchivo =  strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
+                
+                // if ($tipoArchivo != 'jpg' || $tipoArchivo != 'jpeg' || $tipoArchivo != 'png' || $tipoArchivo != 'pdf') {
+                //     echo '<script>
+
+                //     swal({
+
+                //         type: "error",
+                //         title: "¡Tipo de archivo no admitido!",
+                //         showConfirmButton: true,
+                //         confirmButtonText: "Cerrar"
+
+                //     }).then(function(result){
+
+                //         return;
+
+                //     });
+                
+
+                //     </script>';
+                //     return;
+                // }
+
+                if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $archivo)) {
+                    // echo 'ya se subio';
+                }
+
                 $datos = array(
                     "nombre" => $_POST["nuevoNombre"],
                     "calle" => $_POST["nuevaCalle"],
@@ -32,7 +63,8 @@ class ControladorPedidosPaqueteria
                     "estado" => $_POST["nuevoEstado"],
                     "telefono" => $_POST["nuevoTelefono"],
                     "entreCalles" => $_POST["nuevaCalles"],
-                    "referencias" => $_POST["nuevaReferencia"]
+                    "referencias" => $_POST["nuevaReferencia"],
+                    "archivo" => basename($_FILES["archivo"]["name"])
                 );
 
                 $respuesta = ModeloPedidosPaqueteriasAdmn::mdlIngresarPedidoPaqueteriaAdmn($tabla, $datos);
