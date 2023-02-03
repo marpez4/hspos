@@ -18,7 +18,7 @@ class ControladorExt
 
         if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombre"]) &&
             preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cp"]) &&
-            preg_match('/^[0-9]+$/', $_POST["telefono"]) &&){
+            preg_match('/^[0-9]+$/', $_POST["telefono"])){
 
             $tabla = "pedidospaqueteria";
 

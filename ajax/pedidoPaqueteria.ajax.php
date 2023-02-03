@@ -1,7 +1,7 @@
 <?php
 
 require_once "../controladores/pedidosPaqueteria.controlador.php";
-require_once "..../controladores/ext.controlador.php";
+require_once "../controladores/ext.controlador.php";
 require_once "../modelos/pedidosPaqueteria.modelo.php";
 
 class AjaxPedidoPaqueteria
