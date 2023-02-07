@@ -56,6 +56,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                         <tr>
 
                             <th style="width:10px">#</th>
+                            <th>No. de Folio</th>
                             <th>Nombre cliente</th>
                             <th>Calle</th>
                             <th>CP</th>
@@ -86,6 +87,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                     <td>' . ($key + 1) . '</td>
 
+                    <td class="text-uppercase"><span class="badge badge-pill badge-danger">' . $value["folio"] . '</span></td>
                     <td class="text-uppercase">' . $value["nombreCompleto"] . '</td>
                     <td class="text-uppercase">' . $value["calle"] . '</td>
                     <td class="text-uppercase">' . $value["cp"] . '</td>
@@ -214,6 +216,22 @@ MODAL AGREGAR CATEGORÍA
                 <div class="modal-body">
 
                     <div class="box-body">
+
+                        <!-- ENTRADA PARA EL FOLIO -->
+
+                        <div class="form-group">
+
+                            <label for="">Número de folio</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="nuevoFolio" placeholder="Ingresar número de folio" required>
+
+                            </div>
+
+                        </div>
 
                         <!-- ENTRADA PARA EL NOMBRE -->
 
@@ -348,10 +366,10 @@ MODAL AGREGAR CATEGORÍA
 
                             <div class="input-group">
 
-                                 <span class="glyphicon glyphicon-folder-open form-control-feedback"></span>
+                                <span class="glyphicon glyphicon-folder-open form-control-feedback"></span>
 
-                                <input type="file" class="form-control input-lg" placeholder="Archivo" name="archivo" id="archivo" required >
-                                
+                                <input type="file" class="form-control input-lg" placeholder="Archivo" name="archivo" id="archivo" required>
+
 
                             </div>
 
@@ -419,6 +437,22 @@ MODAL EDITAR CATEGORÍA
                 <div class="modal-body">
 
                     <div class="box-body">
+
+                        <!-- ENTRADA PARA EL FOLIO -->
+
+                        <div class="form-group">
+
+                            <label for="">Número de folio</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="editarFolio" id="editarFolio" placeholder="Ingresar Folio">
+
+                            </div>
+
+                        </div>
 
                         <!-- ENTRADA PARA EL NOMBRE -->
 

@@ -11,14 +11,7 @@ class ControladorPedidosPaqueteria
 
             if (
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["nuevaCalle"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["nuevaColonia"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCp"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCiudad"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoEstado"]) &&
-                preg_match('/^[0-9]+$/', $_POST["nuevoTelefono"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["nuevaCalles"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["nuevaReferencia"])
+                preg_match('/^[0-9]+$/', $_POST["nuevoTelefono"])
             ) {
 
                 $tabla = "pedidosPaqueteria";
@@ -28,7 +21,7 @@ class ControladorPedidosPaqueteria
 
                 $archivo = $directorio . basename($_FILES["archivo"]["name"]);
                 $tipoArchivo =  strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-                
+
                 // if ($tipoArchivo != 'jpg' || $tipoArchivo != 'jpeg' || $tipoArchivo != 'png' || $tipoArchivo != 'pdf') {
                 //     echo '<script>
 
@@ -44,7 +37,7 @@ class ControladorPedidosPaqueteria
                 //         return;
 
                 //     });
-                
+
 
                 //     </script>';
                 //     return;
@@ -55,6 +48,7 @@ class ControladorPedidosPaqueteria
                 }
 
                 $datos = array(
+                    "folio" => $_POST["nuevoFolio"],
                     "nombre" => $_POST["nuevoNombre"],
                     "calle" => $_POST["nuevaCalle"],
                     "colonia" => $_POST["nuevaColonia"],
@@ -142,20 +136,13 @@ class ControladorPedidosPaqueteria
         if (isset($_POST["editarNombre"])) {
 
             if (
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["editarColonia"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["editarCalle"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCp"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCiudad"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarEstado"]) &&
-                preg_match('/^[0-9]+$/', $_POST["editarTelefono"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["editarCalles"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#., ]+$/', $_POST["editarReferencia"])
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])
             ) {
 
                 $tabla = "pedidospaqueteria";
 
                 $datos = array(
+                    "folio" => $_POST["editarFolio"],
                     "nombre" => $_POST["editarNombre"],
                     "calle" => $_POST["editarCalle"],
                     "colonia" => $_POST["editarColonia"],
@@ -277,6 +264,5 @@ class ControladorPedidosPaqueteria
         $respuesta = ModeloPedidosPaqueteriasAdmn::mdlVerHistory($tabla, $item, $valor);
 
         return $respuesta;
-        
     }
 }

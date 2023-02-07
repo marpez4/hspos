@@ -114,6 +114,7 @@
                         </div>
                         
                         <div class="form-group has-feedback">
+                            <label for="">Subir comprobante de pago en formato, PNG, IMG o PDF</label>
                             <input type="file" class="form-control" placeholder="Archivo" name="archivo" id="archivo" required >
                             <span class="glyphicon glyphicon-folder-open form-control-feedback"></span>
                         </div>

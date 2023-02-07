@@ -18,6 +18,7 @@ $(".tablas").on("click", ".btnEditarPedidoPaqueteria", function () {
       // alert($("#idPedidoPaqueteria").val(respuesta["id"]));
 
       $("#idPedidoPaqueteria").val(respuesta["id"]);
+      $("#editarFolio").val(respuesta["folio"]);
       $("#editarNombre").val(respuesta["nombreCompleto"]);
       $("#editarCalle").val(respuesta["calle"]);
       $("#editarColonia").val(respuesta["colonia"]);

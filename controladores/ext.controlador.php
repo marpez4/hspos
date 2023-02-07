@@ -16,43 +16,36 @@ class ControladorExt
 
         if (isset($_POST["nombre"])) {
 
-        if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombre"]) &&
-            preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cp"]) &&
-            preg_match('/^[0-9]+$/', $_POST["telefono"])){
+            if (
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombre"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cp"]) &&
+                preg_match('/^[0-9]+$/', $_POST["telefono"])
+            ) {
 
-            $tabla = "pedidospaqueteria";
+                $tabla = "pedidospaqueteria";
 
-                $directorio = "./uploads/";
+                $directorio = "uploads/";
 
                 $archivo = $directorio . basename($_FILES["archivo"]["name"]);
                 $tipoArchivo =  strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
 
                 // echo $tipoArchivo;
 
-                // if ($tipoArchivo != 'jpg' || $tipoArchivo != 'jpeg' || $tipoArchivo != 'png' || $tipoArchivo != 'pdf') {
-                //     echo '<script>
+                if ($tipoArchivo != 'jpg' || $tipoArchivo != 'jpeg' || $tipoArchivo != 'png' || $tipoArchivo != 'pdf') {
+                    echo '<script>
 
-                //     swal({
+                    swal({
 
-                //         type: "error",
-                //         title: "¡Tipo de archivo no admitido!",
-                //         showConfirmButton: true,
-                //         confirmButtonText: "Cerrar"
+                        type: "error",
+                        title: "¡Tipo de archivo no admitido!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
 
-                //     }).then(function(result){
-
-                //         return;
-
-                //     });
-                
-
-                //     </script>';
-                //     return;
-                // }
-
-                if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $archivo)) {
-                    // echo 'ya se subio';
+                    })
+                    </script>';
                 }
+
+                move_uploaded_file($_FILES["archivo"]["tmp_name"], $archivo);
 
                 $datos = array(
                     "nombre" => $_POST["nombre"],

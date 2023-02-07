@@ -19,7 +19,7 @@ class ModeloPedidosPaqueteriasAdmn
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
             $stmt->execute();
 
@@ -34,8 +34,9 @@ class ModeloPedidosPaqueteriasAdmn
     static public function mdlIngresarPedidoPaqueteriaAdmn($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreCompleto, calle, colonia, cp, idCiudad, idEstado, telefono, entreCalles, referencias, archivo ) VALUES (:nombreCompleto, :calle, :colonia, :cp, :ciudad, :estado, :telefono, :entreCalles, :referencias, :archivo)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(folio, nombreCompleto, calle, colonia, cp, idCiudad, idEstado, telefono, entreCalles, referencias, archivo ) VALUES (:folio, :nombreCompleto, :calle, :colonia, :cp, :ciudad, :estado, :telefono, :entreCalles, :referencias, :archivo)");
 
+        $stmt->bindParam(":folio", $datos["folio"], PDO::PARAM_STR);
         $stmt->bindParam(":nombreCompleto", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
         $stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
@@ -62,8 +63,9 @@ class ModeloPedidosPaqueteriasAdmn
     static public function mdlEditarPedidoPaqueteriaAdmn($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombreCompleto = :nombreCompleto, calle = :calle, colonia = :colonia, cp = :cp, idCiudad = :ciudad, idEstado = :estado, telefono = :telefono, entreCalles = :entreCalles, referencias = :referencias WHERE id = :id");
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET folio = :folio, nombreCompleto = :nombreCompleto, calle = :calle, colonia = :colonia, cp = :cp, idCiudad = :ciudad, idEstado = :estado, telefono = :telefono, entreCalles = :entreCalles, referencias = :referencias WHERE id = :id");
 
+        $stmt->bindParam(":folio", $datos["folio"], PDO::PARAM_STR);
         $stmt->bindParam(":nombreCompleto", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
         $stmt->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
