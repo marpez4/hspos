@@ -1,4 +1,4 @@
-# HellssPos :tw-1f4ca: :tw-1f4ca:
+# HellssPos
 ## Sistema Point of Sale
 *Este sistema esta desarrollado en PHP puro, Java Script y Jquery, utilizando como gestor de base de datos MySQL.*
 
