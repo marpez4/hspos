@@ -164,7 +164,7 @@ class ModeloServicios
 
 		if ($fechaInicial == null) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
 			$stmt->execute();
 
