@@ -97,6 +97,20 @@ class ControladorServicios
 	}
 
 	/*=============================================
+	MOSTRAR FOLIO
+	=============================================*/
+
+	static public function ctrMostrarFolio($item, $valor)
+	{
+
+		$tabla = "servicios";
+
+		$respuesta = ModeloServicios::mdlMostrarFolio($tabla, $item, $valor);
+
+		return $respuesta;
+	}
+
+	/*=============================================
 	EDITAR CATEGORIA
 	=============================================*/
 

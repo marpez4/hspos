@@ -229,7 +229,7 @@ MODAL AGREGAR SERVICIO
                             $item = null;
                             $valor = null;
 
-                            $servicios = ControladorServicios::ctrMostrarServicios($item, $valor);
+                            $servicios = ControladorServicios::ctrMostrarFolio($item, $valor);
 
                             if (!$servicios) {
 
