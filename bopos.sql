@@ -2,18 +2,81 @@
 Navicat MySQL Data Transfer
 
 Source Server         : XAMPP
-Source Server Version : 50505
+Source Server Version : 50621
 Source Host           : localhost:3306
 Source Database       : bopos
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2022-08-19 13:27:02
+Date: 2023-02-17 13:48:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for banner
+-- ----------------------------
+DROP TABLE IF EXISTS `banner`;
+CREATE TABLE `banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ruta` text COLLATE utf8_spanish_ci NOT NULL,
+  `img` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo1` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo2` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo3` text COLLATE utf8_spanish_ci NOT NULL,
+  `estilo` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of banner
+-- ----------------------------
+INSERT INTO `banner` VALUES ('1', 'sin-categoria', 'vistas/img/banner/default.jpg', '{\r\n	\"texto\": \"OFERTAS ESPECIALES\",\r\n	\"color\": \"#fff\"\r\n}', '{\r\n	\"texto\": \"50% off\",\r\n	\"color\": \"#fff\"\r\n}', '{\r\n	\"texto\": \"Termina el 31 de Octubre\",\r\n	\"color\": \"#fff\"\r\n}', 'textoDer', '2017-10-12 13:14:41');
+INSERT INTO `banner` VALUES ('2', 'articulos-gratis', 'vistas/img/banner/ropa.jpg', '{\r\n	\"texto\": \"ARTÍCULOS GRATIS\",\r\n	\"color\": \"#fff\"\r\n}', '{\r\n\r\n	\"texto\": \"¡Entrega inmediata!\",\r\n\r\n	\"color\": \"#fff\"\r\n\r\n}', '{\r\n	\"texto\": \"Disfrútalo\",\r\n	\"color\": \"#fff\"\r\n}', 'textoIzq', '2017-10-12 13:05:43');
+INSERT INTO `banner` VALUES ('3', 'desarrollo-web', 'vistas/img/banner/web.jpg', '{\r\n	\"texto\": \"OFERTAS ESPECIALES\",\r\n	\"color\": \"#fff\"\r\n}', '{\r\n\r\n	\"texto\": \"50% off\",\r\n\r\n	\"color\": \"#fff\"\r\n\r\n}', '{\r\n	\"texto\": \"Termina el 31 de Octubre\",\r\n	\"color\": \"#fff\"\r\n}', 'textoCentro', '2017-10-12 13:05:43');
+INSERT INTO `banner` VALUES ('4', 'ropa-para-hombre', 'vistas/img/banner/ropaHombre.jpg', '{\r\n	\"texto\": \"OFERTAS ESPECIALES\",\r\n	\"color\": \"#fff\"\r\n}', '{\r\n\r\n	\"texto\": \"50% off\",\r\n\r\n	\"color\": \"#fff\"\r\n\r\n}', '{\r\n	\"texto\": \"Termina el 31 de Octubre\",\r\n	\"color\": \"#fff\"\r\n}', 'textoDer', '2017-10-12 13:06:15');
+
+-- ----------------------------
+-- Table structure for bodega
+-- ----------------------------
+DROP TABLE IF EXISTS `bodega`;
+CREATE TABLE `bodega` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_producto` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cantidad` int(255) DEFAULT NULL,
+  `cantidadLlegadas` int(11) DEFAULT NULL,
+  `fecha_apertura` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `tipo` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of bodega
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cabeceras
+-- ----------------------------
+DROP TABLE IF EXISTS `cabeceras`;
+CREATE TABLE `cabeceras` (
+  `id` int(11) NOT NULL,
+  `ruta` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo` text COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `palabrasClaves` text COLLATE utf8_spanish_ci NOT NULL,
+  `portada` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of cabeceras
+-- ----------------------------
+INSERT INTO `cabeceras` VALUES ('1', 'inicio', 'Tienda Virtual', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam accusantium enim esse eos officiis sit officia', 'Lorem ipsum, dolor sit amet, consectetur, adipisicing, elit, Quisquam, accusantium, enim, esse', 'vistas/img/cabeceras/default.jpg', '2017-11-17 14:58:16');
+INSERT INTO `cabeceras` VALUES ('2', 'desarrollo-web', 'Desarrollo Web', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam accusantium enim esse eos officiis sit officia', 'Lorem ipsum, dolor sit amet, consectetur, adipisicing, elit, Quisquam, accusantium, enim, esse', 'vistas/img/cabeceras/web.jpg', '2017-11-17 14:59:28');
 
 -- ----------------------------
 -- Table structure for cajas
@@ -24,9 +87,9 @@ CREATE TABLE `cajas` (
   `nombre` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `fecha_cierre` date DEFAULT NULL,
   `fecha_apertura` datetime DEFAULT NULL,
-  `estatus` int(5) DEFAULT 1,
+  `estatus` int(5) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- ----------------------------
 -- Records of cajas
@@ -35,6 +98,10 @@ INSERT INTO `cajas` VALUES ('1', 'Test2', null, '2022-06-30 08:40:59', '0');
 INSERT INTO `cajas` VALUES ('2', 'Paul ', null, '2022-07-04 08:05:26', '0');
 INSERT INTO `cajas` VALUES ('3', 'Paul2', '2022-07-05', '2022-07-04 08:10:29', '0');
 INSERT INTO `cajas` VALUES ('4', 'caja 23', '2022-08-19', '2022-07-05 08:39:25', '0');
+INSERT INTO `cajas` VALUES ('5', '29082022', '2022-08-29', '2022-08-29 06:53:45', '0');
+INSERT INTO `cajas` VALUES ('6', 'caja09112022', '2022-11-10', '2022-11-09 05:30:36', '0');
+INSERT INTO `cajas` VALUES ('7', 'caja10112022', '2022-11-10', '2022-11-10 06:57:53', '0');
+INSERT INTO `cajas` VALUES ('8', '07022023', null, '2023-02-07 07:31:48', '1');
 
 -- ----------------------------
 -- Table structure for categorias
@@ -43,20 +110,21 @@ DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` text COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ruta` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of categorias
 -- ----------------------------
-INSERT INTO `categorias` VALUES ('7', 'Desktop', '2022-04-27 10:37:23');
-INSERT INTO `categorias` VALUES ('8', 'Laptops', '2022-03-01 21:35:19');
-INSERT INTO `categorias` VALUES ('9', 'All in One', '2022-03-01 21:35:28');
-INSERT INTO `categorias` VALUES ('10', 'Accesesorios', '2022-04-19 10:31:24');
-INSERT INTO `categorias` VALUES ('11', 'Gabinetes', '2022-04-27 10:39:57');
-INSERT INTO `categorias` VALUES ('12', 'Memorias', '2022-04-27 10:40:17');
-INSERT INTO `categorias` VALUES ('13', 'Gaming', '2022-04-27 10:40:38');
+INSERT INTO `categorias` VALUES ('7', 'Desktop', 'computadoras', '2023-02-14 10:58:05');
+INSERT INTO `categorias` VALUES ('8', 'Laptops', 'computadoras', '2023-02-14 10:58:10');
+INSERT INTO `categorias` VALUES ('9', 'All in One', 'computadoras', '2023-02-14 10:58:10');
+INSERT INTO `categorias` VALUES ('10', 'Accesesorios', 'accesorios', '2023-02-14 10:58:22');
+INSERT INTO `categorias` VALUES ('11', 'Gabinetes', 'otros', '2023-02-14 10:58:26');
+INSERT INTO `categorias` VALUES ('12', 'Memorias', 'accesorios', '2023-02-14 10:58:30');
+INSERT INTO `categorias` VALUES ('13', 'Gaming', 'gaming', '2023-02-14 10:58:33');
 
 -- ----------------------------
 -- Table structure for clientes
@@ -73,17 +141,63 @@ CREATE TABLE `clientes` (
   `fecha_nacimiento` date NOT NULL,
   `compras` int(11) NOT NULL,
   `ultima_compra` datetime NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of clientes
 -- ----------------------------
-INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', '155644654', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', 'AMAZON', '0000-00-00', '1', '2022-07-04 11:01:18', '2022-07-04 11:01:18');
-INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', '2147483647', 'angel@gmail.com', '(475) 222-2222', 'sep', '0000-00-00', '0', '0000-00-00 00:00:00', '2022-05-16 22:00:39');
-INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', '415466546', 'PAUL@GMAIL.COM', '(477) 522-2222', 'CATA', '0000-00-00', '1', '2022-06-27 09:27:12', '2022-06-27 09:27:12');
-INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', '0', 'na@gmail.com', '(777) 777-7777', 'NA', '0000-00-00', '2', '2022-05-17 22:29:19', '2022-05-17 22:29:19');
+INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', '155644654', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', 'AMAZON', '0000-00-00', '5', '2023-01-04 14:07:29', '2023-01-04 13:07:29');
+INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', '2147483647', 'angel@gmail.com', '(475) 222-2222', 'sep', '0000-00-00', '7', '2022-11-10 11:11:03', '2022-11-10 10:11:03');
+INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', '415466546', 'PAUL@GMAIL.COM', '(477) 522-2222', 'CATA', '0000-00-00', '5', '2022-11-10 13:04:56', '2022-11-10 12:04:56');
+INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', '0', 'na@gmail.com', '(777) 777-7777', 'NA', '0000-00-00', '8', '2022-11-10 11:10:38', '2022-11-10 10:10:39');
+
+-- ----------------------------
+-- Table structure for comentarios
+-- ----------------------------
+DROP TABLE IF EXISTS `comentarios`;
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `calificacion` float NOT NULL,
+  `comentario` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of comentarios
+-- ----------------------------
+INSERT INTO `comentarios` VALUES ('1', '2', '500', '0', '', '2018-06-14 11:50:09');
+
+-- ----------------------------
+-- Table structure for comercio
+-- ----------------------------
+DROP TABLE IF EXISTS `comercio`;
+CREATE TABLE `comercio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `impuesto` float NOT NULL,
+  `envioNacional` float NOT NULL,
+  `envioInternacional` float NOT NULL,
+  `tasaMinimaNal` float NOT NULL,
+  `tasaMinimaInt` float NOT NULL,
+  `pais` text COLLATE utf8_spanish_ci NOT NULL,
+  `modoPaypal` text COLLATE utf8_spanish_ci NOT NULL,
+  `clienteIdPaypal` text COLLATE utf8_spanish_ci NOT NULL,
+  `llaveSecretaPaypal` text COLLATE utf8_spanish_ci NOT NULL,
+  `modoPayu` text COLLATE utf8_spanish_ci NOT NULL,
+  `merchantIdPayu` int(11) NOT NULL,
+  `accountIdPayu` int(11) NOT NULL,
+  `apiKeyPayu` text COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of comercio
+-- ----------------------------
+INSERT INTO `comercio` VALUES ('1', '19', '1', '2', '10', '15', 'MX', 'sandbox', 'AecffvSZfOgj6g1MkrVmz12ACMES2-InggmWCpU5CblR-AT2BX_aogxjXKSIsxQEn9oy1qo9iHVaHUu9YjaNT3nYgqBLiqbmurxCFOSArxVZoAACwevlpHHZDix0_', 'EAx1SVMHGV6MJKwl-pnOSzaJASlAINZdYRdS--EDTNrHqJ9R3T1gdXXVPCy6UdsKWR7N6yPR8oN9wtrImfRegciHQ1oCyg1xQQWbbv8-qfAlY5FM4R3jQa', 'sandbox', '508029', '512321', '4Vj8eK4rloUd272L48hsrarnUA');
 
 -- ----------------------------
 -- Table structure for componentes
@@ -95,7 +209,7 @@ CREATE TABLE `componentes` (
   `acron` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `tipo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fecha` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -111,6 +225,37 @@ INSERT INTO `componentes` VALUES ('6', '8', 'GB', null, 'RAM', '2022-04-22 11:26
 INSERT INTO `componentes` VALUES ('7', '8', 'GB', null, 'DD', '2022-04-22 11:29:16');
 
 -- ----------------------------
+-- Table structure for compras
+-- ----------------------------
+DROP TABLE IF EXISTS `compras`;
+CREATE TABLE `compras` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `envio` int(11) NOT NULL,
+  `metodo` text COLLATE utf8_spanish_ci NOT NULL,
+  `email` text COLLATE utf8_spanish_ci NOT NULL,
+  `direccion` text COLLATE utf8_spanish_ci NOT NULL,
+  `pais` text COLLATE utf8_spanish_ci NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `detalle` text COLLATE utf8_spanish_ci,
+  `pago` text COLLATE utf8_spanish_ci,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of compras
+-- ----------------------------
+INSERT INTO `compras` VALUES ('12', '2', '496', '0', 'paypal', 'tutorialesatualcance-buyer@hotmail.com', '1 Main St, San Jose, CA, 95131', 'US', '0', '', '', '2017-11-02 14:46:59');
+INSERT INTO `compras` VALUES ('13', '2', '464', '0', 'paypal', 'tutorialesatualcance-buyer@hotmail.com', '1 Main St, San Jose, CA, 95131', 'US', '0', '', '', '2017-11-02 14:47:00');
+INSERT INTO `compras` VALUES ('14', '2', '497', '0', 'paypal', 'tutorialesatualcance-buyer@hotmail.com', '1 Main St, San Jose, CA, 95131', 'US', '0', '', '', '2017-11-02 15:34:05');
+INSERT INTO `compras` VALUES ('15', '2', '500', '0', 'payu', 'correo@test.com', '', '', '0', '', '', '2017-11-03 13:33:54');
+INSERT INTO `compras` VALUES ('16', '2', '184', '0', 'payu', 'correo@test.com', '', '', '0', '', '', '2017-11-03 13:33:54');
+INSERT INTO `compras` VALUES ('17', '2', '499', '0', 'payu', 'ejemplo@test.com', '', '', '0', '', '', '2017-11-03 14:00:52');
+INSERT INTO `compras` VALUES ('18', '2', '500', '0', 'paypal', 'tutorialesatualcance-buyer@hotmail.com', '1 Main St, San Jose, CA, 95131', 'US', '0', '', '', '2018-06-14 11:50:09');
+
+-- ----------------------------
 -- Table structure for corte_caja
 -- ----------------------------
 DROP TABLE IF EXISTS `corte_caja`;
@@ -120,20 +265,64 @@ CREATE TABLE `corte_caja` (
   `monto_final` float DEFAULT NULL,
   `fecha_apertura` datetime DEFAULT NULL,
   `fecha_cierre` datetime DEFAULT NULL,
-  `total_servicios` int(11) DEFAULT 0,
-  `total_ventas` int(11) DEFAULT 0,
+  `total_servicios` int(11) DEFAULT '0',
+  `total_ventas` int(11) DEFAULT '0',
   `monto_total` float DEFAULT NULL,
-  `estatus` int(11) DEFAULT 1,
+  `estatus` int(11) DEFAULT '1',
   `id_usuario` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT '',
   `id_caja` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- ----------------------------
 -- Records of corte_caja
 -- ----------------------------
 INSERT INTO `corte_caja` VALUES ('7', '1500', '37410', '2022-07-04 09:54:46', '2022-07-05 08:38:29', '3', '7', '38910', '0', 'Alfonso Martinez Lopez', '3');
 INSERT INTO `corte_caja` VALUES ('9', '150', '0', '2022-07-05 08:39:57', '2022-08-19 08:25:18', '0', '0', '150', '0', 'Alfonso Martinez Lopez', '4');
+INSERT INTO `corte_caja` VALUES ('10', '1000', '11526', '2022-08-29 06:56:05', '2022-08-29 06:56:36', '1', '2', '12526', '0', 'Alfonso Martinez Lopez', '5');
+INSERT INTO `corte_caja` VALUES ('11', '2000', '15437', '2022-11-09 05:31:01', '2022-11-10 06:52:10', '1', '6', '17437', '0', 'Alfonso Martinez Lopez', '6');
+INSERT INTO `corte_caja` VALUES ('12', '1050.5', '588', '2022-11-10 07:01:29', '2022-11-10 07:05:20', '0', '1', '1638.5', '0', 'Alfonso Martinez Lopez', '7');
+INSERT INTO `corte_caja` VALUES ('13', '0', null, '2023-02-07 07:33:29', null, '0', '0', null, '1', '', '8');
+
+-- ----------------------------
+-- Table structure for deseos
+-- ----------------------------
+DROP TABLE IF EXISTS `deseos`;
+CREATE TABLE `deseos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of deseos
+-- ----------------------------
+INSERT INTO `deseos` VALUES ('1', '6', '3', '2022-11-22 11:58:32');
+INSERT INTO `deseos` VALUES ('2', '6', '469', '2022-11-22 11:58:33');
+
+-- ----------------------------
+-- Table structure for historial_mov_bodega
+-- ----------------------------
+DROP TABLE IF EXISTS `historial_mov_bodega`;
+CREATE TABLE `historial_mov_bodega` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_bodega` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cantidad` int(255) DEFAULT NULL,
+  `cantidadLlegadas` int(255) DEFAULT NULL,
+  `tipo_movimiento` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_mov` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `id_usuario` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of historial_mov_bodega
+-- ----------------------------
+INSERT INTO `historial_mov_bodega` VALUES ('21', '10', '35', '35', '1', '2023-01-24 17:25:02', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('22', '10', '10', '0', '0', '2023-01-24 17:25:24', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('23', '10', '0', '10', '1', '2023-01-24 17:25:46', '60');
 
 -- ----------------------------
 -- Table structure for pedidospaqueteria
@@ -141,6 +330,7 @@ INSERT INTO `corte_caja` VALUES ('9', '150', '0', '2022-07-05 08:39:57', '2022-0
 DROP TABLE IF EXISTS `pedidospaqueteria`;
 CREATE TABLE `pedidospaqueteria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `folio` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `nombreCompleto` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `calle` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `cp` int(11) DEFAULT NULL,
@@ -150,15 +340,73 @@ CREATE TABLE `pedidospaqueteria` (
   `telefono` varchar(10) COLLATE utf8mb4_spanish_ci DEFAULT '',
   `entreCalles` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `referencias` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `fechaAlta` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `estatus` tinyint(4) DEFAULT NULL,
+  `fechaAlta` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `archivo` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- ----------------------------
 -- Records of pedidospaqueteria
 -- ----------------------------
-INSERT INTO `pedidospaqueteria` VALUES ('3', 'Alfonso Mtz', 'Eufrasia', '37408', 'Leon II', 'Leon', 'Guanajuato', '4776477193', 'Mariano escobedo', 'Una casa ', '2022-06-24 14:42:14');
-INSERT INTO `pedidospaqueteria` VALUES ('4', 'Paul ', 'Cima diamante', '37408', 'La cima', 'Leon', 'Guanajuato', '4776477193', 'asda', 'asdas', null);
+INSERT INTO `pedidospaqueteria` VALUES ('3', null, 'Alfonso Mtz', 'Eufrasia', '37408', 'Leon II', 'Leon', 'Guanajuato', '4776477193', 'Mariano escobedo', 'Una casa 12', '3', '2023-02-07 10:22:33', null);
+INSERT INTO `pedidospaqueteria` VALUES ('4', null, 'Paul ', 'Cima diamante', '37408', 'La cima', 'Leon', 'Guanajuato', '4776477193', 'asda', 'asdas11', '2', '2023-01-23 15:54:35', null);
+INSERT INTO `pedidospaqueteria` VALUES ('6', null, 'MAXIMINO', 'una calle', '37490', 'una colonia', 'tamaulipas', 'Guanajuato', '688888888', 'unas calles', 'otras calles', '4', '2023-01-23 11:39:43', null);
+INSERT INTO `pedidospaqueteria` VALUES ('10', null, 'Jose Eduardo Ambriz Hernandez', 'Damasco #1052', '37408', 'Cima Diamante', 'León', 'Guanajuato', '4775862182', 'adasda', 'asdasd', '1', '2023-01-23 11:39:49', null);
+INSERT INTO `pedidospaqueteria` VALUES ('12', '7595123', 'JOEL MIJANGOS ZARATE', 'MANUEL PATRON  118', '37408', 'LEON II', 'León', 'Guanajuato', '123123', 'dasdasd', 'asdasda', '2', '2023-02-07 12:39:06', './uploads/InformeTrimestral oct-dec2022_Alfonso.docx');
+INSERT INTO `pedidospaqueteria` VALUES ('18', '8529637411', 'Jose Eduardo Ambriz Hernandez', 'Damasco #1052', '37408', 'Cima Diamante', 'León', 'Guanajuato', '4775862182', 'ashdkaskj', 'ahdkjashkdj', null, null, 'firma2023.png');
+
+-- ----------------------------
+-- Table structure for pedido_paqueteria_hmov
+-- ----------------------------
+DROP TABLE IF EXISTS `pedido_paqueteria_hmov`;
+CREATE TABLE `pedido_paqueteria_hmov` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paqueteria` int(255) DEFAULT NULL,
+  `fecha_mov` datetime DEFAULT NULL,
+  `estatus` tinyint(255) DEFAULT NULL,
+  `id_usuario` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of pedido_paqueteria_hmov
+-- ----------------------------
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('7', '3', '2023-01-24 17:15:14', '1', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('8', '3', '2023-01-24 17:15:19', '2', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('9', '3', '2023-01-24 17:15:22', '3', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('10', '3', '2023-01-24 17:15:25', '4', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('11', '3', '2023-01-24 17:15:29', '5', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('12', '11', '2023-01-24 17:33:08', '1', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('13', '3', '2023-02-03 22:39:51', '2', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('14', '11', '2023-02-03 22:53:18', '1', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('15', '12', '2023-02-03 22:53:22', '2', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('16', '3', '2023-02-07 17:22:33', '3', 'admin');
+INSERT INTO `pedido_paqueteria_hmov` VALUES ('17', '14', '2023-02-07 18:37:25', '5', 'admin');
+
+-- ----------------------------
+-- Table structure for plantilla
+-- ----------------------------
+DROP TABLE IF EXISTS `plantilla`;
+CREATE TABLE `plantilla` (
+  `id` int(11) NOT NULL,
+  `barraSuperior` text COLLATE utf8_spanish_ci NOT NULL,
+  `textoSuperior` text COLLATE utf8_spanish_ci NOT NULL,
+  `colorFondo` text COLLATE utf8_spanish_ci NOT NULL,
+  `colorTexto` text COLLATE utf8_spanish_ci NOT NULL,
+  `logo` text COLLATE utf8_spanish_ci NOT NULL,
+  `icono` text COLLATE utf8_spanish_ci NOT NULL,
+  `redesSociales` text COLLATE utf8_spanish_ci NOT NULL,
+  `apiFacebook` text COLLATE utf8_spanish_ci NOT NULL,
+  `pixelFacebook` text COLLATE utf8_spanish_ci NOT NULL,
+  `googleAnalytics` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of plantilla
+-- ----------------------------
+INSERT INTO `plantilla` VALUES ('1', '#e9171b', '#ffffff', '#ae0000', '#fdfdfd', 'vistas/img/plantilla/logo.png', 'vistas/img/plantilla/icono.png', '[{\"red\":\"fa-facebook\",\"estilo\":\"facebookBlanco\",\"url\":\"http://facebook.com/hs\",\"activo\":1},{\"red\":\"fa-youtube\",\"estilo\":\"youtubeBlanco\",\"url\":\"http://youtube.com/hs\",\"activo\":1},{\"red\":\"fa-twitter\",\"estilo\":\"twitterBlanco\",\"url\":\"http://twitter.com/hs\",\"activo\":1},{\"red\":\"fa-google-plus\",\"estilo\":\"google-plusBlanco\",\"url\":\"http://google.com/hs\",\"activo\":1},{\"red\":\"fa-instagram\",\"estilo\":\"instagramBlanco\",\"url\":\"http://instagram.com/hs\",\"activo\":1}]', '<script>   window.fbAsyncInit = function() {     FB.init({       appId      : \'131737410786111\',       cookie     : true,       xfbml      : true,       version    : \'v2.10\'     });            FB.AppEvents.logPageView();             };    (function(d, s, id){      var js, fjs = d.getElementsByTagName(s)[0];      if (d.getElementById(id)) {return;}      js = d.createElement(s); js.id = id;      js.src = \"https://connect.facebook.net/en_US/sdk.js\";      fjs.parentNode.insertBefore(js, fjs);    }(document, \'script\', \'facebook-jssdk\'));  </script>\r\n      		\r\n      		\r\n      		', '<!-- Facebook Pixel Code --> 	<script> 	  !function(f,b,e,v,n,t,s) 	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod? 	  n.callMethod.apply(n,arguments):n.queue.push(arguments)}; 	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version=\'2.0\'; 	  n.queue=[];t=b.createElement(e);t.async=!0; 	  t.src=v;s=b.getElementsByTagName(e)[0]; 	  s.parentNode.insertBefore(t,s)}(window, document,\'script\', 	  \'https://connect.facebook.net/en_US/fbevents.js\'); 	  fbq(\'init\', \'131737410786111\'); 	  fbq(\'track\', \'PageView\'); 	</script> 	<noscript><img height=\"1\" width=\"1\" style=\"display:none\" 	  src=\"https://www.facebook.com/tr?id=149877372404434&ev=PageView&noscript=1\" 	/></noscript> <!-- End Facebook Pixel Code -->    \r\n  			    \r\n  			    \r\n  			', '<!-- Global site tag (gtag.js) - Google Analytics --> 	<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-999999-1\"></script> 	<script> 	  window.dataLayer = window.dataLayer || []; 	  function gtag(){dataLayer.push(arguments);} 	  gtag(\'js\', new Date());  	  gtag(\'config\', \'UA-9999999-1\'); 	</script>      \r\n            \r\n            \r\n            \r\n            \r\n  			      \r\n  			', '2023-02-16 10:48:52');
 
 -- ----------------------------
 -- Table structure for productos
@@ -171,6 +419,7 @@ CREATE TABLE `productos` (
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `imagen` text COLLATE utf8_spanish_ci NOT NULL,
   `stock` int(11) NOT NULL,
+  `precio` float DEFAULT NULL,
   `precio_compra` float NOT NULL,
   `precio_venta` float NOT NULL,
   `precio_ml` float DEFAULT NULL,
@@ -183,25 +432,26 @@ CREATE TABLE `productos` (
   `graficos` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ssd` int(11) DEFAULT NULL,
   `hhd` int(11) DEFAULT NULL,
+  `vistas` int(11) DEFAULT NULL,
+  `titulo` text COLLATE utf8_spanish_ci,
+  `portada` text COLLATE utf8_spanish_ci,
+  `nuevo` int(11) DEFAULT NULL,
+  `tipo` text COLLATE utf8_spanish_ci,
+  `ruta` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `oferta` int(11) DEFAULT NULL,
   `ventas` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES ('75', '7', '502', 'Lenovo', 'vistas/img/productos/502/789.jpg', '16', '1900', '2660', null, '2500', 'Lenovo 205', '1', '2', 'Core i7', '17', '3', '4', '5', '4', '2022-04-27 10:44:15');
-INSERT INTO `productos` VALUES ('76', '10', '104', 'Logitech 205', 'vistas/img/productos/104/901.jpg', '19', '190', '266', null, '205', null, null, null, null, null, null, null, null, '4', '2022-04-29 21:12:25');
-INSERT INTO `productos` VALUES ('77', '8', '200', 'HP', 'vistas/img/productos/default/anonymous.png', '16', '4800', '6720', null, '5200', 'HP', '6', '7', 'Core i7', '17', '3', '4', '5', '4', '2022-04-29 20:57:26');
-INSERT INTO `productos` VALUES ('78', '10', '22', 'USB', 'vistas/img/productos/default/anonymous.png', '7', '50', '75', null, '80', null, null, null, null, null, null, null, null, '3', '2022-04-29 21:12:25');
-INSERT INTO `productos` VALUES ('79', '10', '21', 'Auriculares', 'vistas/img/productos/default/anonymous.png', '2', '90', '120', null, '100', null, null, null, null, null, null, null, null, '9', '2022-04-29 21:12:25');
-INSERT INTO `productos` VALUES ('80', '9', '500', 'HP', 'vistas/img/productos/default/anonymous.png', '12', '5200', '7280', null, '6000', 'HP', '6', '2', 'Core i7', '17', '3', '4', '5', '0', '2022-04-27 10:52:08');
-INSERT INTO `productos` VALUES ('81', '11', '502', 'Chida', 'vistas/img/productos/default/anonymous.png', '19', '4000', '5600', null, '5000', null, null, null, null, null, null, null, null, '1', '2022-04-29 21:12:25');
-INSERT INTO `productos` VALUES ('82', '13', '1000', 'Mouse Logitech', 'vistas/img/productos/default/anonymous.png', '10', '212', '296.8', null, '280', null, null, null, null, null, null, null, null, '0', '2022-04-27 10:53:21');
-INSERT INTO `productos` VALUES ('83', '13', 'Teclado', 'Logitech', 'vistas/img/productos/default/anonymous.png', '18', '420', '588', null, '500', null, null, null, null, null, null, null, null, '2', '2022-05-17 22:29:19');
-INSERT INTO `productos` VALUES ('84', '9', '2300', 'Lenovo', 'vistas/img/productos/default/anonymous.png', '10', '4100', '5740', null, '5000', 'Lenovo', '1', '2', 'Core i7', '17', '3', '4', '5', '2', '2022-06-27 09:27:12');
-INSERT INTO `productos` VALUES ('85', '10', '1234', 'Cable RJ45 20 mts', 'vistas/img/productos/default/anonymous.png', '16', '90', '126', '121', '100', null, null, null, null, null, null, null, null, '4', '2022-07-04 11:01:18');
+INSERT INTO `productos` VALUES ('89', '13', 'Logitech', 'Mouse G235', 'vistas/img/productos/default/anonymous.png', '4', null, '100', '140', '150', '120', 'DELL', '1', null, 'ICORE 5', '12', '3', '4', '5', null, null, null, null, null, null, null, '1', '2023-01-04 13:07:28');
+INSERT INTO `productos` VALUES ('90', '7', '100', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '9', null, '3000', '4200', '4500', '4000', 'DELL', '1', null, 'ICORE 5', '12', '3', '4', '5', null, null, null, null, null, null, null, '1', '2023-01-04 13:07:28');
+INSERT INTO `productos` VALUES ('91', '11', '2131', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '12', null, '222', '310.8', '222', '222', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-11 10:38:05');
+INSERT INTO `productos` VALUES ('92', '12', 'Logitech', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '12', null, '90', '126', '125', '120', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-18 14:30:02');
+INSERT INTO `productos` VALUES ('93', '13', 'LG', 'Mouse', 'vistas/img/productos/default/anonymous.png', '65', null, '300', '420', '435', '420', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-24 10:25:24');
 
 -- ----------------------------
 -- Table structure for servicios
@@ -209,35 +459,107 @@ INSERT INTO `productos` VALUES ('85', '10', '1234', 'Cable RJ45 20 mts', 'vistas
 DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE `servicios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `folio` int(11) DEFAULT NULL,
   `cliente` varchar(255) COLLATE utf8_spanish_ci DEFAULT '',
+  `telefono` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_empleado` int(11) DEFAULT NULL,
   `equipo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `marca` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `procesador` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ram` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `dd` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ssd` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `so` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cargador` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `contrasena` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `falla` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `solucion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `obs` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `tipo_servicio` char(255) COLLATE utf8_spanish_ci DEFAULT '',
   `total` float DEFAULT NULL,
   `estatus` tinyint(4) DEFAULT NULL,
-  `fecha_entrega` timestamp NULL DEFAULT NULL,
-  `fecha_llegada` timestamp NULL DEFAULT NULL,
+  `fecha_entrega` date DEFAULT NULL,
+  `fecha_llegada` date DEFAULT NULL,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of servicios
 -- ----------------------------
-INSERT INTO `servicios` VALUES ('1', 'Angel Romero', '60', 'DELL', 'Lenovo', 'I7', '4', '500', 'W10', 'No enciende', 'Aun sin solucion', 'Llego bien', '3', '300', '2', '2022-06-23 00:00:00', '2022-06-23 00:00:00', '2');
-INSERT INTO `servicios` VALUES ('2', 'Diana Gonzalez', '60', 'DELL', 'Lenovo', 'I7', '4', '500', 'W10', 'Falla de tipo 2', '', '', '2', '200', '1', '2022-06-23 00:00:00', '2022-06-16 00:00:00', '2');
-INSERT INTO `servicios` VALUES ('3', 'Cliente venta mostrador', '61', 'DELL', 'Lenovo', 'I7', '8', '500', 'W10', 'No enciende', null, '', '3', '300', '4', '2022-06-22 00:00:00', '2022-04-01 00:00:00', '2');
-INSERT INTO `servicios` VALUES ('4', 'Angel Romero', '60', 'DELL', 'HP', 'I7', '4', '500', 'W10', 'xeqwe', 'qweqw', 'das', '2', '200', '6', '2022-07-04 00:00:00', '2022-07-04 00:00:00', '3');
-INSERT INTO `servicios` VALUES ('7', 'Cliente venta mostrador', '61', 'DELL', 'Lenovo', 'I7', '4', '500', 'W10', 'v', 'v', 'v', '2', '200', '1', '2022-07-05 00:00:00', '2022-07-04 00:00:00', '3');
-INSERT INTO `servicios` VALUES ('8', 'Diana Gonzalez', '60', 'DELL', 'Lenovo', 'I7', '4', '500', 'W10', 'asd', 'asd', 'asd', '3', '300', '1', '2022-07-04 00:00:00', '2022-07-31 00:00:00', '3');
+INSERT INTO `servicios` VALUES ('15', '10001', 'Angel Romero', null, '60', 'Laptop', 'HP', 'I Core 5', '4 gb', '120 gb', null, 'W10', null, null, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, voluptas', null, '', '', '200', '6', '2022-11-17', '2022-11-10', '6');
+INSERT INTO `servicios` VALUES ('16', '10002', 'Paul Mendoza', '47785293341', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', null, 'W10', null, 'scoop2', 'Cargador ', null, 'hola', '', '450', '6', '2023-01-04', '2023-01-04', null);
+INSERT INTO `servicios` VALUES ('17', '10003', 'Miguel Mendoza Gaona', '4773172475', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', '250', 'W10', null, 'scoop', 'Virus troyano', '', '', '', '0', '1', '0000-00-00', '2023-01-09', null);
+INSERT INTO `servicios` VALUES ('18', '10004', 'Paul Mendoza', '4764777193', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', '120', 'W10', 'No', 'scoop', 'No enciende', '', '', '', '0', '1', '2023-01-16', '2023-01-16', null);
+
+-- ----------------------------
+-- Table structure for slide
+-- ----------------------------
+DROP TABLE IF EXISTS `slide`;
+CREATE TABLE `slide` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `imgFondo` text COLLATE utf8_spanish_ci NOT NULL,
+  `tipoSlide` text COLLATE utf8_spanish_ci NOT NULL,
+  `imgProducto` text COLLATE utf8_spanish_ci NOT NULL,
+  `estiloImgProducto` text COLLATE utf8_spanish_ci NOT NULL,
+  `estiloTextoSlide` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo1` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo2` text COLLATE utf8_spanish_ci NOT NULL,
+  `titulo3` text COLLATE utf8_spanish_ci NOT NULL,
+  `boton` text COLLATE utf8_spanish_ci NOT NULL,
+  `url` text COLLATE utf8_spanish_ci NOT NULL,
+  `orden` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of slide
+-- ----------------------------
+INSERT INTO `slide` VALUES ('1', 'ZAPATOS AMARILLOS', 'vistas/img/slide/default/back_default.jpg', 'slideOpcion2', 'vistas/img/slide/slide1/calzado.png', '{\"top\":\"5\",\"right\":\"\",\"left\":\"5\",\"width\":\"50\"}', '{\"top\":\"20\",\"right\":\"10\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '1', '2018-01-31 16:46:41');
+INSERT INTO `slide` VALUES ('2', 'CURSO', 'vistas/img/slide/default/back_default.jpg', 'slideOpcion2', 'vistas/img/slide/slide2/curso.png', '{\"top\":\"10\",\"right\":\"\",\"left\":\"15\",\"width\":\"30\"}', '{\"top\":\"15\",\"right\":\"15\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '3', '2023-02-17 10:19:21');
+INSERT INTO `slide` VALUES ('3', 'MÓVIL', 'vistas/img/slide/slide3/fondo2.jpg', 'slideOpcion2', 'vistas/img/slide/slide3/iphone.png', '{\"top\":\"10\",\"right\":\"\",\"left\":\"10\",\"width\":\"35\"}', '{\"top\":\"15\",\"right\":\"15\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#eee\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#ccc\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#aaa\"}', 'VER PRODUCTO', '#', '2', '2023-02-17 10:19:21');
+INSERT INTO `slide` VALUES ('4', 'CHICA', 'vistas/img/slide/slide4/fondo3.jpg', 'slideOpcion1', '', '{\"top\":\"\",\"right\":\"\",\"left\":\"\",\"width\":\"\"}', '{\"top\":\"20\",\"right\":\"\",\"left\":\"10\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', '', '', '4', '2018-01-31 16:46:04');
+INSERT INTO `slide` VALUES ('5', '', 'vistas/img/slide/default/fondo.jpg', 'slideOpcion1', '', '', '{\"top\":\"20\",\"right\":\"\",\"left\":\"15\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '5', '2023-02-16 12:36:23');
+
+-- ----------------------------
+-- Table structure for subcategorias
+-- ----------------------------
+DROP TABLE IF EXISTS `subcategorias`;
+CREATE TABLE `subcategorias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subcategoria` text COLLATE utf8_spanish_ci NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `ruta` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of subcategorias
+-- ----------------------------
+INSERT INTO `subcategorias` VALUES ('1', 'Ropa para dama', '1', 'ropa-para-dama', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('2', 'Ropa para hombre', '1', 'ropa-para-hombre', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('3', 'Ropa deportiva', '1', 'ropa-deportiva', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('4', 'Ropa infantil', '1', 'ropa-infantil', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('5', 'Calzado para dama', '2', 'calzado-para-dama', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('6', 'Calzado para hombre', '2', 'calzado-para-hombre', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('7', 'Calzado deportivo', '2', 'calzado-deportivo', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('8', 'Calzado infantil', '2', 'calzado-infantil', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('9', 'Bolsos', '3', 'bolsos', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('10', 'Relojes', '3', 'relojes', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('11', 'Pulseras', '3', 'pulseras', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('12', 'Collares', '3', 'collares', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('13', 'Gafas de sol', '3', 'gafas-de-sol', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('14', 'Teléfonos Móvil', '4', 'telefonos-movil', '2017-10-05 10:49:56');
+INSERT INTO `subcategorias` VALUES ('15', 'Tabletas Electrónicas', '4', 'tabletas-electronicas', '2017-10-05 10:50:02');
+INSERT INTO `subcategorias` VALUES ('16', 'Computadoras', '4', 'computadoras', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('17', 'Auriculares', '4', 'auriculares', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('18', 'Desarrollo Web', '5', 'desarrollo-web', '0000-00-00 00:00:00');
+INSERT INTO `subcategorias` VALUES ('19', 'Aplicaciones Móviles', '5', 'aplicaciones-moviles', '2017-10-05 10:50:07');
+INSERT INTO `subcategorias` VALUES ('20', 'Diseño Gráfico', '5', 'diseno-grafico', '2017-10-05 10:50:17');
+INSERT INTO `subcategorias` VALUES ('21', 'Marketing Digital', '5', 'marketing-digital', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for usuarios
@@ -252,14 +574,14 @@ CREATE TABLE `usuarios` (
   `foto` text COLLATE utf8_spanish_ci NOT NULL,
   `estado` int(11) NOT NULL,
   `ultimo_login` datetime NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2022-07-06 11:44:58', '2022-07-06 11:44:58');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-02-15 11:39:44', '2023-02-15 10:39:44');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 10:56:19');
 
 -- ----------------------------
@@ -277,10 +599,10 @@ CREATE TABLE `ventas` (
   `total` float NOT NULL,
   `metodo_pago` text COLLATE utf8_spanish_ci NOT NULL,
   `esClienteF` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of ventas
@@ -298,3 +620,104 @@ INSERT INTO `ventas` VALUES ('48', '10010', '18', '60', '[{\"id\":\"85\",\"descr
 INSERT INTO `ventas` VALUES ('49', '10011', '18', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"588\",\"total\":\"588\"}]', '0', '714', '714', 'Efectivo', '2', '2022-07-05 13:04:28', '3');
 INSERT INTO `ventas` VALUES ('50', '10012', '20', '60', '[{\"id\":\"84\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"10\",\"precio\":\"5740\",\"total\":\"5740\"}]', '0', '5740', '5740', 'CH-4564464', '2', '2022-07-05 10:24:34', '3');
 INSERT INTO `ventas` VALUES ('51', '10013', '18', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"121\",\"total\":\"121\"}]', '0', '121', '121', 'TD-123123', '3', '2022-07-05 10:24:34', '3');
+INSERT INTO `ventas` VALUES ('52', '10014', '19', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"100\",\"total\":\"100\"},{\"id\":\"84\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"9\",\"precio\":\"5000\",\"total\":\"5000\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"500\",\"total\":\"500\"}]', '0', '5600', '5600', 'Efectivo', '1', '2022-08-29 11:55:06', '5');
+INSERT INTO `ventas` VALUES ('53', '10015', '21', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"5600\",\"total\":\"5600\"}]', '0', '5726', '5726', 'TC-213131321', '2', '2022-08-29 11:55:47', '5');
+INSERT INTO `ventas` VALUES ('54', '10016', '20', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"13\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"588\",\"total\":\"588\"},{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"1\",\"stock\":\"1\",\"precio\":\"120\",\"total\":\"120\"}]', '0', '834', '834', 'Efectivo', '2', '2022-11-10 10:09:03', '6');
+INSERT INTO `ventas` VALUES ('55', '10017', '19', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"12\",\"precio\":\"100\",\"total\":\"100\"},{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"5200\",\"total\":\"5200\"}]', '0', '5300', '5300', 'TC-78979798', '1', '2022-11-10 10:09:33', '6');
+INSERT INTO `ventas` VALUES ('56', '10018', '18', '60', '[{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"null\",\"total\":\"0\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"null\",\"total\":\"null\"}]', '0', '0', '0', 'TD-131321231', '3', '2022-11-10 10:09:54', '6');
+INSERT INTO `ventas` VALUES ('57', '10019', '21', '60', '[{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"5600\",\"total\":\"5600\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"266\",\"total\":\"266\"}]', '0', '5866', '5866', 'TF-258963147', '2', '2022-11-10 10:10:15', '6');
+INSERT INTO `ventas` VALUES ('58', '10020', '21', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"2\",\"stock\":\"15\",\"precio\":\"266\",\"total\":\"532\"}]', '0', '532', '532', 'TD-258963174', '2', '2022-11-10 10:10:39', '6');
+INSERT INTO `ventas` VALUES ('59', '10021', '19', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"205\",\"total\":\"205\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"2500\",\"total\":\"2500\"}]', '0', '2705', '2705', 'Efectivo', '1', '2022-11-10 10:11:03', '6');
+INSERT INTO `ventas` VALUES ('60', '10022', '20', '60', '[{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"588\",\"total\":\"588\"}]', '0', '588', '588', 'TD-396741852', '2', '2022-11-10 12:04:56', '7');
+INSERT INTO `ventas` VALUES ('61', '10023', '19', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"205\",\"total\":\"205\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"2500\",\"total\":\"2500\"}]', '0', '2705', '2705', 'DOXXO', '1', '2022-11-14 10:13:42', '6');
+INSERT INTO `ventas` VALUES ('62', '10024', '18', '60', '[{\"id\":\"90\",\"descripcion\":\"PRECISSION\",\"cantidad\":\"1\",\"stock\":\"9\",\"precio\":\"4500\",\"total\":\"4500\"},{\"id\":\"89\",\"descripcion\":\"Mouse G235\",\"cantidad\":\"1\",\"stock\":\"4\",\"precio\":\"150\",\"total\":\"150\"}]', '0', '4650', '4650', 'Efectivo', '3', '2023-01-04 13:07:29', null);
+
+-- ----------------------------
+-- Table structure for visitaspaises
+-- ----------------------------
+DROP TABLE IF EXISTS `visitaspaises`;
+CREATE TABLE `visitaspaises` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pais` text COLLATE utf8_spanish_ci NOT NULL,
+  `codigo` text COLLATE utf8_spanish_ci NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of visitaspaises
+-- ----------------------------
+INSERT INTO `visitaspaises` VALUES ('1', 'United States', 'US', '2', '2017-12-05 15:02:46');
+INSERT INTO `visitaspaises` VALUES ('2', 'Japan', 'JP', '45', '2023-02-16 10:12:23');
+INSERT INTO `visitaspaises` VALUES ('3', 'Spain', 'ES', '10', '2017-12-05 15:02:53');
+INSERT INTO `visitaspaises` VALUES ('4', 'Colombia', 'CO', '5', '2017-12-05 15:02:55');
+INSERT INTO `visitaspaises` VALUES ('5', 'China', 'CN', '3', '2017-12-05 15:04:32');
+INSERT INTO `visitaspaises` VALUES ('6', 'Germany', 'DE', '34', '2017-12-05 15:04:39');
+INSERT INTO `visitaspaises` VALUES ('7', 'Mexico', 'MX', '8', '2017-12-05 15:04:41');
+
+-- ----------------------------
+-- Table structure for visitaspersonas
+-- ----------------------------
+DROP TABLE IF EXISTS `visitaspersonas`;
+CREATE TABLE `visitaspersonas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` text COLLATE utf8_spanish_ci NOT NULL,
+  `pais` text COLLATE utf8_spanish_ci NOT NULL,
+  `visitas` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of visitaspersonas
+-- ----------------------------
+INSERT INTO `visitaspersonas` VALUES ('1', '153.202.197.216', 'Japan', '1', '2017-11-08 12:37:07');
+INSERT INTO `visitaspersonas` VALUES ('3', '249.170.168.184', 'Spain', '1', '2017-11-28 13:16:16');
+INSERT INTO `visitaspersonas` VALUES ('5', '249.170.168.184', 'Spain', '1', '2017-11-28 13:16:19');
+INSERT INTO `visitaspersonas` VALUES ('6', '234.13.198.119', 'Colombia', '1', '2017-11-28 13:16:03');
+INSERT INTO `visitaspersonas` VALUES ('7', '141.46.61.241', 'Germany', '1', '2017-11-28 13:13:45');
+INSERT INTO `visitaspersonas` VALUES ('8', '40.179.75.60', 'United States', '1', '2017-11-28 13:14:05');
+INSERT INTO `visitaspersonas` VALUES ('9', '153.205.198.22', 'Japan', '1', '2017-11-01 13:14:18');
+INSERT INTO `visitaspersonas` VALUES ('10', '148.21.177.158', 'United States', '1', '2017-10-28 14:14:34');
+INSERT INTO `visitaspersonas` VALUES ('11', '40.224.125.226', 'United States', '1', '2017-11-28 13:14:56');
+INSERT INTO `visitaspersonas` VALUES ('12', '10.98.135.68', 'China', '1', '2017-11-28 13:15:57');
+INSERT INTO `visitaspersonas` VALUES ('13', '23.121.157.131', 'United States', '1', '2017-11-28 13:15:37');
+INSERT INTO `visitaspersonas` VALUES ('17', '8.12.238.123', 'United States', '1', '2017-11-28 13:28:27');
+INSERT INTO `visitaspersonas` VALUES ('18', '148.21.177.158', 'United States', '1', '2017-11-28 13:33:05');
+INSERT INTO `visitaspersonas` VALUES ('19', '153.202.197.216', 'Japan', '1', '2017-11-28 13:33:50');
+INSERT INTO `visitaspersonas` VALUES ('27', '153.205.198.22', 'Japan', '1', '2017-10-28 15:05:19');
+INSERT INTO `visitaspersonas` VALUES ('31', '153.205.198.22', 'Japan', '1', '2017-11-28 14:09:49');
+INSERT INTO `visitaspersonas` VALUES ('32', '153.205.198.22', 'Japan', '1', '2017-11-29 13:23:07');
+INSERT INTO `visitaspersonas` VALUES ('33', '153.205.198.22', 'Japan', '1', '2017-11-30 17:01:27');
+INSERT INTO `visitaspersonas` VALUES ('34', '153.205.198.22', 'Japan', '1', '2017-12-04 08:55:27');
+INSERT INTO `visitaspersonas` VALUES ('35', '153.205.198.22', 'Japan', '1', '2017-12-05 14:58:04');
+INSERT INTO `visitaspersonas` VALUES ('36', '153.205.198.22', 'Japan', '1', '2017-12-06 15:11:13');
+INSERT INTO `visitaspersonas` VALUES ('37', '153.205.198.22', 'Japan', '1', '2017-12-07 16:32:13');
+INSERT INTO `visitaspersonas` VALUES ('38', '153.205.198.22', 'Japan', '1', '2017-12-11 09:32:10');
+INSERT INTO `visitaspersonas` VALUES ('39', '153.205.198.22', 'Japan', '1', '2017-12-13 09:45:58');
+INSERT INTO `visitaspersonas` VALUES ('40', '153.205.198.22', 'Japan', '1', '2017-12-18 20:37:45');
+INSERT INTO `visitaspersonas` VALUES ('41', '153.205.198.22', 'Japan', '1', '2017-12-19 06:54:21');
+INSERT INTO `visitaspersonas` VALUES ('42', '153.205.198.22', 'Unknown', '1', '2017-12-30 09:41:47');
+INSERT INTO `visitaspersonas` VALUES ('43', '153.205.198.22', 'Japan', '1', '2018-01-02 09:46:52');
+INSERT INTO `visitaspersonas` VALUES ('44', '153.205.198.22', 'Japan', '1', '2018-01-03 07:54:29');
+INSERT INTO `visitaspersonas` VALUES ('45', '153.205.198.22', 'Japan', '1', '2018-01-04 10:54:03');
+INSERT INTO `visitaspersonas` VALUES ('46', '153.205.198.22', 'Japan', '1', '2018-01-05 11:17:05');
+INSERT INTO `visitaspersonas` VALUES ('47', '153.205.198.22', 'Japan', '1', '2018-01-08 07:57:21');
+INSERT INTO `visitaspersonas` VALUES ('48', '153.205.198.22', 'Japan', '1', '2018-01-09 09:46:40');
+INSERT INTO `visitaspersonas` VALUES ('49', '153.205.198.22', 'Japan', '1', '2018-01-10 14:34:12');
+INSERT INTO `visitaspersonas` VALUES ('50', '153.205.198.22', 'Japan', '1', '2018-01-11 08:08:56');
+INSERT INTO `visitaspersonas` VALUES ('51', '153.205.198.22', 'Japan', '1', '2018-01-15 12:10:09');
+INSERT INTO `visitaspersonas` VALUES ('52', '153.205.198.22', 'Japan', '1', '2018-01-16 10:15:33');
+INSERT INTO `visitaspersonas` VALUES ('53', '153.205.198.22', 'Japan', '1', '2018-01-17 15:39:17');
+INSERT INTO `visitaspersonas` VALUES ('54', '153.205.198.22', 'Japan', '1', '2018-01-18 14:16:09');
+INSERT INTO `visitaspersonas` VALUES ('55', '153.205.198.22', 'Japan', '1', '2018-01-19 09:05:32');
+INSERT INTO `visitaspersonas` VALUES ('56', '153.205.198.22', 'Japan', '1', '2018-01-22 08:38:48');
+INSERT INTO `visitaspersonas` VALUES ('57', '153.205.198.22', 'Japan', '1', '2018-01-25 09:44:30');
+INSERT INTO `visitaspersonas` VALUES ('58', '153.205.198.22', 'Japan', '1', '2018-01-26 15:24:38');
+INSERT INTO `visitaspersonas` VALUES ('59', '153.205.198.22', 'Japan', '1', '2018-01-29 14:45:50');
+INSERT INTO `visitaspersonas` VALUES ('60', '153.205.198.22', 'Japan', '1', '2018-01-30 16:32:35');
+INSERT INTO `visitaspersonas` VALUES ('61', '153.205.198.22', 'Japan', '1', '2018-01-31 12:35:33');
+INSERT INTO `visitaspersonas` VALUES ('62', '153.205.198.22', 'Japan', '1', '2023-02-14 11:15:24');
+INSERT INTO `visitaspersonas` VALUES ('63', '153.205.198.22', 'Japan', '1', '2023-02-15 10:38:41');
+INSERT INTO `visitaspersonas` VALUES ('64', '153.205.198.22', 'Japan', '1', '2023-02-16 10:12:23');

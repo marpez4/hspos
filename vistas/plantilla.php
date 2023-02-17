@@ -53,12 +53,26 @@ session_start();
   <!-- Morris chart -->
   <link rel="stylesheet" href="vistas/bower_components/morris.js/morris.css">
 
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+  <!--=====================================
+  CSS PERSONALIZADO
+  ======================================-->
+
+  <link rel="stylesheet" href="vistas/css/plantilla.css">
+
+  <link rel="stylesheet" href="vistas/css/slide.css">
+
   <!--=====================================
   PLUGINS DE JAVASCRIPT
   ======================================-->
 
   <!-- jQuery 3 -->
   <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
+  
+  <!-- jQuery UI 1.11.4 -->
+  <script src="vistas/bower_components/jquery-ui/jquery-ui.min.js"></script>
 
   <!-- Bootstrap 3.3.7 -->
   <script src="vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -113,6 +127,9 @@ session_start();
   <!-- select -->
   <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 
+  <!-- bootstrap color picker https://farbelous.github.io/bootstrap-colorpicker/v2/-->
+  <script src="vistas/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+
 </head>
 
 <!--=====================================
@@ -164,6 +181,14 @@ CUERPO DOCUMENTO
       ) {
 
         include "modulos/" . $_GET["ruta"] . ".php";
+
+      } else if (
+                $_GET["ruta"] == "comercio" ||
+                $_GET["ruta"] == "slide" ) {
+
+        // INICIA VISTAS DELL COMERCIO ELECTRONICO 
+
+        include "modulos/gestor_comercio/" . $_GET["ruta"] . ".php";
       } else {
 
         include "modulos/404.php";
@@ -199,6 +224,8 @@ CUERPO DOCUMENTO
   <script src="vistas/js/cajas.js"></script>
   <script src="vistas/js/cortes.js"></script>
   <script src="vistas/js/pedidosPaqueteria.js"></script>
+  <script src="vistas/js/gestorComercio.js"></script>
+  <script src="vistas/js/gestorSlide.js"></script>
 
 </body>
 

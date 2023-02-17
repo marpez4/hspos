@@ -71,3 +71,14 @@ if(window.matchMedia("(max-width:767px)").matches){
 
 	$("body").addClass('sidebar-collapse');
 }
+
+
+/* iCheck */
+$('input').iCheck({
+	checkboxClass: 'icheckbox_square-blue',
+	radioClass: 'iradio_square-blue',
+	increaseArea: '20%' // optional
+});
+
+//Colorpicker
+$('.my-colorpicker').colorpicker();

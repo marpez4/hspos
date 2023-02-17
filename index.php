@@ -11,6 +11,8 @@ require_once "controladores/servicios.controlador.php";
 require_once "controladores/pedidosPaqueteria.controlador.php";
 require_once "controladores/cortes.controlador.php";
 require_once "controladores/cajas.controlador.php";
+require_once "controladores/gestor_comercio/comercio.controlador.php";
+require_once "controladores/gestor_comercio/slide.controlador.php";
 
 
 require_once "modelos/usuarios.modelo.php";
@@ -24,6 +26,8 @@ require_once "modelos/pedidosPaqueteria.modelo.php";
 require_once "modelos/cortes.modelo.php";
 require_once "modelos/cajas.modelo.php";
 require_once "extensiones/vendor/autoload.php";
+require_once "modelos/gestor_comercio/comercio.modelo.php";
+require_once "modelos/gestor_comercio/slide.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

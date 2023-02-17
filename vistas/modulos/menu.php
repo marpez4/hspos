@@ -247,6 +247,132 @@
 
 			</li>';
 			}
+
+			if ($_SESSION["perfil"] == "Administrador") {
+
+				echo '<li class="treeview">
+
+				<a href="#">
+
+					<i class="fa fa-desktop"></i>
+					
+					<span>Gestor Comercio</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
+
+				</a>
+
+				<ul class="treeview-menu">
+
+					<li>
+
+						<a href="comercio">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor sitio</span>
+
+						</a>
+
+					</li>
+					
+					<li>
+
+						<a href="slide">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Slide</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Productos</span>
+
+						</a>
+
+					</li>
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Banner</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Ventas</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Visitas</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Usuarios</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Mensajes</span>
+
+						</a>
+
+					</li>
+					<li>
+
+						<a href="cortes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor Perfiles</span>
+
+						</a>
+
+					</li>
+					
+					
+					
+					';
+
+				echo '</ul>
+
+			</li>';
+			}
 			?>
 
 		</ul>
