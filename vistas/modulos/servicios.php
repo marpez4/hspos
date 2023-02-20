@@ -78,14 +78,14 @@ if ($_SESSION["perfil"] == "Vendedor") {
                         <tr>
 
                             <th style="width:10px">#</th>
-                            <th>Folio</th>
-                            <th>Fecha llegada</th>
-                            <th>Cliente</th>
-                            <th>Empleado</th>
-                            <th>Equipo</th>
-                            <th>Falla</th>
-                            <th>Estatus</th>
-                            <th>Acciones</th>
+                            <th width="1%">Folio</th>
+                            <th width="1%">Fecha llegada</th>
+                            <th width="10%">Cliente</th>
+                            <th width="10%">Empleado</th>
+                            <th width="10%">Equipo</th>
+                            <th width="10%">Falla</th>
+                            <th width="1%">Estatus</th>
+                            <th width="10%">Acciones</th>
 
                         </tr>
 
