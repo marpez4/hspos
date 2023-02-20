@@ -83,7 +83,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             <th width="10%">Cliente</th>
                             <th width="10%">Empleado</th>
                             <th width="10%">Equipo</th>
-                            <th width="10%">Falla</th>
+                            <th style="width:150px">Falla</th>
                             <th width="1%">Estatus</th>
                             <th width="10%">Acciones</th>
 
