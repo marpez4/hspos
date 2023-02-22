@@ -215,4 +215,173 @@ class ModeloServicios
 			return $stmt->fetchAll();
 		}
 	}
+
+	static public function mdlRangoFechasReporteServicios($tabla, $fechaInicial, $fechaFinal)
+	{
+
+		if ($fechaInicial == null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estatus = 6 ORDER BY id DESC");
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else if ($fechaInicial == $fechaFinal) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada AND estatus = 6 like '%$fechaFinal%'");
+
+			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else {
+
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+			} else {
+
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
+			}
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		}
+	}
+
+	static public function mdlRangoFechasReporteServiciosGral($tabla, $fechaInicial, $fechaFinal)
+	{
+
+		if ($fechaInicial == null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT SUM(total) AS totalServicios FROM $tabla WHERE estatus = 6");
+
+			$stmt->execute();
+
+			foreach ($stmt as $value) {
+
+				$totalServicios = $value["totalServicios"];
+			}
+
+			$stmtNo = Conexion::conectar()->prepare("SELECT COUNT(*) AS totalNoServicios FROM $tabla WHERE estatus = 6");
+
+			$stmtNo->execute();
+
+			foreach ($stmtNo as $value2) {
+
+				$totalNoServicios = $value2["totalNoServicios"];
+			}
+
+			$respuesta = array(
+				'totalServicio' => $totalServicios,
+				'totalNoServicios' => $totalNoServicios
+			);
+
+			return $respuesta;
+		} else if ($fechaInicial == $fechaFinal) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT SUM(total) AS totalServicios FROM $tabla WHERE fecha_entrega like '%$fechaFinal%' AND estatus = 6 ");
+
+			$stmt->bindParam(":fecha_entrega", $fechaFinal, PDO::PARAM_STR);
+
+			$stmt->execute();
+
+			foreach ($stmt as $value) {
+
+				$totalServicios = $value["totalServicios"];
+			}
+
+			$stmtNo = Conexion::conectar()->prepare("SELECT COUNT(*) AS totalNoServicios FROM $tabla WHERE fecha_entrega  like '%$fechaFinal%' AND estatus = 6");
+
+			$stmtNo->bindParam(":fecha_entrega", $fechaFinal, PDO::PARAM_STR);
+
+			$stmtNo->execute();
+
+			foreach ($stmtNo as $value2) {
+
+				$totalNoServicios = $value2["totalNoServicios"];
+			}
+
+			$respuesta = array(
+				'totalServicio' => $totalServicios,
+				'totalNoServicios' => $totalNoServicios
+			);
+
+			return $respuesta;
+		} else {
+
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$stmt = Conexion::conectar()->prepare("SELECT SUM(total) AS totalServicios FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+
+				$stmt->execute();
+
+				foreach ($stmt as $value) {
+
+					$totalServicios = $value["totalServicios"];
+				}
+
+				$stmtNo = Conexion::conectar()->prepare("SELECT COUNT(*) AS totalNoServicios FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+
+				$stmtNo->execute();
+
+				foreach ($stmtNo as $value2) {
+
+					$totalNoServicios = $value2["totalNoServicios"];
+				}
+
+				$respuesta = array(
+					'totalServicio' => $totalServicios,
+					'totalNoServicios' => $totalNoServicios
+				);
+
+				return $respuesta;
+			} else {
+
+				$stmt = Conexion::conectar()->prepare("SELECT SUM(total) AS totalServicios FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+
+				$stmt->execute();
+
+				foreach ($stmt as $value) {
+
+					$totalServicios = $value["totalServicios"];
+				}
+
+				$stmtNo = Conexion::conectar()->prepare("SELECT COUNT(*) AS totalNoServicios FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+
+				$stmtNo->execute();
+
+				foreach ($stmtNo as $value2) {
+
+					$totalNoServicios = $value2["totalNoServicios"];
+				}
+			}
+
+			$respuesta = array(
+				'totalServicio' => $totalServicios,
+				'totalNoServicios' => $totalNoServicios
+			);
+
+			return $respuesta;
+		}
+	}
 }

@@ -123,3 +123,34 @@ $('#daterangeServicio-btn').daterangepicker(
 	}
 
 )
+
+$('#daterangeReporteServicio-btn').daterangepicker(
+	
+	{
+		ranges: {
+			'Hoy': [moment(), moment()],
+			'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+			'Últimos 7 días': [moment().subtract(6, 'days'), moment()],
+			'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+			'Este mes': [moment().startOf('month'), moment().endOf('month')],
+			'Último mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+		},
+		startDate: moment(),
+		endDate: moment()
+	},
+	function (start, end) {
+		$('#daterangeReporteServicio-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+		var fechaInicial = start.format('YYYY-MM-DD');
+
+		var fechaFinal = end.format('YYYY-MM-DD');
+
+		var capturarRango = $("#daterangeReporteServicio-btn span").html();
+
+		localStorage.setItem("capturarRango", capturarRango);
+
+		window.location = "index.php?ruta=reporteServicios&fechaInicial=" + fechaInicial + "&fechaFinal=" + fechaFinal;
+
+	}
+
+)

@@ -161,6 +161,16 @@
 						</a>
 
 					</li>
+					<li>
+
+						<a href="reporteServicios">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Reporte servicios</span>
+
+						</a>
+
+					</li>
 					
 					</ul>
 			</li>';

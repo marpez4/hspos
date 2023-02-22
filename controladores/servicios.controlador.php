@@ -236,4 +236,28 @@ class ControladorServicios
 		return $respuesta;
 
 	}
+
+	// REPORTE DE SERVICIOS
+
+	static public function ctrRangoFechasReporteServicios($fechaInicial, $fechaFinal)
+	{
+
+		$tabla = "servicios";
+
+		$respuesta = ModeloServicios::mdlRangoFechasReporteServicios($tabla, $fechaInicial, $fechaFinal);
+
+		return $respuesta;
+
+	}
+
+	static public function ctrRangoFechasReporteServiciosGral($fechaInicial, $fechaFinal)
+	{
+
+		$tabla = "servicios";
+
+		$respuesta = ModeloServicios::mdlRangoFechasReporteServiciosGral($tabla, $fechaInicial, $fechaFinal);
+
+		return $respuesta;
+
+	}
 }
