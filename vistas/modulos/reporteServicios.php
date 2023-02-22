@@ -128,7 +128,7 @@ GRÁFICO DE VENTAS
                                     $fechaFinal = null;
                                 }
 
-                                $respuesta = ControladorServicios::ctrRangoFechasServicios($fechaInicial, $fechaFinal);
+                                $respuesta = ControladorServicios::ctrRangoFechasServiciosGrafica($fechaInicial, $fechaFinal);
 
                                 $arrayFechas = array();
                                 $arrayVentas = array();
@@ -141,6 +141,8 @@ GRÁFICO DE VENTAS
 
                                     #Introducir las fechas en arrayFechas
                                     array_push($arrayFechas, $fecha);
+
+                                    var_dump($fecha);
 
                                     #Capturamos las ventas
                                     $arrayVentas = array($fecha => $value["total"]);

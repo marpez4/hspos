@@ -384,4 +384,48 @@ class ModeloServicios
 			return $respuesta;
 		}
 	}
+
+	static public function mdlRangoFechasServiciosGrafica($tabla, $fechaInicial, $fechaFinal)
+	{
+
+		if ($fechaInicial == null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estatus = 6 ORDER BY id DESC");
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else if ($fechaInicial == $fechaFinal) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada like '%$fechaFinal%' AND estatus = 6");
+
+			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else {
+
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+			} else {
+
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
+			}
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		}
+	}
 }

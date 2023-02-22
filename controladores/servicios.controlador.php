@@ -260,4 +260,15 @@ class ControladorServicios
 		return $respuesta;
 
 	}
+
+	static public function ctrRangoFechasServiciosGrafica($fechaInicial, $fechaFinal)
+	{
+
+		$tabla = "servicios";
+
+		$respuesta = ModeloServicios::mdlRangoFechasServiciosGrafica($tabla, $fechaInicial, $fechaFinal);
+
+		return $respuesta;
+
+	}
 }
