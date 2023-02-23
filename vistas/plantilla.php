@@ -56,6 +56,9 @@ session_start();
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 
+  <!-- bootstrap slider -->
+  <link rel="stylesheet" href="vistas/plugins/bootstrap-slider/slider.css">
+
   <!--=====================================
   CSS PERSONALIZADO
   ======================================-->
@@ -70,7 +73,7 @@ session_start();
 
   <!-- jQuery 3 -->
   <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
-  
+
   <!-- jQuery UI 1.11.4 -->
   <script src="vistas/bower_components/jquery-ui/jquery-ui.min.js"></script>
 
@@ -83,6 +86,9 @@ session_start();
   <!-- AdminLTE App -->
   <script src="vistas/dist/js/adminlte.min.js"></script>
 
+  <!-- iCheck http://icheck.fronteed.com/-->
+  <script src="vistas/plugins/iCheck/icheck.min.js"></script>
+
   <!-- DataTables -->
   <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -93,9 +99,6 @@ session_start();
   <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
   <!-- By default SweetAlert2 doesn't support IE. To enable IE 11 support, include Promise polyfill:-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-
-  <!-- iCheck 1.0.1 -->
-  <script src="vistas/plugins/iCheck/icheck.min.js"></script>
 
   <!-- InputMask -->
   <script src="vistas/plugins/input-mask/jquery.inputmask.js"></script>
@@ -129,6 +132,9 @@ session_start();
 
   <!-- bootstrap color picker https://farbelous.github.io/bootstrap-colorpicker/v2/-->
   <script src="vistas/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+
+  <!-- Bootstrap slider http://seiyria.com/bootstrap-slider/-->
+  <script src="vistas/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 
 </head>
 
@@ -181,10 +187,10 @@ CUERPO DOCUMENTO
       ) {
 
         include "modulos/" . $_GET["ruta"] . ".php";
-
       } else if (
-                $_GET["ruta"] == "comercio" ||
-                $_GET["ruta"] == "slide" ) {
+        $_GET["ruta"] == "comercio" ||
+        $_GET["ruta"] == "slide"
+      ) {
 
         // INICIA VISTAS DELL COMERCIO ELECTRONICO 
 
@@ -226,6 +232,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/pedidosPaqueteria.js"></script>
   <script src="vistas/js/gestorComercio.js"></script>
   <script src="vistas/js/gestorSlide.js"></script>
+  <script src="vistas/js/gestor_comercio/gestorCategorias.js"></script>
 
 </body>
 

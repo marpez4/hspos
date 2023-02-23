@@ -419,172 +419,172 @@ $(".cambioColorTexto3").change(function(){
 CAMBIAR POSICIÓN IMAGEN PRODUCTO SLIDE
 =============================================*/
 
-// for(var i = 0; i < slideOpciones.length; i++){
+for(var i = 0; i < slideOpciones.length; i++){
 
-// 	// VERTICAL
+	// VERTICAL
 
-// 	var posVertical = new Slider('.posVertical'+i, {
+	var posVertical = new Slider('.posVertical'+i, {
 		
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".posVertical").change(function(){
+			$(".posVertical").change(function(){
 
-// 				var indiceSlide = $(this).attr("indice");	
+				var indiceSlide = $(this).attr("indice");	
 
-// 				$(slideOpciones[indiceSlide]).children('img').css({"top":value+"%"});
+				$(slideOpciones[indiceSlide]).children('img').css({"top":value+"%"});
 
-// 				$(guardarSlide[indiceSlide]).attr("estiloImgProductoTop", value);
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoTop", value);
 
-// 			})
+			})
 
-// 			return value;	
+			return value;	
 			
 					
-// 		}
+		}
 
-// 	})
+	})
 
-// 	// HORIZONTAL
+	// HORIZONTAL
 
-// 	var posHorizontal = new Slider('.posHorizontal'+i, {
+	var posHorizontal = new Slider('.posHorizontal'+i, {
 
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".posHorizontal").change(function(){
+			$(".posHorizontal").change(function(){
 
-// 				var tipoSlide = $(this).attr("tipoSlide");
-// 				var indiceSlide = $(this).attr("indice");
+				var tipoSlide = $(this).attr("tipoSlide");
+				var indiceSlide = $(this).attr("indice");
 
-// 				if(tipoSlide == "slideOpcion1"){
+				if(tipoSlide == "slideOpcion1"){
 
-// 					$(slideOpciones[indiceSlide]).children('img').css({"right":value+"%"});
+					$(slideOpciones[indiceSlide]).children('img').css({"right":value+"%"});
 
-// 					$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", value);
-// 					$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", "");			
+					$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", value);
+					$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", "");			
 
-// 				}else{
+				}else{
 
-// 					$(slideOpciones[indiceSlide]).children('img').css({"left":value+"%"});
+					$(slideOpciones[indiceSlide]).children('img').css({"left":value+"%"});
 
-// 					$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", value);
-// 					$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", "");
+					$(guardarSlide[indiceSlide]).attr("estiloImgProductoLeft", value);
+					$(guardarSlide[indiceSlide]).attr("estiloImgProductoRight", "");
 
-// 				}
+				}
 
-// 			})
+			})
 
-// 			return value;	
+			return value;	
 			
-// 		}
+		}
 
-// 	})
+	})
 
-// 	// ANCHO
+	// ANCHO
 
-// 	var anchoImagen = new Slider('.anchoImagen'+i, {
+	var anchoImagen = new Slider('.anchoImagen'+i, {
 
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".anchoImagen").change(function(){
+			$(".anchoImagen").change(function(){
 
-// 				var indiceSlide = $(this).attr("indice");
+				var indiceSlide = $(this).attr("indice");
 				
-// 				$(slideOpciones[indiceSlide]).children('img').css({"width":value+"%"});
+				$(slideOpciones[indiceSlide]).children('img').css({"width":value+"%"});
 
-// 				$(guardarSlide[indiceSlide]).attr("estiloImgProductoWidth", value);
+				$(guardarSlide[indiceSlide]).attr("estiloImgProductoWidth", value);
 
-// 			})
+			})
 
-// 			return value;	
+			return value;	
 			
-// 		}
+		}
 
-// 	})
+	})
 
-// 	/*=============================================
-// 	CAMBIAR POSICIÓN TEXTO
-// 	=============================================*/
+	/*=============================================
+	CAMBIAR POSICIÓN TEXTO
+	=============================================*/
 
-// 	// VERTICAL
+	// VERTICAL
 
-// 	var posVerticalTexto = new Slider('.posVerticalTexto'+i, {
+	var posVerticalTexto = new Slider('.posVerticalTexto'+i, {
 		
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".posVerticalTexto").change(function(){
+			$(".posVerticalTexto").change(function(){
 
-// 				var indiceSlide = $(this).attr("indice");	
+				var indiceSlide = $(this).attr("indice");	
 
-// 				$(slideOpciones[indiceSlide]).children('.textosSlide').css({"top":value+"%"});
+				$(slideOpciones[indiceSlide]).children('.textosSlide').css({"top":value+"%"});
 
-// 				$(guardarSlide[indiceSlide]).attr("estiloTextoSlideTop", value);
+				$(guardarSlide[indiceSlide]).attr("estiloTextoSlideTop", value);
 
-// 			})
+			})
 			
-// 			return value;	
+			return value;	
 								
-// 		}
+		}
 
-// 	})
+	})
 
-// 	// HORIZONTAL
+	// HORIZONTAL
 
-// 	var posHorizontalTexto = new Slider('.posHorizontalTexto'+i, {
+	var posHorizontalTexto = new Slider('.posHorizontalTexto'+i, {
 
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".posHorizontalTexto").change(function(){
+			$(".posHorizontalTexto").change(function(){
 
-// 				var tipoSlide = $(this).attr("tipoSlide");
-// 				var indiceSlide = $(this).attr("indice");
+				var tipoSlide = $(this).attr("tipoSlide");
+				var indiceSlide = $(this).attr("indice");
 
-// 				if(tipoSlide == "slideOpcion1"){
+				if(tipoSlide == "slideOpcion1"){
 
-// 					$(slideOpciones[indiceSlide]).children('.textosSlide').css({"left":value+"%"});
+					$(slideOpciones[indiceSlide]).children('.textosSlide').css({"left":value+"%"});
 
-// 					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", value);
-// 					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", "");			
+					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", value);
+					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", "");			
 
-// 				}else{
+				}else{
 
-// 					$(slideOpciones[indiceSlide]).children('.textosSlide').css({"right":value+"%"});
+					$(slideOpciones[indiceSlide]).children('.textosSlide').css({"right":value+"%"});
 
-// 					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", value);
-// 					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", "");
+					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideRight", value);
+					$(guardarSlide[indiceSlide]).attr("estiloTextoSlideLeft", "");
 
-// 				}
+				}
 
-// 			})
+			})
 
-// 			return value;	
+			return value;	
 			
-// 		}
+		}
 
-// 	})
+	})
 
-// 	// ANCHO
+	// ANCHO
 
-// 	var anchoImagenTexto = new Slider('.anchoTexto'+i, {
+	var anchoImagenTexto = new Slider('.anchoTexto'+i, {
 
-// 		formatter: function(value) {
+		formatter: function(value) {
 
-// 			$(".anchoTexto").change(function(){
+			$(".anchoTexto").change(function(){
 
-// 				var indiceSlide = $(this).attr("indice");
+				var indiceSlide = $(this).attr("indice");
 				
-// 				$(slideOpciones[indiceSlide]).children('.textosSlide').css({"width":value+"%"});
+				$(slideOpciones[indiceSlide]).children('.textosSlide').css({"width":value+"%"});
 
-// 				$(guardarSlide[indiceSlide]).attr("estiloTextoSlideWidth", value);
+				$(guardarSlide[indiceSlide]).attr("estiloTextoSlideWidth", value);
 
-// 			})
+			})
 
-// 			return value;	
+			return value;	
 			
-// 		}
+		}
 
-// 	})
+	})
 
-// }
+}
 
 /*=============================================
 CAMBIO DE BOTÓN

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-02-17 13:48:40
+Date: 2023-02-23 16:01:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,11 +52,12 @@ CREATE TABLE `bodega` (
   `fecha_apertura` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `tipo` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of bodega
 -- ----------------------------
+INSERT INTO `bodega` VALUES ('1', '', '93', '10', '12', null, '1');
 
 -- ----------------------------
 -- Table structure for cabeceras
@@ -110,21 +111,48 @@ DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` text COLLATE utf8_spanish_ci NOT NULL,
+  `ruta` text COLLATE utf8_spanish_ci NOT NULL,
+  `estado` int(11) NOT NULL,
+  `oferta` int(11) NOT NULL,
+  `precioOferta` float NOT NULL,
+  `descuentoOferta` int(11) NOT NULL,
+  `imgOferta` text COLLATE utf8_spanish_ci NOT NULL,
+  `finOferta` datetime NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of categorias
+-- ----------------------------
+INSERT INTO `categorias` VALUES ('7', 'Desktop', 'desktop', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:16');
+INSERT INTO `categorias` VALUES ('8', 'Laptops', 'laptop', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:16');
+INSERT INTO `categorias` VALUES ('9', 'All in One', 'all-in-one', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:16');
+INSERT INTO `categorias` VALUES ('10', 'Accesorios', 'accesorios', '1', '1', '9.99', '0', 'vistas/img/ofertas/cursos.jpg', '2018-03-29 23:59:59', '2023-02-23 15:23:23');
+INSERT INTO `categorias` VALUES ('11', 'Gaming', 'gaming', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:24');
+
+-- ----------------------------
+-- Table structure for categoriaspos
+-- ----------------------------
+DROP TABLE IF EXISTS `categoriaspos`;
+CREATE TABLE `categoriaspos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` text COLLATE utf8_spanish_ci NOT NULL,
   `ruta` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
--- Records of categorias
+-- Records of categoriaspos
 -- ----------------------------
-INSERT INTO `categorias` VALUES ('7', 'Desktop', 'computadoras', '2023-02-14 10:58:05');
-INSERT INTO `categorias` VALUES ('8', 'Laptops', 'computadoras', '2023-02-14 10:58:10');
-INSERT INTO `categorias` VALUES ('9', 'All in One', 'computadoras', '2023-02-14 10:58:10');
-INSERT INTO `categorias` VALUES ('10', 'Accesesorios', 'accesorios', '2023-02-14 10:58:22');
-INSERT INTO `categorias` VALUES ('11', 'Gabinetes', 'otros', '2023-02-14 10:58:26');
-INSERT INTO `categorias` VALUES ('12', 'Memorias', 'accesorios', '2023-02-14 10:58:30');
-INSERT INTO `categorias` VALUES ('13', 'Gaming', 'gaming', '2023-02-14 10:58:33');
+INSERT INTO `categoriaspos` VALUES ('7', 'Desktop', 'computadoras', '2023-02-14 10:58:05');
+INSERT INTO `categoriaspos` VALUES ('8', 'Laptops', 'computadoras', '2023-02-14 10:58:10');
+INSERT INTO `categoriaspos` VALUES ('9', 'All in One', 'computadoras', '2023-02-14 10:58:10');
+INSERT INTO `categoriaspos` VALUES ('10', 'Accesesorios', 'accesorios', '2023-02-14 10:58:22');
+INSERT INTO `categoriaspos` VALUES ('11', 'Gabinetes', 'otros', '2023-02-14 10:58:26');
+INSERT INTO `categoriaspos` VALUES ('12', 'Memorias', 'accesorios', '2023-02-14 10:58:30');
+INSERT INTO `categoriaspos` VALUES ('13', 'Gaming', 'gaming', '2023-02-14 10:58:33');
 
 -- ----------------------------
 -- Table structure for clientes
@@ -315,7 +343,7 @@ CREATE TABLE `historial_mov_bodega` (
   `fecha_mov` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `id_usuario` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of historial_mov_bodega
@@ -323,6 +351,7 @@ CREATE TABLE `historial_mov_bodega` (
 INSERT INTO `historial_mov_bodega` VALUES ('21', '10', '35', '35', '1', '2023-01-24 17:25:02', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('22', '10', '10', '0', '0', '2023-01-24 17:25:24', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('23', '10', '0', '10', '1', '2023-01-24 17:25:46', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('24', '1', '10', '12', '1', '2023-02-22 20:25:27', '60');
 
 -- ----------------------------
 -- Table structure for pedidospaqueteria
@@ -482,15 +511,58 @@ CREATE TABLE `servicios` (
   `fecha_llegada` date DEFAULT NULL,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of servicios
 -- ----------------------------
-INSERT INTO `servicios` VALUES ('15', '10001', 'Angel Romero', null, '60', 'Laptop', 'HP', 'I Core 5', '4 gb', '120 gb', null, 'W10', null, null, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, voluptas', null, '', '', '200', '6', '2022-11-17', '2022-11-10', '6');
-INSERT INTO `servicios` VALUES ('16', '10002', 'Paul Mendoza', '47785293341', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', null, 'W10', null, 'scoop2', 'Cargador ', null, 'hola', '', '450', '6', '2023-01-04', '2023-01-04', null);
-INSERT INTO `servicios` VALUES ('17', '10003', 'Miguel Mendoza Gaona', '4773172475', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', '250', 'W10', null, 'scoop', 'Virus troyano', '', '', '', '0', '1', '0000-00-00', '2023-01-09', null);
-INSERT INTO `servicios` VALUES ('18', '10004', 'Paul Mendoza', '4764777193', '60', 'Laptop', 'DELL', 'I Core 5', '4 gb', '120 gb', '120', 'W10', 'No', 'scoop', 'No enciende', '', '', '', '0', '1', '2023-01-16', '2023-01-16', null);
+INSERT INTO `servicios` VALUES ('20', '10001', 'LORENA MARGARITA CHICO', '477000000', '60', 'LAPTOP', 'HP COMPAQ', 'AMD E240', '2', '250 HHD', '0', 'W7', '', 'SIN CONTRASEÑA', 'REVISAR MENSAJE DE VENTILADOR', 'SERVICIO DE PRUEBA SE BORRO EL FOLIO 2 \n\nSE REALIZO MANTENIMIENTO ', 'CON CARGADOR, DEJA MALETIN,\nCONTRASEÑA: scorpion\nTELEFONO: 4777975807', '', '350', '6', '2023-01-11', '2023-01-02', '10');
+INSERT INTO `servicios` VALUES ('21', '10002', 'Prueba', 'xxx', '60', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', 'TEST', '', 'TEST', 'TEST', 'TEST', 'TEST', '', '0', '5', '2023-01-14', '2023-01-14', null);
+INSERT INTO `servicios` VALUES ('22', '10003', 'Carolina Franco Duran', '4776481420', '61', 'LAPTOP', 'DELL', 'CORE I5', '12', '240 SSD', '', 'W10', '', 'SIN CONTRASEÑA', 'REVISAR CODIGO DE ERROR PANTALLA AZUL\nREVISAR BOTON DE ENCENDIDO\nSE LLEVA UN MOSE VORAGO', '', 'CON CARGADOR\n\nPAGO CON TARJETA ', '', '531.19', '6', '2023-01-07', '2023-01-04', null);
+INSERT INTO `servicios` VALUES ('23', '10004', 'Serafin Garcia', '4772242339', '61', 'ALL IN ONE ', 'LENOVO', 'AMD A6', '4', '1 TB', '', 'W10', '', 'SIN CONTRASEÑA', 'SISTEMA LENTO\nFORMATEO SIN RESPALDO', '', 'CON CARGADOR DE CORRIENTE', '', '350', '6', '2023-01-07', '2023-01-05', null);
+INSERT INTO `servicios` VALUES ('24', '10005', 'Oscar Villegas', '4776464680', '60', 'LAPTOP', 'LENOVO', 'AMD A8', '8', '1 TB', '', 'W 10', '', '845679123', 'MANTENIMIENTO INTERNO FISICO\r\nMANTENIMIENTO S.O CON RESPALDO\r\nDISCO SOLIDO SSD DE 480 GB\r\nCASE PARA DISCO EXTERNO', '', 'CON CARGADOR', '', '1890', '6', '2023-01-12', '2023-01-06', null);
+INSERT INTO `servicios` VALUES ('25', '10006', 'MARCO REYES', '4778707951', '61', 'LAPTOP ', 'HP', 'CORE I5', '8', '240 GB ', '0', 'W10', '', 'SIN CONTRASEÑA', 'VENTANAS EMERGENTES', 'DESACTIVAR ALGUNAS PAGINAS QUE MANDAN LA PUBLICIDAD', 'CON CARGADOR', '', '150', '6', '2023-01-11', '2023-01-07', null);
+INSERT INTO `servicios` VALUES ('26', '10007', 'Jose Luis Estrada Rico', '3312332906', '64', 'Laptop', 'Lenovo Thinkpad', 'Core i5', '16', '0', '240', 'W10', '', 'Marypily2121', 'Bisagra de pantalla Rota y tapa', 'Cotización de Bisagra y tapa superior del equipo', 'SIN CARGADOR, bisagra y tapa superior rota del equipo', '', '1700', '6', '2023-01-12', '2023-01-09', null);
+INSERT INTO `servicios` VALUES ('27', '10008', 'Fernando Garcia', '4775075130', '60', 'ALL IN ONE', 'HP', 'AMD A8', '8', '1 TB', 'SIN DISCO', 'W10', 'Sí', 'SIN CONTRASEÑA', 'SE APAGA REPENTINAMENTE EN OCASIONES', 'REVISAR', 'CON CARGADOR HP GENERICO', '', '0', '6', '2023-01-10', '2023-01-10', null);
+INSERT INTO `servicios` VALUES ('28', '10009', 'JAQUELINE GONZALEZ', '4773097660', '60', 'LAPTOP', 'HP', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', '', 'SIN DATO', 'NO ENCIENDE\nBISAGRA DAÑADA', 'REVISION Y COTIZACION', 'SIN CARGADOR ', '', '0', '1', '2023-01-16', '2023-01-10', null);
+INSERT INTO `servicios` VALUES ('29', '10010', 'Brayan Herrera', '4776324965', '61', 'LAPTOP', 'GOBIERNO', 'CORE I3', '8', '', '120', 'WINDOWS 10', '', 'SIN CONTRASEÑA', 'REVISAR VENTILADOR SUENA FUERTE, ', 'MANTENIMIENTO INTERNO', 'CON CARGADOR', '', '350', '6', '2023-01-18', '2023-01-11', null);
+INSERT INTO `servicios` VALUES ('30', '10011', 'Liliana Romero', '4777069001', '60', 'LAPTOP', 'HP ', 'AMD E2', '4', '0', '32', 'WINDOWS 10', '', '1003', 'FORMATEO SIN RESPALDO', 'LIMPIEZA', 'CON CARGADOR\r\n\r\nYA SE ACABO EL DIA MARTES Y LE MARCAMOS Y NO NOS CONTESTA', '', '350', '3', '2023-01-16', '2023-01-13', null);
+INSERT INTO `servicios` VALUES ('36', '10012', 'MARIA GISELA HERNANDEZ', '4771087570', '61', 'LAPTOP ELITEBOOK', 'HP', 'CORE I5', '4', '500', '', 'WINDOWS 10 ', '', 'alesighdzc2484', '- MANTENIMIENTO FISICO \r\n- CAMBIO DE DISCO SOLIDO 480 GB SSD\r\n- INSTALACION DE S.O CON RESPALDO\r\n', 'EN LA DESCRIPCIÓN LA SOLUCIÓN ', 'SIN CARGADOR', '', '1740', '6', '2023-01-17', '2023-01-14', null);
+INSERT INTO `servicios` VALUES ('37', '10013', 'GABY MEDRANO', '4774494041', '60', 'LAPTOP', 'HP', 'SIN INFORMACION', 'SIN INFORMACION', 'SIN INFORMACION', 'SIN INFORMACION', 'SIN INFORMACION', 'Sí', 'yotequieromucho1', 'NO DA VIDEO', 'REVISIÓN', 'CON CARGADOR ', '', '0', '6', '2023-01-20', '2023-01-16', null);
+INSERT INTO `servicios` VALUES ('38', '10014', 'JORGE ROMERO', '4791191961', '61', 'LAPTOP', 'HP', 'PENDIENTE', 'PENDIENTE', 'PENDIENTE', 'PENDIENTE', 'WINDOWS 7', '', 'SIN CONTRASEÑA', 'FORMATEO SIN RESPALDO', 'ACTUALIZACIÓN DE SISTEMA OK', 'CON CARGADOR', '', '350', '6', '2023-01-24', '2023-01-19', null);
+INSERT INTO `servicios` VALUES ('39', '10015', 'OLGA GUADIAN MARTINEZ', '4772385078', '60', 'LAPTOP', 'HP', 'CORE I5', '4', '160', '', 'WINDOWS 10', 'Sí', '1623', 'FORMATEO SIN RESPALDO REVISAR DISCO DURO TARDA EN ENTRAR AL SISTEMA DESDE UN PRINCIPIO', 'MANTENIMIENTO FISICO Y FORMATEO', 'CON CARGADOR', '', '700', '6', '2023-01-24', '2023-01-19', null);
+INSERT INTO `servicios` VALUES ('40', '10016', 'KARLA MARIANA QUINTANA CARRERA', '4778601425', '64', 'LAPTOP', 'GTO', 'PENDIENTE', 'PENDIENTE', 'PENDIENTE', 'PENDIENTE', 'PENDIENTE', 'Sí', 'SIN CONTRASEÑA', 'NO PRENDE ', '1500 +299 DE REGULADOR ', 'LAPTOP + CARGADOR ', '', '1500', '6', '2023-01-30', '2023-01-19', null);
+INSERT INTO `servicios` VALUES ('41', '10017', 'Maria de Fatima Gonzalez', '4777027288', '64', 'LAPTOP ', 'LENOVO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', '', 'NO', 'NO PRENDE', '', 'DEJA LAPTOP CON CARGADOR SIN ENCENDER', '', '0', '1', '0000-00-00', '2023-01-21', null);
+INSERT INTO `servicios` VALUES ('42', '10017', 'Maria de Fatima Gonzalez', '4777027288', '64', 'LAPTOP ', 'LENOVO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', '', 'NO', 'NO PRENDE', '', 'DEJA LAPTOP CON CARGADOR SIN ENCENDER', '', '0', '1', '0000-00-00', '2023-01-21', null);
+INSERT INTO `servicios` VALUES ('43', '10018', 'Daniel Sanchez', '4778273941', '61', 'CPU', 'DELL', 'CORE I5', '4', '', 'SIN INFORMACION', 'SIN INFORMACION', 'No', 'sin contraseña', 'CAMBIO DE DISCO SSD 480 + SISTEMA+MANTENIMIENTO INTERNO+ CAMBIO DE PROCESADOR.', 'SE AGREGO EL PROCESADOR TOTAL ANTERIOR DE $1,590 TOTAL CUANDO RECIBE EL EQUIPO DE $2,540 PESOS ', 'SIN CABLES ', '', '2540', '6', '2023-02-11', '2023-01-23', null);
+INSERT INTO `servicios` VALUES ('45', '10019', 'Margarita Avenicio', '4778590851', '60', 'LAPTOP', 'TOSHIBA', 'CENTRINO', '3', 'SIN DISCO', '', 'SIN SISTEMA', 'No', 'SIN CONTRASEÑA', 'INSTALAR DISCO DURO Y S.O.\r\nREVISAR CUALQUIER OTRO DETALLE', '', 'SIN CARGADOR Y SIN DISCO\r\n', '', '0', '1', '2023-01-27', '2023-01-24', null);
+INSERT INTO `servicios` VALUES ('46', '10020', 'Cristian Contreras', '4774663243', '60', 'ALL IN ONE', 'HP', 'AMD E-350', '4', '500', 'SIN DATOS', 'WINDOWS 7', 'Sí', 'SIN CONTRASEÑA', 'REVISARLA A DETALLE\r\nSE APAGA TRABAJANDO CON EL TIEMPO', 'REVISION', 'CON CARGADOR', '', '100', '1', '2023-01-27', '2023-01-24', null);
+INSERT INTO `servicios` VALUES ('47', '10021', 'Idalia Castro', '4776828090', '60', 'Laptop', 'HP', 'Intel pentium', 'sin dato', 'sin dato', 'no', 'w10', 'Sí', 'no ', 'equipo lento', '', 'Tarda mucho tiempo en prender', '', '0', '1', '0000-00-00', '2023-01-26', null);
+INSERT INTO `servicios` VALUES ('48', '10022', 'ADRIAN CHICO MARMOLEJO', '4773031994', '60', 'LAPTOP', 'ACER', 'INTEL CORE I3', 'SIN INFORMACION', 'SIN INFORMACION', 'SIN INFORMACION', 'SIN INFORMACION', 'Sí', 'SIN DATOS', 'NO ENCIENDE', 'REVISAR', '', '', '0', '1', '2023-01-30', '2023-01-27', null);
+INSERT INTO `servicios` VALUES ('49', '10023', 'PATRICIA GOMEZ GONZALEZ', '4774114631', '60', 'LAPTOP', 'ACER', 'PENTIUM', '4', '500', 'NO APLICA', 'WIN 10', 'Sí', 'SIN CONTRASEÑA', '- MUY LENTA REINICIO DE S.O\r\n- REVISAR BISAGRA DAÑADA', 'FORMATEO SIN RESPALDO', 'CON BISAGRA DAÑADA \r\nLINEA EN PANTALLA\r\nTAPA ROTA', '', '350', '6', '2023-02-03', '2023-01-28', null);
+INSERT INTO `servicios` VALUES ('50', '10024', 'GENERAL OPERADOR LOGISTICO', '4777507474', '60', 'ALL IN ONE ', 'HP', 'AMD A12', '12', '1 TB', '', 'WIN 10', 'Sí', 'GeneralF', 'SE APAGA EL EQUIPO', 'ACTUALIZACION DE SISTEMA Y BIOS ', 'ENTREGADO', '', '150', '6', '2023-02-07', '2023-01-30', null);
+INSERT INTO `servicios` VALUES ('51', '10025', 'VALNTINA DUARTE', '4776491526', '60', 'LAPTOP', 'LANIX', 'PENTIUM', 'SIN DATOS', 'SIN DATOS ', 'SIN DATOS', 'SIN DATOS', 'Sí', 'NO RECUERDA', 'COTIZAR PANTALLA ESTRELLADA\r\nSE PRENDE PERO SE APAGA\r\n', 'CAMBIO DE PANTALLA', 'SE PRENDE PERO SE APAGA', '', '1500', '6', '2023-02-06', '2023-01-30', null);
+INSERT INTO `servicios` VALUES ('52', '10026', 'CARLOS RAMOS', '4773160086', '60', 'CPU', 'LENOVO ', 'CORE I3', '4', '500', 'SIN INFORMACION', 'WINDOWS 10', 'Sí', 'SIN CONTRASEÑA', 'NO DETECTA EL PUERTO ETHERNET', 'actualización de driver', 'se actualizo driver y windows update', '', '200', '6', '2023-02-07', '2023-01-30', null);
+INSERT INTO `servicios` VALUES ('53', '10027', 'SERGIO AGUILAR GUZMAN', '4777043753', '60', 'LAPTOP', 'GTO', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'Sí', 'SIN CONTRASEÑA', 'EL EQUIPO PRENDE Y SE APAGA, REVISAR TECLADO', 'SOLO SE REVISO OCUPA CAMBIO DE TECLADO Y BOTON DE ENCENDIDO', 'FALTAN DOS TECLAS AL TECLADO\r\n', '', '100', '6', '2023-02-06', '2023-01-31', null);
+INSERT INTO `servicios` VALUES ('54', '10028', 'BLANCA VAZQUEZ', '4776755287', '60', 'LAPTOP', 'TOSHIBA', 'CELERON', '4', '1 TB', 'SIN DATOS', 'WIN 10', 'Sí', '1234', 'INSTALAR ANTIVIRUS Y ACTUALIZAR OFFICE', 'ACTUALIZACION DE OFFICE Y ANTIVIRUS SE QUEDO EL MISMO ', 'SOLO ACTIVACION Y INSTALACION', '', '350', '6', '2023-01-31', '2023-01-31', null);
+INSERT INTO `servicios` VALUES ('55', '10029', 'NOE VALTIERRA', '4772624031', '60', 'CPU', 'DELL', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'No', 'daliaya0106', 'FORMATEO sin respaldo y revisar sonido de ventilador', 'MANTENIMIENTO Y SISTEMA OPERATIVO', 'sin cables', '', '700', '6', '2023-02-08', '2023-02-01', null);
+INSERT INTO `servicios` VALUES ('56', '10030', 'ABRAHAM CARRERA', '4771102469', '60', 'LAPTOP', 'LANIX', 'ATOM', '2', '235', 'SIN DATOS', 'WIN 10', 'Sí', 'CERRAJERIA16', 'INSTALACION DE PROGRAMA', 'activación programa', 'CON MOCHILA\r\nADAPTADOR DE MEMORIA\r\nPROGRAMAS', '', '150', '6', '2023-02-08', '2023-02-01', null);
+INSERT INTO `servicios` VALUES ('57', '10031', 'RENATA GAONA ', '4776690819', '64', 'LAPTOP', 'LENOVO THINKPAD', 'CORE I5', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'No', 'mnbvcxz10', 'No inicia S.O, el equipo no dio imagen al momento de recibirlo ', 'cambio a ssd de 480 + sistema sin respaldo', 'El equipo no da imagen cuando ingresa, el usuario indica que tarda de 7 a 10 min. en prender.', '', '1293', '6', '2023-02-15', '2023-02-03', null);
+INSERT INTO `servicios` VALUES ('58', '10032', 'Claudia Flores', '4772860571', '64', 'ALL IN ONE', 'HP', 'INTEL PENTIUM', 'SIN INFORMACION', '320', '', 'WINDOWS 10', 'Sí', 'SIN CONTRASEÑA', 'FORMATEO SIN RESPALDO', 'TODO OK ', 'EQUIPO ENTREGADO', '', '350', '6', '2023-02-10', '2023-02-03', null);
+INSERT INTO `servicios` VALUES ('59', '10033', 'JONATHAN RAMOS', '4424719849', '60', 'LAPTOP', 'HP', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'No', 'SIN CONTRASEÑA', 'REVISAR PANTALLA SE VA IMAGEN CUANDO SE ABRE', 'reconeción de flex de video. se probo display en otro equipo y no fallo asi mismo el flex no se logro identificar como tal la falla pero con las pruebas quedo funcionando correctamente.', 'se dieron 30 dias de garantia en el servicio se tomara a cuenta lo cobrado en dado caso de que vuelva a fallar. ', '', '200', '6', '2023-02-13', '2023-02-06', null);
+INSERT INTO `servicios` VALUES ('60', '10034', 'LA BUSQUEDA II', '4777723354', '60', 'ALL IN ONE', 'SAMSUNG', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'Sí', 'Consejeria2021', 'No enciende\r\nDa pantalla azul', '', '', '', '0', '2', '2023-02-13', '2023-02-06', null);
+INSERT INTO `servicios` VALUES ('61', '10035', 'MARIA MARTINA', '4774833001', '60', 'LAPTOP', 'DELL ', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'Sí', 'SIN CONTRASEÑA', 'LIMPIEZA  POR DERRAME DE LIQUIDO\r\nREVISAR POR QUE SE APAGA CON EL USO\r\nREVISAR POR QUE DA PANTALLA AZUL', 'mantenimiento físico y actualizaciones de s.o', '', '', '450', '6', '2023-02-06', '2023-02-06', null);
+INSERT INTO `servicios` VALUES ('62', '10036', 'PEDRO SERRATOS', '4773473131', '60', 'CPU', 'ARMADO', 'CORE I5', '32', '', '480', 'WINDOWS 10', 'No', 'SIN CONTRASEÑA', 'FORMATEO SIN RESPALDO', 'FORMATEO SIN RESPALDO ', 'SIN CABLE DE CORRIENTE', '', '350', '6', '2023-02-14', '2023-02-07', null);
+INSERT INTO `servicios` VALUES ('63', '10037', 'PATRICIA GOMEZ GONZALEZ', '4774114631', '64', 'LAPTOP', 'GUANAJUATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'Sí', 'pendiente la mandara por whats', 'No prende el equipo. cliente comenta que al principio batallaban para que prendiera, movían el cargador de la parte conde se conecta a la laptop para que prendiera', 'revisar', '', '', '0', '1', '2023-02-07', '2023-02-07', null);
+INSERT INTO `servicios` VALUES ('64', '10038', 'Jose Mauricio Perez', '4776863096', '64', 'LAPTOP', 'HP', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'SIN DATO', 'Sí', 'Fabiolamurillo', 'No prende equipo. si detecta el cargador cuando se conecta pero no prende', '', 'El cargador presenta desgaste estético cable jalado', '', '0', '1', '0000-00-00', '2023-02-07', null);
+INSERT INTO `servicios` VALUES ('65', '10039', 'David alejandro hernandez', '4773854815', '64', 'laptop', 'hp', 'sin dato', 'sin dato', 'sin dato', 'sin dato', 'sin dato', 'No', 'SIN DATO', 'NO PRENDE.', 'SE REVISO NADA MAS', 'se vendara cargador costo $490', '', '100', '6', '2023-02-23', '2023-02-11', null);
+INSERT INTO `servicios` VALUES ('66', '10040', 'Ricardo Cardenas', '4776315181', '64', 'laptop', 'hp', 'core i7', '12', '250', '', 'w10', 'Sí', 'sin contraseña', 'actualización de programa y config. de teclado.', 'formateo y respaldo de inf.', '', '', '450', '6', '2023-02-08', '2023-02-13', null);
+INSERT INTO `servicios` VALUES ('67', '10041', 'Beatriz Romero', '4775957851', '60', 'LAPTOP', 'HP', 'CELERON', '4', '500', 'sin dato', 'WIN 10', 'Sí', 'Montielromero', 'Equipo lento\r\nCambiar a Ssd de 480 gb \r\nwind 10 con respaldo de informacion', 'Cambio a ssd 480 gb, formateo y respaldo de info.', 'cargador parchado del cable ', '', '1390', '6', '2023-02-17', '2023-02-14', null);
+INSERT INTO `servicios` VALUES ('68', '10042', 'Moises Hernandez', '4774333271', '64', 'laptop ', 'HYUNDAY ', 'sin dato', 'sin dato', 'sin dato', 'sin dato', 'sin dato', 'Sí', 'SIN DATO', 'Formateo sin respaldo de información', 'formateo sin respaldo w10', '', '', '350', '6', '2023-02-17', '2023-02-15', null);
+INSERT INTO `servicios` VALUES ('69', '10043', 'SU Wenci', '7721201878', '60', 'CPU', 'ACER', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'SIN DATOS', 'No', 'SIN DATOS', 'NO ENCIENDE', 'REVISAR', 'SOLO CPU SIN CABLES NI NADA', '', '0', '1', '2023-02-24', '2023-02-17', null);
+INSERT INTO `servicios` VALUES ('70', '10044', 'Ana Mariela Alba Barroso', '4771258719', '60', 'LAPTOP', 'ACER ', 'CORE I5', '4', '1 TB', 'SIN DATOS', 'WINDOWS 10', 'Sí', 'SIN DATOS', 'CAMBIO DE DISCO SSD A 480 + FORMATEO', '', 'EQUIPO LENTO', '', '0', '1', '2023-02-18', '2023-02-18', null);
+INSERT INTO `servicios` VALUES ('71', '10045', 'CARLOS OLIVA HERNANDEZ', '4779164832', '60', 'LAPTOP', 'COMPAQ', 'CELREON', '4', 'SIN DATOS', 'SIN DATOS', 'WIN 7', 'Sí', 'SIN DATOS', 'FORMATEO CON RESPALDO', '', '', '', '500', '1', '2023-02-25', '2023-02-18', null);
+INSERT INTO `servicios` VALUES ('72', '10046', 'BRAULIO SIERRA', '4772877645', '60', 'LAPTOP', 'DELL', 'CORE I5', '8', 'SIN DATOS', '240', 'WINDOWS 10', 'Sí', 'SIN DATOS', 'revisar bateria\r\nrevisar cargador\r\nrevisar jack de corriente', 'REVISAR', 'Linea en pantalla , quebrada en la tapa superior, jack de corriente dañado, no agarra touchpad', '', '0', '1', '2023-02-27', '2023-02-20', null);
 
 -- ----------------------------
 -- Table structure for slide
@@ -512,16 +584,16 @@ CREATE TABLE `slide` (
   `orden` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of slide
 -- ----------------------------
-INSERT INTO `slide` VALUES ('1', 'ZAPATOS AMARILLOS', 'vistas/img/slide/default/back_default.jpg', 'slideOpcion2', 'vistas/img/slide/slide1/calzado.png', '{\"top\":\"5\",\"right\":\"\",\"left\":\"5\",\"width\":\"50\"}', '{\"top\":\"20\",\"right\":\"10\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '1', '2018-01-31 16:46:41');
+INSERT INTO `slide` VALUES ('1', 'ZAPATOS AMARILLOS', 'vistas/img/slide/default/back_default.jpg', 'slideOpcion2', 'vistas/img/slide/slide1/calzado.png', '{\"top\":\"5\",\"right\":\"\",\"left\":\"4.99929735806633\",\"width\":\"50\"}', '{\"top\":\"20\",\"right\":\"9.999494097807757\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#e6ca35\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '1', '2023-02-23 14:17:43');
 INSERT INTO `slide` VALUES ('2', 'CURSO', 'vistas/img/slide/default/back_default.jpg', 'slideOpcion2', 'vistas/img/slide/slide2/curso.png', '{\"top\":\"10\",\"right\":\"\",\"left\":\"15\",\"width\":\"30\"}', '{\"top\":\"15\",\"right\":\"15\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '3', '2023-02-17 10:19:21');
 INSERT INTO `slide` VALUES ('3', 'MÓVIL', 'vistas/img/slide/slide3/fondo2.jpg', 'slideOpcion2', 'vistas/img/slide/slide3/iphone.png', '{\"top\":\"10\",\"right\":\"\",\"left\":\"10\",\"width\":\"35\"}', '{\"top\":\"15\",\"right\":\"15\",\"left\":\"\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#eee\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#ccc\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#aaa\"}', 'VER PRODUCTO', '#', '2', '2023-02-17 10:19:21');
 INSERT INTO `slide` VALUES ('4', 'CHICA', 'vistas/img/slide/slide4/fondo3.jpg', 'slideOpcion1', '', '{\"top\":\"\",\"right\":\"\",\"left\":\"\",\"width\":\"\"}', '{\"top\":\"20\",\"right\":\"\",\"left\":\"10\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', '', '', '4', '2018-01-31 16:46:04');
-INSERT INTO `slide` VALUES ('5', '', 'vistas/img/slide/default/fondo.jpg', 'slideOpcion1', '', '', '{\"top\":\"20\",\"right\":\"\",\"left\":\"15\",\"width\":\"40\"}', '{\"texto\":\"Lorem Ipsum\",\"color\":\"#333\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#777\"}', '{\"texto\":\"Lorem ipsum dolor sit\",\"color\":\"#888\"}', 'VER PRODUCTO', '#', '5', '2023-02-16 12:36:23');
+INSERT INTO `slide` VALUES ('7', 'Laptop', 'vistas/img/slide/slide7/fondo.jpg', 'slideOpcion1', 'vistas/img/slide/slide7/producto.png', '{\"top\":\"15\",\"right\":\"10\",\"left\":\"\",\"width\":\"25\"}', '{\"top\":\"20\",\"right\":\"\",\"left\":\"15\",\"width\":\"30\"}', '{\"texto\":\"Microsoft - Surface Laptop Go\",\"color\":\"#ff5722\"}', '{\"texto\":\"Pantalla táctil de 12.4\",\"color\":\"#777777\"}', '{\"texto\":\"color gris plata (Platinum)\",\"color\":\"#888888\"}', 'VER PRODUCTO', '#', '5', '2023-02-23 14:46:11');
 
 -- ----------------------------
 -- Table structure for subcategorias
@@ -581,7 +653,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-02-15 11:39:44', '2023-02-15 10:39:44');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-02-23 15:25:29', '2023-02-23 14:25:29');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 10:56:19');
 
 -- ----------------------------
@@ -649,7 +721,7 @@ CREATE TABLE `visitaspaises` (
 -- Records of visitaspaises
 -- ----------------------------
 INSERT INTO `visitaspaises` VALUES ('1', 'United States', 'US', '2', '2017-12-05 15:02:46');
-INSERT INTO `visitaspaises` VALUES ('2', 'Japan', 'JP', '45', '2023-02-16 10:12:23');
+INSERT INTO `visitaspaises` VALUES ('2', 'Japan', 'JP', '46', '2023-02-23 13:36:57');
 INSERT INTO `visitaspaises` VALUES ('3', 'Spain', 'ES', '10', '2017-12-05 15:02:53');
 INSERT INTO `visitaspaises` VALUES ('4', 'Colombia', 'CO', '5', '2017-12-05 15:02:55');
 INSERT INTO `visitaspaises` VALUES ('5', 'China', 'CN', '3', '2017-12-05 15:04:32');
@@ -667,7 +739,7 @@ CREATE TABLE `visitaspersonas` (
   `visitas` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of visitaspersonas
@@ -721,3 +793,4 @@ INSERT INTO `visitaspersonas` VALUES ('61', '153.205.198.22', 'Japan', '1', '201
 INSERT INTO `visitaspersonas` VALUES ('62', '153.205.198.22', 'Japan', '1', '2023-02-14 11:15:24');
 INSERT INTO `visitaspersonas` VALUES ('63', '153.205.198.22', 'Japan', '1', '2023-02-15 10:38:41');
 INSERT INTO `visitaspersonas` VALUES ('64', '153.205.198.22', 'Japan', '1', '2023-02-16 10:12:23');
+INSERT INTO `visitaspersonas` VALUES ('65', '153.205.198.22', 'Japan', '1', '2023-02-23 13:36:57');
