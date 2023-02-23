@@ -228,7 +228,7 @@ class ModeloServicios
 			return $stmt->fetchAll();
 		} else if ($fechaInicial == $fechaFinal) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada AND estatus = 6 like '%$fechaFinal%'");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega AND estatus = 6 like '%$fechaFinal%'");
 
 			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
 
@@ -247,11 +247,11 @@ class ModeloServicios
 
 			if ($fechaFinalMasUno == $fechaActualMasUno) {
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
 			} else {
 
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
 			}
 
 			$stmt->execute();
@@ -397,9 +397,9 @@ class ModeloServicios
 			return $stmt->fetchAll();
 		} else if ($fechaInicial == $fechaFinal) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada like '%$fechaFinal%' AND estatus = 6");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega like '%$fechaFinal%' AND estatus = 6");
 
-			$stmt->bindParam(":fecha_llegada", $fechaFinal, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_entrega", $fechaFinal, PDO::PARAM_STR);
 
 			$stmt->execute();
 
@@ -416,11 +416,11 @@ class ModeloServicios
 
 			if ($fechaFinalMasUno == $fechaActualMasUno) {
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND estatus = 6");
 			} else {
 
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_entrega BETWEEN '$fechaInicial' AND '$fechaFinal' AND estatus = 6");
 			}
 
 			$stmt->execute();

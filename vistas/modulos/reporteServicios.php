@@ -137,7 +137,9 @@ GRÁFICO DE VENTAS
                                 foreach ($respuesta as $key => $value) {
 
                                     #Capturamos sólo el año y el mes
-                                    $fecha = substr($value["fecha_entrega"], 0, 7);
+                                    $fecha = substr($value["fecha_entrega"], 0, 10);
+
+                                    var_dump($fecha);
 
                                     #Introducir las fechas en arrayFechas
                                     array_push($arrayFechas, $fecha);
