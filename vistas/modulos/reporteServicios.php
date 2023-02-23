@@ -142,8 +142,6 @@ GRÁFICO DE VENTAS
                                     #Introducir las fechas en arrayFechas
                                     array_push($arrayFechas, $fecha);
 
-                                    var_dump($fecha);
-
                                     #Capturamos las ventas
                                     $arrayVentas = array($fecha => $value["total"]);
 
@@ -256,6 +254,7 @@ GRÁFICO DE VENTAS
                             <th width="10%">Empleado</th>
                             <th width="10%">Equipo</th>
                             <th style="width:150px">Falla</th>
+                            <th width="10%">$ Total</th>
                             <th width="1%">Estatus</th>
                             <th width="10%">Acciones</th>
 
@@ -301,7 +300,8 @@ GRÁFICO DE VENTAS
                             echo '<td class="text-uppercase">' . $respuestaEmpleado["nombre"] . '</td>';
 
                             echo '<td class="text-uppercase">' . $value["equipo"] . '</td>
-                                  <td class="text-uppercase">' . $value["falla"] . '</td>';
+                                  <td class="text-uppercase">' . $value["falla"] . '</td>
+                                  <td class="text-uppercase"><b>$' . number_format($value["total"], 2). '</b></td>';
                             if ($value["estatus"] == 1) {
 
                                 echo '<td class="text-uppercase"><button class="btn btn-primary">Abierto</button></td>';

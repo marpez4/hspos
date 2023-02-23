@@ -399,7 +399,7 @@ class ModeloServicios
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha_llegada like '%$fechaFinal%' AND estatus = 6");
 
-			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_llegada", $fechaFinal, PDO::PARAM_STR);
 
 			$stmt->execute();
 
