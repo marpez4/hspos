@@ -292,6 +292,17 @@
 
 					<li>
 
+						<a href="categoriasGc">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Gestor categorías</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
 						<a href="cortes">
 							
 							<i class="fa fa-circle-o"></i>

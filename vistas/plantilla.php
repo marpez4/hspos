@@ -189,7 +189,8 @@ CUERPO DOCUMENTO
         include "modulos/" . $_GET["ruta"] . ".php";
       } else if (
         $_GET["ruta"] == "comercio" ||
-        $_GET["ruta"] == "slide"
+        $_GET["ruta"] == "slide" ||
+        $_GET["ruta"] == "categoriasGc" 
       ) {
 
         // INICIA VISTAS DELL COMERCIO ELECTRONICO 
