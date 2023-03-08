@@ -256,6 +256,17 @@
 				echo '</ul>
 
 			</li>';
+
+			echo '<li>
+
+				<a href="facturacion">
+
+					<i class="fa fa-th"></i>
+					<span>Config. Facturación</span>
+
+				</a>
+
+			</li>';
 			}
 			?>
 

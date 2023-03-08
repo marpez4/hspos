@@ -1,7 +1,6 @@
 <?php
-
+include_once "/../cors.php";
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -161,7 +160,8 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "cajas" ||
         $_GET["ruta"] == "salir" ||
         $_GET["ruta"] == "bodega_mv_detalle" ||
-        $_GET["ruta"] == "reporteServicios"
+        $_GET["ruta"] == "reporteServicios" ||
+        $_GET["ruta"] == "facturacion"
       ) {
 
         include "modulos/" . $_GET["ruta"] . ".php";
@@ -200,6 +200,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/cajas.js"></script>
   <script src="vistas/js/cortes.js"></script>
   <script src="vistas/js/pedidosPaqueteria.js"></script>
+  <script src="vistas/js/facturas.js"></script>
 
 </body>
 
