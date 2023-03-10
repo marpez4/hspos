@@ -1,5 +1,4 @@
 <?php
-include_once "/../cors.php";
 session_start();
 ?>
 

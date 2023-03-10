@@ -1,4 +1,3 @@
-
 <script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
 <!-- <script src="/ext/hspos/extra/Facturama/facturama.api.multiemisor.js"></script> -->
 
@@ -51,8 +50,15 @@ if ($_SESSION["perfil"] == "Vendedor") {
             </div>
 
             <div class="box-body">
-                
-                <button onclick="testCliente()">Probar</button>
+                <?php
+                //  pruebas:pruebas2011 
+                // $datos = "AlfonsoMartinez:holamundo2409";
+                $datos = "marcoaguilar:hsfacturas2023.";
+                echo base64_encode($datos);
+                ?>
+                <br>
+
+                <button onclick="testCliente()">Testing</button>
 
             </div>
 

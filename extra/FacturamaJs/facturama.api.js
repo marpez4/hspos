@@ -1,12 +1,24 @@
+var invocation = new XMLHttpRequest();
+
 var valuesFacturama = {
-    token: "TWFyY29BZ3VpbGFyOmhzZmFjdHVyYWNpb24yMDIz", // usuario: pruebas, Contraseña: pruebas2011    
+    // token: "QWxmb25zb01hcnRpbmV6OmhvbGFtdW5kbzI0MDk=", //  usuario: pruebas, Contraseña: pruebas2011    
+    token: "bWFyY29hZ3VpbGFyOmhzZmFjdHVyYXMyMDIzLg==",
     url: "https://apisandbox.facturama.mx/"
 };
 
 $.ajaxSetup({
     beforeSend: function (xhr) {
-        xhr.withCredentials = true;
-        xhr.setRequestHeader("Authorization", "Basic " + valuesFacturama.token);
+        if (invocation) {
+            invocation.open('GET', valuesFacturama.url, true);
+            xhr.withCredentials = true;
+            xhr.setRequestHeader("Authorization", "Basic " + valuesFacturama.token);
+            invocation.send();
+            console.log("Si entre");
+
+        }else{
+
+            console.log("No entre");
+        }
     }
 });
 
@@ -156,10 +168,10 @@ $.ajaxSetup({
                     return listWithParam('cfdi', param, callback);
                 },
                 Create: function (data, callback, callbackError) {
-                    postSyncWithData('2/cfdis', data, callback, callbackError);  
+                    postSyncWithData('2/cfdis', data, callback, callbackError);
                 },
                 Create3: function (data, callback, callbackError) {
-                    postSyncWithData('3/cfdis', data, callback, callbackError);   
+                    postSyncWithData('3/cfdis', data, callback, callbackError);
                 },
                 Send: function (param, callback) {
                     postSyncWithParam('cfdi', param, callback);
@@ -173,9 +185,8 @@ $.ajaxSetup({
                 Acuse: function (format, type, id, callback) {
                     retrieve('acuse/' + format + '/' + type, id, callback);
                 },
-                Status: function(params,callback)
-                {
-                    return retrieveStatus('cfdi/status' , params , callback);
+                Status: function (params, callback) {
+                    return retrieveStatus('cfdi/status', params, callback);
                 }
             },
             TaxEntity: {
