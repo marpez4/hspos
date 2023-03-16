@@ -1,38 +1,31 @@
-var newClient = {
-    "Email": "pruebas@gmail.com",
-    "Address": {
-        "Street": "Av Seguridad Soc",
-        "ExteriorNumber": "123",
-        "InteriorNumber": "",
-        "Neighborhood": "Fidel Velazquez",
-        "ZipCode": "78436",
-        "Locality": "",
-        "Municipality": "Soledad de Graciano Sánchez",
-        "State": "San Luis Potosí",
-        "Country": "Mex"
-    },
-    "Rfc": "XAMA620210DQ5",
-    "Name": "ALBA XKARAJAM MENDEZ",
-    "CfdiUse": "G03",
-    "TaxZipCode": "83410",
-    "FiscalRegime": "626"
-};
 
-function testCliente() {
+function testCliente(datos) {
+
+    console.log(datos);
+
+    var newClient = {
+        "Email": datos.email,
+        "Address": {
+            "Street": datos.calle,
+            "ExteriorNumber": datos.ext,
+            "InteriorNumber": datos.int,
+            "Neighborhood": datos.colonia,
+            "ZipCode": datos.cp,
+            "Locality": "",
+            "Municipality": datos.municipio,
+            "State": datos.estado,
+            "Country": "Mex"
+        },
+        "Rfc": datos.rfc,
+        "Name": datos.nombre,
+        "CfdiUse": datos.cfdi,
+        "TaxZipCode": "",
+        "FiscalRegime": datos.regimen
+    };
 
     Facturama.Clients.Create(newClient, function (result) {
         client = result;
         console.log("creacion", result);
     });
 
-}
-var invocation = new XMLHttpRequest();
-var url = 'http://bar.other/resources/public-data/';
-
-function callOtherDomain() {
-  if(invocation) {
-    invocation.open('GET', url, true);
-    invocation.onreadystatechange = handler;
-    invocation.send();
-  }
 }

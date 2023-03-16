@@ -53,7 +53,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                 <?php
                 //  pruebas:pruebas2011 
                 // $datos = "AlfonsoMartinez:holamundo2409";
-                $datos = "marcoaguilar:hsfacturas2023.";
+                $datos = "devHellsystems:hsFacturacion2023.";
                 echo base64_encode($datos);
                 ?>
                 <br>

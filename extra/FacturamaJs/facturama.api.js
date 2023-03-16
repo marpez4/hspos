@@ -3,9 +3,9 @@ var invocation = new XMLHttpRequest();
 var valuesFacturama = {
     // token: "QWxmb25zb01hcnRpbmV6OmhvbGFtdW5kbzI0MDk=", //  usuario: pruebas, Contraseña: pruebas2011    
 
-//     En cuestión de API la persona encargada es José Romero y Rafael Dorantes, ellos te pueden apoyar, por favor los contactas en el correo, soporte-api@facturama.mx, ccp: rafael.dorantes@freshbooks.com
-// jorge.torre@freshbooks.com y te responderán a la brevedad posible. 
-    token: "bWFyY29hZ3VpbGFyOmhzZmFjdHVyYXMyMDIzLg==",
+    //     En cuestión de API la persona encargada es José Romero y Rafael Dorantes, ellos te pueden apoyar, por favor los contactas en el correo, soporte-api@facturama.mx, ccp: rafael.dorantes@freshbooks.com
+    // jorge.torre@freshbooks.com y te responderán a la brevedad posible. 
+    token: "ZGV2SGVsbHN5c3RlbXM6aHNGYWN0dXJhY2lvbjIwMjMu",
     url: "https://apisandbox.facturama.mx/"
 };
 
@@ -18,7 +18,7 @@ $.ajaxSetup({
             invocation.send();
             console.log("Si entre");
 
-        }else{
+        } else {
 
             console.log("No entre");
         }

@@ -1,6 +1,6 @@
 <?php
 
-if($_SESSION["perfil"] == "Especial"){
+if ($_SESSION["perfil"] == "Especial") {
 
   echo '<script>
 
@@ -9,7 +9,6 @@ if($_SESSION["perfil"] == "Especial"){
   </script>';
 
   return;
-
 }
 
 ?>
@@ -17,19 +16,19 @@ if($_SESSION["perfil"] == "Especial"){
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Administrar clientes
-    
+
     </h1>
 
     <ol class="breadcrumb">
-      
+
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Administrar clientes</li>
-    
+
     </ol>
 
   </section>
@@ -39,9 +38,9 @@ if($_SESSION["perfil"] == "Especial"){
     <div class="box">
 
       <div class="box-header with-border">
-  
+
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
-          
+
           Agregar cliente
 
         </button>
@@ -49,98 +48,87 @@ if($_SESSION["perfil"] == "Especial"){
       </div>
 
       <div class="box-body">
-        
-       <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
-         
-        <thead>
-         
-         <tr>
-           
-           <th style="width:10px">#</th>
-           <th>Nombre</th>
-           <th>Documento ID</th>
-           <th>Email</th>
-           <th>Teléfono</th>
-           <th>Empresa</th>
-           <th>Total compras</th>
-           <th>Última compra</th>
-           <th>Tipo cliente</th>
-           <th>Acciones</th>
 
-         </tr> 
+        <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
 
-        </thead>
+          <thead>
 
-        <tbody>
+            <tr>
 
-        <?php
+              <th style="width:10px">#</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Total compras</th>
+              <th>Última compra</th>
+              <th>Tipo cliente</th>
+              <th>Acciones</th>
 
-          $item = null;
-          $valor = null;
+            </tr>
 
-          $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
+          </thead>
 
-          foreach ($clientes as $key => $value) {
-            
+          <tbody>
 
-            echo '<tr>
+            <?php
 
-                    <td>'.($key+1).'</td>
+            $item = null;
+            $valor = null;
 
-                    <td>'.$value["nombre"].'</td>
+            $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
 
-                    <td>'.$value["documento"].'</td>
-
-                    <td>'.$value["email"].'</td>
-
-                    <td>'.$value["telefono"].'</td>
-
-                    <td>'.$value["direccion"].'</td>         
-
-                    <td>'.$value["compras"].'</td>
-
-                    <td>'.$value["ultima_compra"].'</td>';
-
-                    if($value["frecuente"] == 1){                 
-                    
-                      echo '<td> <span class="badge alert-success">CF</span></td>';
-
-                    }else if($value["frecuente"] == 2){
-
-                      echo '<td> <span class="badge alert-primary">CNF</span></td>';
-
-                    }else if ($value["frecuente"] == 3){
-
-                      echo '<td> <span class="badge alert-warning">ML</span></td>';
-
-                    }
+            foreach ($clientes as $key => $value) {
 
 
-                    echo '<td>
+              echo '<tr>
+
+                    <td>' . ($key + 1) . '</td>
+
+                    <td>' . $value["nombre"] . '</td>
+
+                    <td>' . $value["email"] . '</td>
+
+                    <td>' . $value["telefono"] . '</td>       
+
+                    <td>' . $value["compras"] . '</td>
+
+                    <td>' . $value["ultima_compra"] . '</td>';
+
+              if ($value["frecuente"] == 1) {
+
+                echo '<td> <span class="badge alert-success">CF</span></td>';
+              } else if ($value["frecuente"] == 2) {
+
+                echo '<td> <span class="badge alert-primary">CNF</span></td>';
+              } else if ($value["frecuente"] == 3) {
+
+                echo '<td> <span class="badge alert-warning">ML</span></td>';
+              }
+
+
+              echo '<td>
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                        <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>';
 
-                      if($_SESSION["perfil"] == "Administrador"){
+              if ($_SESSION["perfil"] == "Administrador") {
 
-                          echo '<button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                echo '<button class="btn btn-danger btnEliminarCliente" idCliente="' . $value["id"] . '"><i class="fa fa-times"></i></button>';
+              }
 
-                      }
-
-                      echo '</div>  
+              echo '</div>  
 
                     </td>
 
                   </tr>';
-          
             }
 
-        ?>
-   
-        </tbody>
+            ?>
 
-       </table>
+          </tbody>
+
+        </table>
 
       </div>
 
@@ -155,7 +143,7 @@ MODAL AGREGAR CLIENTE
 ======================================-->
 
 <div id="modalAgregarCliente" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -183,14 +171,16 @@ MODAL AGREGAR CLIENTE
           <div class="box-body">
 
             <!-- ENTRADA PARA EL NOMBRE -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+            <div class="form-group">
+
+              <label for="nombre">Nombre / Razón Social</label>
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoCliente" required>
 
               </div>
 
@@ -199,10 +189,12 @@ MODAL AGREGAR CLIENTE
             <!-- ENTRADA PARA CLIENTE FRECUENTE -->
 
             <div class="form-group">
-              
+
+              <label for="tipoCliente">Tipo de cliente</label>
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
 
                 <select name="frecuente" class="form-control" required>
 
@@ -217,76 +209,359 @@ MODAL AGREGAR CLIENTE
 
             </div>
 
-            <!-- ENTRADA PARA EL DOCUMENTO ID -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
-
-                <input type="number" min="0" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar documento" required>
-
-              </div>
-
-            </div>
-
             <!-- ENTRADA PARA EL EMAIL -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email" required>
+            <div class="form-group">
+
+              <label for="correo">Correo electrónico</label>
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+
+                <input type="email" class="form-control input-lg" name="nuevoEmail">
 
               </div>
 
             </div>
 
             <!-- ENTRADA PARA EL TELÉFONO -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+            <div class="form-group">
+
+              <label for="phone">Número de teléfono</label>
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA LA DIRECCIÓN -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
+            <!-- DATOS DE FACTURACIÓN -->
 
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar empresa" required>
+            <div class="form-group" style="text-align: right;">
 
-              </div>
+              <label>
+                <input type="checkbox" class="minimal checkDatosFact">
+                Agregar datos para facturar
+              </label>
 
             </div>
+            <div class="datosFact hidden">
+              <div class="box box-info">
 
-             <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
-            
-            <!-- <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
+                <div class="box-header ui-sortable-handle">
 
-                <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                  <div class="row">
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL RFC -->
+
+                      <div class="form-group">
+
+                        <label for="rfc">RFC</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" maxlength="13" class="form-control input-lg" name="nuevoRfc" id="nuevoRfc">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL CP -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">C.P</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" maxlength="5" class="form-control input-lg" name="nuevoCp" id="nuevoCp">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Uso cfdi -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">Uso de la factura</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control chosen-select" name="nuevoCfdi" id="nuevoCfdi">
+
+                            <option value="">Seleccionar uso de la factura </option>
+
+                            <?php
+
+                            $tabla = "catalogocfdi";
+
+                            $uso = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($uso as $key => $value) {
+
+                              echo '<option value="' . $value["usoCfdi"] . '">' . $value["usoCfdi"] . ' - ' . $value["descripcion"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL regimen -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">Régimen fiscal</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control chosen-select" name="nuevoRegimen" id="nuevoRegimen">
+
+                            <option value="">Seleccionar el régimen fiscal </option>
+
+                            <?php
+
+                            $tabla = "catalogoregimen";
+
+                            $regimen = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($regimen as $key => $value) {
+
+                              echo '<option value="' . $value["codigo"] . '">' . $value["codigo"] . ' - ' . $value["descripcion"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Calle-->
+
+                      <div class="form-group">
+
+                        <label for="calle">Calle</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="nuevoCalle" id="nuevoCalle">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL No Ext-->
+
+                      <div class="form-group">
+
+                        <label for="noExt">No. exterior</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" class="form-control input-lg" name="nuevoNoExt" id="nuevoNoExt">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL No Int-->
+
+                      <div class="form-group">
+
+                        <label for="noInt">No. interior</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" class="form-control input-lg" name="nuevoNoInt" id="nuevoNoInt">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Colonia-->
+
+                      <div class="form-group">
+
+                        <label for="noInt">Colonia</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="nuevoColonia" id="nuevoColonia">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <!-- <div class="col-lg-12"> -->
+
+                      <!-- ENTRADA PARA EL Localidad-->
+
+                      <!-- <div class="form-group">
+
+                        <label for="Localidad">Localidad</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="nuevoLocalidad" id="nuevoLocalidad">
+
+                        </div>
+
+                      </div>
+
+                    </div> -->
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Municipio-->
+
+                      <div class="form-group">
+
+                        <label for="Municipio">Municipio</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="nuevoMunicipio" id="nuevoMunicipio">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Estado-->
+
+                      <div class="form-group">
+
+                        <label for="Estado">Estado</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control chosen-select" name="nuevoEstado" id="nuevoEstado">
+
+                            <option value="">Seleccionar el estado </option>
+
+                            <?php
+
+                            $tabla = "catalogoEstados";
+
+                            $regimen = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($regimen as $key => $value) {
+
+                              echo '<option value="' . $value["estado"] . '">' . $value["estado"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Pais-->
+
+                      <div class="form-group">
+
+                        <label for="Pais">Pais</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select name="nuevoPais" id="nuevoPais" class="form-control" required>
+
+                            <option value="MEXICO">MÉXICO</option>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
 
               </div>
+            </div>
 
-            </div> -->
-  
           </div>
 
         </div>
@@ -307,8 +582,8 @@ MODAL AGREGAR CLIENTE
 
       <?php
 
-        $crearCliente = new ControladorClientes();
-        $crearCliente -> ctrCrearCliente();
+      $crearCliente = new ControladorClientes();
+      $crearCliente->ctrCrearCliente();
 
       ?>
 
@@ -323,7 +598,7 @@ MODAL EDITAR CLIENTE
 ======================================-->
 
 <div id="modalEditarCliente" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -351,12 +626,12 @@ MODAL EDITAR CLIENTE
           <div class="box-body">
 
             <!-- ENTRADA PARA EL NOMBRE -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
                 <input type="text" class="form-control input-lg" name="editarCliente" id="editarCliente" required>
                 <input type="hidden" id="idCliente" name="idCliente">
@@ -366,10 +641,10 @@ MODAL EDITAR CLIENTE
             <!-- ENTRADA PARA CLIENTE FRECUENTE -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
 
                 <select name="editarFrecuente" id="editarFrecuente" class="form-control" required>
 
@@ -385,12 +660,12 @@ MODAL EDITAR CLIENTE
             </div>
 
             <!-- ENTRADA PARA EL DOCUMENTO ID -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
 
                 <input type="number" min="0" class="form-control input-lg" name="editarDocumentoId" id="editarDocumentoId" required>
 
@@ -399,12 +674,12 @@ MODAL EDITAR CLIENTE
             </div>
 
             <!-- ENTRADA PARA EL EMAIL -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 
                 <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" required>
 
@@ -413,12 +688,12 @@ MODAL EDITAR CLIENTE
             </div>
 
             <!-- ENTRADA PARA EL TELÉFONO -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
 
                 <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
 
@@ -427,21 +702,21 @@ MODAL EDITAR CLIENTE
             </div>
 
             <!-- ENTRADA PARA LA EMPRESA -->
-            
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarDireccion" id="editarDireccion"  required>
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarEmpresa" id="editarEmpresa" required>
 
               </div>
 
             </div>
 
-             <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
-            
+            <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
+
             <!-- <div class="form-group">
               
               <div class="input-group">
@@ -453,7 +728,7 @@ MODAL EDITAR CLIENTE
               </div>
 
             </div> -->
-  
+
           </div>
 
         </div>
@@ -474,12 +749,12 @@ MODAL EDITAR CLIENTE
 
       <?php
 
-        $editarCliente = new ControladorClientes();
-        $editarCliente -> ctrEditarCliente();
+      $editarCliente = new ControladorClientes();
+      $editarCliente->ctrEditarCliente();
 
       ?>
 
-    
+
 
     </div>
 
@@ -489,9 +764,7 @@ MODAL EDITAR CLIENTE
 
 <?php
 
-  $eliminarCliente = new ControladorClientes();
-  $eliminarCliente -> ctrEliminarCliente();
+$eliminarCliente = new ControladorClientes();
+$eliminarCliente->ctrEliminarCliente();
 
 ?>
-
-
