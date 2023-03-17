@@ -1,4 +1,5 @@
 var invocation = new XMLHttpRequest();
+fetch("https://apisandbox.facturama.mx/");
 
 var valuesFacturama = {
     // token: "QWxmb25zb01hcnRpbmV6OmhvbGFtdW5kbzI0MDk=", //  usuario: pruebas, Contraseña: pruebas2011    

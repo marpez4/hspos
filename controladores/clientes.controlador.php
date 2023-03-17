@@ -18,6 +18,7 @@ class ControladorClientes{
 				   			   "frecuente"=>$_POST["frecuente"],
 					           "email"=>$_POST["nuevoEmail"],
 					           "telefono"=>$_POST["nuevoTelefono"],
+							   "calle"=>$_POST["nuevoCalle"],
 							   "rfc"=>$_POST["nuevoRfc"],
 							   "cp"=>$_POST["nuevoCp"],
 							   "cfdi"=>$_POST["nuevoCfdi"],
@@ -45,7 +46,7 @@ class ControladorClientes{
 						  }).then(function(result){
 									if (result.value) {
 
-									
+										window.location = "clientes";
 
 									}
 								})
@@ -66,7 +67,8 @@ class ControladorClientes{
 						  }).then(function(result){
 							if (result.value) {
 
-
+								window.location = "clientes";
+								
 							}
 						})
 

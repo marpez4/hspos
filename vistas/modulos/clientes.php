@@ -1,3 +1,4 @@
+<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
 <?php
 
 if ($_SESSION["perfil"] == "Especial") {
@@ -180,7 +181,7 @@ MODAL AGREGAR CLIENTE
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoCliente" required>
+                <input type="text" class="form-control input-lg" name="nuevoCliente" id="nuevoCliente" required>
 
               </div>
 
@@ -219,7 +220,7 @@ MODAL AGREGAR CLIENTE
 
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail">
+                <input type="email" class="form-control input-lg" name="nuevoEmail" id="nuevoEmail">
 
               </div>
 
@@ -457,9 +458,9 @@ MODAL AGREGAR CLIENTE
 
                     <!-- <div class="col-lg-12"> -->
 
-                      <!-- ENTRADA PARA EL Localidad-->
+                    <!-- ENTRADA PARA EL Localidad-->
 
-                      <!-- <div class="form-group">
+                    <!-- <div class="form-group">
 
                         <label for="Localidad">Localidad</label>
 
@@ -574,7 +575,7 @@ MODAL AGREGAR CLIENTE
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar cliente</button>
+          <button type="submit" class="btn btn-primary btnGuardarCliente">Guardar cliente</button>
 
         </div>
 

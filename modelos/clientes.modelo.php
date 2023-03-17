@@ -1,6 +1,5 @@
-<script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 <script src="vistas/js/facturas.js"></script>
-<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
+
 <?php
 
 require_once "conexion.php";

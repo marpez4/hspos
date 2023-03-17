@@ -93,8 +93,3 @@ $(".checkDatosFact").on("ifUnchecked", function () {
   $("#nuevoPais").removeAttr("required");
 
 })
-
-function saludo (){
-
-  alert("Hola soy un saludo desde cliente");
-}
