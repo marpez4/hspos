@@ -17,6 +17,18 @@ class ControladorProductos
 		return $respuesta;
 	}
 
+	static public function ctrMostrarAltaProductos($item, $valor, $orden)
+	{
+
+		$tabla = "productosN";
+
+		$respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
+
+		return $respuesta;
+	}
+
+	
+
 	/*=============================================
 	CREAR PRODUCTO
 	=============================================*/

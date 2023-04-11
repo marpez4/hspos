@@ -42,17 +42,48 @@
 
 				</a>
 
-			</li>
+			</li>';
 
-			<li>
+			echo '<li class="treeview">
 
-				<a href="productos">
+				<a href="#">
 
-					<i class="fa fa-product-hunt"></i>
+					<i class="fa fa-folder-o"></i>
+					
 					<span>Productos</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
 
 				</a>
 
+				<ul class="treeview-menu">
+					
+					<li>
+
+						<a href="altaProductos">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Alta productos</span>
+
+						</a>
+
+					</li>
+					<li>
+
+						<a href="productos">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Inventario</span>
+
+						</a>
+
+					</li>
+					
+					</ul>
 			</li>';
 			}
 
@@ -257,7 +288,7 @@
 
 			</li>';
 
-			echo '<li>
+				echo '<li>
 
 				<a href="facturacion">
 

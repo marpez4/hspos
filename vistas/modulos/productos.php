@@ -18,7 +18,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
     <h1>
 
-      Administrar productos
+      Administrar inventario
 
     </h1>
 
@@ -26,7 +26,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-      <li class="active">Administrar productos</li>
+      <li class="active">Administrar inventario</li>
 
     </ol>
 
@@ -38,9 +38,12 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+        <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto"> -->
+        <button class="btn btn-primary">
 
-          Agregar producto
+          <a href="altaProductos" style="color:white;">
+            Agregar producto
+          </a>
 
         </button>
 
