@@ -39,7 +39,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
             <div class="box-header with-border">
 
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProductofac">
 
                     Agregar producto
 
@@ -83,6 +83,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
 </div>
 
+
 <div id="modalAgregarProducto" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
@@ -91,84 +92,130 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
             <form role="form" method="post" enctype="multipart/form-data">
 
-                <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
+                <!-- Nombre Interno -->
 
-                <div class="modal-header" style="background:#3c8dbc; color:white">
+                <div class="form-group">
 
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <label for="">Nombre producto</label>
 
-                    <h4 class="modal-title">Agregar producto</h4>
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+
+                        <input type="text" class="form-control input-lg" name="nuevaNombre" required>
+
+                    </div>
 
                 </div>
 
-                <!--=====================================
-                CUERPO DEL MODAL
-                ======================================-->
+                <!-- ENTRADA PARA EL CÓDIGO -->
 
-                <div class="modal-body">
+                <div class="form-group">
 
-                    <div class="box-body">
+                    <label for="">Código producto</label>
 
-                        <!-- Nombre Interno -->
+                    <div class="input-group">
 
-                        <div class="form-group">
+                        <span class="input-group-addon"><i class="fa fa-code"></i></span>
 
-                            <label for="">Nombre producto</label>
+                        <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" required>
+
+                    </div>
+
+                </div>
+                <!-- DESCRIPCIÓN -->
+
+                <div class="form-group">
+
+                    <label for="">Descripción</label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+
+                        <textarea name="nuevaDescripcion" cols="2" rows="2" class="form-control"></textarea>
+
+                    </div>
+
+                </div>
+
+                <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
+
+                <div class="form-group">
+
+                    <label for="">Categoría</label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                        <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
+
+                            <option value="">Selecionar categoría</option>
+
+                            <?php
+
+                            $item = null;
+                            $valor = null;
+
+                            $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+
+                            foreach ($categorias as $key => $value) {
+
+                                echo '<option value="' . $value["id"] . '">' . $value["categoria"] . '</option>';
+                            }
+
+                            ?>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- INICIA FORM COMPUTADORAS -->
+
+                <div id="computadoras" name="computadoras" class="hidden">
+
+                    <div class="form-group row">
+
+                        <div class="col-xs-6">
+
+                            <label for="">Marca del equipo</label>
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-bars"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaDescripcion" required>
+                                <input type="text" class="form-control input-lg" name="nuevaMarca" id="nuevaMarca">
 
                             </div>
 
                         </div>
 
-                        <!-- ENTRADA PARA EL CÓDIGO -->
+                        <div class="col-xs-6">
 
-                        <div class="form-group">
-
-                            <label for="">Código producto</label>
+                            <label for="">RAM</label>
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-code"></i></span>
-
-                                <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" required>
-
-                            </div>
-
-                        </div>
+                                <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
 
+                                <select class="form-control input-lg" id="nuevaRam" name="nuevaRam" required>
 
-                        <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
-
-                        <div class="form-group">
-
-                            <label for="">Categoría</label>
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                                <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
-
-                                    <option value="">Selecionar categoría</option>
+                                    <option value="">Selecionar RAM</option>
 
                                     <?php
 
-                                    $item = null;
-                                    $valor = null;
+                                    $item = "tipo";
+                                    $valor = "RAM";
 
-                                    $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+                                    $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
 
-                                    foreach ($categorias as $key => $value) {
+                                    foreach ($componentes as $key => $value) {
 
-                                        echo '<option value="' . $value["id"] . '">' . $value["categoria"] . '</option>';
+                                        echo '<option value="' . $value["id"] . '">' . $value["capacidad"] . ' ' . $value["acron"] . '</option>';
                                     }
 
                                     ?>
@@ -179,220 +226,363 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                         </div>
 
-                        <div class="form-group row">
+                        <div class="col-xs-6">
 
-                            <!-- ENTRADA PARA PRECIO COMPRA -->
+                            <label for="">Procesador</label>
 
-                            <div class="col-xs-6">
+                            <div class="input-group">
 
-                                <label for="">Precio de compra</label>
+                                <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" step="any" min="0" required>
-
-                                </div>
+                                <input type="text" class="form-control input-lg" name="nuevaProcesedor" id="nuevaProcesedor">
 
                             </div>
+                        </div>
 
-                            <!-- ENTRADA PARA PRECIO DE CLIENTE FRECUENTE  -->
+                        <div class="col-xs-6">
 
-                            <div class="col-xs-6">
+                            <label for="">Tamaño de pantalla</label>
 
-                                <label for="">Precio cliente frecuente</label>
+                            <div class="input-group">
 
-                                <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-desktop"></i></span>
 
-                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioClienteF" name="nuevoPrecioClienteF" step="any" min="0" required>
-
-                                </div>
-
-                            </div>
-
-                            <!-- ENTRADA PARA PRECIO DE ML  -->
-
-                            <div class="col-xs-6">
-
-                                <label for="">Precio Mercado Libre</label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
-
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioMl" name="nuevoPrecioMl" step="any" min="0" required>
-
-                                </div>
-
-                            </div>
-
-                            <!-- ENTRADA PARA PRECIO VENTA -->
-
-                            <div class="col-xs-6">
-
-                                <label for="">Precio venta</label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" step="any" min="0" required>
-
-                                </div>
-
+                                <input type="text" class="form-control input-lg" name="nuevaPantalla" id="nuevaPantalla" placeholder="Ingresar pantalla">
 
                             </div>
 
                         </div>
 
-                        <div class="form-group row">
+                        <div class="col-xs-6">
 
-                            <div class="col-xs-6">
+                            <label for="">Tarjeta gráfica</label>
 
-                                <label for="">IVA</label>
+                            <div class="input-group">
 
-                                <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
-                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                <select class="form-control input-lg" name="nuevaGraficos" id="nuevaGraficos" required>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaIva" name="nuevaIva" required>
+                                    <option value="">Selecionar Gráficos</option>
 
-                                        <option value="">Seleciona</option>
-                                        <option value="16">IVA 16%</option>
-                                        <option value="8">IVA 8%</option>
-                                        <option value="0">IVA 0%</option>
-                                        <option value="exento">Exento</option>
+                                    <?php
 
-                                    </select>
+                                    $item = "tipo";
+                                    $valor = "Graphics";
 
-                                </div>
+                                    $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
 
-                            </div>
+                                    foreach ($componentes as $key => $value) {
 
-                            <div class="col-xs-6">
+                                        echo '<option value="' . $value["id"] . '">' . $value["capacidad"] . ' ' . $value["acron"] . '</option>';
+                                    }
 
-                                <label for="">Clave de producto</label>
+                                    ?>
 
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaClave" name="nuevaClave" required>
-
-                                        <option value="">Seleciona una clave</option>
-
-                                        <?php
-
-                                        $item = null;
-                                        $valor = null;
-
-                                        $catalogo1 = ControladorCatalogosSat::ctrMostrarClaves($item, $valor);
-
-                                        foreach ($catalogo1 as $key => $value) {
-
-                                            echo '<option value="' . $value["clave"] . '">' . $value["clave"] . '</option>';
-                                        }
-
-                                        ?>
-
-                                    </select>
-
-                                </div>
+                                </select>
 
                             </div>
 
-                            <div class="col-xs-6">
 
-                                <label for="">Unidad del producto</label>
+                        </div>
 
-                                <div class="input-group">
+                        <div class="col-xs-6">
 
-                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                            <label for="">SSD</label>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaUnidad" name="nuevaUnidad" required>
+                            <div class="input-group">
 
-                                        <option value="">Seleciona la unidad</option>
+                                <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
 
-                                        <?php
+                                <select class="form-control input-lg" name="nuevaSsd" id="nuevaSsd" required>
 
-                                        $item = null;
-                                        $valor = null;
-                                        
-                                        $catalogo2 = ControladorCatalogosSat::ctrMostrarUnidades($item, $valor);
+                                    <option value="">Seleciona SSD</option>
 
-                                        foreach ($catalogo2 as $key => $value) {
+                                    <?php
 
-                                            echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] . '</option>';
-                                        }
+                                    $item = "tipo";
+                                    $valor = "SSD";
 
-                                        ?>
+                                    $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
 
-                                    </select>
+                                    foreach ($componentes as $key => $value) {
 
-                                </div>
+                                        echo '<option value="' . $value["id"] . '">' . $value["capacidad"] . ' ' . $value["acron"] . '</option>';
+                                    }
 
-                            </div>
+                                    ?>
 
-                            <div class="col-xs-6">
-
-                                <label for="">Objeto de impuesto</label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaImpuesto" name="nuevaImpuesto" required>
-
-                                        <option value="">Seleciona una opción</option>
-                                        <option value="">01-No objeto de impuesto</option>
-                                        <option value="">02-Si objeto de impuesto</option>
-                                        <option value="">03-Si objeto del impuesto y no obligado al desglose</option>
-                                        <option value="">04-Si objeto de impuesto y no causa impuesto</option>
-                                        
-                                    </select>
-
-                                </div>
+                                </select>
 
                             </div>
 
                         </div>
 
-                        <br>
+                        <div class="col-xs-6">
 
-                        <!-- ENTRADA PARA SUBIR FOTO -->
+                            <label for="">HHD</label>
 
-                        <div class="form-group">
+                            <div class="input-group">
 
-                            <div class="panel">SUBIR IMAGEN</div>
+                                <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
 
-                            <input type="file" class="nuevaImagen" name="nuevaImagen">
+                                <select class="form-control input-lg" name="nuevaHhd" id="nuevaHhd" required>
 
-                            <p class="help-block">Peso máximo de la imagen 2MB</p>
+                                    <option value="">Seleciona HHD</option>
 
-                            <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                                    <?php
+
+                                    $item = "tipo";
+                                    $valor = "HHD";
+
+                                    $componentes = ControladorComponentes::ctrMostrarComponente($item, $valor);
+
+                                    foreach ($componentes as $key => $value) {
+
+                                        echo '<option value="' . $value["id"] . '">' . $value["capacidad"] . ' ' . $value["acron"] . '</option>';
+                                    }
+
+                                    ?>
+
+                                </select>
+
+                            </div>
 
                         </div>
 
                     </div>
+
                 </div>
 
-                <!--=====================================
+                <!-- TERMINA FORM COMPUTADORAS -->
+
+
+                <div class="form-group row">
+
+                    <!-- ENTRADA PARA PRECIO COMPRA -->
+
+                    <div class="col-xs-6">
+
+                        <label for="">Precio de compra</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
+
+                            <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" step="any" min="0" required>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ENTRADA PARA PRECIO DE CLIENTE FRECUENTE  -->
+
+                    <div class="col-xs-6">
+
+                        <label for="">Precio cliente frecuente</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+
+                            <input type="number" class="form-control input-lg" id="nuevoPrecioClienteF" name="nuevoPrecioClienteF" step="any" min="0" required>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ENTRADA PARA PRECIO DE ML  -->
+
+                    <div class="col-xs-6">
+
+                        <label for="">Precio Mercado Libre</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-money"></i></span>
+
+                            <input type="number" class="form-control input-lg" id="nuevoPrecioMl" name="nuevoPrecioMl" step="any" min="0" required>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ENTRADA PARA PRECIO VENTA -->
+
+                    <div class="col-xs-6">
+
+                        <label for="">Precio venta</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
+
+                            <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" step="any" min="0" required>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-xs-6">
+
+                        <label for="">IVA</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                            <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaIva" name="nuevaIva" required>
+
+                                <option value="">Seleciona</option>
+                                <option value="16">IVA 16%</option>
+                                <option value="8">IVA 8%</option>
+                                <option value="0">IVA 0%</option>
+                                <option value="exento">Exento</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <label for="">Clave de producto</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                            <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaClave" name="nuevaClave" required>
+
+                                <option value="">Seleciona una clave</option>
+
+                                <?php
+
+                                $item = null;
+                                $valor = null;
+
+                                $catalogo1 = ControladorCatalogosSat::ctrMostrarClaves($item, $valor);
+
+                                foreach ($catalogo1 as $key => $value) {
+
+                                    echo '<option value="' . $value["clave"] . '">' . $value["clave"] . '</option>';
+                                }
+
+                                ?>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <label for="">Unidad del producto</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                            <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaUnidad" name="nuevaUnidad" required>
+
+                                <option value="">Seleciona la unidad</option>
+
+                                <?php
+
+                                $item = null;
+                                $valor = null;
+
+                                $catalogo2 = ControladorCatalogosSat::ctrMostrarUnidades($item, $valor);
+
+                                foreach ($catalogo2 as $key => $value) {
+
+                                    echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] . '</option>';
+                                }
+
+                                ?>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <label for="">Objeto de impuesto</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                            <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaImpuesto" name="nuevaImpuesto" required>
+
+                                <option value="">Seleciona una opción</option>
+                                <option value="01">01-No objeto de impuesto</option>
+                                <option value="02">02-Si objeto de impuesto</option>
+                                <option value="03">03-Si objeto del impuesto y no obligado al desglose</option>
+                                <option value="04">04-Si objeto de impuesto y no causa impuesto</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <!-- ENTRADA PARA SUBIR FOTO -->
+
+                <div class="form-group">
+
+                    <div class="panel">SUBIR IMAGEN</div>
+
+                    <input type="file" class="nuevaImagen" name="nuevaImagen">
+
+                    <p class="help-block">Peso máximo de la imagen 2MB</p>
+
+                    <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+                </div>
+
+        </div>
+        
+    </div>
+
+
+
+    <!--=====================================
                 PIE DEL MODAL
                 ======================================-->
 
-                <div class="modal-footer">
+    <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">Guardar producto</button>
 
-                </div>
-
-            </form>
-
-        </div>
     </div>
+
+    </form>
+
+    <?php
+
+    $crearProducto = new ControladorProductos();
+    $crearProducto->ctrCrearProducto();
+
+    ?>
+
+</div>
+
+</div>
+
 </div>

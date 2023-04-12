@@ -20,14 +20,14 @@ class ControladorProductos
 	static public function ctrMostrarAltaProductos($item, $valor, $orden)
 	{
 
-		$tabla = "productosN";
+		$tabla = "productosfacturas";
 
 		$respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
 
 		return $respuesta;
 	}
 
-	
+
 
 	/*=============================================
 	CREAR PRODUCTO
@@ -36,16 +36,9 @@ class ControladorProductos
 	static public function ctrCrearProducto()
 	{
 
-		if (isset($_POST["nuevaDescripcion"])) {
+		if (isset($_POST["nuevoNombre"])) {
 
-			if (
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#,-. ]+$/', $_POST["nuevaDescripcion"]) &&
-				preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&
-				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
-				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"]) &&
-				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioClienteF"]) &&
-				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioMl"])
-			) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#,-. ]+$/', $_POST["nuevoNombre"])) {
 
 				/*=============================================
 				VALIDAR IMAGEN
@@ -111,32 +104,37 @@ class ControladorProductos
 					}
 				}
 
-				$tabla = "productos";
+				$tabla = "productosfacturas";
 
 				if ($_POST["nuevaMarca"] == "") {
 
 					$datos = array(
-						"id_categoria" => $_POST["nuevaCategoria"],
+						"nombre" => $_POST["nuevaNombre"],
 						"codigo" => $_POST["nuevoCodigo"],
 						"descripcion" => $_POST["nuevaDescripcion"],
-						"stock" => $_POST["nuevoStock"],
+						"id_categoria" => $_POST["nuevaCategoria"],
 						"precio_compra" => $_POST["nuevoPrecioCompra"],
 						"precio_venta" => $_POST["nuevoPrecioVenta"],
-						"precio_cliente" => $_POST["nuevoPrecioClienteF"],
 						"precio_ml" => $_POST["nuevoPrecioMl"],
+						"precio_cliente" => $_POST["nuevoPrecioClienteF"],
+						"iva" => $_POST["nuevaIva"],
+						"clave" => $_POST["nuevaClave"],
+						"unidad" => $_POST["nuevaUnidad"],
+						"impuesto" => $_POST["nuevaImpuesto"],
 						"imagen" => $ruta
 					);
 				} else {
 
 					$datos = array(
-						"id_categoria" => $_POST["nuevaCategoria"],
+						"nombre" => $_POST["nuevaNombre"],
 						"codigo" => $_POST["nuevoCodigo"],
 						"descripcion" => $_POST["nuevaDescripcion"],
+						"id_categoria" => $_POST["nuevaCategoria"],
 						"stock" => $_POST["nuevoStock"],
 						"precio_compra" => $_POST["nuevoPrecioCompra"],
 						"precio_venta" => $_POST["nuevoPrecioVenta"],
-						"precio_cliente" => $_POST["nuevoPrecioClienteF"],
 						"precio_ml" => $_POST["nuevoPrecioMl"],
+						"precio_cliente" => $_POST["nuevoPrecioClienteF"],
 						"marca" => $_POST["nuevaMarca"],
 						"ram" => $_POST["nuevaRam"],
 						"procesador" => $_POST["nuevaProcesedor"],
@@ -144,6 +142,10 @@ class ControladorProductos
 						"graficos" => $_POST["nuevaGraficos"],
 						"ssd" => $_POST["nuevaSsd"],
 						"hhd" => $_POST["nuevaHhd"],
+						"iva" => $_POST["nuevaIva"],
+						"clave" => $_POST["nuevaClave"],
+						"unidad" => $_POST["nuevaUnidad"],
+						"impuesto" => $_POST["nuevaImpuesto"],
 						"imagen" => $ruta
 					);
 				}
@@ -166,7 +168,7 @@ class ControladorProductos
 							  }).then(function(result){
 										if (result.value) {
 
-										window.location = "productos";
+										window.location = "altaProductos";
 
 										}
 									})
@@ -185,7 +187,7 @@ class ControladorProductos
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "productos";
+							window.location = "altaProductos";
 
 							}
 						})
