@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-04-11 14:37:17
+Date: 2023-04-13 14:01:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -287,7 +287,7 @@ CREATE TABLE `categorias` (
   `finOferta` datetime NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of categorias
@@ -297,6 +297,7 @@ INSERT INTO `categorias` VALUES ('8', 'Laptops', 'laptop', '1', '0', '0', '0', '
 INSERT INTO `categorias` VALUES ('9', 'All in One', 'all-in-one', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:16');
 INSERT INTO `categorias` VALUES ('10', 'Accesorios', 'accesorios', '1', '1', '9.99', '0', 'vistas/img/ofertas/cursos.jpg', '2018-03-29 23:59:59', '2023-02-23 15:23:23');
 INSERT INTO `categorias` VALUES ('11', 'Gaming', 'gaming', '1', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-02-23 15:23:24');
+INSERT INTO `categorias` VALUES ('12', 'Pantallas', '', '0', '0', '0', '0', '', '0000-00-00 00:00:00', '2023-04-12 11:42:16');
 
 -- ----------------------------
 -- Table structure for categoriaspos
@@ -335,7 +336,7 @@ CREATE TABLE `clientes` (
   `ultima_compra` datetime NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of clientes
@@ -345,6 +346,7 @@ INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', 'angel@gmail.com', '(4
 INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', 'PAUL@GMAIL.COM', '(477) 522-2222', '5', '2022-11-10 13:04:56', '2022-11-10 12:04:56');
 INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', 'na@gmail.com', '(777) 777-7777', '8', '2022-11-10 11:10:38', '2022-11-10 10:10:39');
 INSERT INTO `clientes` VALUES ('61', 'Miguel Mendoza Gaona', '1', 'ponchomarpez@gmail.com', '(111) 111-1111', '0', '0000-00-00 00:00:00', '2023-03-17 13:49:14');
+INSERT INTO `clientes` VALUES ('62', 'MARCO ANTONIO AGUILAR OLMEDO', '1', 'facturacionhellssystems@gmail.com', '(477) 777-7777', '0', '0000-00-00 00:00:00', '2023-04-13 13:17:09');
 
 -- ----------------------------
 -- Table structure for cliente_infofac
@@ -371,6 +373,7 @@ CREATE TABLE `cliente_infofac` (
 -- Records of cliente_infofac
 -- ----------------------------
 INSERT INTO `cliente_infofac` VALUES ('61', 'Eufrasia Pantoja ', '123', '0', 'León II', '37502', null, 'León', 'GUANAJUATO', 'MEXICO', 'MALA941104D14', 'G03', null, '626');
+INSERT INTO `cliente_infofac` VALUES ('62', 'CLAVELES', '208', '0', 'JARDINES DE JEREZ 1A SECCION', '37530', null, 'LEON', 'GUANAJUATO', 'MEXICO', 'AUOM880720FSA', 'G03', null, '626');
 
 -- ----------------------------
 -- Table structure for comentarios
@@ -437,6 +440,8 @@ CREATE TABLE `complemento_producto` (
 -- ----------------------------
 -- Records of complemento_producto
 -- ----------------------------
+INSERT INTO `complemento_producto` VALUES ('8', 'LENOVO', '6', null, 'ICORE 5', '12.5', '3', '4', '5');
+INSERT INTO `complemento_producto` VALUES ('9', 'HP', '6', null, 'ICORE 5', '12', '3', '4', '5');
 
 -- ----------------------------
 -- Table structure for componentes
@@ -500,18 +505,27 @@ INSERT INTO `compras` VALUES ('18', '2', '500', '0', 'paypal', 'tutorialesatualc
 DROP TABLE IF EXISTS `comp_prod_factura`;
 CREATE TABLE `comp_prod_factura` (
   `IdentificationNumber` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Description` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Name` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Price` decimal(10,2) DEFAULT NULL,
+  `Descripcion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Nombre` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Price` float DEFAULT NULL,
   `Unit` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `UnitCode` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Taxes` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ObjetoImp` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_producto` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of comp_prod_factura
 -- ----------------------------
+INSERT INTO `comp_prod_factura` VALUES (null, null, null, null, null, null, null, null, '6');
+INSERT INTO `comp_prod_factura` VALUES ('HUB1873S', 'HUB PARA ENTRADA DE USB 3.0', 'HUB', null, 'Pieza', 'H87', '8', null, '7');
+INSERT INTO `comp_prod_factura` VALUES ('HP973781', 'COMPUTADORA ALL IN ONE HP MODELO 2022', 'HP', null, 'Pieza', 'H87', '.16', '01', '9');
+INSERT INTO `comp_prod_factura` VALUES ('MSI294734', 'COMPUTADOR DE ESCRITORIO PARA GAMER', 'MSI', null, 'Pieza', 'H87', '.08', '01', '10');
+INSERT INTO `comp_prod_factura` VALUES ('LOGTC186', 'TACLADO GENERICO EN ESPAÑOL PARA COMPUTADORA', 'TECLADO LOGITECH', null, 'Pieza', 'H87', '.16', '01', '11');
+INSERT INTO `comp_prod_factura` VALUES ('AUD4231', 'ADIFONOS DE 1M ALAMABRICOS', 'AUDIFONOS', null, 'Pieza', 'H87', '.16', '01', '12');
+INSERT INTO `comp_prod_factura` VALUES ('GAB486', 'GABINETE PARA MONTAR ', 'GABINETE', null, 'Pieza', 'H87', '.16', '01', '14');
+INSERT INTO `comp_prod_factura` VALUES ('PAS53998', 'PASTA TERMICA PARA PROCESADOR', 'PASTA TERMICA', null, 'Pieza', 'H87', '.16', '01', '15');
 
 -- ----------------------------
 -- Table structure for corte_caja
@@ -713,10 +727,10 @@ INSERT INTO `productos` VALUES ('92', '12', 'Logitech', 'PRECISSION', 'vistas/im
 INSERT INTO `productos` VALUES ('93', '13', 'LG', 'Mouse', 'vistas/img/productos/default/anonymous.png', '65', null, '300', '420', '435', '420', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-24 10:25:24');
 
 -- ----------------------------
--- Table structure for productosn
+-- Table structure for productosfacturas
 -- ----------------------------
-DROP TABLE IF EXISTS `productosn`;
-CREATE TABLE `productosn` (
+DROP TABLE IF EXISTS `productosfacturas`;
+CREATE TABLE `productosfacturas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -731,12 +745,23 @@ CREATE TABLE `productosn` (
   `stock` int(255) DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
--- Records of productosn
+-- Records of productosfacturas
 -- ----------------------------
-INSERT INTO `productosn` VALUES ('1', '47759', 'TV', 'Televisión de 43 pulgadas', '10', 'vistas/img/productos/default/anonymous.png', '0', '1000', '1250', '1300', '1100', null, '2023-04-11 11:28:59');
+INSERT INTO `productosfacturas` VALUES ('1', '47759', 'TV', 'Televisión de 43 pulgadas', '10', 'vistas/img/productos/default/anonymous.png', '0', '1000', '1250', '1300', '1100', null, '2023-04-11 11:28:59');
+INSERT INTO `productosfacturas` VALUES ('4', '1-A1', 'USB', 'MEMORIA USB DE 32 GB COLOR AZUL METALICO MUY NICE ALV ', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '135', '130', '125', null, null);
+INSERT INTO `productosfacturas` VALUES ('5', 'PAN29180', 'PANTALLA SONY', 'PANTALLA OLED DE 50 PULGADAS MARCA SONY', '12', 'vistas/img/productos/default/anonymous.png', null, '20000', '26500', '26000', '25000', null, null);
+INSERT INTO `productosfacturas` VALUES ('6', 'MOU1290', 'MOUSE ', 'MOUSE INALAMBRICO GAMING CON 400 DPI´S', '11', 'vistas/img/productos/default/anonymous.png', null, '500', '550', '525', '520', null, null);
+INSERT INTO `productosfacturas` VALUES ('7', 'HUB1873S', 'HUB', 'HUB PARA ENTRADA DE USB 3.0', '10', 'vistas/img/productos/default/anonymous.png', null, '500', '515', '512', '510', null, null);
+INSERT INTO `productosfacturas` VALUES ('8', 'LENAI8471', 'LENOVO AIR', 'COMPUTADORA PORTATIL MARCA LENOVO AIR MODELO 2021', '8', 'vistas/img/productos/default/anonymous.png', null, '5000', '5300', '5250', '5200', null, null);
+INSERT INTO `productosfacturas` VALUES ('9', 'HP973781', 'HP', 'COMPUTADORA ALL IN ONE HP MODELO 2022', '9', 'vistas/img/productos/default/anonymous.png', null, '4500', '4800', '4700', '4600', null, null);
+INSERT INTO `productosfacturas` VALUES ('10', 'MSI294734', 'MSI', 'COMPUTADOR DE ESCRITORIO PARA GAMER', '11', 'vistas/img/productos/default/anonymous.png', null, '5000', '5500', '5300', '5200', null, null);
+INSERT INTO `productosfacturas` VALUES ('11', 'LOGTC186', 'TECLADO LOGITECH', 'TACLADO GENERICO EN ESPAÑOL PARA COMPUTADORA', '10', 'vistas/img/productos/default/anonymous.png', null, '450', '550', '520', '500', null, null);
+INSERT INTO `productosfacturas` VALUES ('12', 'AUD4231', 'AUDIFONOS', 'ADIFONOS DE 1M ALAMABRICOS', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '135', '130', '125', null, null);
+INSERT INTO `productosfacturas` VALUES ('14', 'GAB486', 'GABINETE', 'GABINETE PARA MONTAR ', '10', 'vistas/img/productos/default/anonymous.png', null, '2500', '2800', '2700', '2600', null, null);
+INSERT INTO `productosfacturas` VALUES ('15', 'PAS53998', 'PASTA TERMICA', 'PASTA TERMICA PARA PROCESADOR', '10', 'vistas/img/productos/default/anonymous.png', null, '90', '115', '112', '100', null, null);
 
 -- ----------------------------
 -- Table structure for servicios
@@ -909,7 +934,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-04-10 10:35:39', '2023-04-10 09:35:39');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-04-12 10:58:53', '2023-04-12 09:58:53');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 09:56:19');
 
 -- ----------------------------
