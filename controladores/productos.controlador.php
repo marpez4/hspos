@@ -36,9 +36,9 @@ class ControladorProductos
 	static public function ctrCrearProducto()
 	{
 
-		if (isset($_POST["nuevoNombre"])) {
+		if (isset($_POST["nuevaNombre"])) {
 
-			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#,-. ]+$/', $_POST["nuevoNombre"])) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ#,-. ]+$/', $_POST["nuevaNombre"])) {
 
 				/*=============================================
 				VALIDAR IMAGEN
@@ -130,7 +130,6 @@ class ControladorProductos
 						"codigo" => $_POST["nuevoCodigo"],
 						"descripcion" => $_POST["nuevaDescripcion"],
 						"id_categoria" => $_POST["nuevaCategoria"],
-						"stock" => $_POST["nuevoStock"],
 						"precio_compra" => $_POST["nuevoPrecioCompra"],
 						"precio_venta" => $_POST["nuevoPrecioVenta"],
 						"precio_ml" => $_POST["nuevoPrecioMl"],

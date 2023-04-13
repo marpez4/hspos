@@ -1,3 +1,4 @@
+
 <?php
 
 require_once "conexion.php";
@@ -56,30 +57,68 @@ class ModeloProductos
 			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
 		} else {
 
-			// $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta, precio_cliente, marca, ram, dd, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta, :precio_cliente, :marca, :ram, :dd, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, nombre, descripcion, id_categoria, imagen, precio_compra, precio_venta, precio_ml, precio_cliente) VALUES (:codigo, :nombre, :descripcion, :id_categoria, :imagen, :precio_compra, :precio_venta, :precio_ml, :precio_cliente)");
 
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta, precio_cliente, precio_ml, marca, ram, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta, :precio_cliente, :precio_ml, :marca, :ram, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
-
-
-			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
+			$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 			$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
-			$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
-			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_ml", $datos["precio_ml"], PDO::PARAM_STR);
-			$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
-			$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
-			$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
-			$stmt->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
-			$stmt->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);
-			$stmt->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
-			$stmt->bindParam(":hhd", $datos["hhd"], PDO::PARAM_STR);
+			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
 		}
 
 		if ($stmt->execute()) {
+
+			$ultIdProd = Conexion::conectar()->prepare("SELECT MAX(id) AS id FROM productosfacturas");
+
+			$ultIdProd->execute();
+
+			foreach ($ultIdProd as $value) {
+
+				$idProd =  $value["id"];
+			}
+
+			$comp = Conexion::conectar()->prepare("INSERT INTO comp_prod_factura(IdentificationNumber, Descripcion,	Nombre, Unit, UnitCode,Taxes, ObjetoImp, id_producto) VALUES (:IdentificationNumber, :Descripcion, :Nombre, :Unit, :UnitCode, :Taxes, :ObjetoImp, :id_producto)");
+
+			$comp->bindParam(":IdentificationNumber", $datos["codigo"], PDO::PARAM_STR);
+			$comp->bindParam(":Descripcion", $datos["descripcion"], PDO::PARAM_STR);
+			$comp->bindParam(":Nombre", $datos["nombre"], PDO::PARAM_STR);
+			$comp->bindParam(":Unit", $datos["unidad"], PDO::PARAM_STR);
+			$comp->bindParam(":UnitCode", $datos["clave"], PDO::PARAM_STR);
+			$comp->bindParam(":Taxes", $datos["iva"], PDO::PARAM_STR);
+			$comp->bindParam(":ObjetoImp", $datos["impuesto"], PDO::PARAM_STR);
+			$comp->bindParam(":id_producto", $idProd, PDO::PARAM_INT);
+
+			$comp->execute();
+
+			if ($datos["marca"] != "") {
+
+				$stmtCp = Conexion::conectar()->prepare("INSERT INTO complemento_producto(id_producto, marca, ram, procesador, tam_pantalla, graficos, ssd, hhd) VALUES (:id_producto, :marca, :ram, :procesador, :tam_pantalla, :graficos, :ssd, :hhd)");
+
+				$stmtCp->bindParam(":id_producto", $idProd, PDO::PARAM_INT);
+				$stmtCp->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
+				$stmtCp->bindParam(":hhd", $datos["hhd"], PDO::PARAM_STR);
+
+				$stmtCp->execute();
+			}
+
+			// $newData = json_encode($datos);
+
+			// agregarProducto(' . $newData . ');
+			echo '<script> 
+
+					agregarProducto();
+				
+			    </script>';
+
 
 			return "ok";
 		} else {
@@ -333,7 +372,7 @@ class ModeloProductos
 				$hoy = date("Y-m-d H:i:s");
 
 				$movBode = Conexion::conectar()->prepare("INSERT INTO historial_mov_bodega(id_bodega, cantidad, cantidadLlegadas, tipo_movimiento, fecha_mov, id_usuario) VALUES (:id_bodega, :cantidad, :cantidadLlegadas, :tipo_movimiento, :fecha_mov, :id_usuario)");
-				
+
 				$valor = 0;
 
 				$movBode->bindParam(":id_bodega", $datos["idBodega"], PDO::PARAM_INT);
@@ -370,14 +409,14 @@ class ModeloProductos
 	{
 
 		$item = "id_bodega";
-        $valor = $valor;
+		$valor = $valor;
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = " . $valor . "");
 		// $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = 5");
 
 		$stmt->execute();
 
-		return $stmt->fetchAll();      
+		return $stmt->fetchAll();
 
 		// echo $table;
 	}

@@ -1,7 +1,5 @@
 
-function testCliente(datos) {
-
-    console.log(datos);
+function agregarCliente(datos) {
 
     var newClient = {
         "Email": datos.email,
@@ -25,7 +23,30 @@ function testCliente(datos) {
 
     Facturama.Clients.Create(newClient, function (result) {
         client = result;
-        console.log("creacion", result);
+    });
+
+}
+
+function agregarProducto() {
+
+    var newProduct = {
+        "Unit": "Servicio",
+        "UnitCode": "E48",
+        "IdentificationNumber": "WEB003",
+        "Name": "Sitio Web CMS",
+        "Description": "Desarrollo e implementación de sitio web empleando un CMS",
+        "Price": 6500.0,
+        "CodeProdServ": "43232408",
+        "Taxes": [{
+            "Name": "IVA",
+            "Rate": 0.16,
+            "IsRetention": false,
+            "IsFederalTax": true
+        }]
+    };
+
+    Facturama.Products.Create(newProduct, function (result) {
+        product = result;
     });
 
 }

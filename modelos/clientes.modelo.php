@@ -55,7 +55,7 @@ class ModeloClientes
 
 			echo '<script> 
 
-				testCliente(' . $newData . ');
+					agregarCliente(' . $newData . ');
 				
 			    </script>';
 		}
