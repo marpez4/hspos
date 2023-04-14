@@ -27,19 +27,18 @@ function agregarCliente(datos) {
 
 }
 
-function agregarProducto() {
+function agregarProducto(datos) {
 
     var newProduct = {
-        "Unit": "Servicio",
-        "UnitCode": "E48",
-        "IdentificationNumber": "WEB003",
-        "Name": "Sitio Web CMS",
-        "Description": "Desarrollo e implementación de sitio web empleando un CMS",
-        "Price": 6500.0,
-        "CodeProdServ": "43232408",
+        "Unit": datos.unidad,
+        "UnitCode": datos.clave,
+        "IdentificationNumber": datos.codigo,
+        "Name": datos.nombre,
+        "Description": datos.descripcion,
+        "ObjetoImp": datos.impuesto,
         "Taxes": [{
             "Name": "IVA",
-            "Rate": 0.16,
+            "Rate": datos.iva,
             "IsRetention": false,
             "IsFederalTax": true
         }]

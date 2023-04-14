@@ -110,12 +110,11 @@ class ModeloProductos
 				$stmtCp->execute();
 			}
 
-			// $newData = json_encode($datos);
+			$newData = json_encode($datos);
 
-			// agregarProducto(' . $newData . ');
 			echo '<script> 
 
-					agregarProducto();
+					agregarProducto(' . $newData . ');
 				
 			    </script>';
 

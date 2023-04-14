@@ -523,7 +523,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         foreach ($catalogo2 as $key => $value) {
 
-                                            echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] . '</option>';
+                                            echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] ."-".$value["nombre"] . '</option>';
                                         }
 
                                         ?>

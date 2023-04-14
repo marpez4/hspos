@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-04-13 14:01:13
+Date: 2023-04-14 15:09:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -173,7 +173,7 @@ CREATE TABLE `catalogoclavessat` (
 -- ----------------------------
 -- Records of catalogoclavessat
 -- ----------------------------
-INSERT INTO `catalogoclavessat` VALUES ('1', 'H87', '2023-04-11 14:19:11');
+INSERT INTO `catalogoclavessat` VALUES ('1', 'H87', '2023-04-14 11:21:52');
 
 -- ----------------------------
 -- Table structure for catalogoestados
@@ -261,6 +261,7 @@ INSERT INTO `catalogoregimen` VALUES ('15', '639', 'Enajenación de acciones en 
 DROP TABLE IF EXISTS `catalogounidaessat`;
 CREATE TABLE `catalogounidaessat` (
   `id_unidad` int(255) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `unidad` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_unidad`)
@@ -269,7 +270,7 @@ CREATE TABLE `catalogounidaessat` (
 -- ----------------------------
 -- Records of catalogounidaessat
 -- ----------------------------
-INSERT INTO `catalogounidaessat` VALUES ('1', 'Pieza', '2023-04-11 14:18:58');
+INSERT INTO `catalogounidaessat` VALUES ('1', 'Dispositivo de almacenamiento de disco duro portátil', '43211805', '2023-04-14 11:24:00');
 
 -- ----------------------------
 -- Table structure for categorias
@@ -287,7 +288,7 @@ CREATE TABLE `categorias` (
   `finOferta` datetime NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of categorias
@@ -526,6 +527,13 @@ INSERT INTO `comp_prod_factura` VALUES ('LOGTC186', 'TACLADO GENERICO EN ESPAÑO
 INSERT INTO `comp_prod_factura` VALUES ('AUD4231', 'ADIFONOS DE 1M ALAMABRICOS', 'AUDIFONOS', null, 'Pieza', 'H87', '.16', '01', '12');
 INSERT INTO `comp_prod_factura` VALUES ('GAB486', 'GABINETE PARA MONTAR ', 'GABINETE', null, 'Pieza', 'H87', '.16', '01', '14');
 INSERT INTO `comp_prod_factura` VALUES ('PAS53998', 'PASTA TERMICA PARA PROCESADOR', 'PASTA TERMICA', null, 'Pieza', 'H87', '.16', '01', '15');
+INSERT INTO `comp_prod_factura` VALUES ('MPD847', 'MOUSE PAD PARA GAMER', 'MOUSE PAD', null, 'Pieza', 'H87', '.16', '01', '16');
+INSERT INTO `comp_prod_factura` VALUES ('USBAD8271', 'ADAPTADOR DE USB PARA BLUETOOTH', 'ADAPTADOR USB BLUETOOTH', null, 'Pieza', 'H87', '.16', '01', '17');
+INSERT INTO `comp_prod_factura` VALUES ('BOC876', 'BOCINAS PARA COMPUTADORA', 'BOCINAS', null, 'Pieza', 'H87', '.16', '01', '18');
+INSERT INTO `comp_prod_factura` VALUES ('CAL8464', 'CALCULADORA USB', 'CALCULADORA', null, 'Pieza', 'H87', '.16', '01', '19');
+INSERT INTO `comp_prod_factura` VALUES ('PIZ2341', 'PIZARRA DE TABLET', 'PIZARRA', null, 'Pieza', 'H87', '.08', '01', '20');
+INSERT INTO `comp_prod_factura` VALUES ('LAL234', 'LLAVERO PARA USB', 'LLAVERO', null, 'Pieza', 'H87', '.16', '01', '21');
+INSERT INTO `comp_prod_factura` VALUES ('RJ45CL', 'CABLE RJ45 COLOR ROJO DE 3 MTS', 'CABLE RJ45', null, 'Pieza', 'H87', '.16', '01', '22');
 
 -- ----------------------------
 -- Table structure for corte_caja
@@ -745,7 +753,7 @@ CREATE TABLE `productosfacturas` (
   `stock` int(255) DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of productosfacturas
@@ -762,6 +770,13 @@ INSERT INTO `productosfacturas` VALUES ('11', 'LOGTC186', 'TECLADO LOGITECH', 'T
 INSERT INTO `productosfacturas` VALUES ('12', 'AUD4231', 'AUDIFONOS', 'ADIFONOS DE 1M ALAMABRICOS', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '135', '130', '125', null, null);
 INSERT INTO `productosfacturas` VALUES ('14', 'GAB486', 'GABINETE', 'GABINETE PARA MONTAR ', '10', 'vistas/img/productos/default/anonymous.png', null, '2500', '2800', '2700', '2600', null, null);
 INSERT INTO `productosfacturas` VALUES ('15', 'PAS53998', 'PASTA TERMICA', 'PASTA TERMICA PARA PROCESADOR', '10', 'vistas/img/productos/default/anonymous.png', null, '90', '115', '112', '100', null, null);
+INSERT INTO `productosfacturas` VALUES ('16', 'MPD847', 'MOUSE PAD', 'MOUSE PAD PARA GAMER', '11', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '130', null, null);
+INSERT INTO `productosfacturas` VALUES ('17', 'USBAD8271', 'ADAPTADOR USB BLUETOOTH', 'ADAPTADOR DE USB PARA BLUETOOTH', '10', 'vistas/img/productos/default/anonymous.png', null, '150', '165', '160', '155', null, null);
+INSERT INTO `productosfacturas` VALUES ('18', 'BOC876', 'BOCINAS', 'BOCINAS PARA COMPUTADORA', '10', 'vistas/img/productos/default/anonymous.png', null, '250', '280', '270', '260', null, null);
+INSERT INTO `productosfacturas` VALUES ('19', 'CAL8464', 'CALCULADORA', 'CALCULADORA USB', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '136', null, null);
+INSERT INTO `productosfacturas` VALUES ('20', 'PIZ2341', 'PIZARRA', 'PIZARRA DE TABLET', '10', 'vistas/img/productos/default/anonymous.png', null, '200', '230', '220', '210', null, null);
+INSERT INTO `productosfacturas` VALUES ('21', 'LAL234', 'LLAVERO', 'LLAVERO PARA USB', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '130', null, null);
+INSERT INTO `productosfacturas` VALUES ('22', 'RJ45CL', 'CABLE RJ45', 'CABLE RJ45 COLOR ROJO DE 3 MTS', '10', 'vistas/img/productos/default/anonymous.png', null, '70', '90', '85', '80', null, null);
 
 -- ----------------------------
 -- Table structure for servicios
