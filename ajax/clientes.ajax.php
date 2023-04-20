@@ -1,7 +1,7 @@
 <?php
 
-require_once "../controladores/clientes.controlador.php";
-require_once "../modelos/clientes.modelo.php";
+require_once "../controladores/ventas.controlador.php";
+require_once "../modelos/ventas.modelo.php";
 
 class AjaxClientes{
 
@@ -16,7 +16,7 @@ class AjaxClientes{
 		$item = "id";
 		$valor = $this->idCliente;
 
-		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+		$respuesta = ControladorVentas::ctrMostrarClientes($item, $valor);
 
 		echo json_encode($respuesta);
 
