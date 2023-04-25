@@ -66,7 +66,7 @@ class ControladorVentas
 
 				array_push($totalProductosComprados, $value["cantidad"]);
 
-				$tablaProductos = "productos";
+				$tablaProductos = "productosfacturas";
 
 				$item = "id";
 				$valor = $value["id"];
@@ -279,7 +279,7 @@ class ControladorVentas
 
 					array_push($totalProductosComprados, $value["cantidad"]);
 
-					$tablaProductos = "productos";
+					$tablaProductos = "productosfacturas";
 
 					$item = "id";
 					$valor = $value["id"];
@@ -484,7 +484,7 @@ class ControladorVentas
 
 				array_push($totalProductosComprados, $value["cantidad"]);
 
-				$tablaProductos = "productos";
+				$tablaProductos = "productosfacturas";
 
 				$item = "id";
 				$valor = $value["id"];
