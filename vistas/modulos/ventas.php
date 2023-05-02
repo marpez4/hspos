@@ -144,6 +144,8 @@ if($xml){
                   $valorUsuario = $value["id_vendedor"];
 
                   $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+                  
+                  // <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
 
                   echo '<td>'.$respuestaUsuario["nombre"].'</td>
 
@@ -159,7 +161,7 @@ if($xml){
 
                     <div class="btn-group">
 
-                      <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
+                      <a class="btn btn-success" data-toggle="modal" data-target="#modalAgregarFactura" codigoVentaFactura='.$value["codigo"].'">Facturar</a>
                         
                       <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
 
@@ -192,6 +194,10 @@ if($xml){
 
       $eliminarVenta = new ControladorVentas();
       $eliminarVenta -> ctrEliminarVenta();
+      
+      // SOLICITAMOS EL MODAL PARA LA AGREGAR LA FACURA
+      
+      require_once "/modals/modal-agregarFactura.php"
 
       ?>
        
@@ -203,7 +209,6 @@ if($xml){
   </section>
 
 </div>
-
 
 
 
