@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-04-14 15:09:03
+Date: 2023-05-02 15:11:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,12 +68,14 @@ CREATE TABLE `bodega` (
   `fecha_apertura` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `tipo` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of bodega
 -- ----------------------------
 INSERT INTO `bodega` VALUES ('1', '', '93', '10', '12', null, '1');
+INSERT INTO `bodega` VALUES ('2', '', '23', '10', '5', '2023-04-24 14:48:08', '1');
+INSERT INTO `bodega` VALUES ('3', '', '24', '5', '0', null, '1');
 
 -- ----------------------------
 -- Table structure for cabeceras
@@ -342,9 +344,9 @@ CREATE TABLE `clientes` (
 -- ----------------------------
 -- Records of clientes
 -- ----------------------------
-INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', '5', '2023-01-04 14:07:29', '2023-01-04 13:07:29');
+INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', '9', '2023-04-25 11:16:24', '2023-04-25 10:16:24');
 INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', 'angel@gmail.com', '(475) 222-2222', '7', '2022-11-10 11:11:03', '2022-11-10 10:11:03');
-INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', 'PAUL@GMAIL.COM', '(477) 522-2222', '5', '2022-11-10 13:04:56', '2022-11-10 12:04:56');
+INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', 'PAUL@GMAIL.COM', '(477) 522-2222', '10', '2023-04-25 12:22:39', '2023-04-25 11:22:39');
 INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', 'na@gmail.com', '(777) 777-7777', '8', '2022-11-10 11:10:38', '2022-11-10 10:10:39');
 INSERT INTO `clientes` VALUES ('61', 'Miguel Mendoza Gaona', '1', 'ponchomarpez@gmail.com', '(111) 111-1111', '0', '0000-00-00 00:00:00', '2023-03-17 13:49:14');
 INSERT INTO `clientes` VALUES ('62', 'MARCO ANTONIO AGUILAR OLMEDO', '1', 'facturacionhellssystems@gmail.com', '(477) 777-7777', '0', '0000-00-00 00:00:00', '2023-04-13 13:17:09');
@@ -519,21 +521,8 @@ CREATE TABLE `comp_prod_factura` (
 -- ----------------------------
 -- Records of comp_prod_factura
 -- ----------------------------
-INSERT INTO `comp_prod_factura` VALUES (null, null, null, null, null, null, null, null, '6');
-INSERT INTO `comp_prod_factura` VALUES ('HUB1873S', 'HUB PARA ENTRADA DE USB 3.0', 'HUB', null, 'Pieza', 'H87', '8', null, '7');
-INSERT INTO `comp_prod_factura` VALUES ('HP973781', 'COMPUTADORA ALL IN ONE HP MODELO 2022', 'HP', null, 'Pieza', 'H87', '.16', '01', '9');
-INSERT INTO `comp_prod_factura` VALUES ('MSI294734', 'COMPUTADOR DE ESCRITORIO PARA GAMER', 'MSI', null, 'Pieza', 'H87', '.08', '01', '10');
-INSERT INTO `comp_prod_factura` VALUES ('LOGTC186', 'TACLADO GENERICO EN ESPAÑOL PARA COMPUTADORA', 'TECLADO LOGITECH', null, 'Pieza', 'H87', '.16', '01', '11');
-INSERT INTO `comp_prod_factura` VALUES ('AUD4231', 'ADIFONOS DE 1M ALAMABRICOS', 'AUDIFONOS', null, 'Pieza', 'H87', '.16', '01', '12');
-INSERT INTO `comp_prod_factura` VALUES ('GAB486', 'GABINETE PARA MONTAR ', 'GABINETE', null, 'Pieza', 'H87', '.16', '01', '14');
-INSERT INTO `comp_prod_factura` VALUES ('PAS53998', 'PASTA TERMICA PARA PROCESADOR', 'PASTA TERMICA', null, 'Pieza', 'H87', '.16', '01', '15');
-INSERT INTO `comp_prod_factura` VALUES ('MPD847', 'MOUSE PAD PARA GAMER', 'MOUSE PAD', null, 'Pieza', 'H87', '.16', '01', '16');
-INSERT INTO `comp_prod_factura` VALUES ('USBAD8271', 'ADAPTADOR DE USB PARA BLUETOOTH', 'ADAPTADOR USB BLUETOOTH', null, 'Pieza', 'H87', '.16', '01', '17');
-INSERT INTO `comp_prod_factura` VALUES ('BOC876', 'BOCINAS PARA COMPUTADORA', 'BOCINAS', null, 'Pieza', 'H87', '.16', '01', '18');
-INSERT INTO `comp_prod_factura` VALUES ('CAL8464', 'CALCULADORA USB', 'CALCULADORA', null, 'Pieza', 'H87', '.16', '01', '19');
-INSERT INTO `comp_prod_factura` VALUES ('PIZ2341', 'PIZARRA DE TABLET', 'PIZARRA', null, 'Pieza', 'H87', '.08', '01', '20');
-INSERT INTO `comp_prod_factura` VALUES ('LAL234', 'LLAVERO PARA USB', 'LLAVERO', null, 'Pieza', 'H87', '.16', '01', '21');
-INSERT INTO `comp_prod_factura` VALUES ('RJ45CL', 'CABLE RJ45 COLOR ROJO DE 3 MTS', 'CABLE RJ45', null, 'Pieza', 'H87', '.16', '01', '22');
+INSERT INTO `comp_prod_factura` VALUES ('PSO451', 'PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS', 'PANTALLA SONY', null, '43211805', 'H87', '.08', '01', '23');
+INSERT INTO `comp_prod_factura` VALUES ('MOU1290', 'MOUSE INALAMBRICO DE 500000 DPIS', 'MOUSE ', null, '43211805', 'H87', '.08', '01', '24');
 
 -- ----------------------------
 -- Table structure for corte_caja
@@ -595,7 +584,7 @@ CREATE TABLE `historial_mov_bodega` (
   `fecha_mov` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `id_usuario` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of historial_mov_bodega
@@ -604,6 +593,9 @@ INSERT INTO `historial_mov_bodega` VALUES ('21', '10', '35', '35', '1', '2023-01
 INSERT INTO `historial_mov_bodega` VALUES ('22', '10', '10', '0', '0', '2023-01-24 17:25:24', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('23', '10', '0', '10', '1', '2023-01-24 17:25:46', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('24', '1', '10', '12', '1', '2023-02-22 20:25:27', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('25', '2', '5', '0', '1', '2023-04-24 22:47:54', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('26', '2', '5', '5', '1', '2023-04-24 22:48:08', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('27', '3', '5', '0', '1', '2023-04-24 23:01:49', '60');
 
 -- ----------------------------
 -- Table structure for pedidospaqueteria
@@ -723,16 +715,12 @@ CREATE TABLE `productos` (
   `ventas` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES ('89', '13', 'Logitech', 'Mouse G235', 'vistas/img/productos/default/anonymous.png', '4', null, '100', '140', '150', '120', 'DELL', '1', null, 'ICORE 5', '12', '3', '4', '5', null, null, null, null, null, null, null, '1', '2023-01-04 13:07:28');
-INSERT INTO `productos` VALUES ('90', '7', '100', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '9', null, '3000', '4200', '4500', '4000', 'DELL', '1', null, 'ICORE 5', '12', '3', '4', '5', null, null, null, null, null, null, null, '1', '2023-01-04 13:07:28');
-INSERT INTO `productos` VALUES ('91', '11', '2131', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '12', null, '222', '310.8', '222', '222', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-11 10:38:05');
-INSERT INTO `productos` VALUES ('92', '12', 'Logitech', 'PRECISSION', 'vistas/img/productos/default/anonymous.png', '12', null, '90', '126', '125', '120', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-18 14:30:02');
-INSERT INTO `productos` VALUES ('93', '13', 'LG', 'Mouse', 'vistas/img/productos/default/anonymous.png', '65', null, '300', '420', '435', '420', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', '2023-01-24 10:25:24');
+INSERT INTO `productos` VALUES ('94', '10', 'MOU1290', 'Mouse', 'vistas/img/productos/default/anonymous.png', '197', null, '220', '308', '220', '210', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '3', '2023-04-25 10:16:24');
 
 -- ----------------------------
 -- Table structure for productosfacturas
@@ -753,30 +741,13 @@ CREATE TABLE `productosfacturas` (
   `stock` int(255) DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of productosfacturas
 -- ----------------------------
-INSERT INTO `productosfacturas` VALUES ('1', '47759', 'TV', 'Televisión de 43 pulgadas', '10', 'vistas/img/productos/default/anonymous.png', '0', '1000', '1250', '1300', '1100', null, '2023-04-11 11:28:59');
-INSERT INTO `productosfacturas` VALUES ('4', '1-A1', 'USB', 'MEMORIA USB DE 32 GB COLOR AZUL METALICO MUY NICE ALV ', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '135', '130', '125', null, null);
-INSERT INTO `productosfacturas` VALUES ('5', 'PAN29180', 'PANTALLA SONY', 'PANTALLA OLED DE 50 PULGADAS MARCA SONY', '12', 'vistas/img/productos/default/anonymous.png', null, '20000', '26500', '26000', '25000', null, null);
-INSERT INTO `productosfacturas` VALUES ('6', 'MOU1290', 'MOUSE ', 'MOUSE INALAMBRICO GAMING CON 400 DPI´S', '11', 'vistas/img/productos/default/anonymous.png', null, '500', '550', '525', '520', null, null);
-INSERT INTO `productosfacturas` VALUES ('7', 'HUB1873S', 'HUB', 'HUB PARA ENTRADA DE USB 3.0', '10', 'vistas/img/productos/default/anonymous.png', null, '500', '515', '512', '510', null, null);
-INSERT INTO `productosfacturas` VALUES ('8', 'LENAI8471', 'LENOVO AIR', 'COMPUTADORA PORTATIL MARCA LENOVO AIR MODELO 2021', '8', 'vistas/img/productos/default/anonymous.png', null, '5000', '5300', '5250', '5200', null, null);
-INSERT INTO `productosfacturas` VALUES ('9', 'HP973781', 'HP', 'COMPUTADORA ALL IN ONE HP MODELO 2022', '9', 'vistas/img/productos/default/anonymous.png', null, '4500', '4800', '4700', '4600', null, null);
-INSERT INTO `productosfacturas` VALUES ('10', 'MSI294734', 'MSI', 'COMPUTADOR DE ESCRITORIO PARA GAMER', '11', 'vistas/img/productos/default/anonymous.png', null, '5000', '5500', '5300', '5200', null, null);
-INSERT INTO `productosfacturas` VALUES ('11', 'LOGTC186', 'TECLADO LOGITECH', 'TACLADO GENERICO EN ESPAÑOL PARA COMPUTADORA', '10', 'vistas/img/productos/default/anonymous.png', null, '450', '550', '520', '500', null, null);
-INSERT INTO `productosfacturas` VALUES ('12', 'AUD4231', 'AUDIFONOS', 'ADIFONOS DE 1M ALAMABRICOS', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '135', '130', '125', null, null);
-INSERT INTO `productosfacturas` VALUES ('14', 'GAB486', 'GABINETE', 'GABINETE PARA MONTAR ', '10', 'vistas/img/productos/default/anonymous.png', null, '2500', '2800', '2700', '2600', null, null);
-INSERT INTO `productosfacturas` VALUES ('15', 'PAS53998', 'PASTA TERMICA', 'PASTA TERMICA PARA PROCESADOR', '10', 'vistas/img/productos/default/anonymous.png', null, '90', '115', '112', '100', null, null);
-INSERT INTO `productosfacturas` VALUES ('16', 'MPD847', 'MOUSE PAD', 'MOUSE PAD PARA GAMER', '11', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '130', null, null);
-INSERT INTO `productosfacturas` VALUES ('17', 'USBAD8271', 'ADAPTADOR USB BLUETOOTH', 'ADAPTADOR DE USB PARA BLUETOOTH', '10', 'vistas/img/productos/default/anonymous.png', null, '150', '165', '160', '155', null, null);
-INSERT INTO `productosfacturas` VALUES ('18', 'BOC876', 'BOCINAS', 'BOCINAS PARA COMPUTADORA', '10', 'vistas/img/productos/default/anonymous.png', null, '250', '280', '270', '260', null, null);
-INSERT INTO `productosfacturas` VALUES ('19', 'CAL8464', 'CALCULADORA', 'CALCULADORA USB', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '136', null, null);
-INSERT INTO `productosfacturas` VALUES ('20', 'PIZ2341', 'PIZARRA', 'PIZARRA DE TABLET', '10', 'vistas/img/productos/default/anonymous.png', null, '200', '230', '220', '210', null, null);
-INSERT INTO `productosfacturas` VALUES ('21', 'LAL234', 'LLAVERO', 'LLAVERO PARA USB', '10', 'vistas/img/productos/default/anonymous.png', null, '120', '150', '140', '130', null, null);
-INSERT INTO `productosfacturas` VALUES ('22', 'RJ45CL', 'CABLE RJ45', 'CABLE RJ45 COLOR ROJO DE 3 MTS', '10', 'vistas/img/productos/default/anonymous.png', null, '70', '90', '85', '80', null, null);
+INSERT INTO `productosfacturas` VALUES ('23', 'PSO451', 'PANTALLA SONY', 'PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS', '12', 'vistas/img/productos/default/anonymous.png', null, '10000', '12000', '11100', '11000', '4', '2023-04-25 11:22:39');
+INSERT INTO `productosfacturas` VALUES ('24', 'MOU1290', 'MOUSE ', 'MOUSE INALAMBRICO DE 500000 DPIS', '11', 'vistas/img/productos/default/anonymous.png', null, '400', '160', '450', '410', '3', '2023-04-25 11:22:39');
 
 -- ----------------------------
 -- Table structure for servicios
@@ -949,7 +920,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-04-12 10:58:53', '2023-04-12 09:58:53');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-05-02 14:46:55', '2023-05-02 13:46:55');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 09:56:19');
 
 -- ----------------------------
@@ -970,35 +941,12 @@ CREATE TABLE `ventas` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of ventas
 -- ----------------------------
-INSERT INTO `ventas` VALUES ('38', '10001', '18', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"22\",\"precio\":\"266\",\"total\":\"266\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"19\",\"precio\":\"2660\",\"total\":\"2660\"}]', '0', '2926', '2926', 'Efectivo', '1', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('39', '10002', '18', '60', '[{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"2\",\"stock\":\"9\",\"precio\":\"100\",\"total\":\"200\"},{\"id\":\"78\",\"descripcion\":\"USB\",\"cantidad\":\"2\",\"stock\":\"8\",\"precio\":\"80\",\"total\":\"160\"}]', '43.2', '360', '403.2', 'TC-1212312312312', '1', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('40', '10003', '18', '60', '[{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"2\",\"stock\":\"7\",\"precio\":\"120\",\"total\":\"240\"},{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"19\",\"precio\":\"6720\",\"total\":\"6720\"}]', '69.6', '6960', '7029.6', 'Efectivo', '1', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('41', '10004', '18', '60', '[{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"2\",\"stock\":\"5\",\"precio\":\"100\",\"total\":\"200\"},{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"5200\",\"total\":\"5200\"}]', '0', '5400', '5400', 'Efectivo', '2', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('42', '10005', '18', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"21\",\"precio\":\"266\",\"total\":\"205\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"2660\",\"total\":\"2500\"},{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"1\",\"stock\":\"4\",\"precio\":\"100\",\"total\":\"100\"}]', '0', '2805', '2805', 'Efectivo', '1', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('43', '10006', '18', '60', '[{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"1\",\"stock\":\"3\",\"precio\":\"100\",\"total\":\"100\"}]', '0', '100', '100', 'Efectivo', '1', '2022-07-05 07:40:01', '2');
-INSERT INTO `ventas` VALUES ('44', '10007', '18', '60', '[{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"2\",\"stock\":\"16\",\"precio\":\"2660\",\"total\":\"5320\"},{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"6720\",\"total\":\"5200\"}]', '0', '10520', '10520', 'Efectivo', '1', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('45', '10008', '18', '60', '[{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"6720\",\"total\":\"6720\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"20\",\"precio\":\"266\",\"total\":\"266\"}]', '0', '6986', '6986', 'Efectivo', '2', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('46', '10009', '18', '60', '[{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"19\",\"precio\":\"5600\",\"total\":\"5600\"},{\"id\":\"84\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"11\",\"precio\":\"5740\",\"total\":\"5740\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"19\",\"precio\":\"588\",\"total\":\"588\"},{\"id\":\"78\",\"descripcion\":\"USB\",\"cantidad\":\"1\",\"stock\":\"7\",\"precio\":\"75\",\"total\":\"75\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"19\",\"precio\":\"266\",\"total\":\"266\"},{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"1\",\"stock\":\"2\",\"precio\":\"120\",\"total\":\"120\"}]', '0', '12389', '12389', 'Efectivo', '2', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('48', '10010', '18', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"2\",\"stock\":\"18\",\"precio\":\"120\",\"total\":\"240\"}]', '0', '240', '240', 'TC-245235235234523', '3', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('49', '10011', '18', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"588\",\"total\":\"588\"}]', '0', '714', '714', 'Efectivo', '2', '2022-07-05 12:04:28', '3');
-INSERT INTO `ventas` VALUES ('50', '10012', '20', '60', '[{\"id\":\"84\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"10\",\"precio\":\"5740\",\"total\":\"5740\"}]', '0', '5740', '5740', 'CH-4564464', '2', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('51', '10013', '18', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"121\",\"total\":\"121\"}]', '0', '121', '121', 'TD-123123', '3', '2022-07-05 09:24:34', '3');
-INSERT INTO `ventas` VALUES ('52', '10014', '19', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"100\",\"total\":\"100\"},{\"id\":\"84\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"9\",\"precio\":\"5000\",\"total\":\"5000\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"500\",\"total\":\"500\"}]', '0', '5600', '5600', 'Efectivo', '1', '2022-08-29 10:55:06', '5');
-INSERT INTO `ventas` VALUES ('53', '10015', '21', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"5600\",\"total\":\"5600\"}]', '0', '5726', '5726', 'TC-213131321', '2', '2022-08-29 10:55:47', '5');
-INSERT INTO `ventas` VALUES ('54', '10016', '20', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"13\",\"precio\":\"126\",\"total\":\"126\"},{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"588\",\"total\":\"588\"},{\"id\":\"79\",\"descripcion\":\"Auriculares\",\"cantidad\":\"1\",\"stock\":\"1\",\"precio\":\"120\",\"total\":\"120\"}]', '0', '834', '834', 'Efectivo', '2', '2022-11-10 10:09:03', '6');
-INSERT INTO `ventas` VALUES ('55', '10017', '19', '60', '[{\"id\":\"85\",\"descripcion\":\"Cable RJ45 20 mts\",\"cantidad\":\"1\",\"stock\":\"12\",\"precio\":\"100\",\"total\":\"100\"},{\"id\":\"77\",\"descripcion\":\"HP\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"5200\",\"total\":\"5200\"}]', '0', '5300', '5300', 'TC-78979798', '1', '2022-11-10 10:09:33', '6');
-INSERT INTO `ventas` VALUES ('56', '10018', '18', '60', '[{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"null\",\"total\":\"0\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"18\",\"precio\":\"null\",\"total\":\"null\"}]', '0', '0', '0', 'TD-131321231', '3', '2022-11-10 10:09:54', '6');
-INSERT INTO `ventas` VALUES ('57', '10019', '21', '60', '[{\"id\":\"81\",\"descripcion\":\"Chida\",\"cantidad\":\"1\",\"stock\":\"16\",\"precio\":\"5600\",\"total\":\"5600\"},{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"17\",\"precio\":\"266\",\"total\":\"266\"}]', '0', '5866', '5866', 'TF-258963147', '2', '2022-11-10 10:10:15', '6');
-INSERT INTO `ventas` VALUES ('58', '10020', '21', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"2\",\"stock\":\"15\",\"precio\":\"266\",\"total\":\"532\"}]', '0', '532', '532', 'TD-258963174', '2', '2022-11-10 10:10:39', '6');
-INSERT INTO `ventas` VALUES ('59', '10021', '19', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"205\",\"total\":\"205\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"2500\",\"total\":\"2500\"}]', '0', '2705', '2705', 'Efectivo', '1', '2022-11-10 10:11:03', '6');
-INSERT INTO `ventas` VALUES ('60', '10022', '20', '60', '[{\"id\":\"83\",\"descripcion\":\"Logitech\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"588\",\"total\":\"588\"}]', '0', '588', '588', 'TD-396741852', '2', '2022-11-10 12:04:56', '7');
-INSERT INTO `ventas` VALUES ('61', '10023', '19', '60', '[{\"id\":\"76\",\"descripcion\":\"Logitech 205\",\"cantidad\":\"1\",\"stock\":\"14\",\"precio\":\"205\",\"total\":\"205\"},{\"id\":\"75\",\"descripcion\":\"Lenovo\",\"cantidad\":\"1\",\"stock\":\"15\",\"precio\":\"2500\",\"total\":\"2500\"}]', '0', '2705', '2705', 'DOXXO', '1', '2022-11-14 10:13:42', '6');
-INSERT INTO `ventas` VALUES ('62', '10024', '18', '60', '[{\"id\":\"90\",\"descripcion\":\"PRECISSION\",\"cantidad\":\"1\",\"stock\":\"9\",\"precio\":\"4500\",\"total\":\"4500\"},{\"id\":\"89\",\"descripcion\":\"Mouse G235\",\"cantidad\":\"1\",\"stock\":\"4\",\"precio\":\"150\",\"total\":\"150\"}]', '0', '4650', '4650', 'Efectivo', '3', '2023-01-04 13:07:29', null);
+INSERT INTO `ventas` VALUES ('66', '10001', '20', '60', '[{\"id\":\"23\",\"descripcion\":\"PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS\",\"cantidad\":\"1\",\"stock\":\"4\",\"precio\":\"12000\",\"total\":\"12000\"},{\"id\":\"24\",\"descripcion\":\"MOUSE INALAMBRICO DE 500000 DPIS\",\"cantidad\":\"2\",\"stock\":\"3\",\"precio\":\"160\",\"total\":\"320\"}]', '0', '12320', '12320', 'TC-2326556', '2', '2023-04-25 11:22:39', '8');
 
 -- ----------------------------
 -- Table structure for visitaspaises
