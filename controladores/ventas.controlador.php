@@ -322,7 +322,7 @@ class ControladorVentas
 
 					array_push($totalProductosComprados_2, $value["cantidad"]);
 
-					$tablaProductos_2 = "productos";
+					$tablaProductos_2 = "productosfacturas";
 
 					$item_2 = "id";
 					$valor_2 = $value["id"];
