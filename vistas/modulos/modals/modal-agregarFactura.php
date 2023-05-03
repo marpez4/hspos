@@ -30,19 +30,165 @@ MODAL AGREGAR CATEGORÍA
 
                     <div class="box-body">
 
-                        <!-- ENTRADA PARA EL NOMBRE -->
 
-                        <div class="form-group">
 
-                            <div class="input-group">
+                        <div class="form-group row">
 
-                                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                            <!-- NAMEID -->
 
-                                <input type="text" class="form-control input-lg" name="nuevaCategoria" placeholder="Ingresar categoría" required>
+                            <input type="hidden" value="1" name="nameId">
+
+                            <!-- EXPORTATION -->
+                            <input type="hidden" value="01" name="exportation">
+                            
+                            <!-- SERIE -->
+                            <input type="hidden" value="null" name="serie">
+
+                            <!-- ENTRADA PARA EL NOMBRE -->
+
+                            <div class="col-xs-6">
+
+                                <label for="">Folio</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+
+                                    <input type="number" class="form-control input-lg" name="folio" id="folio" readonly>
+
+                                </div>
 
                             </div>
 
+
+                            <!-- ENTRADA PARA EL NOMBRE -->
+
+                            <div class="col-xs-8">
+
+                                <label for="">Nombre del emisor</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="text" class="form-control input-lg" name="nombreEmisor" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <!-- ENTRADA PARA CP -->
+
+                            <div class="col-xs-4">
+
+                                <label for="">Código postal del emisor</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="text" class="form-control input-lg" name="cpEmisor" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <!-- TIPO DE FACTURA -->
+
+                            <div class="col-xs-8">
+
+                                <label for="">Tipo de factura</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
+
+                                    <select class="form-control input-lg" name="cfdiType" required>
+
+                                        <option value="">Seleciona tipo</option>
+                                        <option value="I">Factura</option>
+                                        <option value="I">Factura global</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <!-- LUGAR DE EXPEDICION -->
+
+                            <div class="col-xs-4">
+
+                                <label for="">Lugar de expedición</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="number" class="form-control input-lg" name="expeditionPlace" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <!-- FORMA DE PAGO  -->
+
+                            <div class="col-xs-12">
+
+                                <label for="">Forma de pago</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
+
+                                    <select class="form-control input-lg" name="paymentForm" required>
+
+                                        <option value="">Seleciona forma</option>
+                                        <option value="01">01-Efectivo</option>
+                                        <option value="03">03-Transferencia electrónica de fondos</option>
+                                        <option value="04">04-Tarjeta de credito</option>
+                                        <option value="28">05-Tarjeta de debito</option>
+                                        <option value="99">99-Por definir</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <!-- METODO DE PAGO  -->
+
+                            <div class="col-xs-12">
+
+                                <label for="">Método de pago</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
+
+                                    <select class="form-control input-lg" name="paymentMethod" required>
+
+                                        <option value="">Seleciona método</option>
+                                        <option value="PPD">PPD-Pago en parcialidades ó diferido</option>
+                                        <option value="PUE">PUE-Pago en una sola exhibición</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+
                         </div>
+
+                        <hr class="box box-success">
+
+                        CLIENTE
+
+                        <hr class="box box-warning">
+
+                        PRODUCTOS
 
                     </div>
 
