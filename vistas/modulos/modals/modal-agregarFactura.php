@@ -40,7 +40,7 @@ MODAL AGREGAR CATEGORÍA
 
                             <!-- EXPORTATION -->
                             <input type="hidden" value="01" name="exportation">
-                            
+
                             <!-- SERIE -->
                             <input type="hidden" value="null" name="serie">
 
@@ -185,6 +185,22 @@ MODAL AGREGAR CATEGORÍA
                         <hr class="box box-success">
 
                         CLIENTE
+
+                        <div class="col-xs-12">
+
+                            <label for="">Nombre del cliente</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="nombreCliente" id="nombreCliente" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <br>
 
                         <hr class="box box-warning">
 

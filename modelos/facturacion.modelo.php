@@ -18,25 +18,19 @@ class ModeloFacturacion
         $stmt = null;
     }
 
-    static public function mdlVerInfoInicialFactura($item, $valor, $tabla)
+    static public function mdlVerInfoInicialFactura($tabla, $item, $valor)
     {
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM ventas WHERE codigo = 10001");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 
-        // $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
-        if ($stmt->execute()) {
+        $stmt->execute();
 
-            foreach ($stmt as $value) {
+        return $stmt->fetch();
 
-                $idCaja = $value["id"];
-            }
-        }
+        $stmt->close();
 
-        $res = array(
-            "idCaja" => $idCaja
-        );
-
-        return $res;
+		$stmt = null;
     }
 }
