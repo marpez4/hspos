@@ -60,6 +60,21 @@ MODAL AGREGAR CATEGORÍA
 
                             </div>
 
+                            <!-- NOMBRE DEL CLIENTE  -->
+
+                            <div class="col-xs-12">
+
+                                <label for="">Nombre del cliente</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="text" class="form-control input-lg" name="nombreCliente" id="nombreCliente" readonly>
+
+                                </div>
+
+                            </div>
 
                             <!-- ENTRADA PARA EL NOMBRE -->
 
@@ -71,7 +86,7 @@ MODAL AGREGAR CATEGORÍA
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <input type="text" class="form-control input-lg" name="nombreEmisor" readonly>
+                                    <input type="text" class="form-control input-lg" name="nombreEmisor" id="nombreEmisor" readonly>
 
                                 </div>
 
@@ -87,7 +102,7 @@ MODAL AGREGAR CATEGORÍA
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <input type="text" class="form-control input-lg" name="cpEmisor" readonly>
+                                    <input type="text" class="form-control input-lg" name="cpEmisor" id="cpEmisor" readonly>
 
                                 </div>
 
@@ -125,7 +140,7 @@ MODAL AGREGAR CATEGORÍA
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <input type="number" class="form-control input-lg" name="expeditionPlace" readonly>
+                                    <input type="number" class="form-control input-lg" name="expeditionPlace" id="expeditionPlace" readonly>
 
                                 </div>
 
@@ -178,33 +193,15 @@ MODAL AGREGAR CATEGORÍA
 
                             </div>
 
-
-
-                        </div>
-
-                        <hr class="box box-success">
-
-                        CLIENTE
-
-                        <div class="col-xs-12">
-
-                            <label for="">Nombre del cliente</label>
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="nombreCliente" id="nombreCliente" readonly>
-
+                            <div style="margin-top:5em">
+                                &nbsp;
                             </div>
 
+                            <hr class="box box-warning">
+
+                            PRODUCTOS
+
                         </div>
-
-                        <br>
-
-                        <hr class="box box-warning">
-
-                        PRODUCTOS
 
                     </div>
 

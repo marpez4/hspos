@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-05-02 15:11:37
+Date: 2023-05-04 15:07:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -345,7 +345,7 @@ CREATE TABLE `clientes` (
 -- Records of clientes
 -- ----------------------------
 INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', '9', '2023-04-25 11:16:24', '2023-04-25 10:16:24');
-INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', 'angel@gmail.com', '(475) 222-2222', '7', '2022-11-10 11:11:03', '2022-11-10 10:11:03');
+INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', 'angel@gmail.com', '(475) 222-2222', '9', '2023-05-04 11:22:20', '2023-05-04 10:22:20');
 INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', 'PAUL@GMAIL.COM', '(477) 522-2222', '10', '2023-04-25 12:22:39', '2023-04-25 11:22:39');
 INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', 'na@gmail.com', '(777) 777-7777', '8', '2022-11-10 11:10:38', '2022-11-10 10:10:39');
 INSERT INTO `clientes` VALUES ('61', 'Miguel Mendoza Gaona', '1', 'ponchomarpez@gmail.com', '(111) 111-1111', '0', '0000-00-00 00:00:00', '2023-03-17 13:49:14');
@@ -554,6 +554,26 @@ INSERT INTO `corte_caja` VALUES ('12', '1050.5', '588', '2022-11-10 07:01:29', '
 INSERT INTO `corte_caja` VALUES ('13', '0', null, '2023-02-07 07:33:29', null, '0', '0', null, '1', '', '8');
 
 -- ----------------------------
+-- Table structure for datosgeneralesfactura
+-- ----------------------------
+DROP TABLE IF EXISTS `datosgeneralesfactura`;
+CREATE TABLE `datosgeneralesfactura` (
+  `Folio` int(11) NOT NULL AUTO_INCREMENT,
+  `CfdiType` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `NameId` int(11) DEFAULT NULL,
+  `ExpeditionPlace` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Serie` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `PaymentForm` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `PaymentMethod` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Exportation` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`Folio`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of datosgeneralesfactura
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for deseos
 -- ----------------------------
 DROP TABLE IF EXISTS `deseos`;
@@ -570,6 +590,34 @@ CREATE TABLE `deseos` (
 -- ----------------------------
 INSERT INTO `deseos` VALUES ('1', '6', '3', '2022-11-22 11:58:32');
 INSERT INTO `deseos` VALUES ('2', '6', '469', '2022-11-22 11:58:33');
+
+-- ----------------------------
+-- Table structure for emisorfacturacion
+-- ----------------------------
+DROP TABLE IF EXISTS `emisorfacturacion`;
+CREATE TABLE `emisorfacturacion` (
+  `tipoPersona` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `giro` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFiscal` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreComercial` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` int(12) DEFAULT NULL,
+  `tamaño` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `regimenFiscal` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `codigoPostal` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `calle` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numeroExt` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `colonia` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `localidad` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `municipio` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of emisorfacturacion
+-- ----------------------------
+INSERT INTO `emisorfacturacion` VALUES ('0(moral)', '21 (Informática/Telecomunicaciones)', 'ESCUELA KEMPER URGATE', 'ESCUELA KEMPER URGATE', 'facturacionhellssystems@gmail.com', '477647719', 'micro', '601', '26015', 'CLAVELES', '208', 'Jardines de Jerez II', null, 'León', 'Guanajuato', 'MEXICO');
 
 -- ----------------------------
 -- Table structure for historial_mov_bodega
@@ -746,8 +794,8 @@ CREATE TABLE `productosfacturas` (
 -- ----------------------------
 -- Records of productosfacturas
 -- ----------------------------
-INSERT INTO `productosfacturas` VALUES ('23', 'PSO451', 'PANTALLA SONY', 'PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS', '12', 'vistas/img/productos/default/anonymous.png', null, '10000', '12000', '11100', '11000', '4', '2023-04-25 11:22:39');
-INSERT INTO `productosfacturas` VALUES ('24', 'MOU1290', 'MOUSE ', 'MOUSE INALAMBRICO DE 500000 DPIS', '11', 'vistas/img/productos/default/anonymous.png', null, '400', '160', '450', '410', '3', '2023-04-25 11:22:39');
+INSERT INTO `productosfacturas` VALUES ('23', 'PSO451', 'PANTALLA SONY', 'PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS', '12', 'vistas/img/productos/default/anonymous.png', null, '10000', '12000', '11100', '11000', '3', '2023-05-04 10:22:20');
+INSERT INTO `productosfacturas` VALUES ('24', 'MOU1290', 'MOUSE ', 'MOUSE INALAMBRICO DE 500000 DPIS', '11', 'vistas/img/productos/default/anonymous.png', null, '400', '160', '450', '410', '2', '2023-05-04 10:22:20');
 
 -- ----------------------------
 -- Table structure for servicios
@@ -920,7 +968,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-05-02 14:46:55', '2023-05-02 13:46:55');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-05-04 13:12:49', '2023-05-04 12:12:49');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 09:56:19');
 
 -- ----------------------------
@@ -941,12 +989,13 @@ CREATE TABLE `ventas` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of ventas
 -- ----------------------------
 INSERT INTO `ventas` VALUES ('66', '10001', '20', '60', '[{\"id\":\"23\",\"descripcion\":\"PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS\",\"cantidad\":\"1\",\"stock\":\"4\",\"precio\":\"12000\",\"total\":\"12000\"},{\"id\":\"24\",\"descripcion\":\"MOUSE INALAMBRICO DE 500000 DPIS\",\"cantidad\":\"2\",\"stock\":\"3\",\"precio\":\"160\",\"total\":\"320\"}]', '0', '12320', '12320', 'TC-2326556', '2', '2023-04-25 11:22:39', '8');
+INSERT INTO `ventas` VALUES ('67', '10002', '19', '60', '[{\"id\":\"23\",\"descripcion\":\"PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS\",\"cantidad\":\"1\",\"stock\":\"3\",\"precio\":\"11000\",\"total\":\"11000\"},{\"id\":\"24\",\"descripcion\":\"MOUSE INALAMBRICO DE 500000 DPIS\",\"cantidad\":\"1\",\"stock\":\"2\",\"precio\":\"410\",\"total\":\"410\"}]', '0', '11410', '11410', 'Efectivo', '1', '2023-05-04 10:22:20', '8');
 
 -- ----------------------------
 -- Table structure for visitaspaises
