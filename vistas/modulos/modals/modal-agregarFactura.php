@@ -60,22 +60,6 @@ MODAL AGREGAR CATEGORÍA
 
                             </div>
 
-                            <!-- NOMBRE DEL CLIENTE  -->
-
-                            <div class="col-xs-12">
-
-                                <label for="">Nombre del cliente</label>
-
-                                <div class="input-group">
-
-                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                                    <input type="text" class="form-control input-lg" name="nombreCliente" id="nombreCliente" readonly>
-
-                                </div>
-
-                            </div>
-
                             <!-- ENTRADA PARA EL NOMBRE -->
 
                             <div class="col-xs-8">
@@ -192,6 +176,71 @@ MODAL AGREGAR CATEGORÍA
                                 </div>
 
                             </div>
+                            <div style="margin-top:5em">
+                                &nbsp;
+                            </div>
+
+                            <hr class="box box-success">
+
+                            CLIENTE
+
+                            <!-- NOMBRE DEL CLIENTE  -->
+
+                            <div class="col-xs-12">
+
+                                <label for="">Nombre del cliente</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="text" class="form-control input-lg" name="nombreCliente" id="nombreCliente" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <!-- CFDI USE RECPEPTOR -->
+
+                            <input type="text" class="hidden" name="cfdiRecep" id="cfdiRecep">
+
+                            <!-- REGIMEN FISCAL RECEPTOR -->
+
+                            <input type="text" class="hidden" name="fiscalRegRecep" id="fiscalRegRecep">
+
+                            <!-- RFC RECEPTOR -->
+
+                            <div class="col-xs-6">
+
+                                <label for="">RFC</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="text" class="form-control input-lg" name="rfcRecep" id="rfcRecep" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <!-- CP RECEPTOR -->
+
+                            <div class="col-xs-6">
+
+                                <label for="">CP.</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                    <input type="number" class="form-control input-lg" name="cpRecep" id="cpRecep" readonly>
+
+                                </div>
+
+                            </div>
+
+
 
                             <div style="margin-top:5em">
                                 &nbsp;
@@ -200,6 +249,22 @@ MODAL AGREGAR CATEGORÍA
                             <hr class="box box-warning">
 
                             PRODUCTOS
+
+                            <table style="width: 100%;" border="1">
+
+                                <thead>
+                                    <tr>
+                                        <th>Cant.</th>
+                                        <th>Claves</th>
+                                        <th>Descripción</th>
+                                        <th>Precio</th>
+                                        <th>Subtotal</th>
+                                        <th>Impuestos</th>
+                                        <th>Total</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="mTableBody"></tbody>
+                            </table>
 
                         </div>
 

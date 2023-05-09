@@ -1,4 +1,5 @@
 <script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
+
 <?php
 
 if ($_SESSION["perfil"] == "Vendedor") {
@@ -487,11 +488,11 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                         $item = null;
                                         $valor = null;
 
-                                        $catalogo1 = ControladorCatalogosSat::ctrMostrarClaves($item, $valor);
+                                        $catalogo1 = ControladorCatalogosSat::ctrMostrarUnidades($item, $valor);
 
                                         foreach ($catalogo1 as $key => $value) {
 
-                                            echo '<option value="' . $value["clave"] . '">' . $value["clave"] . '</option>';
+                                            echo '<option value="' .$value["unidad"] . '">' . $value["unidad"] ."-".$value["nombre"]  . '</option>';
                                         }
 
                                         ?>
@@ -519,11 +520,11 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                         $item = null;
                                         $valor = null;
 
-                                        $catalogo2 = ControladorCatalogosSat::ctrMostrarUnidades($item, $valor);
+                                        $catalogo2 = ControladorCatalogosSat::ctrMostrarClaves($item, $valor);
 
                                         foreach ($catalogo2 as $key => $value) {
 
-                                            echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] ."-".$value["nombre"] . '</option>';
+                                            echo '<option value="' .$value["clave"] . '">' . $value["clave"] ."-". $value["descripcion"]  . '</option>';
                                         }
 
                                         ?>

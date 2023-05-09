@@ -30,9 +30,10 @@ class ModeloFacturacion
         foreach ($stmt as $value) {
 
             $idCliente = $value["id_cliente"];
+            $productos = $value["productos"];
         }
 
-        // CONSULTA DE CLIENTES 
+        // CONSULTA DE CLIENTE 
 
         $stmtCl = Conexion::conectar()->prepare("SELECT nombre FROM clientes WHERE id = $idCliente");
 
@@ -42,6 +43,20 @@ class ModeloFacturacion
 
             $nombreCliente = $value["nombre"];
         }
+
+        // CONSULTA DE DATOS DE FACTURA DEL CLIENTE
+
+        $stmtClF = Conexion::conectar()->prepare("SELECT * FROM cliente_infofac WHERE id_cliente = $idCliente");
+
+        $stmtClF->execute();
+
+        foreach ($stmtClF as $value) {
+
+            $cfdiCliente = $value["CfdiUse"];
+            $rfcCliente = $value["Rfc"];
+            $regimenCliente = $value["FiscalRegime"];
+            $cpCliente = $value["ZipCode"];
+        }   
 
         // DATOS DEL EMISOR
 
@@ -60,7 +75,12 @@ class ModeloFacturacion
             "idCliente" => $idCliente,
             "nombreCliente" => $nombreCliente,
             "nombreFiscal" => $nombreFiscal,
-            "codigoPostal" => $codigoPostal
+            "codigoPostal" => $codigoPostal,
+            "cfdiCliente" => $cfdiCliente, 
+            "rfcCliente" => $rfcCliente, 
+            "regimenCliente" => $regimenCliente, 
+            "cpCliente" => $cpCliente,
+            "productos" => $productos
         );
 
         return $res;
