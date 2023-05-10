@@ -178,6 +178,10 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 
 				var descripcion = respuesta["descripcion"];
 				var stock = respuesta["stock"];
+				var impuesto = respuesta["Taxes"];
+				var unitCode = respuesta["UnitCode"];
+				var unit = respuesta["Unit"];
+				var identificationNumber = respuesta["IdentificationNumber"];
 				// var precio = respuesta["precio_venta"];			  
 
 				/*=============================================
@@ -201,6 +205,22 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 				$(".nuevoProducto").append(
 
 					'<div class="row" style="padding:5px 15px">' +
+
+					'<!-- Impuesto del producto -->' +
+
+					'<input type="text" class="form-control nuevoImpuestoProducto" name="nuevoImpuestoProducto" value="' + impuesto + '" 		readonly required></input>' +
+
+					'<!-- Unit code del producto -->' +
+
+					'<input type="text" class="form-control nuevoUnitCodeProducto" name="nuevoUnitCodeProducto" value="' + unitCode + '" 		readonly required></input>' +
+
+					'<!-- Unit del producto -->' +
+
+					'<input type="text" class="form-control nuevoUnitProducto" name="nuevoUnitProducto" value="' + unit + '" 		readonly required></input>' +
+
+					'<!-- Identification number del producto -->' +
+
+					'<input type="text" class="form-control nuevoIdentificationNumberProducto" name="nuevoIdentificationNumberProducto" value="' + identificationNumber + '" readonly required></input>' +
 
 					'<!-- Descripción del producto -->' +
 
@@ -378,7 +398,7 @@ $(".btnAgregarProducto").click(function () {
 
 				'<div class="row" style="padding:5px 15px">' +
 
-				'<!-- Descripción del producto -->' + 
+				'<!-- Descripción del producto -->' +
 
 				'<div class="col-xs-6" style="padding-right:0px">' +
 
@@ -459,7 +479,7 @@ $(".btnAgregarProducto").click(function () {
 })
 
 /*=============================================
-SELECCIONAR PRODUCTO
+SELECCIONAR PRODUCTO EN DISPOSITIVO
 =============================================*/
 
 $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function () {
@@ -772,6 +792,16 @@ function listarProductos() {
 
 	var precio = $(".nuevoPrecioProducto");
 
+	var impuesto = $(".nuevoImpuestoProducto");
+
+	var unitCode = $(".nuevoUnitCodeProducto");
+
+	var unit = $(".nuevoUnitProducto");
+
+	var identificationNumber = $(".nuevoIdentificationNumberProducto");
+
+
+
 	for (var i = 0; i < descripcion.length; i++) {
 
 		listaProductos.push({
@@ -780,7 +810,11 @@ function listarProductos() {
 			"cantidad": $(cantidad[i]).val(),
 			"stock": $(cantidad[i]).attr("nuevoStock"),
 			"precio": $(precio[i]).attr("precioReal"),
-			"total": $(precio[i]).val()
+			"total": $(precio[i]).val(),
+			"impuesto": $(impuesto[i]).val(),
+			"unitCode": $(unitCode[i]).val(),
+			"unit": $(unit[i]).val(),
+			"identificationNumber": $(identificationNumber[i]).val(),
 		})
 
 	}
@@ -1018,6 +1052,7 @@ $(document).ready(function () {
 	$('.chosen-select').select2();
 });
 
+// BOTON PARA HACER EL PREVIO A LA FACTURA
 
 $(".tablas").on("click", "button.btnAgregarFactura", function () {
 
