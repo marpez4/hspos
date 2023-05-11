@@ -1,4 +1,3 @@
-
 <?php
 
 require_once "conexion.php";
@@ -15,7 +14,13 @@ class ModeloProductos
 
 		if ($item != null) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+			$stmt = Conexion::conectar()->prepare("SELECT
+												   	*
+												   FROM
+												   	$tabla P
+												   JOIN comp_prod_factura CPF ON P.id = CPF.id_producto
+												   WHERE
+												   	p.id = :$item ORDER BY id DESC");			
 
 			$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
@@ -36,9 +41,11 @@ class ModeloProductos
 		$stmt = null;
 	}
 
+
 	/*=============================================
 	REGISTRO DE PRODUCTO
 	=============================================*/
+
 	static public function mdlIngresarProducto($tabla, $datos)
 	{
 
