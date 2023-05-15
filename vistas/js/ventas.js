@@ -182,7 +182,11 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 				var unitCode = respuesta["UnitCode"];
 				var unit = respuesta["Unit"];
 				var identificationNumber = respuesta["IdentificationNumber"];
-				// var precio = respuesta["precio_venta"];			  
+				// var precio = respuesta["precio_venta"];	
+				
+				// INICIANDO EL VALOR DE IMPUESTO 
+
+				var impuestoPrecio = precio * impuesto;
 
 				/*=============================================
 				EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
@@ -203,7 +207,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 				}
 
 				// TODO 
-				
+
 
 				$(".nuevoProducto").append(
 
@@ -211,19 +215,19 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 
 					'<!-- Impuesto del producto -->' +
 
-					'<input type="text" class="form-control nuevoImpuestoProducto" impuestoReal = "'+impuesto+'" name="nuevoImpuestoProducto" value="' + impuesto + '" readonly required></input>' +
+					'<input type="text" class="form-control nuevoImpuestoProducto hidden" impuestoReal = "' + impuesto + '" name="nuevoImpuestoProducto" value="' + impuesto + '" readonly required></input>' +
 
 					'<!-- Operación Impuesto x Precio producto -->' +
 
-					'<input type="text" class="form-control nuevaOperacionImpuestoProducto" name="nuevaOperacionImpuestoProducto" value="" readonly required></input>' +
+					'<input type="text" class="form-control nuevaOperacionImpuestoProducto hidden" name="nuevaOperacionImpuestoProducto" value="" readonly required></input>' +
 
 					'<!-- Unit code del producto -->' +
 
-					'<input type="text" class="form-control nuevoUnitCodeProducto hidden" name="nuevoUnitCodeProducto" value="' + unitCode + '" 		readonly required></input>' +
+					'<input type="text" class="form-control nuevoUnitCodeProducto hidden" name="nuevoUnitCodeProducto" value="' + unitCode + '" readonly required></input>' +
 
 					'<!-- Unit del producto -->' +
 
-					'<input type="text" class="form-control nuevoUnitProducto hidden" name="nuevoUnitProducto" value="' + unit + '" 		readonly required></input>' +
+					'<input type="text" class="form-control nuevoUnitProducto hidden" name="nuevoUnitProducto" value="' + unit + '" readonly required></input>' +
 
 					'<!-- Identification number del producto -->' +
 
@@ -260,6 +264,23 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 					'<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>' +
 
 					'<input type="text" class="form-control nuevoPrecioProducto" precioReal="' + precio + '" name="nuevoPrecioProducto" value="' + precio + '" readonly required>' +
+
+					'</div>' +
+
+					'</div>' +
+
+					'<! -- OPERACION IMPUESTO -->' +
+
+					'<div class="col-xs-6 ingresoImpuesto"></div>' +
+					'<div class="col-xs-3 ingresoImpuesto"></div>' +
+
+					'<div class="col-xs-3 ingresoImpuesto" style="padding-left:2px">' +
+
+					'<div class="input-group">' +
+
+					'<span class="input-group-addon">IVA</span>' +
+
+					'<input type="text" class="form-control nuevoPrecioProductoImpuesto" precioRealImpuesto="' + impuesto + '" name="nuevoPrecioProductoImpuesto" value="' + impuestoPrecio + '" readonly required>' +
 
 					'</div>' +
 
@@ -557,6 +578,8 @@ $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function (
 	})
 })
 
+// TODO 
+
 /*=============================================
 MODIFICAR LA CANTIDAD
 =============================================*/
@@ -571,13 +594,17 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function () {
 
 	precio.val(precioFinal);
 
-	// SUMANDO CANIDAD + IMPUESTO
+	// SUMANDO CANTIDAD + IMPUESTO
 
-	var impuestoItem = $(".nuevoImpuestoProducto").attr("impuestoReal");
+	var impuesto = $(this).parent().parent().children(".ingresoImpuesto").children().children(".nuevoPrecioProductoImpuesto");
 
-	var impuestoFinal = $(this).val() * impuestoItem;
+	var impuestoProducto = $(this).val() * impuesto.attr("precioRealImpuesto")
 
-	$(".nuevoImpuestoProducto").val(impuestoFinal);
+	var impuestoFinal = impuestoProducto * precio.attr("precioReal");
+
+	impuesto.val(impuestoFinal);
+
+	//
 
 	var nuevoStock = Number($(this).attr("stock")) - $(this).val();
 
@@ -664,36 +691,24 @@ FUNCIÓN AGREGAR IMPUESTO
 
 function operacionImpuesto() {
 
-	var producto = 0;
+	var impuestoItem = $(".nuevoPrecioProductoImpuesto");	
 
-	var impuestoItem = $(".nuevoImpuestoProducto").val();
-	
-	var precioProducto = $(".nuevoPrecioProducto").attr("precioReal");
+	var arraySumaImpuesto = [];
 
-	var producto = Number(impuestoItem * precioProducto);
+	for(var i = 0; i < impuestoItem.length; i++){
 
-	var sumaImpuesto = $(".nuevaOperacionImpuestoProducto").val(producto);
+		arraySumaImpuesto.push(Number($(impuestoItem[i]).val()));
 
-	console.log(producto);
+	}
 
-	// var arraySumaImpuesto = [];
+	function sumaArrayImpuestos(total, numero){
 
-	// for(var i = 0; i < sumaImpuesto.length; i++){
+		return total + numero;
+	}
 
-	// 	arraySumaImpuesto.push(Number($(sumaImpuesto[i]).val()));
+	var sumaTotalImpuesto = arraySumaImpuesto.reduce(sumaArrayImpuestos);
 
-	// 	console.log(arraySumaImpuesto);
-
-	// }
-
-	// function sumaArrayImpuestos(total, numero){
-
-	// 	return total + numero;
-	// }
-
-	// var sumaTotalImpuesto = arraySumaImpuesto.reduce(sumaArrayImpuestos);
-
-	// $("#nuevoImpuestoVenta").val(sumaTotalImpuesto)
+	$("#nuevoImpuestoVenta").val(sumaTotalImpuesto)
 
 }
 
@@ -709,7 +724,7 @@ function agregarImpuesto() {
 	// var precioImpuesto = Number(precioTotal * impuesto / 100);
 
 	// var totalConImpuesto = Number(precioImpuesto) + Number(precioTotal);
-	
+
 	var totalConImpuesto = Number(impuesto) + Number(precioTotal);
 
 	$("#nuevoTotalVenta").val(totalConImpuesto);
@@ -864,9 +879,7 @@ function listarProductos() {
 
 	var identificationNumber = $(".nuevoIdentificationNumberProducto");
 
-	var impuestoFinal = $("#nuevoImpuestoVenta");
-
-	var totalNeto = $("#nuevoPrecioNeto");
+	var impuestoFinal = $(".nuevoPrecioProductoImpuesto");
 
 	for (var i = 0; i < descripcion.length; i++) {
 
@@ -878,16 +891,18 @@ function listarProductos() {
 			"precio": $(precio[i]).attr("precioReal"),
 			"subTotal": $(precio[i]).val(),
 			"impuestoFinal": $(impuestoFinal[i]).val(),
-			"totalNeto": $(totalNeto[i]).val(),
+			"totalNeto": parseFloat($(impuestoFinal[i]).val()) + parseFloat($(precio[i]).val()),
 			"impuesto": $(impuesto[i]).val(),
 			"unitCode": $(unitCode[i]).val(),
 			"unit": $(unit[i]).val(),
 			"identificationNumber": $(identificationNumber[i]).val()
 		})
-
 	}
 
+	console.log(listaProductos);
+
 	$("#listaProductos").val(JSON.stringify(listaProductos));
+	
 
 }
 
