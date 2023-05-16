@@ -204,7 +204,10 @@ class ModeloVentas
 
 		if ($item != null) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT * from $tabla cl 
+													LEFT JOIN cliente_infofac clf 
+													ON cl.id = clf.id_cliente
+													WHERE cl.id = :$item");
 
 			$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 

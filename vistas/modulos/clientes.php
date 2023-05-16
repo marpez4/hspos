@@ -660,20 +660,6 @@ MODAL EDITAR CLIENTE
 
             </div>
 
-            <!-- ENTRADA PARA EL DOCUMENTO ID -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-
-                <input type="number" min="0" class="form-control input-lg" name="editarDocumentoId" id="editarDocumentoId" required>
-
-              </div>
-
-            </div>
-
             <!-- ENTRADA PARA EL EMAIL -->
 
             <div class="form-group">
@@ -702,33 +688,307 @@ MODAL EDITAR CLIENTE
 
             </div>
 
-            <!-- ENTRADA PARA LA EMPRESA -->
+            <!-- DATOS DE FACTURACIÓN -->
 
-            <div class="form-group">
+            <div class="form-group" style="text-align: right;">
 
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-
-                <input type="text" class="form-control input-lg" name="editarEmpresa" id="editarEmpresa" required>
-
-              </div>
+              <label>
+                <input type="checkbox" class="minimal checkDatosEditarFact" id="checkDatosEditarFact" readonly>
+                Agregar datos para facturar
+              </label>
 
             </div>
 
-            <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
+            <div class="datosFactEditar hidden">
+              <div class="box box-info">
 
-            <!-- <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
+                <div class="box-header ui-sortable-handle">
 
-                <input type="text" class="form-control input-lg" name="editarFechaNacimiento" id="editarFechaNacimiento"  data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                  <div class="row">
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL RFC -->
+
+                      <div class="form-group">
+
+                        <label for="rfc">RFC</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" maxlength="13" class="form-control input-lg" name="editarRfc" id="editarRfc">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL CP -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">C.P</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" maxlength="5" class="form-control input-lg" name="editarCp" id="editarCp">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Uso cfdi -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">Uso de la factura</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control" name="editarCfdi" >
+
+                          <option id="editarCfdi"></option>
+
+                            <?php
+
+                            $tabla = "catalogocfdi";
+
+                            $uso = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($uso as $key => $value) {
+
+                              echo '<option value="' . $value["usoCfdi"] . '">' . $value["usoCfdi"] . ' - ' . $value["descripcion"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL regimen -->
+
+                      <div class="form-group">
+
+                        <label for="UsoCFDI">Régimen fiscal</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control" name="editarRegimen" >
+
+                          <option id="editarRegimen"></option>
+
+                            <?php
+
+                            $tabla = "catalogoregimen";
+
+                            $regimen = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($regimen as $key => $value) {
+                              echo '<option value=""></option>';
+                              echo '<option value="' . $value["codigo"] . '">' . $value["codigo"] . ' - ' . $value["descripcion"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Calle-->
+
+                      <div class="form-group">
+
+                        <label for="calle">Calle</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="editarCalle" id="editarCalle">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL No Ext-->
+
+                      <div class="form-group">
+
+                        <label for="noExt">No. exterior</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" class="form-control input-lg" name="editarNoExt" id="editarNoExt">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                      <!-- ENTRADA PARA EL No Int-->
+
+                      <div class="form-group">
+
+                        <label for="noInt">No. interior</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="number" class="form-control input-lg" name="editarNoInt" id="editarNoInt">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Colonia-->
+
+                      <div class="form-group">
+
+                        <label for="noInt">Colonia</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="editarColonia" id="editarColonia">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Municipio-->
+
+                      <div class="form-group">
+
+                        <label for="Municipio">Municipio</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <input type="text" class="form-control input-lg" name="editarMunicipio" id="editarMunicipio">
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Estado-->
+
+                      <div class="form-group">
+
+                        <label for="Estado">Estado</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select style="width:100%; height: auto;" class="form-control" name="editarEstado">
+
+                            <option id="editarEstado" value=""></option>
+
+                            <?php
+
+                            $tabla = "catalogoEstados";
+
+                            $regimen = ControladorFacturacion::ctrMostrarCatalogos($tabla);
+
+                            foreach ($regimen as $key => $value) {
+
+                              echo '<option value="' . $value["estado"] . '">' . $value["estado"] . '</option>';
+                            }
+
+
+                            ?>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                      <!-- ENTRADA PARA EL Pais-->
+
+                      <div class="form-group">
+
+                        <label for="Pais">Pais</label>
+
+                        <div class="input-group">
+
+                          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+
+                          <select name="editarPais" id="editarPais" class="form-control" required>
+
+                            <option value="MEXICO">MÉXICO</option>
+
+                          </select>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
 
               </div>
-
-            </div> -->
+            </div>
 
           </div>
 

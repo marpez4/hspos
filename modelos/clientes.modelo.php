@@ -102,17 +102,38 @@ class ModeloClientes
 	static public function mdlEditarCliente($tabla, $datos)
 	{
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, frecuente = :frecuente, documento = :documento, email = :email, telefono = :telefono, empresa = :empresa WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, frecuente = :frecuente, email = :email, telefono = :telefono WHERE id = :id");
 
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":frecuente", $datos["frecuente"], PDO::PARAM_INT);
-		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_INT);
 		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-		$stmt->bindParam(":empresa", $datos["empresa"], PDO::PARAM_STR);
 
-		if ($stmt->execute()) {
+		$stmt->execute();		
+
+		if($datos["rfc"] != ""){
+
+			$stmtInfofac = Conexion::conectar()->prepare("UPDATE cliente_infofac SET Street = :calle, ExteriorNumber = :noExt, InteriorNumber = :noInt, Neighborhood = :colonia, ZipCode = :cp, Municipality = :municipio, StateF = :estado, Country = :pais, Rfc = :rfc, CfdiUse = :cfdi, TaxZipCode = :cp2, FiscalRegime = :regimen WHERE id_cliente = :id");
+
+			$stmtInfofac->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+			$stmtInfofac->bindParam(":calle", $datos["calle"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":noExt", $datos["noext"], PDO::PARAM_INT);
+			$stmtInfofac->bindParam(":noInt", $datos["noInt"], PDO::PARAM_INT);
+			$stmtInfofac->bindParam(":colonia", $datos["colonia"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":cp", $datos["cp"], PDO::PARAM_INT);
+			$stmtInfofac->bindParam(":municipio", $datos["municipio"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":pais", $datos["pais"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":rfc", $datos["rfc"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":cfdi", $datos["cfdi"], PDO::PARAM_STR);
+			$stmtInfofac->bindParam(":cp2", $datos["cp"], PDO::PARAM_INT);
+			$stmtInfofac->bindParam(":regimen", $datos["regimen"], PDO::PARAM_STR);
+
+
+		}
+
+		if ($stmtInfofac->execute()) {
 
 			return "ok";
 		} else {

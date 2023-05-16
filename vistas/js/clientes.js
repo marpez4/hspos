@@ -19,13 +19,43 @@ $(".tablas").on("click", ".btnEditarCliente", function () {
     dataType: "json",
     success: function (respuesta) {
 
+      $("#checkDatosEditarFact").iCheck('uncheck');
+
       $("#idCliente").val(respuesta["id"]);
       $("#editarCliente").val(respuesta["nombre"]);
       $("#editarFrecuente").val(respuesta["frecuente"]);
-      $("#editarDocumentoId").val(respuesta["documento"]);
       $("#editarEmail").val(respuesta["email"]);
       $("#editarTelefono").val(respuesta["telefono"]);
-      $("#editarEmpresa").val(respuesta["empresa"]);
+
+      if (respuesta["Rfc"] != null) {
+
+        $("#checkDatosEditarFact").iCheck('check');
+        $(".datosFactEditar").removeClass("hidden");
+
+        // DATOS
+
+        $("#editarRfc").val(respuesta["Rfc"]);
+        $("#editarCfdi").val(respuesta["CfdiUse"]);
+        $("#editarCfdi").html(respuesta["CfdiUse"]);
+        $("#editarRegimen").val(respuesta["FiscalRegime"]);
+        $("#editarRegimen").html(respuesta["FiscalRegime"]);
+        $("#editarCp").val(respuesta["ZipCode"]);
+        $("#editarCalle").val(respuesta["Street"]);
+        $("#editarNoInt").val(respuesta["InteriorNumber"]);
+        $("#editarNoExt").val(respuesta["ExteriorNumber"]);
+        $("#editarColonia").val(respuesta["Neighborhood"]);
+        // $("#editarLocalidad").val(respuesta["Locality"]);
+        $("#editarMunicipio").val(respuesta["Municipality"]);
+        $("#editarEstado").val(respuesta["StateF"]);
+        $("#editarEstado").html(respuesta["StateF"]);
+        $("#editarPais").val(respuesta["Country"]);
+
+      } else {
+        $(".datosFactEditar").addClass("hidden");
+      }
+
+
+
     }
 
   })
@@ -58,9 +88,11 @@ $(".tablas").on("click", ".btnEliminarCliente", function () {
 
 })
 
+// CREAR CLIENTE
 $(".checkDatosFact").on("ifChecked", function () {
 
   $(".datosFact").removeClass("hidden");
+  $(".datosFactEditar").removeClass("hidden");
 
   $("#nuevoRfc").attr("required", true);
   $("#nuevoCfdi").attr("required", true);
@@ -76,9 +108,48 @@ $(".checkDatosFact").on("ifChecked", function () {
 
 })
 
+// EDITAR CLIENTE 
+$(".checkDatosEditarFact").on("ifChecked", function () {
+
+  $(".datosFactEditar").removeClass("hidden");
+
+  $("#editarRfc").val("required", true);
+  $("#editarCfdi").attr("required", true);
+  $("#editarRegimen").attr("required", true);
+  $("#editarCp").attr("required", true);
+  $("#editarCalle").attr("required", true);
+  $("#editarNoExt").attr("required", true);
+  $("#editarColonia").attr("required", true);
+  $("#editarLocalidad").attr("required", true);
+  $("#editarMunicipio").attr("required", true);
+  $("#editarEstado").attr("required", true);
+  $("#editarPais").attr("required", true);
+
+  // VACIAMOS LOS INPUTS
+
+  $("#editarRfc").val("");
+  $("#editarCfdi").val("");
+  $("#editarRegimen").val("");
+  $("#editarCp").val("");
+  $("#editarCalle").val("");
+  $("#editarNoExt").val("");
+  $("#editarColonia").val("");
+  $("#editarLocalidad").val("");
+  $("#editarMunicipio").val("");
+  $("#editarEstado").val("");
+  $("#editarPais").val("");
+  $("#editarCfdi").html("");
+  $("#editarRegimen").html("");
+  $("#editarEstado").html("");
+
+
+})
+
+// CREAR CLIENTE
 $(".checkDatosFact").on("ifUnchecked", function () {
 
   $(".datosFact").addClass("hidden");
+  $(".datosFactEditar").addClass("hidden");
 
   $("#nuevoRfc").removeAttr("required");
   $("#nuevoCfdi").removeAttr("required");
@@ -91,5 +162,25 @@ $(".checkDatosFact").on("ifUnchecked", function () {
   $("#nuevoMunicipio").removeAttr("required");
   $("#nuevoEstado").removeAttr("required");
   $("#nuevoPais").removeAttr("required");
+
+})
+
+// EDITAR CLIENTE 
+
+$(".checkDatosEditarFact").on("ifUnchecked", function () {
+
+  $(".datosFactEditar").addClass("hidden");
+
+  $("#editarRfc").removeAttr("required");
+  $("#editarCfdi").removeAttr("required");
+  $("#editarRegimen").removeAttr("required");
+  $("#editarCp").removeAttr("required");
+  $("#editarCalle").removeAttr("required");
+  $("#editarNoExt").removeAttr("required");
+  $("#editarColonia").removeAttr("required");
+  $("#editarLocalidad").removeAttr("required");
+  $("#editarMunicipio").removeAttr("required");
+  $("#editarEstado").removeAttr("required");
+  $("#editarPais").removeAttr("required");
 
 })
