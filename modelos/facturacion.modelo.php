@@ -21,7 +21,7 @@ class ModeloFacturacion
     static public function mdlVerInfoInicialFactura($tabla, $item, $valor)
     {
 
-        $stmt = Conexion::conectar()->prepare("SELECT id_cliente, productos, total FROM $tabla WHERE $item = :$item");
+        $stmt = Conexion::conectar()->prepare("SELECT id_cliente, productos, total, neto, impuesto  FROM $tabla WHERE $item = :$item");
 
         $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
@@ -31,6 +31,9 @@ class ModeloFacturacion
 
             $idCliente = $value["id_cliente"];
             $productos = $value["productos"];
+            $total =  $value["neto"];
+            $subtotal = $value["total"];
+            $impuesto = $value["impuesto"];
         }
 
         // CONSULTA DE CLIENTE 
@@ -80,7 +83,10 @@ class ModeloFacturacion
             "rfcCliente" => $rfcCliente, 
             "regimenCliente" => $regimenCliente, 
             "cpCliente" => $cpCliente,
-            "productos" => $productos
+            "productos" => $productos,
+            "neto" => $total,
+            "subTotal" => $subtotal,
+            "impuesto" => $impuesto
         );
 
         return $res;

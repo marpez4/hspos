@@ -183,7 +183,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 				var unit = respuesta["Unit"];
 				var identificationNumber = respuesta["IdentificationNumber"];
 				// var precio = respuesta["precio_venta"];	
-				
+
 				// INICIANDO EL VALOR DE IMPUESTO 
 
 				var impuestoPrecio = precio * impuesto;
@@ -280,7 +280,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 
 					'<span class="input-group-addon">IVA</span>' +
 
-					'<input type="text" class="form-control nuevoPrecioProductoImpuesto" precioRealImpuesto="' + impuesto + '" name="nuevoPrecioProductoImpuesto" value="' + impuestoPrecio + '" readonly required>' +
+					'<input type="text" class="form-control nuevoPrecioProductoImpuesto" precioRealImpuesto="' + impuesto + '" name="nuevoPrecioProductoImpuesto" value="' + impuestoPrecio.toFixed(2) + '" readonly required>' +
 
 					'</div>' +
 
@@ -602,7 +602,7 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function () {
 
 	var impuestoFinal = impuestoProducto * precio.attr("precioReal");
 
-	impuesto.val(impuestoFinal);
+	impuesto.val(impuestoFinal.toFixed(2));
 
 	//
 
@@ -678,6 +678,8 @@ function sumarTotalPrecios() {
 
 	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
 
+	console.log(sumaTotalPrecio);
+
 	$("#nuevoTotalVenta").val(sumaTotalPrecio);
 	$("#totalVenta").val(sumaTotalPrecio);
 	$("#nuevoTotalVenta").attr("total", sumaTotalPrecio);
@@ -691,24 +693,24 @@ FUNCIÓN AGREGAR IMPUESTO
 
 function operacionImpuesto() {
 
-	var impuestoItem = $(".nuevoPrecioProductoImpuesto");	
+	var impuestoItem = $(".nuevoPrecioProductoImpuesto");
 
 	var arraySumaImpuesto = [];
 
-	for(var i = 0; i < impuestoItem.length; i++){
+	for (var i = 0; i < impuestoItem.length; i++) {
 
 		arraySumaImpuesto.push(Number($(impuestoItem[i]).val()));
 
 	}
 
-	function sumaArrayImpuestos(total, numero){
+	function sumaArrayImpuestos(total, numero) {
 
 		return total + numero;
 	}
 
 	var sumaTotalImpuesto = arraySumaImpuesto.reduce(sumaArrayImpuestos);
 
-	$("#nuevoImpuestoVenta").val(sumaTotalImpuesto)
+	$("#nuevoImpuestoVenta").val(sumaTotalImpuesto.toFixed(2));
 
 }
 
@@ -902,7 +904,7 @@ function listarProductos() {
 	console.log(listaProductos);
 
 	$("#listaProductos").val(JSON.stringify(listaProductos));
-	
+
 
 }
 
@@ -1174,20 +1176,37 @@ $(".tablas").on("click", "button.btnAgregarFactura", function () {
 
 			let tbody = document.getElementById("mTableBody");
 
+			var sumaSubtotal = Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(respuesta["subTotal"]);
+			var sumaTotal = Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(respuesta["neto"]);
+			var sumaImpuestos = Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(respuesta["impuesto"]);
+
 			prod.forEach((r) => {
 
 				let filaNueva = '<tr>' +
 					'<td align="center">' + r.cantidad + '</td>' +
-					'<td>' + + '</td>' +
+					'<td> <small>' + r.unitCode + '</small><br><small>' + r.unit + '<small></td>' +
 					'<td>' + r.descripcion + '</td>' +
 					'<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.precio) + '</td>' +
-					'<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.total) + '</td>' +
-					'<td>' + + '</td>' +
-					'<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.total) + '</td>' +
+					'<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.subTotal) + '</td>' +
+					'<td> <small>' + r.impuesto + '</small><br>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.impuestoFinal) + '</td>' +
+					'<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.totalNeto) + '</td>' +
 					'</tr>';
+
 				tbody.innerHTML += filaNueva;
 			})
 
+
+			// for (let i in prod) {
+
+			// 	sumaSubtotal += Number(prod[i].subTotal);
+			// 	sumaTotal += Number(prod[i].totalNeto);
+			// 	sumaImpuestos += Number(prod[i].impuestoFinal);
+
+			// }
+			
+			$("#subtotalNeto").val(sumaSubtotal);
+			$("#totalNeto").val(sumaTotal);
+			$("#impuestosNeto").val(sumaImpuestos);
 		}
 	})
 

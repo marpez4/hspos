@@ -260,11 +260,57 @@ MODAL AGREGAR CATEGORÍA
                                         <th>Precio</th>
                                         <th>Subtotal</th>
                                         <th>Impuestos</th>
-                                        <th>Total</th>                                        
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="mTableBody"></tbody>
                             </table>
+
+                            <div class="form-group row">
+
+                                <div class="col-xs-4">
+
+                                    <label for="">Subtotal</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                        <input type="text" class="form-control input-lg" name="subtotalNeto" id="subtotalNeto" readonly>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-4">
+
+                                    <label for="">Impuestos</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                        <input type="text" class="form-control input-lg" name="impuestosNeto" id="impuestosNeto" readonly>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-4">
+
+                                    <label for="">Total</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                        <input type="text" class="form-control input-lg" name="totalNeto" id="totalNeto" readonly>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -280,7 +326,7 @@ MODAL AGREGAR CATEGORÍA
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Guardar categoría</button>
+                    <button type="submit" class="btn btn-primary">Emitir factura</button>
 
                 </div>
 
