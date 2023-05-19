@@ -49,3 +49,78 @@ function agregarProducto(datos) {
     });
 
 }
+
+function emisionFactura(datos, productos) {
+
+    
+    for (var i = 0; i < productos.length; i++) {
+        var obj = [{
+            "ProductCode": productos[i].unitCode,
+            "IdentificationNumber": productos[i].identificationNumber,
+            "Description": productos[i].descripcion,
+            "Unit": productos[i].unit,
+            "UnitCode": productos[i].unitCode, // Falta este dato
+            "UnitPrice": productos[i].precio,
+            "Quantity": productos[i].cantidad,
+            "Subtotal": productos[i].subTotal,
+            "Taxes": [
+                {
+                    "Total": productos[i].impuestoFinal,
+                    "Name": "IVA",
+                    "Base": productos[i].subTotal,
+                    "Rate": productos[i].impuesto,
+                    "IsRetention": false
+                }
+            ],
+            "Total": productos[i].totalNeto
+        }]
+        console.log(obj);
+    }
+
+    var factura = {
+
+        "Receiver": {
+            "Name": datos.Name,
+            "CfdiUse": datos.CfdiUse,
+            "Rfc": datos.Rfc,
+            "FiscalRegime": datos.FiscalRegime,
+            "TaxZipCode": datos.TaxZipCode
+        },
+        "CfdiType": datos.CfdiType,
+        "NameId": datos.NameId,
+        "ExpeditionPlace": datos.ExpeditionPlace,
+        "Serie": datos.Serie,
+        "Folio": datos.Folio,
+        "PaymentForm": datos.PaymentForm,
+        "PaymentMethod": datos.PaymentMethod,
+        "Exportation": datos.Exportation,
+        "Items": [
+            obj.push()
+        ]
+    }
+
+
+    console.log(factura);
+
+    // Receiver
+
+    // var nombreCliente = $("#nombreCliente").val();
+    // var cfdiUse = $("#cfdiRecep").val();
+    // var rfc = $("#rfcRecep").val();
+    // var fiscalReg = $("#fiscalRegRecep").val();
+    // var cp = $("#cpRecep").val();
+
+    // Datos generales
+
+    // var cfdiType = $("#cfdiType").val();
+    // var nameId = $("#nameId").val();
+    // var expeditionPlace = $("#expeditionPlace").val();
+    // var folio = $("#folio").val();
+    // var paymentForm = $("#paymentForm").val();
+    // var paymentMethod = $("#paymentMethod").val();
+
+
+    // ARREGLO
+
+
+}

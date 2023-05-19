@@ -332,8 +332,8 @@ MODAL AGREGAR CATEGORÍA
 
                 <?php
 
-                $crearCategoria = new ControladorCategorias();
-                $crearCategoria->ctrCrearCategoria();
+                    $crearfactura = new ControladorFacturacion();
+                    $crearfactura->ctrEmitirfactura();
 
                 ?>
 

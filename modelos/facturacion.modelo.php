@@ -59,7 +59,7 @@ class ModeloFacturacion
             $rfcCliente = $value["Rfc"];
             $regimenCliente = $value["FiscalRegime"];
             $cpCliente = $value["ZipCode"];
-        }   
+        }
 
         // DATOS DEL EMISOR
 
@@ -71,7 +71,6 @@ class ModeloFacturacion
 
             $nombreFiscal = $value["nombreFiscal"];
             $codigoPostal = $value["codigoPostal"];
-
         }
 
         $res = array(
@@ -79,9 +78,9 @@ class ModeloFacturacion
             "nombreCliente" => $nombreCliente,
             "nombreFiscal" => $nombreFiscal,
             "codigoPostal" => $codigoPostal,
-            "cfdiCliente" => $cfdiCliente, 
-            "rfcCliente" => $rfcCliente, 
-            "regimenCliente" => $regimenCliente, 
+            "cfdiCliente" => $cfdiCliente,
+            "rfcCliente" => $rfcCliente,
+            "regimenCliente" => $regimenCliente,
             "cpCliente" => $cpCliente,
             "productos" => $productos,
             "neto" => $total,
@@ -96,5 +95,24 @@ class ModeloFacturacion
         // $stmt->close();
 
         // $stmt = null;
+    }
+
+    static public function mdlEmitirfactura($datos)
+    {
+
+        $stmt = Conexion::conectar()->prepare("SELECT productos, codigo  FROM ventas WHERE codigo = :folio");
+
+        $stmt->bindParam(":folio", $datos["Folio"], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        foreach ($stmt as $value) {
+
+            $productos = $value["productos"];
+        }
+
+        $newData = json_encode($datos);
+
+        echo '<script>emisionFactura(' . $newData . ', '. $productos .')</script>';
     }
 }
