@@ -74,8 +74,9 @@ function emisionFactura(datos, productos) {
             ],
             "Total": productos[i].totalNeto
         }]
-        console.log(obj);
     }
+
+    let newObs = [];
 
     var factura = {
 
@@ -95,7 +96,7 @@ function emisionFactura(datos, productos) {
         "PaymentMethod": datos.PaymentMethod,
         "Exportation": datos.Exportation,
         "Items": [
-            obj.push()
+            productos
         ]
     }
 
