@@ -182,6 +182,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 				var unitCode = respuesta["UnitCode"];
 				var unit = respuesta["Unit"];
 				var identificationNumber = respuesta["IdentificationNumber"];
+				var TaxObject = respuesta["ObjetoImp"];
 				// var precio = respuesta["precio_venta"];	
 
 				// INICIANDO EL VALOR DE IMPUESTO 
@@ -228,6 +229,10 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 					'<!-- Unit del producto -->' +
 
 					'<input type="text" class="form-control nuevoUnitProducto hidden" name="nuevoUnitProducto" value="' + unit + '" readonly required></input>' +
+
+					'<!-- Identification number del producto -->' +
+
+					'<input type="text" class="form-control nuevoObjImp hidden" name="nuevoObjImp" value="' + TaxObject + '" readonly required></input>' +
 
 					'<!-- Identification number del producto -->' +
 
@@ -883,6 +888,8 @@ function listarProductos() {
 
 	var impuestoFinal = $(".nuevoPrecioProductoImpuesto");
 
+	var taxObj = $(".nuevoObjImp");
+
 	for (var i = 0; i < descripcion.length; i++) {
 
 		listaProductos.push({
@@ -895,6 +902,7 @@ function listarProductos() {
 			"impuestoFinal": $(impuestoFinal[i]).val(),
 			"totalNeto": parseFloat($(impuestoFinal[i]).val()) + parseFloat($(precio[i]).val()),
 			"impuesto": $(impuesto[i]).val(),
+			"taxObj": $(taxObj[i]).val(),
 			"unitCode": $(unitCode[i]).val(),
 			"unit": $(unit[i]).val(),
 			"identificationNumber": $(identificationNumber[i]).val()

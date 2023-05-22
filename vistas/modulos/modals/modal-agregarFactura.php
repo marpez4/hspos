@@ -42,7 +42,7 @@ MODAL AGREGAR CATEGORÍA
                             <input type="hidden" value="01" name="exportation">
 
                             <!-- SERIE -->
-                            <input type="hidden" value="null" name="serie">
+                            <input type="hidden" value="Blue" name="serie">
 
                             <!-- ENTRADA PARA EL NOMBRE -->
 

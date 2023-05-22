@@ -59,6 +59,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                 <br>
 
                 <button onclick="testCliente()">Testing</button>
+                <button onclick="downloadCFDI()">CFDI</button>
 
             </div>
 

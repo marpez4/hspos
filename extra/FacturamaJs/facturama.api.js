@@ -17,8 +17,6 @@ $.ajaxSetup({
             xhr.withCredentials = true;
             xhr.setRequestHeader("Authorization", "Basic " + valuesFacturama.token);
             invocation.send();
-            console.log("Si entre");
-
         } else {
 
             console.log("No entre");

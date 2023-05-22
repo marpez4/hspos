@@ -1,4 +1,5 @@
 <script src="vistas/js/verInfoFactura.js"></script>
+<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
 
 <?php
 

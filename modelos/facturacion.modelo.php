@@ -113,6 +113,30 @@ class ModeloFacturacion
 
         $newData = json_encode($datos);
 
+        // for ($i = 0; $i < count($productos); $i++) {
+
+        //     var obj = [{
+        //         "ProductCode" => $productos[$i]["unitCode"]
+        //         "IdentificationNumber" => $productos[$i]["identificationNumber"]
+        //         "Description" => $productos[$i]["descripcion"]
+        //         "Unit" => $productos[$i]["unit"]
+        //         "UnitCode" => $productos[$i]["unitCode"]
+        //         "UnitPrice" => $productos[$i]["precio"]
+        //         "Quantity" => $productos[$i]["cantidad"]
+        //         "Subtotal" => $productos[$i]["subTotal"]
+        //         "Taxes" => [
+        //             {
+        //                 "Total" => $productos[$i]["impuestoFinal"]
+        //                 "Name" => "IVA",
+        //                 "Base" => $productos[$i]["subTotal"]
+        //                 "Rate" => $productos[$i]["impuesto"]
+        //                 "IsRetention" => false
+        //             }
+        //         ],
+        //         "Total" => $productos[$i]["totalNet"]
+        //     }]
+        // }
+
         echo '<script>emisionFactura(' . $newData . ', '. $productos .')</script>';
     }
 }
