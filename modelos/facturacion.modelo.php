@@ -111,9 +111,40 @@ class ModeloFacturacion
             $productos = $value["productos"];
         }
 
+        $item = json_decode($productos, true);
+
         $newData = json_encode($datos);
 
-        // for ($i = 0; $i < count($productos); $i++) {
+        $itemsJson = '[';
+
+        for ($i = 0; $i < count($item); $i++) {
+
+            $itemsJson .= '{
+                "ProductCode" : "' . $item[$i]["unitCode"] . '",
+                "IdentificationNumber" : "' . $item[$i]["identificationNumber"] . '",
+                "Description": "' . $item[$i]["descripcion"] . '",
+                "Unit" : "' . $item[$i]["unitCode"] . '",
+                "UnitCode" : "' . $item[$i]["unit"] . '",
+                "UnitPrice" : ' . $item[$i]["precio"] . ',
+                "Quantity" : ' . $item[$i]["cantidad"] . ',
+                "Subtotal" :' . $item[$i]["subTotal"] . ',
+                "TaxObject" : "' . $item[$i]["taxObj"] . '",';
+            if ($item[$i]["impuesto"] != 0) {
+                $itemsJson .= ' "Taxes": [{
+                "Total" : ' . $item[$i]["impuestoFinal"] . ',
+                "Name" : "IVA",
+                "Base" : ' . $item[$i]["subTotal"] . ',
+                "Rate" : ' . $item[$i]["impuesto"] . ',
+                "IsRetention" : false,
+                }],';
+            }
+            $itemsJson .= ' "Total" : ' . $item[$i]["totalNeto"] . '
+            },';
+        }
+
+        $itemsJson .=   ']';
+
+        //  echo $itemsJson;
 
         //     var obj = [{
         //         "ProductCode" => $productos[$i]["unitCode"]
@@ -137,6 +168,18 @@ class ModeloFacturacion
         //     }]
         // }
 
-        echo '<script>emisionFactura(' . $newData . ', '. $productos .')</script>';
+        echo '<script>emisionFactura(' . $newData . ', ' . $itemsJson . ')</script>';
+    }
+
+    static public function mdlRegistrarFactura($tabla, $datos)
+    {
+
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(respuesta, estatus, folio) VALUES (:respuesta, :estatus, :folio)");
+
+        $stmt->bindParam(":respuesta", $datos["valores"], PDO::PARAM_STR);
+        $stmt->bindParam(":estatus", 1, PDO::PARAM_INT);
+        $stmt->bindParam(":folio", 10001, PDO::PARAM_INT);
+
+        $stmt->execute();
     }
 }

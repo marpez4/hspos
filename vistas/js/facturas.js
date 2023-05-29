@@ -50,33 +50,9 @@ function agregarProducto(datos) {
 
 }
 
-function emisionFactura(datos, productos) {
 
+function emisionFactura(datos, Items) {
 
-    // for (var i = 0; i < productos.length; i++) {
-    //     var obj = [{
-    //         "ProductCode": productos[i].unitCode,
-    //         "IdentificationNumber": productos[i].identificationNumber,
-    //         "Description": productos[i].descripcion,
-    //         "Unit": productos[i].unit,
-    //         "UnitCode": productos[i].unitCode, // Falta este dato
-    //         "UnitPrice": productos[i].precio,
-    //         "Quantity": productos[i].cantidad,
-    //         "Subtotal": productos[i].subTotal,
-    //         "Taxes": [
-    //             {
-    //                 "Total": productos[i].impuestoFinal,
-    //                 "Name": "IVA",
-    //                 "Base": productos[i].subTotal,
-    //                 "Rate": productos[i].impuesto,
-    //                 "IsRetention": false
-    //             }
-    //         ],
-    //         "Total": productos[i].totalNeto
-    //     }]
-    // }
-
-    // let newObs = [];
 
     var factura = {
 
@@ -91,67 +67,68 @@ function emisionFactura(datos, productos) {
         "NameId": datos.NameId,
         "ExpeditionPlace": datos.ExpeditionPlace,
         "Serie": datos.Serie,
+        "Currency": "MXN",
         "Folio": datos.Folio,
         "PaymentForm": datos.PaymentForm,
         "PaymentMethod": datos.PaymentMethod,
         "Exportation": datos.Exportation,
-        "Items": [
-            {
-                "ProductCode": productos[0].unitCode,
-                "IdentificationNumber": productos[0].identificationNumber,
-                "Description": productos[0].descripcion,
-                "Unit": productos[0].unitCode,
-                "UnitCode": productos[0].unit,
-                "UnitPrice": productos[0].precio,
-                "Quantity": productos[0].cantidad,
-                "Subtotal": productos[0].subTotal,
-                "TaxObject": productos[0].taxObj,
-                "Taxes": [
-                    {
-                        "Total": productos[0].impuestoFinal,
-                        "Name": "IVA",
-                        "Base": productos[0].subTotal,
-                        "Rate": productos[0].impuesto,
-                        "IsRetention": false
-                    }
-                ],
-                "Total": productos[0].totalNeto
-            }
-        ]
+        "Items": Items
     }
 
-
-    console.log(factura);
+    // console.log(factura);
 
     Facturama.Cfdi.Create3(factura, function (result) {
-        factura = result;
-        console.log("factura ==>>" + result);
+
+        cfdi = result;
+		Cfdi_Id = cfdi.Id;
+
+        //descargar el PDF del cfdi
+		Facturama.Cfdi.Download("pdf", "issued", Cfdi_Id, function(result){
+
+			// console.log("Descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/pdf');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+		});
+
+        //descargar el XML del cfdi
+		Facturama.Cfdi.Download("xml", "issued", Cfdi_Id, function(result){
+
+			// console.log("Descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/xml');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+		});
+        //     URL: "ajax/facturasInicio.php",
+        //     method: "POST",
+        //     data: result,
+        //     cache: false,
+        //     contentType: false,
+        //     proccessData: false,
+        //     dataType: "json",
+        //     success: function (respuesta) {
+
+        //         swal({
+        //             type: "success",
+        //             title: "El producto ha sido guardado correctamente",
+        //             showConfirmButton: true,
+        //             confirmButtonText: "Cerrar"
+        //         }).then(function (result) {
+        //             if (result.value) {
+
+        //                 window.location = "ventas";
+
+        //             }
+        //         })
+
+        //     }
+        // })
+
     });
-
-    // [{ "id": "23", "descripcion": "PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS", "cantidad": "2", "stock": "46", "precio": "11000", "subTotal": "22000", "impuestoFinal": "1760.00", "totalNeto": 23760, "impuesto": ".08", "unitCode": "43211805", "unit": "H87", "identificationNumber": "PSO451" },
-    // { "id": "26", "descripcion": "HUB DE USB MARCA MOCH CON 6 ENTRADAS ", "cantidad": "1", "stock": "47", "precio": "320", "subTotal": "320", "impuestoFinal": "25.60", "totalNeto": 345.6, "impuesto": ".08", "unitCode": "43211805", "unit": "H87", "identificationNumber": "HUB1873S" }]
-
-    // Receiver
-
-    // var nombreCliente = $("#nombreCliente").val();
-    // var cfdiUse = $("#cfdiRecep").val();
-    // var rfc = $("#rfcRecep").val();
-    // var fiscalReg = $("#fiscalRegRecep").val();
-    // var cp = $("#cpRecep").val();
-
-    // Datos generales
-
-    // var cfdiType = $("#cfdiType").val();
-    // var nameId = $("#nameId").val();
-    // var expeditionPlace = $("#expeditionPlace").val();
-    // var folio = $("#folio").val();
-    // var paymentForm = $("#paymentForm").val();
-    // var paymentMethod = $("#paymentMethod").val();
-
-
-    // ARREGLO
-
-
 }
 
 function downloadCFDI() {
@@ -160,11 +137,41 @@ function downloadCFDI() {
         "format": "pdf",
         "type": "issued",
         "id": "nJxuu4DAwnNc8NeGY1dS4Q2"
-    }
+    };
 
     Facturama.Cfdi.Download(config.format, config.type, config.id, function (result) {
-        factura = result;
-        console.log("factura ==>>" + result);
+
+        dow = result;
+
+        if (!result) {
+            console.log("existo " + result);
+        } else {
+            console.log("No existe");
+        }
+        blob = converBase64toBlob(result.Content, 'application/pdf');
+        var blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl);
+
     });
 
+}
+
+function converBase64toBlob(content, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = window.atob(content); //method which converts base64 to binary
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+        var byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType }); //statement which creates the blob
+    return blob;
 }
