@@ -1,4 +1,4 @@
-<script src="vistas/js/verInfoFactura.js"></script>
+<script src="vistas/js/facturas.js"></script>
 <script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
 
 <?php
@@ -157,15 +157,19 @@ if ($xml) {
 
                   <td>
 
-                    <div class="btn-group">
+                    <div class="btn-group">';
 
-                      <button class="btn btn-success btnAgregarFactura" codigoVentaFactura="' . $value["codigo"] . '" data-toggle="modal" data-target="#modalAgregarFactura">
-                      
-                      <i class="fa fa-address-card"></i>
+              $respuestaFolio = ControladorFacturacion::ctrMostrarFacturasEmitidas($value["codigo"]);
 
-                      </button>
-                        
-                      <button class="btn btn-info btnImprimirFactura" codigoVenta="' . $value["codigo"] . '">
+              if ($respuestaFolio == null || $respuestaFolio["estatus"] == 0 ) {
+
+                echo '<button class="btn btn-success btnAgregarFactura" codigoVentaFactura="' . $value["codigo"] . '" data-toggle="modal" data-target="#modalAgregarFactura"><i class="fa fa-address-card"></i></button>';
+              } else {
+
+                echo '<button class="btn btn-default disabled "><i class="fa fa-address-card"></i></button>';
+              }
+
+              echo '<button class="btn btn-info btnImprimirFactura" codigoVenta="' . $value["codigo"] . '">
 
                         <i class="fa fa-print"></i>
 

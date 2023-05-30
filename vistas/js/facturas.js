@@ -79,56 +79,102 @@ function emisionFactura(datos, Items) {
 
     Facturama.Cfdi.Create3(factura, function (result) {
 
-        cfdi = result;
-		Cfdi_Id = cfdi.Id;
+        var cfdi = result;
+        var Cfdi_Id = cfdi.Id;
+        var folio = cfdi.Folio;
 
-        //descargar el PDF del cfdi
-		Facturama.Cfdi.Download("pdf", "issued", Cfdi_Id, function(result){
+        // //descargar el PDF del cfdi
+        // Facturama.Cfdi.Download("pdf", "issued", Cfdi_Id, function (result) {
 
-			// console.log("Descarga",result);
+        //     // console.log("Descarga",result);
 
-			blob = converBase64toBlob(result.Content, 'application/pdf');
+        //     blob = converBase64toBlob(result.Content, 'application/pdf');
 
-			var blobURL = URL.createObjectURL(blob);
-			window.open(blobURL);
-		});
+        //     var blobURL = URL.createObjectURL(blob);
+        //     window.open(blobURL);
+        // });
 
-        //descargar el XML del cfdi
-		Facturama.Cfdi.Download("xml", "issued", Cfdi_Id, function(result){
+        // //descargar el XML del cfdi
+        // Facturama.Cfdi.Download("xml", "issued", Cfdi_Id, function (result) {
 
-			// console.log("Descarga",result);
+        //     // console.log("Descarga",result);
 
-			blob = converBase64toBlob(result.Content, 'application/xml');
+        //     blob = converBase64toBlob(result.Content, 'application/xml');
 
-			var blobURL = URL.createObjectURL(blob);
-			window.open(blobURL);
-		});
-        //     URL: "ajax/facturasInicio.php",
-        //     method: "POST",
-        //     data: result,
-        //     cache: false,
-        //     contentType: false,
-        //     proccessData: false,
-        //     dataType: "json",
-        //     success: function (respuesta) {
+        //     var blobURL = URL.createObjectURL(blob);
+        //     window.open(blobURL);
 
-        //         swal({
-        //             type: "success",
-        //             title: "El producto ha sido guardado correctamente",
-        //             showConfirmButton: true,
-        //             confirmButtonText: "Cerrar"
-        //         }).then(function (result) {
-        //             if (result.value) {
+        // });
 
-        //                 window.location = "ventas";
+        // ENVIO DE DATOS A BD
 
-        //             }
-        //         })
+        var datos = new FormData();
 
-        //     }
-        // })
+        datos.append("Cfdi_Id", Cfdi_Id);
+        datos.append("folio", folio);
 
-    });
+        $.ajax({
+            url: "ajax/facturasInicio.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (respuesta) {
+
+                if (respuesta == "ok") {
+
+                    swal({
+                        type: "success",
+                        title: "La factura fue emitida correctamente",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                    }).then(function (result) {
+                        if (result.value) {
+
+                            window.location = "ventas";
+
+                        }
+                    })
+
+                } else {
+
+                    swal({
+                        type: "error",
+                        title: "Hubo un error en la BD",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                    }).then(function (result) {
+                        if (result.value) {
+
+                            window.location = "ventas";
+
+                        }
+                    })
+                }
+
+            }
+
+        })
+
+    }, function (error) {
+        if (error && error.responseJSON) {
+            console.log("Errores", error.responseJSON);
+            swal({
+                type: "error",
+                title: "Hubo un error: " + JSON.stringify(error.responseJSON),
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar"
+            }).then(function (result) {
+                if (result.value) {
+
+                    window.location = "ventas";
+
+                }
+            })
+        }
+    }
+    );
 }
 
 function downloadCFDI() {

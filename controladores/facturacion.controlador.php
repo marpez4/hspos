@@ -44,4 +44,24 @@ class ControladorFacturacion{
 
     }
 
+    static public function ctrRegistrarFactura($valor, $folio){
+
+        $tabla = "respuesta_facturacion";
+
+        $respuesta = ModeloFacturacion::mdlRegistrarFactura($tabla, $valor, $folio);  
+
+        return $respuesta;
+
+    }
+
+    static public function ctrMostrarFacturasEmitidas($folio){
+
+        $tabla = "respuesta_facturacion";
+
+        $respuesta = ModeloFacturacion::mdlMostrarFacturasEmitidas($tabla, $folio);
+
+        return $respuesta;
+
+    }
+
 }

@@ -144,42 +144,44 @@ class ModeloFacturacion
 
         $itemsJson .=   ']';
 
-        //  echo $itemsJson;
-
-        //     var obj = [{
-        //         "ProductCode" => $productos[$i]["unitCode"]
-        //         "IdentificationNumber" => $productos[$i]["identificationNumber"]
-        //         "Description" => $productos[$i]["descripcion"]
-        //         "Unit" => $productos[$i]["unit"]
-        //         "UnitCode" => $productos[$i]["unitCode"]
-        //         "UnitPrice" => $productos[$i]["precio"]
-        //         "Quantity" => $productos[$i]["cantidad"]
-        //         "Subtotal" => $productos[$i]["subTotal"]
-        //         "Taxes" => [
-        //             {
-        //                 "Total" => $productos[$i]["impuestoFinal"]
-        //                 "Name" => "IVA",
-        //                 "Base" => $productos[$i]["subTotal"]
-        //                 "Rate" => $productos[$i]["impuesto"]
-        //                 "IsRetention" => false
-        //             }
-        //         ],
-        //         "Total" => $productos[$i]["totalNet"]
-        //     }]
-        // }
-
         echo '<script>emisionFactura(' . $newData . ', ' . $itemsJson . ')</script>';
     }
 
-    static public function mdlRegistrarFactura($tabla, $datos)
+    static public function mdlRegistrarFactura($tabla, $datos, $folio)
     {
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(respuesta, estatus, folio) VALUES (:respuesta, :estatus, :folio)");
+        // echo "datos php >>". $datos;
+        // echo "folio php >>". $folio;
+        $tmp = explode('<br />', $datos);
+        $estatus = 1;
+        $folio = $folio;
+        $fecha = date("Y-m-d H:i:s");
 
-        $stmt->bindParam(":respuesta", $datos["valores"], PDO::PARAM_STR);
-        $stmt->bindParam(":estatus", 1, PDO::PARAM_INT);
-        $stmt->bindParam(":folio", 10001, PDO::PARAM_INT);
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(respuesta, fecha, estatus, folio) VALUES (:respuesta, :fecha, :estatus, :folio)");
 
-        $stmt->execute();
+        $stmt->bindParam(":respuesta", $datos, PDO::PARAM_STR);
+        $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(":estatus", $estatus, PDO::PARAM_INT);
+        $stmt->bindParam(":folio", $folio, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+    }
+
+    static public function mdlMostrarFacturasEmitidas($tabla, $folio){
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE folio = :folio");
+
+        $stmt->bindParam(":folio", $folio, PDO::PARAM_INT);
+
+        $stmt -> execute();
+
+        return $stmt -> fetch();
+
     }
 }
