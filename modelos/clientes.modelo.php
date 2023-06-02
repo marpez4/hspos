@@ -1,4 +1,4 @@
-<script src="vistas/js/facturas.js"></script>
+<!-- <script src="vistas/js/facturas.js"></script> -->
 
 <?php
 

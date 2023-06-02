@@ -293,7 +293,7 @@
 				<a href="facturacion">
 
 					<i class="fa fa-th"></i>
-					<span>Config. Facturación</span>
+					<span>Facturas</span>
 
 				</a>
 

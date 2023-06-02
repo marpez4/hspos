@@ -64,4 +64,18 @@ class ControladorFacturacion{
 
     }
 
+    /*=============================================
+	RANGO FECHAS
+	=============================================*/
+
+	static public function ctrRangoFechasFacturas($fechaInicial, $fechaFinal)
+	{
+
+		$tabla = "respuesta_facturacion";
+
+		$respuesta = ModeloFacturacion::mdlRangoFechasFacturas($tabla, $fechaInicial, $fechaFinal);
+
+		return $respuesta;
+	}
+
 }

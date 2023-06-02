@@ -200,7 +200,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/cajas.js"></script>
   <script src="vistas/js/cortes.js"></script>
   <script src="vistas/js/pedidosPaqueteria.js"></script>
-  <!-- <script src="vistas/js/facturas.js"></script> -->
+  <script src="vistas/js/facturas.js"></script>
   <script src="vistas/js/altaProductos.js"></script>
 
 </body>
