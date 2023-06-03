@@ -1,5 +1,5 @@
 <script src="vistas/js/facturas.js"></script>
-<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
+<script src="/hspos/extra/FacturamaJs/facturama.api.js"></script>
 
 <?php
 

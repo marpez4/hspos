@@ -1,4 +1,4 @@
-<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
+<script src="/hspos/extra/FacturamaJs/facturama.api.js"></script>
 <!-- <script src="/ext/hspos/extra/Facturama/facturama.api.multiemisor.js"></script> -->
 
 <?php
