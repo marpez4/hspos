@@ -21,7 +21,7 @@ class ModeloFacturacion
     static public function mdlVerInfoInicialFactura($tabla, $item, $valor)
     {
 
-        $stmt = Conexion::conectar()->prepare("SELECT id_cliente, productos, total FROM $tabla WHERE $item = :$item");
+        $stmt = Conexion::conectar()->prepare("SELECT id_cliente, productos, total, neto, impuesto  FROM $tabla WHERE $item = :$item");
 
         $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
@@ -31,6 +31,9 @@ class ModeloFacturacion
 
             $idCliente = $value["id_cliente"];
             $productos = $value["productos"];
+            $total =  $value["neto"];
+            $subtotal = $value["total"];
+            $impuesto = $value["impuesto"];
         }
 
         // CONSULTA DE CLIENTE 
@@ -56,7 +59,7 @@ class ModeloFacturacion
             $rfcCliente = $value["Rfc"];
             $regimenCliente = $value["FiscalRegime"];
             $cpCliente = $value["ZipCode"];
-        }   
+        }
 
         // DATOS DEL EMISOR
 
@@ -68,7 +71,6 @@ class ModeloFacturacion
 
             $nombreFiscal = $value["nombreFiscal"];
             $codigoPostal = $value["codigoPostal"];
-
         }
 
         $res = array(
@@ -76,11 +78,14 @@ class ModeloFacturacion
             "nombreCliente" => $nombreCliente,
             "nombreFiscal" => $nombreFiscal,
             "codigoPostal" => $codigoPostal,
-            "cfdiCliente" => $cfdiCliente, 
-            "rfcCliente" => $rfcCliente, 
-            "regimenCliente" => $regimenCliente, 
+            "cfdiCliente" => $cfdiCliente,
+            "rfcCliente" => $rfcCliente,
+            "regimenCliente" => $regimenCliente,
             "cpCliente" => $cpCliente,
-            "productos" => $productos
+            "productos" => $productos,
+            "neto" => $total,
+            "subTotal" => $subtotal,
+            "impuesto" => $impuesto
         );
 
         return $res;
@@ -91,4 +96,153 @@ class ModeloFacturacion
 
         // $stmt = null;
     }
+
+    static public function mdlEmitirfactura($datos)
+    {
+
+        $stmt = Conexion::conectar()->prepare("SELECT productos, codigo  FROM ventas WHERE codigo = :folio");
+
+        $stmt->bindParam(":folio", $datos["Folio"], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        foreach ($stmt as $value) {
+
+            $productos = $value["productos"];
+        }
+
+        $item = json_decode($productos, true);
+
+        $newData = json_encode($datos);
+
+        $itemsJson = '[';
+
+        for ($i = 0; $i < count($item); $i++) {
+
+            $itemsJson .= '{
+                "ProductCode" : "' . $item[$i]["unitCode"] . '",
+                "IdentificationNumber" : "' . $item[$i]["identificationNumber"] . '",
+                "Description": "' . $item[$i]["descripcion"] . '",
+                "Unit" : "' . $item[$i]["unitCode"] . '",
+                "UnitCode" : "' . $item[$i]["unit"] . '",
+                "UnitPrice" : ' . $item[$i]["precio"] . ',
+                "Quantity" : ' . $item[$i]["cantidad"] . ',
+                "Subtotal" :' . $item[$i]["subTotal"] . ',
+                "TaxObject" : "' . $item[$i]["taxObj"] . '",';
+            if ($item[$i]["impuesto"] != 0) {
+                $itemsJson .= ' "Taxes": [{
+                "Total" : ' . $item[$i]["impuestoFinal"] . ',
+                "Name" : "IVA",
+                "Base" : ' . $item[$i]["subTotal"] . ',
+                "Rate" : ' . $item[$i]["impuesto"] . ',
+                "IsRetention" : false,
+                }],';
+            }
+            $itemsJson .= ' "Total" : ' . $item[$i]["totalNeto"] . '
+            },';
+        }
+
+        $itemsJson .=   ']';
+
+        echo '<script>emisionFactura(' . $newData . ', ' . $itemsJson . ')</script>';
+    }
+
+    static public function mdlRegistrarFactura($tabla, $datos, $folio)
+    {
+
+        // echo "datos php >>". $datos;
+        // echo "folio php >>". $folio;
+        $tmp = explode('<br />', $datos);
+        $estatus = 1;
+        $folio = $folio;
+        $fecha = date("Y-m-d H:i:s");
+
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(respuesta, fecha, estatus, folio) VALUES (:respuesta, :fecha, :estatus, :folio)");
+
+        $stmt->bindParam(":respuesta", $datos, PDO::PARAM_STR);
+        $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(":estatus", $estatus, PDO::PARAM_INT);
+        $stmt->bindParam(":folio", $folio, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+    }
+
+    static public function mdlMostrarFacturasEmitidas($tabla, $folio)
+    {
+
+        if ($folio != null) {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE folio = :folio");
+
+            $stmt->bindParam(":folio", $folio, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } else {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+        }
+
+        $stmt->close();
+
+		$stmt = null;
+    }
+
+    /*=============================================
+	RANGO FECHAS
+	=============================================*/
+
+	static public function mdlRangoFechasFacturas($tabla, $fechaInicial, $fechaFinal)
+	{
+
+		if ($fechaInicial == null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC");
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else if ($fechaInicial == $fechaFinal) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%'");
+
+			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else {
+
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+			} else {
+
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+			}
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		}
+	}
 }

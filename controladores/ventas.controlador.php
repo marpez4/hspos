@@ -114,13 +114,15 @@ class ControladorVentas
 
 			$tabla = "ventas";
 
+			$neto = $_POST["nuevoImpuestoVenta"] + $_POST["totalVenta"];
+
 			$datos = array(
 				"id_vendedor" => $_POST["idVendedor"],
 				"id_cliente" => $_POST["seleccionarCliente"],
 				"codigo" => $_POST["nuevaVenta"],
 				"productos" => $_POST["listaProductos"],
 				"impuesto" => $_POST["nuevoImpuestoVenta"],
-				"neto" => $_POST["nuevoTotalVenta"],
+				"neto" => $neto,
 				"total" => $_POST["totalVenta"],
 				"metodo_pago" => $_POST["listaMetodoPago"],
 				"esClienteF" => $_POST["esClienteF"]
