@@ -52,7 +52,7 @@ class ModeloVentas
 			}
 		}
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, metodo_pago, esClienteF, id_caja) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :metodo_pago, :esClienteF, :idCaja)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja)");
 
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -61,6 +61,7 @@ class ModeloVentas
 		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
 		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
+		$stmt->bindParam(":descuento", $datos["descuento"], PDO::PARAM_STR);
 		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
 		$stmt->bindParam(":esClienteF", $datos["esClienteF"], PDO::PARAM_STR);
 		$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);

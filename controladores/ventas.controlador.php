@@ -124,6 +124,7 @@ class ControladorVentas
 				"impuesto" => $_POST["nuevoImpuestoVenta"],
 				"neto" => $neto,
 				"total" => $_POST["totalVenta"],
+				"descuento" => $_POST["nuevoDescuento"],
 				"metodo_pago" => $_POST["listaMetodoPago"],
 				"esClienteF" => $_POST["esClienteF"]
 			);

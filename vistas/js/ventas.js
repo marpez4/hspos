@@ -293,6 +293,10 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 
 					'</div>')
 
+				// AGREGANDO DESCUENTO
+
+				agregarDescuento()
+
 				// SUMAR TOTAL DE PRECIOS
 
 				sumarTotalPrecios()
@@ -390,6 +394,10 @@ $(".formularioVenta").on("click", "button.quitarProducto", function () {
 		$("#nuevoTotalVenta").attr("total", 0);
 
 	} else {
+
+		// DESCUENTO
+
+		agregarDescuento()
 
 		// SUMAR TOTAL DE PRECIOS
 
@@ -641,6 +649,10 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function () {
 		return;
 
 	}
+
+	// DESCUENTO
+
+	agregarDescuento()
 
 	// SUMAR TOTAL DE PRECIOS
 
@@ -1219,6 +1231,29 @@ $(".tablas").on("click", "button.btnAgregarFactura", function () {
 	})
 
 })
+
+function agregarDescuento(){
+
+	var descuento = $("#nuevoDescuento").val();
+	var precioTotal = $("#nuevoPrecioNeto").val();
+
+	var totalConDescuento = Number(precioTotal) - Number(descuento);
+
+	$("#nuevoTotalVenta").val(totalConDescuento);
+
+	$("#totalVenta").val(totalConDescuento);
+
+}
+
+/*=============================================
+CUANDO CAMBIA EL DESCUENTO
+=============================================*/
+
+$("#nuevoDescuento").change(function(){
+
+	agregarDescuento();
+
+});
 
 // $(".btnAgregarFactura").on("click", function () {
 

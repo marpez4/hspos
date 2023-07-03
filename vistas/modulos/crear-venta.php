@@ -1,6 +1,6 @@
 <?php
 
-if($_SESSION["perfil"] == "Especial"){
+if ($_SESSION["perfil"] == "Especial") {
 
   echo '<script>
 
@@ -9,7 +9,6 @@ if($_SESSION["perfil"] == "Especial"){
   </script>';
 
   return;
-
 }
 
 ?>
@@ -17,19 +16,19 @@ if($_SESSION["perfil"] == "Especial"){
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Crear venta
-    
+
     </h1>
 
     <ol class="breadcrumb">
-      
+
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Crear venta</li>
-    
+
     </ol>
 
   </section>
@@ -41,28 +40,28 @@ if($_SESSION["perfil"] == "Especial"){
       <!--=====================================
       EL FORMULARIO
       ======================================-->
-      
+
       <div class="col-lg-5 col-xs-12">
-        
+
         <div class="box box-success">
-          
+
           <div class="box-header with-border"></div>
 
           <form role="form" method="post" class="formularioVenta">
 
             <div class="box-body">
-  
+
               <div class="box">
 
                 <!--=====================================
                 ENTRADA DEL VENDEDOR
                 ======================================-->
-            
+
                 <div class="form-group">
-                
+
                   <div class="input-group">
-                    
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
                     <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
 
@@ -70,16 +69,16 @@ if($_SESSION["perfil"] == "Especial"){
 
                   </div>
 
-                </div> 
+                </div>
 
                 <!--=====================================
                 ENTRADA DEL CÓDIGO
-                ======================================--> 
+                ======================================-->
 
                 <div class="form-group">
-                  
+
                   <div class="input-group">
-                    
+
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
 
                     <?php
@@ -89,86 +88,78 @@ if($_SESSION["perfil"] == "Especial"){
 
                     $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
 
-                    if(!$ventas){
+                    if (!$ventas) {
 
                       echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
-                  
-
-                    }else{
+                    } else {
 
                       foreach ($ventas as $key => $value) {
-                        
-                        
-                      
                       }
 
                       $codigo = $value["codigo"] + 1;
 
 
 
-                      echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
-                  
-
+                      echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="' . $codigo . '" readonly>';
                     }
 
                     ?>
-                    
-                    
+
+
                   </div>
-                
+
                 </div>
 
                 <!--=====================================
                 ENTRADA DEL CLIENTE
-                ======================================--> 
+                ======================================-->
 
                 <div class="form-group">
-                  
+
                   <div class="input-group">
-                    
+
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    
-                    <select class="form-control chosen-select" style="width: 100%"  id="seleccionarCliente" name="seleccionarCliente" required>
 
-                    <option value="">Seleccionar cliente</option>
+                    <select class="form-control chosen-select" style="width: 100%" id="seleccionarCliente" name="seleccionarCliente" required>
 
-                    <?php
+                      <option value="">Seleccionar cliente</option>
+
+                      <?php
 
                       $item = null;
                       $valor = null;
 
                       $categorias = ControladorClientes::ctrMostrarClientes($item, $valor);
 
-                       foreach ($categorias as $key => $value) {
+                      foreach ($categorias as $key => $value) {
 
-                         echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                      }
 
-                       }
-
-                    ?>
+                      ?>
 
                     </select>
 
                     <!-- ENTRADA PARA CLIENTE FRECUENTE -->
 
                     <input type="text" class="hidden" id="esClienteF" name="esClienteF" value="">
-                    
+
                     <!-- <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> -->
                     <span class="input-group-addon" id="esClienteFS" name="esClienteFS"></span>
 
                     <!-- <div id="esClienteFS" name="esClienteFS"></div> -->
-                  
+
                   </div>
-                
+
                 </div>
 
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
-                ======================================--> 
+                ======================================-->
 
                 <div class="form-group row nuevoProducto">
 
-                
+
 
                 </div>
 
@@ -187,51 +178,62 @@ if($_SESSION["perfil"] == "Especial"){
                   <!--=====================================
                   ENTRADA IMPUESTOS Y TOTAL
                   ======================================-->
-                  
-                  <div class="col-xs-8 pull-right">
-                    
+
+                  <div class="col-xs-12 pull-right">
+
                     <table class="table">
 
                       <thead>
 
                         <tr>
+                          <th>Descuento</th>
                           <th>Impuesto</th>
-                          <th>Total</th>      
+                          <th>Total</th>
                         </tr>
 
                       </thead>
 
                       <tbody>
-                      
                         <tr>
-                          
-                          <td style="width: 50%">
-                            
+
+                          <td style="width: 40%">
+
                             <div class="input-group">
-                           
-                              <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" readonly>
 
-                               <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
+                              <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                              <input type="number" class="form-control input-lg" min="0" id="nuevoDescuento" name="nuevoDescuento" placeholder="0">
 
-                               <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
-
-                              <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-                        
                             </div>
 
                           </td>
 
-                           <td style="width: 50%">
-                            
+                          <td style="width: 30%">
+
                             <div class="input-group">
-                           
+
+                              <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" readonly>
+
+                              <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
+
+                              <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
+
+                              <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+
+                            </div>
+
+                          </td>
+
+                          <td style="width: 50%">
+
+                            <div class="input-group">
+
                               <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
 
                               <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" readonly required>
 
                               <input type="hidden" name="totalVenta" id="totalVenta">
-                              
-                        
+
+
                             </div>
 
                           </td>
@@ -253,23 +255,23 @@ if($_SESSION["perfil"] == "Especial"){
                 ======================================-->
 
                 <div class="form-group row">
-                  
+
                   <div class="col-xs-6" style="padding-right:0px">
-                    
-                     <div class="input-group">
-                  
+
+                    <div class="input-group">
+
                       <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago" required>
                         <option value="">Seleccione método de pago</option>
                         <option value="Efectivo">Efectivo</option>
                         <option value="TC">Tarjeta Crédito</option>
-                        <option value="TD">Tarjeta Débito</option>                  
-                        <option value="TF">Transferencia</option>                  
-                        <option value="MP">Mercado pago </option>                  
-                        <option value="CH">Cheque </option>                  
-                        <option value="PY">Paypal</option>                  
-                        <option value="DOXXO">Deposito oxxo</option>                  
-                        <option value="DBV">Deposito banco/ventanilla</option>                  
-                      </select>    
+                        <option value="TD">Tarjeta Débito</option>
+                        <option value="TF">Transferencia</option>
+                        <option value="MP">Mercado pago </option>
+                        <option value="CH">Cheque </option>
+                        <option value="PY">Paypal</option>
+                        <option value="DOXXO">Deposito oxxo</option>
+                        <option value="DBV">Deposito banco/ventanilla</option>
+                      </select>
 
                     </div>
 
@@ -282,28 +284,28 @@ if($_SESSION["perfil"] == "Especial"){
                 </div>
 
                 <br>
-      
+
               </div>
 
-          </div>
+            </div>
 
-          <div class="box-footer">
+            <div class="box-footer">
 
-            <button type="submit" class="btn btn-primary pull-right">Guardar venta</button>
+              <button type="submit" class="btn btn-primary pull-right">Guardar venta</button>
 
-          </div>
+            </div>
 
-        </form>
+          </form>
 
-        <?php
+          <?php
 
           $guardarVenta = new ControladorVentas();
-          $guardarVenta -> ctrCrearVenta();
-          
-        ?>
+          $guardarVenta->ctrCrearVenta();
+
+          ?>
 
         </div>
-            
+
       </div>
 
       <!--=====================================
@@ -311,20 +313,20 @@ if($_SESSION["perfil"] == "Especial"){
       ======================================-->
 
       <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
-        
+
         <div class="box box-warning">
 
           <div class="box-header with-border"> </div>
 
           <div class="box-body">
 
-          <br>
+            <br>
 
             <table class="table table-bordered table-striped dt-responsive tablaVentas" id="example">
-              
-               <thead>
 
-                 <tr>
+              <thead>
+
+                <tr>
                   <th style="width: 10px">#</th>
                   <th>Imagen</th>
                   <th>Código</th>
@@ -346,8 +348,7 @@ if($_SESSION["perfil"] == "Especial"){
       </div>
 
     </div>
-   
+
   </section>
 
 </div>
-
