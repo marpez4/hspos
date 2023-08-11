@@ -144,6 +144,23 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             </div>
 
                         </div>
+
+                        <!-- STOCK -->
+
+                        <div class="form-group">
+
+                            <label for="">Stock</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+
+                                <input type="number" class="form-control input-lg" id="nuevoStock" name="nuevoStock" required>
+
+                            </div>
+
+                        </div>
+
                         <!-- DESCRIPCIÓN -->
 
                         <div class="form-group">

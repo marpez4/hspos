@@ -82,6 +82,17 @@
 						</a>
 
 					</li>
+
+					<li>
+
+						<a href="codigosProductos">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Códigos productos</span>
+
+						</a>
+
+					</li>
 					
 					</ul>
 			</li>';

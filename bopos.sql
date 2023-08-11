@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-06-02 11:45:24
+Date: 2023-08-11 15:35:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,7 +68,7 @@ CREATE TABLE `bodega` (
   `fecha_apertura` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `tipo` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of bodega
@@ -76,6 +76,8 @@ CREATE TABLE `bodega` (
 INSERT INTO `bodega` VALUES ('1', '', '93', '10', '12', null, '1');
 INSERT INTO `bodega` VALUES ('2', '', '23', '10', '5', '2023-04-24 14:48:08', '1');
 INSERT INTO `bodega` VALUES ('3', '', '24', '5', '0', null, '1');
+INSERT INTO `bodega` VALUES ('4', '', '33', '2', '31', '2023-07-04 13:43:33', '1');
+INSERT INTO `bodega` VALUES ('5', '', '32', '15', '5', '2023-07-11 13:32:42', '0');
 
 -- ----------------------------
 -- Table structure for cabeceras
@@ -345,11 +347,11 @@ CREATE TABLE `clientes` (
 -- ----------------------------
 -- Records of clientes
 -- ----------------------------
-INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', '9', '2023-04-25 11:16:24', '2023-04-25 10:16:24');
+INSERT INTO `clientes` VALUES ('18', 'Sheldon', '3', 'ing.alfonso.marpez@gmail.com', '(477) 645-2888', '12', '2023-07-11 14:23:12', '2023-07-11 13:23:12');
 INSERT INTO `clientes` VALUES ('19', 'Angel Romero', '1', 'angel@gmail.com', '(475) 222-2222', '7', '0000-00-00 00:00:00', '2023-05-11 13:17:39');
 INSERT INTO `clientes` VALUES ('20', 'PAUL GARCIA', '2', 'PAUL@GMAIL.COM', '(477) 522-2222', '22', '0000-00-00 00:00:00', '2023-05-22 13:09:07');
 INSERT INTO `clientes` VALUES ('21', 'Cliente Mostrador', '2', 'na@gmail.com', '(777) 777-7777', '8', '2022-11-10 11:10:38', '2022-11-10 10:10:39');
-INSERT INTO `clientes` VALUES ('61', 'ALFONSO MARTINEZ LOPEZ', '1', 'ing.alfonso.marpez@gmail.com', '(111) 111-1111', '8', '2023-05-31 12:39:23', '2023-05-31 11:41:25');
+INSERT INTO `clientes` VALUES ('61', 'ALFONSO MARTINEZ LOPEZ', '1', 'ing.alfonso.marpez@gmail.com', '(111) 111-1111', '12', '2023-07-03 15:19:09', '2023-07-03 14:19:09');
 INSERT INTO `clientes` VALUES ('62', 'MARCO ANTONIO AGUILAR OLMEDO', '1', 'facturacionhellssystems@gmail.com', '(477) 777-7777', '37', '2023-05-30 12:33:40', '2023-05-30 11:33:40');
 INSERT INTO `clientes` VALUES ('63', 'GUILLERMO RAMIREZ BARAJAS', '1', 'GRAMIREZ@GMAIL.COM', '(475) 522-2222', '9', '0000-00-00 00:00:00', '2023-05-29 13:52:39');
 
@@ -380,6 +382,24 @@ CREATE TABLE `cliente_infofac` (
 INSERT INTO `cliente_infofac` VALUES ('61', 'Eufrasia Pantoja ', '214', '0', 'León II', '37408', null, 'León', 'GUANAJUATO', 'MEXICO', 'MALA941104D14', 'G03', null, '626');
 INSERT INTO `cliente_infofac` VALUES ('62', 'CLAVELES', '208', '0', 'JARDINES DE JEREZ 1A SECCION', '37530', null, 'LEON', 'GUANAJUATO', 'MEXICO', 'AUOM880720FSA', 'G03', null, '626');
 INSERT INTO `cliente_infofac` VALUES ('63', ' VILLA DEL MEZQUITAL ', '129', '0', 'VILLAS SANTA JULIA', '37530', null, 'LEON', 'GUANAJUATO', 'MEXICO', 'RABG7402016H7', 'G03', null, '626');
+
+-- ----------------------------
+-- Table structure for codigos_productos
+-- ----------------------------
+DROP TABLE IF EXISTS `codigos_productos`;
+CREATE TABLE `codigos_productos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` char(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cantidad` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descripcion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_producto` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- ----------------------------
+-- Records of codigos_productos
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for comentarios
@@ -534,6 +554,7 @@ INSERT INTO `comp_prod_factura` VALUES ('74563218', 'LIMPIADOR DE PANTALLAS MARC
 INSERT INTO `comp_prod_factura` VALUES ('21365476', 'PASTA TERMICA PARA PROCESADOR', 'PASTA TERMICA', null, 'H87', '43211805', '.08', '02', '30');
 INSERT INTO `comp_prod_factura` VALUES ('96321548', 'CABLE USB DE 2 MTS. COLOR NEGRO', 'CABLE USB', null, 'H87', '43211805', '0', '02', '31');
 INSERT INTO `comp_prod_factura` VALUES ('85213647', 'CAMARA FOTOGROFICA PROFESIONAL', 'CAMARA', null, 'H87', '43211805', '.08', '02', '32');
+INSERT INTO `comp_prod_factura` VALUES ('753159', 'TELÉFONO INHALAMBRICO CON 30 MTS DE ALCANCE ', 'TELÉFONO ', null, 'H87', '43211805', '.08', '02', '33');
 
 -- ----------------------------
 -- Table structure for corte_caja
@@ -643,7 +664,7 @@ CREATE TABLE `historial_mov_bodega` (
   `fecha_mov` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `id_usuario` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of historial_mov_bodega
@@ -655,6 +676,13 @@ INSERT INTO `historial_mov_bodega` VALUES ('24', '1', '10', '12', '1', '2023-02-
 INSERT INTO `historial_mov_bodega` VALUES ('25', '2', '5', '0', '1', '2023-04-24 22:47:54', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('26', '2', '5', '5', '1', '2023-04-24 22:48:08', '60');
 INSERT INTO `historial_mov_bodega` VALUES ('27', '3', '5', '0', '1', '2023-04-24 23:01:49', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('28', '4', '10', '20', '1', '2023-07-04 20:58:53', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('29', '4', '10', '0', '0', '2023-07-04 20:59:08', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('30', '4', '2', '10', '1', '2023-07-04 21:42:59', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('31', '4', '10', '0', '0', '2023-07-04 21:43:19', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('32', '4', '10', '1', '1', '2023-07-04 21:43:33', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('33', '5', '10', '0', '0', '2023-07-11 21:32:10', '60');
+INSERT INTO `historial_mov_bodega` VALUES ('34', '5', '5', '5', '1', '2023-07-11 21:32:42', '60');
 
 -- ----------------------------
 -- Table structure for pedidospaqueteria
@@ -800,7 +828,7 @@ CREATE TABLE `productosfacturas` (
   `stock` int(255) DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of productosfacturas
@@ -811,10 +839,11 @@ INSERT INTO `productosfacturas` VALUES ('25', 'AUD4231', 'AUDIFONOS', 'AUDIFONOS
 INSERT INTO `productosfacturas` VALUES ('26', 'HUB1873S', 'HUB', 'HUB DE USB MARCA MOCH CON 6 ENTRADAS ', '10', 'vistas/img/productos/default/anonymous.png', null, '300', '410', '325', '320', '44', '2023-05-31 11:39:23');
 INSERT INTO `productosfacturas` VALUES ('27', 'USB8213', 'USB', 'USB DE 250 GB MARCA KINGSTON', '10', 'vistas/img/productos/default/anonymous.png', null, '180', '210', '200', '190', '50', '2023-05-22 13:08:04');
 INSERT INTO `productosfacturas` VALUES ('28', 'RJ45CL', 'CABLE RJ45', 'CABLDE RED COLO ROJO DE 10 MTS.', '10', 'vistas/img/productos/default/anonymous.png', null, '80', '100', '90', '85', '48', '2023-05-31 11:39:23');
-INSERT INTO `productosfacturas` VALUES ('29', 'LIM8192', 'LIMPIADOR DE PANTALLAS', 'LIMPIADOR DE PANTALLAS MARCA PATO', '12', 'vistas/img/productos/default/anonymous.png', null, '100', '130', '120', '110', '50', '2023-05-29 13:52:30');
-INSERT INTO `productosfacturas` VALUES ('30', 'PAS53998', 'PASTA TERMICA', 'PASTA TERMICA PARA PROCESADOR', '10', 'vistas/img/productos/default/anonymous.png', null, '200', '250', '220', '210', '49', '2023-05-29 13:55:58');
-INSERT INTO `productosfacturas` VALUES ('31', 'USBAD8271', 'CABLE USB', 'CABLE USB DE 2 MTS. COLOR NEGRO', '10', 'vistas/img/productos/default/anonymous.png', null, '100', '160', '152', '120', '49', '2023-05-30 11:18:01');
+INSERT INTO `productosfacturas` VALUES ('29', 'LIM8192', 'LIMPIADOR DE PANTALLAS', 'LIMPIADOR DE PANTALLAS MARCA PATO', '12', 'vistas/img/productos/default/anonymous.png', null, '100', '130', '120', '110', '49', '2023-07-03 13:35:58');
+INSERT INTO `productosfacturas` VALUES ('30', 'PAS53998', 'PASTA TERMICA', 'PASTA TERMICA PARA PROCESADOR', '10', 'vistas/img/productos/default/anonymous.png', null, '200', '250', '220', '210', '48', '2023-07-03 13:35:58');
+INSERT INTO `productosfacturas` VALUES ('31', 'USBAD8271', 'CABLE USB', 'CABLE USB DE 2 MTS. COLOR NEGRO', '10', 'vistas/img/productos/default/anonymous.png', null, '100', '160', '152', '120', '46', '2023-07-11 13:23:12');
 INSERT INTO `productosfacturas` VALUES ('32', '7985122', 'CAMARA', 'CAMARA FOTOGROFICA PROFESIONAL', '10', 'vistas/img/productos/default/anonymous.png', null, '10000', '12000', '11000', '10200', null, null);
+INSERT INTO `productosfacturas` VALUES ('33', '753159', 'TELÉFONO ', 'TELÉFONO INHALAMBRICO CON 30 MTS DE ALCANCE ', '10', 'vistas/img/productos/default/anonymous.png', null, '200', '250', '220', '210', '8', '2023-07-11 13:23:12');
 
 -- ----------------------------
 -- Table structure for respuesta_facturacion
@@ -827,14 +856,12 @@ CREATE TABLE `respuesta_facturacion` (
   `estatus` char(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `folio` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of respuesta_facturacion
 -- ----------------------------
 INSERT INTO `respuesta_facturacion` VALUES ('0', 'PHQSjXbnC5AEucKwd8yxRQ2', '2023-05-30 14:34:56', '1', '10001');
-INSERT INTO `respuesta_facturacion` VALUES ('6', 'H9zCHZrwL9LnFNbcVYnHMw2', '2023-05-30 14:35:07', '1', '10003');
-INSERT INTO `respuesta_facturacion` VALUES ('10', 'jz-c0BJOu2_PYeryVUqLSQ2', '2023-05-31 19:43:20', '1', '10004');
 
 -- ----------------------------
 -- Table structure for servicios
@@ -1007,7 +1034,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-05-29 10:45:37', '2023-05-29 09:45:37');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-08-11 11:10:11', '2023-08-11 10:10:11');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 09:56:19');
 
 -- ----------------------------
@@ -1023,20 +1050,20 @@ CREATE TABLE `ventas` (
   `impuesto` float NOT NULL,
   `neto` float NOT NULL,
   `total` float NOT NULL,
+  `descuento` float DEFAULT NULL,
   `metodo_pago` text COLLATE utf8_spanish_ci NOT NULL,
   `esClienteF` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_caja` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of ventas
 -- ----------------------------
-INSERT INTO `ventas` VALUES ('105', '10001', '62', '60', '[{\"id\":\"30\",\"descripcion\":\"PASTA TERMICA PARA PROCESADOR\",\"cantidad\":\"1\",\"stock\":\"49\",\"precio\":\"210\",\"subTotal\":\"210\",\"impuestoFinal\":\"16.80\",\"totalNeto\":226.8,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"21365476\"},{\"id\":\"26\",\"descripcion\":\"HUB DE USB MARCA MOCH CON 6 ENTRADAS \",\"cantidad\":\"2\",\"stock\":\"46\",\"precio\":\"320\",\"subTotal\":\"640\",\"impuestoFinal\":\"51.20\",\"totalNeto\":691.2,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"74185263\"}]', '68', '918', '850', 'TC-78531599', '1', '2023-05-29 13:55:58', '8');
-INSERT INTO `ventas` VALUES ('106', '10002', '62', '60', '[{\"id\":\"31\",\"descripcion\":\"CABLE USB DE 2 MTS. COLOR NEGRO\",\"cantidad\":\"1\",\"stock\":\"49\",\"precio\":\"120\",\"subTotal\":\"120\",\"impuestoFinal\":\"0.00\",\"totalNeto\":120,\"impuesto\":\"0\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"96321548\"}]', '0', '120', '120', 'TC-123577', '1', '2023-05-30 11:18:01', '8');
-INSERT INTO `ventas` VALUES ('107', '10003', '62', '60', '[{\"id\":\"26\",\"descripcion\":\"HUB DE USB MARCA MOCH CON 6 ENTRADAS \",\"cantidad\":\"1\",\"stock\":\"45\",\"precio\":\"320\",\"subTotal\":\"320\",\"impuestoFinal\":\"25.60\",\"totalNeto\":345.6,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"74185263\"}]', '25.6', '345.6', '320', 'Efectivo', '1', '2023-05-30 11:33:40', '8');
-INSERT INTO `ventas` VALUES ('108', '10004', '61', '60', '[{\"id\":\"28\",\"descripcion\":\"CABLDE RED COLO ROJO DE 10 MTS.\",\"cantidad\":\"1\",\"stock\":\"48\",\"precio\":\"85\",\"subTotal\":\"85\",\"impuestoFinal\":\"6.80\",\"totalNeto\":91.8,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"12345676\"},{\"id\":\"26\",\"descripcion\":\"HUB DE USB MARCA MOCH CON 6 ENTRADAS \",\"cantidad\":\"1\",\"stock\":\"44\",\"precio\":\"320\",\"subTotal\":\"320\",\"impuestoFinal\":\"25.60\",\"totalNeto\":345.6,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"74185263\"},{\"id\":\"24\",\"descripcion\":\"MOUSE INALAMBRICO DE 500000 DPIS\",\"cantidad\":\"1\",\"stock\":\"49\",\"precio\":\"410\",\"subTotal\":\"410\",\"impuestoFinal\":\"32.80\",\"totalNeto\":442.8,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"87654321\"},{\"id\":\"23\",\"descripcion\":\"PANTALLA OLED DE 55 PULGADAS CON ANDROID IOS\",\"cantidad\":\"1\",\"stock\":\"47\",\"precio\":\"11000\",\"subTotal\":\"11000\",\"impuestoFinal\":\"880.00\",\"totalNeto\":11880,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"12345678\"}]', '945.2', '12760.2', '11815', 'Efectivo', '1', '2023-05-31 11:39:23', '8');
+INSERT INTO `ventas` VALUES ('109', '10007', '61', '60', '[{\"id\":\"31\",\"descripcion\":\"CABLE USB DE 2 MTS. COLOR NEGRO\",\"cantidad\":\"1\",\"stock\":\"48\",\"precio\":\"120\",\"subTotal\":\"120\",\"impuestoFinal\":\"0.00\",\"totalNeto\":120,\"impuesto\":\"0\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"96321548\"},{\"id\":\"30\",\"descripcion\":\"PASTA TERMICA PARA PROCESADOR\",\"cantidad\":\"1\",\"stock\":\"48\",\"precio\":\"210\",\"subTotal\":\"210\",\"impuestoFinal\":\"16.80\",\"totalNeto\":226.8,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"21365476\"},{\"id\":\"29\",\"descripcion\":\"LIMPIADOR DE PANTALLAS MARCA PATO\",\"cantidad\":\"1\",\"stock\":\"49\",\"precio\":\"110\",\"subTotal\":\"110\",\"impuestoFinal\":\"0.00\",\"totalNeto\":110,\"impuesto\":\"0\",\"taxObj\":\"01\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"74563218\"}]', '16.8', '423.6', '406.8', '50', 'Efectivo', '1', '2023-07-03 14:18:49', '8');
+INSERT INTO `ventas` VALUES ('110', '10008', '61', '60', '[{\"id\":\"31\",\"descripcion\":\"CABLE USB DE 2 MTS. COLOR NEGRO\",\"cantidad\":\"1\",\"stock\":\"47\",\"precio\":\"120\",\"subTotal\":\"120\",\"impuestoFinal\":\"0.00\",\"totalNeto\":120,\"impuesto\":\"0\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"96321548\"}]', '0', '120', '120', '0', 'Efectivo', '1', '2023-07-03 14:19:09', '8');
+INSERT INTO `ventas` VALUES ('111', '10009', '18', '60', '[{\"id\":\"33\",\"descripcion\":\"TELÉFONO INHALAMBRICO CON 30 MTS DE ALCANCE \",\"cantidad\":\"2\",\"stock\":\"8\",\"precio\":\"220\",\"subTotal\":\"440\",\"impuestoFinal\":\"35.20\",\"totalNeto\":475.2,\"impuesto\":\".08\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"753159\"},{\"id\":\"31\",\"descripcion\":\"CABLE USB DE 2 MTS. COLOR NEGRO\",\"cantidad\":\"1\",\"stock\":\"46\",\"precio\":\"152\",\"subTotal\":\"152\",\"impuestoFinal\":\"0.00\",\"totalNeto\":152,\"impuesto\":\"0\",\"taxObj\":\"02\",\"unitCode\":\"43211805\",\"unit\":\"H87\",\"identificationNumber\":\"96321548\"}]', '35.2', '627.2', '592', '0', 'Efectivo', '3', '2023-07-11 13:23:12', '8');
 
 -- ----------------------------
 -- Table structure for visitaspaises

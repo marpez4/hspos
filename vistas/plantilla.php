@@ -161,9 +161,10 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "bodega_mv_detalle" ||
         $_GET["ruta"] == "reporteServicios" ||
         $_GET["ruta"] == "facturacion" ||
+        $_GET["ruta"] == "codigosProductos" ||
         $_GET["ruta"] == "altaProductos" 
       ) {
-
+        
         include "modulos/" . $_GET["ruta"] . ".php";
       } else {
 
@@ -202,6 +203,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/pedidosPaqueteria.js"></script>
   <script src="vistas/js/facturas.js"></script>
   <script src="vistas/js/altaProductos.js"></script>
+  <script src="vistas/js/codigosProductos.js"></script>
 
 </body>
 
