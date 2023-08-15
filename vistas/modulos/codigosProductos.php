@@ -63,7 +63,8 @@ if ($_SESSION["perfil"] == "Vendedor") {
                             <th style="width:10px">#</th>
                             <th>Código</th>
                             <th>Cantidad</th>
-                            <th>Producto</th>
+                            <th>Descripción</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
 
                         </tr>
@@ -87,11 +88,14 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                     <td class="text-uppercase">' . $value["codigo"] . '</td>
                     <td class="text-uppercase">' . $value["cantidad"] . '</td>
+                    <td class="text-uppercase">' . $value["descripcion"] . '</td>
                     <td class="text-uppercase">' . $value["fecha"] . '</td>
 
                     <td>
 
                       <div class="btn-group">
+
+                        <button class="btn btn-default btnVerCPr" idCPr="' . $value["id"] . '"><i class="fa fa-barcode"></i></button>
                           
                         <button class="btn btn-warning btnEditarCategoria" idCategoria="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
 

@@ -42,4 +42,18 @@ class ModeloCodigosProductos
 
         $stmt = null;
     }
+
+    static public function mdlMostrarCodigosProductosPDF($tabla, $id)
+    {
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id = $id");
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }

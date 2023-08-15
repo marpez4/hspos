@@ -15,3 +15,11 @@ $("#btnCrearCodigo").on('click', function (){
 
 
 })
+
+$(".tablas").on("click", ".btnVerCPr", function () {
+    
+    var codigoProducto = $(this).attr("idCPr");
+    
+	window.open("extensiones/tcpdf/pdf/codigos-productos.php?codigo=" + codigoProducto, "_blank");
+
+})

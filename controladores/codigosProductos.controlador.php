@@ -51,4 +51,14 @@ class ControladorCodigosProductos{
         return $respuesta;
 
     }
+
+	static public function ctrMostrarCodigoProductoPDF($id){
+
+        $tabla = "codigos_productos";
+
+        $respuesta = ModeloCodigosProductos::mdlMostrarCodigosProductosPDF($tabla, $id);
+
+        return $respuesta;
+
+    }
 }
