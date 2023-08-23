@@ -56,4 +56,28 @@ class ModeloCodigosProductos
 
         $stmt = null;
     }
+
+    static public function mdlEliminarCodigoB($tabla, $datos){
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE codigo = :id");
+
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+        unlink('extensiones/tcpdf/pdf/codigos/'.$datos.'.png');     
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+    }
 }

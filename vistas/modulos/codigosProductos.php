@@ -62,9 +62,9 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                             <th style="width:10px">#</th>
                             <th>Código</th>
-                            <th>Cantidad</th>
                             <th>Descripción</th>
                             <th>Fecha</th>
+                            <th>Img. Código</th>
                             <th>Acciones</th>
 
                         </tr>
@@ -87,21 +87,25 @@ if ($_SESSION["perfil"] == "Vendedor") {
                     <td>' . ($key + 1) . '</td>
 
                     <td class="text-uppercase">' . $value["codigo"] . '</td>
-                    <td class="text-uppercase">' . $value["cantidad"] . '</td>
                     <td class="text-uppercase">' . $value["descripcion"] . '</td>
                     <td class="text-uppercase">' . $value["fecha"] . '</td>
+                    <td class="text-uppercase">
+                        <a href="extensiones/tcpdf/pdf/codigos/'.$value["codigo"].'.png" target="_blank">
+                         <img src="vistas/img/otros/bardcode.png" class="img-thumbnail" width="60px">
+                        </a>
+                    </td>
 
                     <td>
 
                       <div class="btn-group">
 
-                        <button class="btn btn-default btnVerCPr" idCPr="' . $value["id"] . '"><i class="fa fa-barcode"></i></button>
+                        <button class="btn btn-default btnVerCPr" idCPr="' . $value["id"] . '"><i class="fa fa-barcode"></i></button>';
                           
-                        <button class="btn btn-warning btnEditarCategoria" idCategoria="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
+                        // <button class="btn btn-warning btnEditarCategoria" idCategoria="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
 
                             if ($_SESSION["perfil"] == "Administrador") {
 
-                                echo '<button class="btn btn-danger btnEliminarCategoria" idCategoria="' . $value["id"] . '"><i class="fa fa-times"></i></button>';
+                                echo '<button class="btn btn-danger btnEliminarCodigoB" idCodigoB="' . $value["codigo"] . '"><i class="fa fa-times"></i></button>';
                             }
 
                             echo '</div>  
@@ -193,7 +197,7 @@ MODAL AGREGAR CATEGORÍA
 
                         <!-- ENTRADA PARA CANTDAD -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
 
                             <label for="">Cantidad</label>
 
@@ -205,7 +209,7 @@ MODAL AGREGAR CATEGORÍA
 
                             </div>
 
-                        </div>
+                        </div> -->
 
                         <!-- ENTRADA PARA DESCRIPCION -->
 
@@ -217,7 +221,7 @@ MODAL AGREGAR CATEGORÍA
 
                                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                <textarea class="form-control input-lg" name="nuevaDescripcion" cols="3"></textarea>
+                                <textarea class="form-control input-lg" name="nuevaDescripcion" cols="3" required></textarea>
 
                             </div>
 
@@ -335,7 +339,7 @@ MODAL EDITAR CATEGORÍA
 
 <?php
 
-$borrarCategoria = new ControladorCategorias();
-$borrarCategoria->ctrBorrarCategoria();
+$borrarCodigoB = new ControladorCodigosProductos();
+$borrarCodigoB->ctrEliminarCodigo();
 
 ?>

@@ -61,4 +61,36 @@ class ControladorCodigosProductos{
         return $respuesta;
 
     }
+
+	static public function ctrEliminarCodigo(){
+
+		if(isset($_GET["idCodigoB"])){
+
+			$tabla ="codigos_productos";
+			$datos = $_GET["idCodigoB"];
+
+			$respuesta = ModeloCodigosProductos::mdlEliminarCodigoB($tabla, $datos);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "El código ha sido borrado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+									if (result.value) {
+
+									window.location = "codigosProductos";
+
+									}
+								})
+
+					</script>';
+			}
+		}
+
+	}
 }
