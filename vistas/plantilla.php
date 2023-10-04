@@ -162,6 +162,7 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "reporteServicios" ||
         $_GET["ruta"] == "facturacion" ||
         $_GET["ruta"] == "codigosProductos" ||
+        $_GET["ruta"] == "listaPrecios" ||
         $_GET["ruta"] == "altaProductos" 
       ) {
         

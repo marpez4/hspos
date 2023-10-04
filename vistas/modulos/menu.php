@@ -93,6 +93,17 @@
 						</a>
 
 					</li>
+
+					<li>
+
+						<a href="listaPrecios">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Listas de precios</span>
+
+						</a>
+
+					</li>
 					
 					</ul>
 			</li>';

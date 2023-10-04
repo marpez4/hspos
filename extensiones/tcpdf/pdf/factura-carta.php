@@ -98,6 +98,19 @@ class imprimirFactura
 
 		$pdf->AddPage();
 
+		// Tamaño de la página A4
+		$anchoPagina = 210; // mm
+		$altoPagina = 297; // mm
+
+		// Tamaño de la marca de agua
+		$anchoMarcaDeAgua = 100; // mm
+		$altoMarcaDeAgua = 100; // mm
+
+		// Calcular coordenadas para centrar la marca de agua
+		$x = ($anchoPagina - $anchoMarcaDeAgua) / 2;
+		$y = ($altoPagina - $altoMarcaDeAgua) / 2;
+
+		$pdf->Image('images/marcaAgua.png', $x, $y, $anchoMarcaDeAgua, $altoMarcaDeAgua, '', '', '', false, 300, '', false, false, 0);
 		// ---------------------------------------------------------
 
 		$bloque1 = <<<EOF
@@ -256,7 +269,7 @@ EOF;
 
 			$pdf->writeHTML($bloque4, false, false, false, false, '');
 		}
-		
+
 		$bloque5 = <<<EOF
 
 		<table style="font-size:10px; padding:5px 10px;">
