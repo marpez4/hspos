@@ -1,23 +1,34 @@
-<?php 
-class ControladorApartados{
+<?php
+class ControladorApartados
+{
 
     static public function ctrMostrarApartados($item, $valor)
-	{
+    {
 
-		$tabla = "pagos";
+        $tabla = "pagos";
 
-		$respuesta = ModeloApartados::mdlMostrarApartados($tabla, $item, $valor);
+        $respuesta = ModeloApartados::mdlMostrarApartados($tabla, $item, $valor);
 
-		return $respuesta;
-	} 
+        return $respuesta;
+    }
 
     static public function ctrSumarApartados($item, $valor)
-	{
+    {
 
-		$tabla = "pagos";
+        $tabla = "pagos";
 
-		$respuesta = ModeloApartados::mdlSumarApartados($tabla, $item, $valor);
+        $respuesta = ModeloApartados::mdlSumarApartados($tabla, $item, $valor);
 
-		return $respuesta;
-	} 
+        return $respuesta;
+    }
+
+    static public function ctrMostrarAbonos($item, $valor)
+    {
+
+        $tabla = "pagos";
+
+        $respuesta = ModeloApartados::mdlMostrarAbonos($tabla, $item, $valor);
+
+        return $respuesta;
+    }
 }

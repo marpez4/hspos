@@ -34,21 +34,11 @@
 
                             <div class="form-group row">
 
-                                <!-- NAMEID -->
-
-                                <input type="hidden" value="1" name="nameId">
-
-                                <!-- EXPORTATION -->
-                                <input type="hidden" value="01" name="exportation">
-
-                                <!-- SERIE -->
-                                <input type="hidden" value="Blue" name="serie">
-
-                                <!-- ENTRADA PARA EL NOMBRE -->
+                                <!-- ENTRADA PARA EL FOLIO -->
 
                                 <div class="col-xs-6">
 
-                                    <label for="">Folio</label>
+                                    <label for="">Folio venta</label>
 
                                     <div class="input-group">
 
@@ -60,22 +50,57 @@
 
                                 </div>
 
-                                <!-- ENTRADA PARA EL NOMBRE -->
+                                <!-- ENTRADA PARA TOTAL -->
 
-                                <div class="col-xs-8">
+                                <div class="col-xs-6">
 
-                                    <label for="">Nombre del emisor</label>
+                                    <label for="">Total venta</label>
 
                                     <div class="input-group">
 
-                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
 
-                                        <input type="text" class="form-control input-lg" name="nombreEmisor" id="nombreEmisor" readonly>
+                                        <input type="text" class="form-control input-lg" name="totalVenta" id="totalVenta" readonly>
 
                                     </div>
 
                                 </div>
 
+                                <!-- ENTRADA PARA TOTAL -->
+
+                                <div class="col-xs-6">
+
+                                    <label for="">Total abonado hasta el momento</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+
+                                        <input type="text" class="form-control input-lg" name="totalAbonado" id="totalAbonado" readonly>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- ENTRADA PARA EL ABONO -->
+
+                                <div class="col-xs-8">
+
+                                    <label for="">Nuevo abono</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                                        <input type="number" class="form-control input-lg" name="nuevoAbono" id="nuevoAbono">
+
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                <br>
+                                <br>
                                 <br>
                                 <br>
                                 <br>
@@ -92,13 +117,10 @@
 
                                     <thead>
                                         <tr>
-                                            <th>Cant.</th>
-                                            <th>Claves</th>
-                                            <th>Descripción</th>
-                                            <th>Precio</th>
-                                            <th>Subtotal</th>
-                                            <th>Impuestos</th>
-                                            <th>Total</th>
+                                            <th>Num.</th>
+                                            <th>Fecha</th>
+                                            <th>Abono</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody id="mTableBody"></tbody>
@@ -118,7 +140,7 @@
 
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                        <button type="submit" class="btn btn-primary">Emitir factura</button>
+                        <button type="submit" class="btn btn-primary">Guardar abono</button>
 
                     </div>
 
