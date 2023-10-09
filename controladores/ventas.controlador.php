@@ -126,7 +126,9 @@ class ControladorVentas
 				"total" => $_POST["totalVenta"],
 				"descuento" => $_POST["nuevoDescuento"],
 				"metodo_pago" => $_POST["listaMetodoPago"],
-				"esClienteF" => $_POST["esClienteF"]
+				"esClienteF" => $_POST["esClienteF"],
+				"apartado" => $_POST["checkApartado"],
+				"abono" => $_POST["abono"]
 			);
 
 			$respuesta = ModeloVentas::mdlIngresarVenta($tabla, $datos);
@@ -550,12 +552,12 @@ class ControladorVentas
 	RANGO FECHAS
 	=============================================*/
 
-	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal)
+	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal, $estatus)
 	{
 
 		$tabla = "ventas";
 
-		$respuesta = ModeloVentas::mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal);
+		$respuesta = ModeloVentas::mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal, $estatus);
 
 		return $respuesta;
 	}

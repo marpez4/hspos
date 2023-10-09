@@ -16,6 +16,7 @@ require_once "controladores/cajas.controlador.php";
 require_once "controladores/facturacion.controlador.php";
 require_once "controladores/catalogosSat.controlador.php";
 require_once "controladores/codigosProductos.controlador.php";
+require_once "controladores/apartados.controlador.php";
 
 
 require_once "modelos/usuarios.modelo.php";
@@ -32,6 +33,7 @@ require_once "extensiones/vendor/autoload.php";
 require_once "modelos/facturacion.modelo.php";
 require_once "modelos/catalogosSat.modelo.php";
 require_once "modelos/codigosProductos.modelo.php";
+require_once "modelos/apartados.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

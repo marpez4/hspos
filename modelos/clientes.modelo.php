@@ -172,4 +172,59 @@ class ModeloClientes
 
 		$stmt = null;
 	}
+
+	/*=============================================
+	MOSTRAR CLIENTES MOSTRADOR
+	=============================================*/
+
+	static public function mdlMostrarClientesMostrador($tabla, $item, $valor)
+	{
+
+		if ($item != null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+			$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+			$stmt->execute();
+
+			return $stmt->fetch();
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+	/*=============================================
+	CLIENTES MOSTRADOR
+	=============================================*/
+
+	static public function mdlIngresarCM($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, codigo_venta) VALUES (:nombre, :codigo_venta)");
+
+		$stmt->bindParam(":nombre", $datos["cliente"], PDO::PARAM_STR);
+		$stmt->bindParam(":codigo_venta", $datos["codigo"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			$stmt->closeCursor();
+			return "ok";
+
+		}else{
+
+			$stmt->closeCursor();
+			return "error";
+		
+		}
+
+	}
 }

@@ -210,5 +210,59 @@ class ControladorClientes{
 
 	}
 
+	/*=============================================
+	MOSTRAR CLIENTES MOSTRADOR
+	=============================================*/
+
+	static public function ctrMostrarClientesMostrador($item, $valor){
+
+		$tabla = "clientes_mostrador";
+
+		$respuesta = ModeloClientes::mdlMostrarClientesMostrador($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	// CLIENTES MOSTRADOR
+
+	static public function ctrCrearCM(){
+
+		if(isset($_POST["nuevoCliente"])){
+
+				$tabla = "clientes_mostrador";
+
+				$datos = array(
+					"cliente" => $_POST["nuevoCliente"],
+					"codigo" => $_POST["codigoVenta"]
+				);
+
+				$respuesta = ModeloClientes::mdlIngresarCM($tabla, $datos);
+
+				if($respuesta == "ok"){
+
+					echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "El nombre del cliente ha sido guardado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+									if (result.value) {
+
+										window.open("extensiones/tcpdf/pdf/factura-carta.php?codigo='.$_POST["codigoVenta"].'", "_blank");
+										window.location = "ventas";
+
+									}
+								})
+
+					</script>';
+
+				}
+		}
+
+	}
+
 }
 

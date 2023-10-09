@@ -81,6 +81,21 @@ class imprimirFactura
 
 		$respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
+		if ($respuestaCliente["id"] == 21) {
+
+			$itemCodigo = "codigo_venta";
+			
+			$valorCodigo = $valorVenta;
+
+			$respuestaClienteCM = ControladorClientes::ctrMostrarClientesMostrador($itemCodigo, $valorCodigo);
+
+			$nombreCliente = $respuestaClienteCM["nombre"];
+			
+		} else {
+
+			$nombreCliente = $respuestaCliente["nombre"];
+		}
+
 		//TRAEMOS LA INFORMACIÓN DEL VENDEDOR
 
 		$itemVendedor = "id";
@@ -179,7 +194,7 @@ EOF;
 		
 			<td style="background-color:white; width:390px">
 
-			<u style="color:#3F51B5; font-size:14">Sr.(a): $respuestaCliente[nombre] </u>
+			<u style="color:#3F51B5; font-size:14">Sr.(a): $nombreCliente </u>
 
 			</td>
 

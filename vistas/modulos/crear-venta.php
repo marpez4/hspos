@@ -140,6 +140,9 @@ if ($_SESSION["perfil"] == "Especial") {
 
                     </select>
 
+
+
+
                     <!-- ENTRADA PARA CLIENTE FRECUENTE -->
 
                     <input type="text" class="hidden" id="esClienteF" name="esClienteF" value="">
@@ -154,8 +157,19 @@ if ($_SESSION["perfil"] == "Especial") {
                 </div>
 
                 <!--=====================================
-                ENTRADA PARA AGREGAR PRODUCTO
+                ENTRADA PARA APARTADO
                 ======================================-->
+
+                <div class="form-group">
+
+                  <div class="input-group">
+                    <label>
+                      ¿Es un apartado? &nbsp;
+                    </label>
+                    <input type="checkbox" name="checkApartado" class="minimal checkApartado">
+                  </div>
+                </div>
+                <!--=====================================ENTRADA PARA AGREGAR PRODUCTO======================================-->
 
                 <div class="form-group row nuevoProducto">
 
@@ -281,7 +295,23 @@ if ($_SESSION["perfil"] == "Especial") {
 
                   <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
 
+                  <br>
+                  <br>
+                  <div class="col-xs-4 hidden divAbono">
+
+                    <div class="input-group">
+
+                      <input type="number" min="0" class="form-control checkAbono" id="abono" name="abono" placeholder="Abono del apartado">
+
+                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+
+                    </div>
+
+                  </div>
+
                 </div>
+
+
 
                 <br>
 

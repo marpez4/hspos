@@ -23,7 +23,7 @@ class ModeloVentas
 			return $stmt->fetch();
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC ");
 
 			$stmt->execute();
 
@@ -52,7 +52,30 @@ class ModeloVentas
 			}
 		}
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja, apartado) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja, :apartado)");
+
+		if ($datos["apartado"] == "on") {
+
+			$apartado = 1;
+
+			$fechaActual = new DateTime();
+			$fechaFormateada = $fechaActual->format('Y-m-d H:i:s');
+
+			$stmt2 = Conexion::conectar()->prepare("INSERT INTO pagos (codigo_venta, fecha, total, abono) 
+												   VALUES(:codigo, :fecha, :total, :abono)");
+
+			$stmt2->bindParam(":fecha", $fechaFormateada, PDO::PARAM_STR);
+			$stmt2->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
+			$stmt2->bindParam(":total", $datos["neto"], PDO::PARAM_STR);
+			$stmt2->bindParam(":abono", $datos["abono"], PDO::PARAM_STR);
+
+			$stmt2->execute();
+
+			$stmt2->closeCursor();
+
+		} else {
+			$apartado = 0;
+		}
 
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -65,6 +88,7 @@ class ModeloVentas
 		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
 		$stmt->bindParam(":esClienteF", $datos["esClienteF"], PDO::PARAM_STR);
 		$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);
+		$stmt->bindParam(":apartado", $apartado, PDO::PARAM_INT);
 
 
 		if ($stmt->execute()) {
@@ -75,7 +99,7 @@ class ModeloVentas
 			return "error";
 		}
 
-		$stmt->close();
+		$stmt->closeCursor();
 		$stmt = null;
 	}
 
@@ -138,19 +162,19 @@ class ModeloVentas
 	RANGO FECHAS
 	=============================================*/
 
-	static public function mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal)
+	static public function mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal, $estatus)
 	{
 
 		if ($fechaInicial == null) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id ASC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE apartado = $estatus  ORDER BY id ASC");
 
 			$stmt->execute();
 
 			return $stmt->fetchAll();
 		} else if ($fechaInicial == $fechaFinal) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%'");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%' AND apartado = $estatus");
 
 			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
 
@@ -169,11 +193,11 @@ class ModeloVentas
 
 			if ($fechaFinalMasUno == $fechaActualMasUno) {
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND apartado = $estatus ");
 			} else {
 
 
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal' AND apartado = $estatus ");
 			}
 
 			$stmt->execute();

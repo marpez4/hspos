@@ -1036,9 +1036,19 @@ IMPRIMIR FACTURA
 
 $(".tablas").on("click", ".btnImprimirFactura", function () {
 
-	var codigoVenta = $(this).attr("codigoVenta");
+	if ($(this).attr("id_cliente") == 21 && $(this).attr("registroCM") == "") {
 
-	window.open("extensiones/tcpdf/pdf/factura-carta.php?codigo=" + codigoVenta, "_blank");
+		$("#modalAgregarCM").modal("show");
+
+		$("#codigoVenta").val($(this).attr("codigoVenta"));
+
+	} else {
+
+		var codigoVenta = $(this).attr("codigoVenta");
+
+		window.open("extensiones/tcpdf/pdf/factura-carta.php?codigo=" + codigoVenta, "_blank");
+
+	}
 
 })
 
@@ -1223,7 +1233,7 @@ $(".tablas").on("click", "button.btnAgregarFactura", function () {
 			// 	sumaImpuestos += Number(prod[i].impuestoFinal);
 
 			// }
-			
+
 			$("#subtotalNeto").val(sumaSubtotal);
 			$("#totalNeto").val(sumaTotal);
 			$("#impuestosNeto").val(sumaImpuestos);
@@ -1232,7 +1242,7 @@ $(".tablas").on("click", "button.btnAgregarFactura", function () {
 
 })
 
-function agregarDescuento(){
+function agregarDescuento() {
 
 	var descuento = $("#nuevoDescuento").val();
 	var precioTotal = $("#nuevoPrecioNeto").val();
@@ -1249,11 +1259,24 @@ function agregarDescuento(){
 CUANDO CAMBIA EL DESCUENTO
 =============================================*/
 
-$("#nuevoDescuento").change(function(){
+$("#nuevoDescuento").change(function () {
 
 	agregarDescuento();
 
 });
+
+$(".checkApartado").on("ifChecked", function () {
+	console.log("aqui");
+	$(".divAbono").removeClass("hidden");
+	$("#abono").attr("required", true);
+
+})
+
+$(".checkApartado").on("ifUnchecked", function () {
+	console.log("aqui2");
+	$(".divAbono").addClass("hidden");
+	$("#abono").attr("required", false);
+})
 
 // $(".btnAgregarFactura").on("click", function () {
 

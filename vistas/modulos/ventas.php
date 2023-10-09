@@ -122,7 +122,9 @@ if ($xml) {
               $fechaFinal = null;
             }
 
-            $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+            $estatusApartados = 0;
+
+            $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal, $estatusApartados);
 
             foreach ($respuesta as $key => $value) {
 
@@ -158,7 +160,7 @@ if ($xml) {
 
                   <td>
 
-                    <div class="btn-group">';
+                    <div class="btn-group">';            
 
               $respuestaFolio = ControladorFacturacion::ctrMostrarFacturasEmitidas($value["codigo"]);
 
@@ -170,7 +172,13 @@ if ($xml) {
                 echo '<button class="btn btn-default disabled "><i class="fa fa-address-card"></i></button>';
               }
 
-              echo '<button class="btn btn-info btnImprimirFactura" codigoVenta="' . $value["codigo"] . '">
+              // CONSULTAR LOS CLIENTES DE MOSTRADOR 
+
+              $item = "codigo_venta";
+
+              $respuestaClienteMostrador = ControladorClientes::ctrMostrarClientesMostrador($item, $value["codigo"]);
+
+              echo '<button class="btn btn-info btnImprimirFactura" id_cliente="'.$value["id_cliente"].'" registroCM = "'.$respuestaClienteMostrador["codigo_venta"].'" codigoVenta="' . $value["codigo"] . '">
 
                         <i class="fa fa-print"></i>
 
@@ -203,7 +211,9 @@ if ($xml) {
 
         // SOLICITAMOS EL MODAL PARA LA AGREGAR LA FACURA
 
-        require_once "/modals/modal-agregarFactura.php"
+        require_once "/modals/modal-agregarFactura.php";
+        require_once "cliente_mostrador.php";
+                
 
         ?>
 

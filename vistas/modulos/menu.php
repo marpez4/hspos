@@ -44,7 +44,7 @@
 
 			</li>';
 
-			echo '<li class="treeview">
+				echo '<li class="treeview">
 
 				<a href="#">
 
@@ -163,7 +163,18 @@
 
 						</a>
 
-					</li>';
+					</li>
+					<li>
+
+						<a href="apartados">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Apartados</span>
+
+						</a>
+
+					</li>
+					';
 
 				if ($_SESSION["perfil"] == "Administrador") {
 
