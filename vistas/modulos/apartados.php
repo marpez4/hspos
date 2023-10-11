@@ -172,7 +172,7 @@ if ($xml) {
 
                             $respuestaClienteMostrador = ControladorClientes::ctrMostrarClientesMostrador($item, $value["codigo"]);
 
-                            echo '<button class="btn btn-primary btnVerPagos" data-toggle="modal" data-target="#modalAgregarAbono" codigoVentaAp="' . $value["codigo"] . '">
+                            echo '<button class="btn btn-primary btnVerPagos" id="abrirModalBtn" data-toggle="modal" data-target="#modalAgregarAbono" onclick="verTabla(' . $value["codigo"] . ')">
 
                             <i class="fa fa-handshake-o"></i>
 

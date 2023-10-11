@@ -5,6 +5,77 @@ class ModeloApartados
 {
 
     /*=============================================
+	CREAR ABONO
+	=============================================*/
+
+    static public function mdlCrearAbono($tabla, $datos)
+    {
+
+        $fechaActual = new DateTime();
+        $fechaFormateada = $fechaActual->format('Y-m-d H:i:s');
+
+        $stmtA = Conexion::conectar()->prepare("SELECT * FROM pagos WHERE codigo_venta = $datos[folio]");
+
+        $stmtA->execute();
+
+        $abonadoBD = 0;
+        $abonadoR = 0;
+
+        foreach ($stmtA as $value) {
+
+            $abonadoBD += $value["abono"];
+
+            $abonadoR = $abonadoBD + $datos["abono"];
+        }
+
+        if ($abonadoR == $datos["totalVenta"]) {
+
+            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo_venta, total, fecha, abono, abonado) VALUES (:folio, :total, :fecha, :abono, :abonado)");
+
+            $stmt->bindParam(":folio", $datos["folio"], PDO::PARAM_STR);
+            $stmt->bindParam(":total", $datos["totalVenta"], PDO::PARAM_STR);
+            $stmt->bindParam(":fecha", $fechaFormateada, PDO::PARAM_STR);
+            $stmt->bindParam(":abono", $datos["abono"], PDO::PARAM_STR);
+            $stmt->bindParam(":abonado", $abonadoR, PDO::PARAM_STR);
+
+            $stmtU = Conexion::conectar()->prepare("UPDATE ventas SET apartado = 0 WHERE codigo = $datos[folio]");
+
+            $stmtU->execute();
+
+            if ($stmt->execute()) {
+
+                return "ok";
+            } else {
+
+                return "error";
+            }
+            $stmt->close();
+            $stmt = null;
+
+            
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo_venta, total, fecha, abono, abonado) VALUES (:folio, :total, :fecha, :abono, :abonado)");
+
+            $stmt->bindParam(":folio", $datos["folio"], PDO::PARAM_STR);
+            $stmt->bindParam(":total", $datos["totalVenta"], PDO::PARAM_STR);
+            $stmt->bindParam(":fecha", $fechaFormateada, PDO::PARAM_STR);
+            $stmt->bindParam(":abono", $datos["abono"], PDO::PARAM_STR);
+            $stmt->bindParam(":abonado", $abonadoR, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+
+                return "ok";
+            } else {
+
+                return "error";
+            }
+            $stmt->close();
+            $stmt = null;
+        }
+    }
+
+    /*=============================================
 	MOSTRAR APARTADOS
 	=============================================*/
 

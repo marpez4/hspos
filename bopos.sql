@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2023-10-09 13:02:22
+Date: 2023-10-11 15:57:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -711,15 +711,16 @@ CREATE TABLE `pagos` (
   `total` float(255,0) DEFAULT NULL,
   `fecha` timestamp NULL DEFAULT NULL,
   `abono` float DEFAULT NULL,
+  `abonado` float(255,0) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- ----------------------------
 -- Records of pagos
 -- ----------------------------
-INSERT INTO `pagos` VALUES ('1', '10013', '378', '2023-10-06 10:09:35', '200');
-INSERT INTO `pagos` VALUES ('2', '10014', '1800', '2023-10-09 11:08:41', '1000');
-INSERT INTO `pagos` VALUES ('3', '10014', '1800', '2023-10-09 11:08:41', '200');
+INSERT INTO `pagos` VALUES ('1', '10014', '1800', '2023-10-11 10:32:45', '1000', null);
+INSERT INTO `pagos` VALUES ('25', '10014', '1800', '2023-10-11 23:25:19', '300', '1300');
+INSERT INTO `pagos` VALUES ('26', '10014', '1800', '2023-10-11 23:25:29', '100', '1400');
 
 -- ----------------------------
 -- Table structure for pedidospaqueteria
@@ -1071,7 +1072,7 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-10-02 12:56:07', '2023-10-02 11:56:07');
+INSERT INTO `usuarios` VALUES ('60', 'Alfonso Martinez Lopez', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', '', '1', '2023-10-11 10:35:17', '2023-10-11 09:35:17');
 INSERT INTO `usuarios` VALUES ('61', 'VendedorTest', 'vendedor', '$2a$07$asxx54ahjppf45sd87a5aumawKBqkKu/t5yVn5oVpbu8.I0unXqba', 'Vendedor', '', '1', '2022-04-27 10:56:19', '2022-04-27 09:56:19');
 
 -- ----------------------------

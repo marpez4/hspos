@@ -61,6 +61,7 @@
                                         <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
 
                                         <input type="text" class="form-control input-lg" name="totalVenta" id="totalVenta" readonly>
+                                        <input type="hidden" name="totalVentaB" id="totalVentaB">
 
                                     </div>
 
@@ -82,6 +83,23 @@
 
                                 </div>
 
+                                <!-- ENTRADA PARA TOTAL -->
+
+                                <div class="col-xs-6">
+
+                                    <label for="">Faltante</label>
+
+                                    <div class="input-group">
+
+                                        <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+
+                                        <input type="text" class="form-control input-lg" name="faltante" id="faltante" readonly>
+                                        <input type="hidden" name="faltanteB" id="faltanteB">
+
+                                    </div>
+
+                                </div>
+
                                 <!-- ENTRADA PARA EL ABONO -->
 
                                 <div class="col-xs-8">
@@ -97,12 +115,20 @@
                                     </div>
 
                                 </div>
+                                
+                                
+                                <div style="padding: 1em; text-align: right;" class="col-xs-12">
+                                 
+                                    <button type="submit" class="btn btn-primary">Guardar abono</button>
 
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
+                                </div>
+
+                                <?php
+
+                                $crearAbono = new ControladorApartados();
+                                $crearAbono->ctrCrearAbono();
+
+                                ?>
                                 <br>
 
                                 <div style="margin-top:5em">
@@ -140,16 +166,8 @@
 
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                        <button type="submit" class="btn btn-primary">Guardar abono</button>
-
                     </div>
 
-                    <?php
-
-                    // $crearfactura = new ControladorFacturacion();
-                    // $crearfactura->ctrEmitirfactura();
-
-                    ?>
 
                 </form>
 
