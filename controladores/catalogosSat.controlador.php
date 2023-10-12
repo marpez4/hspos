@@ -7,7 +7,7 @@ class ControladorCatalogosSat
     static public function ctrMostrarClaves($item, $valor)
     {
 
-        $tabla = "catalogoclavesSat";
+        $tabla = "catalogoclavessat";
 
         $respuesta = ModeloCatalogosSat::mdlMostrarCatalogoSat($tabla, $item, $valor);
 
@@ -19,7 +19,7 @@ class ControladorCatalogosSat
     static public function ctrMostrarUnidades($item, $valor)
     {
 
-        $tabla = "catalogounidaesSat";
+        $tabla = "catalogounidaessat";
 
         $respuesta = ModeloCatalogosSat::mdlMostrarCatalogoSat($tabla, $item, $valor);
 

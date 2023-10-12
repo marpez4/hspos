@@ -23,8 +23,8 @@ class ModeloPedidosPaqueteria
         $stmt->bindParam(":referencias", $datos["referencias"], PDO::PARAM_STR);
         $stmt->bindParam(":archivo", $datos["archivo"], PDO::PARAM_STR);
 
-        // $para = 'soporte_hell@hotmail.com';
-        $para = 'ponchomarpez@gmail.com';
+        $para = 'soporte_hell@hotmail.com';
+        // $para = 'ponchomarpez@gmail.com';
         $asunto = 'Nuevo servicio de paquetería';
         // URL de la imagen del logotipo
         $logo_url = 'https://hellssystems.com/resources/logo.png';
@@ -60,7 +60,7 @@ class ModeloPedidosPaqueteria
         // Cabeceras del correo
         $cabeceras = 'MIME-Version: 1.0' . "\r\n";
         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $cabeceras .= 'From: tu_nombre <sistemas@hellssystems.com>' . "\r\n";
+        $cabeceras .= 'From: Servicios electrónicos HSPOS<sistemas@hellssystems.com>' . "\r\n";
 
         // Envía el correo
         $mail_enviado = mail($para, $asunto, $mensaje, $cabeceras);
