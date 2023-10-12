@@ -139,7 +139,7 @@ GRÁFICO DE VENTAS
                                     #Capturamos sólo el año y el mes
                                     $fecha = substr($value["fecha_entrega"], 0, 10);
 
-                                    var_dump($fecha);
+                                    // var_dump($fecha);
 
                                     #Introducir las fechas en arrayFechas
                                     array_push($arrayFechas, $fecha);

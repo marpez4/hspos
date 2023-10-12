@@ -17,8 +17,8 @@ class ModeloProductos
 			$stmt = Conexion::conectar()->prepare("SELECT
 												   	*
 												   FROM
-												   	$tabla P
-												   JOIN comp_prod_factura CPF ON P.id = CPF.id_producto
+												   	$tabla p
+												   JOIN comp_prod_factura CPF ON p.id = CPF.id_producto
 												   WHERE
 												   	p.id = :$item ORDER BY id DESC");			
 
