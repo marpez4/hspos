@@ -512,7 +512,7 @@ MODAL AGREGAR CLIENTE
 
                             <?php
 
-                            $tabla = "catalogoEstados";
+                            $tabla = "catalogoestados";
 
                             $regimen = ControladorFacturacion::ctrMostrarCatalogos($tabla);
 
