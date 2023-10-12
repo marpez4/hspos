@@ -84,13 +84,12 @@ class imprimirFactura
 		if ($respuestaCliente["id"] == 21) {
 
 			$itemCodigo = "codigo_venta";
-			
+
 			$valorCodigo = $valorVenta;
 
 			$respuestaClienteCM = ControladorClientes::ctrMostrarClientesMostrador($itemCodigo, $valorCodigo);
 
 			$nombreCliente = $respuestaClienteCM["nombre"];
-			
 		} else {
 
 			$nombreCliente = $respuestaCliente["nombre"];
@@ -125,7 +124,7 @@ class imprimirFactura
 		$x = ($anchoPagina - $anchoMarcaDeAgua) / 2;
 		$y = ($altoPagina - $altoMarcaDeAgua) / 2;
 
-		$pdf->Image('images/marcaAgua.png', $x, $y, $anchoMarcaDeAgua, $altoMarcaDeAgua, '', '', '', false, 300, '', false, false, 0);
+		$pdf->Image('https://hellssystems.com/resources/marcaAgua.png', $x, $y, $anchoMarcaDeAgua, $altoMarcaDeAgua, '', '', '', false, 300, '', false, false, 0);
 		// ---------------------------------------------------------
 
 		$bloque1 = <<<EOF
@@ -134,7 +133,7 @@ class imprimirFactura
 		
 		<tr>
 			
-			<td style="width:150px"><img src="images/logo-negro-bloque3.png"></td>
+			<td style="width:150px"><img src="https://hellssystems.com/resources/logoWeb.png"></td>
 
 			<td style="background-color:white; width:140px">
 				

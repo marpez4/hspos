@@ -144,7 +144,7 @@ class imprimirFactura
 		
 		<tr>
 			
-            <td style="width:150px"><img src="images/logo-negro-bloque3.png"></td>
+            <td style="width:150px"><img src="https://hellssystems.com/resources/logoWeb.png"></td>
 
 			<td style="background-color:white; width:140px">
 				
