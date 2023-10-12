@@ -50,7 +50,7 @@ class ModeloPedidosPaqueteria
         </head>
         <body>
             <div class="container">
-                <img src="' . $logo_url . '" alt="Logotipo" style="max-width: 100%; height: auto;">
+                <img src="' . $logo_url . '" alt="Logotipo" style="max-width: 25%; height: auto;">
                 <h1 style="color: #333;">Nuevo servicio de paquetería abierto.</h1>
                 <p style="color: #666;">Hola buen día, se ha subido un nuevo servicio de paquetería del cliente ' . $datos["nombre"] . ', para más información ingresa al sistema.</p>
             </div>
