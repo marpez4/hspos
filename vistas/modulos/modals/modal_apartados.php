@@ -139,7 +139,7 @@
 
                                 <h4>Listado de abonos</h4>
 
-                                <table style="width: 100%;" border="1">
+                                <table class="table table-bordered table-striped dt-responsive tablas" style="width: 100%;" border="1">
 
                                     <thead>
                                         <tr>

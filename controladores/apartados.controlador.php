@@ -59,21 +59,39 @@ class ControladorApartados
 
                     echo '<script>
 
-					swal({
-						  type: "success",
-						  title: "El abono ha sido guardado correctamente",
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar"
-						  }).then(function(result){
-									if (result.value) {
-                                        
-                                        $("#modalAgregarAbono").modal("show");
-                                        
-                                        verTabla('.$_POST["folio"].'); 
-									}
-								})
+                	swal({
+                		  type: "success",
+                		  title: "El abono ha sido guardado correctamente",
+                		  showConfirmButton: true,
+                		  confirmButtonText: "Cerrar"
+                		  }).then(function(result){
+                					if (result.value) {
 
-					</script>';
+                                        $("#modalAgregarAbono").modal("show");
+
+                                        verTabla(' . $_POST["folio"] . '); 
+                					}
+                				})
+
+                	</script>';
+                } else if(is_numeric($respuesta)){
+                    echo '<script>
+
+                	swal({
+                		  type: "success",
+                		  title: "El abono ha sido guardado correctamente y la venta se completo",
+                		  showConfirmButton: true,
+                		  confirmButtonText: "Cerrar"
+                		  }).then(function(result){
+                					if (result.value) {
+
+                                        window.open("extensiones/tcpdf/pdf/factura_abono.php?codigo=" + ' . $_POST["folio"] . ' + "&idAbono=' . $respuesta . '", "_blank");
+
+                                        window.location = "apartados";
+                					}
+                				})
+
+                	</script>';
                 }
             }
         }
@@ -106,6 +124,14 @@ class ControladorApartados
 
         $respuesta = ModeloApartados::mdlMostrarAbonos($tabla, $item, $valor);
 
+        return $respuesta;
+    }
+
+    static public function ctrBorrarAbono($item, $valor)
+    {
+
+        $tabla = "pagos";
+        $respuesta = ModeloApartados::mdlBorrarAbonos($tabla, $item, $valor);
         return $respuesta;
     }
 }

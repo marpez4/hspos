@@ -38,21 +38,27 @@ class ModeloApartados
             $stmt->bindParam(":abono", $datos["abono"], PDO::PARAM_STR);
             $stmt->bindParam(":abonado", $abonadoR, PDO::PARAM_STR);
 
+            $stmt->execute();
+
             $stmtU = Conexion::conectar()->prepare("UPDATE ventas SET apartado = 0 WHERE codigo = $datos[folio]");
 
             $stmtU->execute();
 
-            if ($stmt->execute()) {
+            $stmtI = Conexion::conectar()->prepare("SELECT MAX(id) AS id FROM $tabla");
 
-                return "ok";
+
+            if ($stmtI->execute()) {
+
+                $result = $stmtI->fetch(); // Obtener el resultado
+                $idAbono = $result["id"];
+                return $idAbono;
+                
             } else {
 
                 return "error";
             }
             $stmt->close();
             $stmt = null;
-
-            
         } else {
 
             $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo_venta, total, fecha, abono, abonado) VALUES (:folio, :total, :fecha, :abono, :abonado)");
@@ -144,6 +150,24 @@ class ModeloApartados
         }
 
         $stmt->closeCursor();
+
+        $stmt = null;
+    }
+    static public function mdlBorrarAbonos($tabla, $item, $valor)
+    {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = :id");
+
+        $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
 
         $stmt = null;
     }

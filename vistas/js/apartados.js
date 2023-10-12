@@ -72,7 +72,7 @@ function verTabla(codigoVentaAp) {
                     '<td align="center">' + num + '</td>' +
                     '<td>' + r.fecha + '</td>' +
                     '<td>' + Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(r.abono) + '</td>' +
-                    '<td><button class="btn btn-primary" onclick="verDocumento('+codigoVenta+', '+r.id+')"><i class="fa fa-print"></i></button><button class="btn btn-danger btnEditarVenta1""><i class="fa fa-times"></i></button></td>' +
+                    '<td><a class="btn btn-primary" onclick="verDocumento(' + codigoVenta + ', ' + r.id + ')"><i class="fa fa-print"></i></a><a class="btn btn-danger btnEliminarAbono" folio="' + codigoVenta + '" idAbono="' + r.id + '"><i class="fa fa-times"></i></a></td>' +
                     '</tr>';
 
                 tbody.innerHTML += filaNueva;
@@ -85,8 +85,63 @@ function verTabla(codigoVentaAp) {
 
 }
 
-function verDocumento(codigoVenta, idAbono){
+function verDocumento(codigoVenta, idAbono) {
 
-    window.open("extensiones/tcpdf/pdf/factura_abono.php?codigo=" + codigoVenta + "&idAbono="+idAbono, "_blank");
+    window.open("extensiones/tcpdf/pdf/factura_abono.php?codigo=" + codigoVenta + "&idAbono=" + idAbono, "_blank");
 
 }
+
+
+/*=============================================
+ELIMINAR CATEGORIA
+=============================================*/
+$(".tablas").on("click", ".btnEliminarAbono", function () {
+
+    var idAbono = $(this).attr("idAbono");
+
+    var folio = $(this).attr("folio");
+
+    var datos = new FormData();
+	datos.append("idAbono", idAbono);
+
+    swal({
+        title: '¿Está seguro de borrar el abono?',
+        text: "¡Si no lo está puede cancelar la acción!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar el abono!'
+    }).then(function (result) {
+
+        if (result.value) {
+
+            $.ajax({
+
+                url: "ajax/apartados.ajax.php",
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (respuesta) {
+                    console.log(respuesta);
+                    if (respuesta == "ok") {
+
+                        $("#modalAgregarAbono").modal("show");
+
+                        verTabla(folio);
+
+                    } else {
+
+                    }
+                }
+            })
+
+        }
+
+    })
+
+})
