@@ -52,11 +52,26 @@ class ModeloVentas
 			}
 		}
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja, apartado) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja, :apartado)");
-
 		if ($datos["apartado"] == "on") {
 
 			$apartado = 1;
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja, apartado) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja, :apartado)");
+
+			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_vendedor", $datos["id_vendedor"], PDO::PARAM_INT);
+			$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
+			$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
+			$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
+			$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
+			$stmt->bindParam(":descuento", $datos["descuento"], PDO::PARAM_STR);
+			$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
+			$stmt->bindParam(":esClienteF", $datos["esClienteF"], PDO::PARAM_STR);
+			$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);
+			$stmt->bindParam(":apartado", $apartado, PDO::PARAM_INT);
+
+			$stmt->execute();
 
 			$fechaActual = new DateTime();
 			$fechaFormateada = $fechaActual->format('Y-m-d H:i:s');
@@ -69,38 +84,41 @@ class ModeloVentas
 			$stmt2->bindParam(":total", $datos["neto"], PDO::PARAM_STR);
 			$stmt2->bindParam(":abono", $datos["abono"], PDO::PARAM_STR);
 
-			$stmt2->execute();
+			if ($stmt2->execute()) {
 
-			$stmt2->closeCursor();
+				return "ok";
+			} else {
 
+				return "error";
+			}
 		} else {
+
 			$apartado = 0;
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_cliente, id_vendedor, productos, impuesto, neto, total, descuento, metodo_pago, esClienteF, id_caja, apartado) VALUES (:codigo, :id_cliente, :id_vendedor, :productos, :impuesto, :neto, :total, :descuento, :metodo_pago, :esClienteF, :idCaja, :apartado)");
+
+			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_vendedor", $datos["id_vendedor"], PDO::PARAM_INT);
+			$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
+			$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
+			$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
+			$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
+			$stmt->bindParam(":descuento", $datos["descuento"], PDO::PARAM_STR);
+			$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
+			$stmt->bindParam(":esClienteF", $datos["esClienteF"], PDO::PARAM_STR);
+			$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);
+			$stmt->bindParam(":apartado", $apartado, PDO::PARAM_INT);
+
+			if ($stmt->execute()) {
+
+				return "ok";
+			} else {
+
+				return "error";
+			}
+
 		}
-
-		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
-		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
-		$stmt->bindParam(":id_vendedor", $datos["id_vendedor"], PDO::PARAM_INT);
-		$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
-		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
-		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
-		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
-		$stmt->bindParam(":descuento", $datos["descuento"], PDO::PARAM_STR);
-		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
-		$stmt->bindParam(":esClienteF", $datos["esClienteF"], PDO::PARAM_STR);
-		$stmt->bindParam(":idCaja", $idCaja, PDO::PARAM_STR);
-		$stmt->bindParam(":apartado", $apartado, PDO::PARAM_INT);
-
-
-		if ($stmt->execute()) {
-
-			return "ok";
-		} else {
-
-			return "error";
-		}
-
-		$stmt->closeCursor();
-		$stmt = null;
 	}
 
 	/*=============================================
