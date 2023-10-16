@@ -185,7 +185,7 @@ class ModeloVentas
 
 		if ($fechaInicial == null) {
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE apartado = $estatus  ORDER BY id ASC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE apartado = $estatus ORDER BY id ASC");
 
 			$stmt->execute();
 

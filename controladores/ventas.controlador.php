@@ -571,11 +571,13 @@ class ControladorVentas
 
 		if (isset($_GET["reporte"])) {
 
+			$estatus = 0;
+
 			$tabla = "ventas";
 
 			if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
 
-				$ventas = ModeloVentas::mdlRangoFechasVentas($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"]);
+				$ventas = ModeloVentas::mdlRangoFechasVentas($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"], $estatus);
 			} else {
 
 				$item = null;
