@@ -34,3 +34,65 @@ $('.tablaAltaProductos').DataTable({
 	}
 
 });
+
+$(".tablaAltaProductos tbody").on("click", "button.btnEliminarProducto", function () {
+
+	var datos = new FormData();
+	datos.append("idProductoDelete", $(this).attr("idProducto"));
+
+	console.log("datos", $(this).attr("idProducto"));
+
+	swal({
+
+		title: '¿Está seguro de borrar el producto?',
+		text: "¡Si no lo está puede cancelar la accíón!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Si, borrar producto!'
+	}).then(function (result) {
+		if (result.value) {
+
+			$.ajax({
+
+				type: "POST",
+				url: "ajax/productos.ajax.php",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function (response) {
+
+					if (response == "ok") {
+
+						swal({
+
+							type: 'success',
+							title: '¡El producto ha sido borrado!',
+							showConfirmButton: true,
+							confirmButtonText: 'Cerrar'
+
+						}).then(function (result) {
+
+							if (result.value) {
+
+								window.location = "altaProductos";
+
+							}
+
+						});
+
+					}
+
+				}
+
+			})
+
+		}
+
+	})
+
+})

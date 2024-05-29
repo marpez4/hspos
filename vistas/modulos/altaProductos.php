@@ -509,7 +509,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         foreach ($catalogo1 as $key => $value) {
 
-                                            echo '<option value="' .$value["unidad"] . '">' . $value["unidad"] ."-".$value["nombre"]  . '</option>';
+                                            echo '<option value="' . $value["unidad"] . '">' . $value["unidad"] . "-" . $value["nombre"]  . '</option>';
                                         }
 
                                         ?>
@@ -541,7 +541,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         foreach ($catalogo2 as $key => $value) {
 
-                                            echo '<option value="' .$value["clave"] . '">' . $value["clave"] ."-". $value["descripcion"]  . '</option>';
+                                            echo '<option value="' . $value["clave"] . '">' . $value["clave"] . "-" . $value["descripcion"]  . '</option>';
                                         }
 
                                         ?>
@@ -621,3 +621,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
     </div>
 
 </div>
+
+<?php
+include "modals/modalEditarProducto.php";
+?>

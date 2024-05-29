@@ -515,4 +515,11 @@ class ControladorProductos
 
 		return $respuesta;
 	}
+
+	static public function ctrEliminarProductoReal($valor){
+
+		$respuesta = ModeloProductos::mdlEliminarProductoReal($valor);
+		return $respuesta;
+
+	}
 }

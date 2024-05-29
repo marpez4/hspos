@@ -428,4 +428,33 @@ class ModeloProductos
 
 		// echo $table;
 	}
+
+	static public function mdlEliminarProductoReal($valor){
+		
+		$stmt = Conexion::conectar()->prepare("DELETE FROM productosfacturas WHERE id = :id");
+
+		$stmt->bindParam(":id", $valor, PDO::PARAM_INT);
+
+		$stmt2 = Conexion::conectar()->prepare("DELETE FROM comp_prod_factura WHERE id_producto = :id");
+
+		$stmt2->bindParam(":id", $valor, PDO::PARAM_INT);
+
+		$stmt2->execute();
+
+		$stmt3 = Conexion::conectar()->prepare("DELETE FROM comp_prod_factura WHERE id_producto = :id");
+
+		$stmt3->bindParam(":id", $valor, PDO::PARAM_INT);
+
+		if ($stmt->execute()) {
+
+			return "ok";
+		} else {
+
+			return "error";
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
 }

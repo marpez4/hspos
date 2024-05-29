@@ -34,6 +34,8 @@ class AjaxProductos{
   public $traerProductos;
   public $nombreProducto;
   public $filtroCategoriaC;
+  public $idProductoEliminar;
+
 
   public function ajaxEditarProducto(){
 
@@ -73,6 +75,17 @@ class AjaxProductos{
 
     }
 
+  }
+
+  public function ajaxEliminarProducto(){
+
+      $valor = $this->idProductoEliminar;
+  
+      $respuesta = ControladorProductos::ctrEliminarProductoReal($valor);
+  
+      echo  json_encode($respuesta);
+  
+    
   }
 }
 
@@ -122,6 +135,18 @@ if(isset($_POST["nombreProducto"])){
   $traerProductos -> nombreProducto = $_POST["nombreProducto"];
   $traerProductos -> ajaxEditarProducto();
 
+}
+
+/*=============================================
+ELIMINAR PRODUCTO
+=============================================*/
+
+if(isset($_POST["idProductoDelete"])){
+
+  $eliminarProducto = new AjaxProductos();
+  $eliminarProducto -> idProductoEliminar = $_POST["idProductoDelete"];
+  $eliminarProducto -> ajaxEliminarProducto();
+  
 }
 
 
