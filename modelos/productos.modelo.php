@@ -20,7 +20,7 @@ class ModeloProductos
 												   	$tabla p
 												   JOIN comp_prod_factura CPF ON p.id = CPF.id_producto
 												   WHERE
-												   	p.id = :$item ORDER BY id DESC");			
+												   	p.id = :$item ORDER BY id DESC");
 
 			$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
@@ -147,41 +147,65 @@ class ModeloProductos
 
 		if ($datos["marca"] == "") {
 
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml  WHERE codigo = :codigo");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, descripcion = :descripcion, id_categoria = :id_categoria, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml WHERE id = :id_producto");
 
-			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
+			$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
 			$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
 			$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_ml", $datos["precio_ml"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_producto", $datos["id"], PDO::PARAM_INT);
+
+			$stmt->execute();
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml, marca = :marca, ram = :ram, procesador = :procesador, tam_pantalla = :tam_pantalla, graficos = :graficos, ssd = :ssd, hhd = :hhd WHERE codigo = :codigo");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, nombre = :nombre, descripcion = :descripcion, id_categoria = :id_categoria, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta, precio_cliente = :precio_cliente, precio_ml = :precio_ml WHERE id = :id_producto");
 
-			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
+			$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 			$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 			$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
-			$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
-			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":precio_ml", $datos["precio_ml"], PDO::PARAM_STR);
-			$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
-			$stmt->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
-			$stmt->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
-			$stmt->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
-			$stmt->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);
-			$stmt->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
-			$stmt->bindParam(":hhd", $datos["hhd"], PDO::PARAM_STR);
+			$stmt->bindParam(":precio_cliente", $datos["precio_cliente"], PDO::PARAM_STR);
+			$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_producto", $datos["id"], PDO::PARAM_INT);
+
+			$stmt->execute();
+
+			$stmt2 = Conexion::conectar()->prepare("UPDATE complemento_producto SET marca = :marca, ram = :ram, procesador = :procesador, tam_pantalla = :tam_pantalla, graficos = :graficos, ssd = :ssd, hhd = :hhd WHERE id_producto = :id_producto");
+
+			$stmt2->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
+			$stmt2->bindParam(":ram", $datos["ram"], PDO::PARAM_STR);
+			$stmt2->bindParam(":procesador", $datos["procesador"], PDO::PARAM_STR);
+			$stmt2->bindParam(":tam_pantalla", $datos["tam_pantalla"], PDO::PARAM_STR);
+			$stmt2->bindParam(":graficos", $datos["graficos"], PDO::PARAM_STR);
+			$stmt2->bindParam(":ssd", $datos["ssd"], PDO::PARAM_STR);
+			$stmt2->bindParam(":hhd", $datos["hhd"], PDO::PARAM_STR);
+			$stmt2->bindParam(":id_producto", $datos["id"], PDO::PARAM_INT);
+
+			$stmt2->execute();
 		}
 
+		$comp = Conexion::conectar()->prepare("UPDATE comp_prod_factura SET IdentificationNumber = :IdentificationNumber, Descripcion = :Descripcion, Nombre = :Nombre, Unit = :Unit, UnitCode = :UnitCode, Taxes = :Taxes, ObjetoImp = :ObjetoImp WHERE id_producto = :id_producto");
 
-		if ($stmt->execute()) {
+		$comp->bindParam(":IdentificationNumber", $datos["codigo"], PDO::PARAM_STR);
+		$comp->bindParam(":Descripcion", $datos["descripcion"], PDO::PARAM_STR);
+		$comp->bindParam(":Nombre", $datos["nombre"], PDO::PARAM_STR);
+		$comp->bindParam(":Unit", $datos["unidad"], PDO::PARAM_STR);
+		$comp->bindParam(":UnitCode", $datos["clave"], PDO::PARAM_STR);
+		$comp->bindParam(":Taxes", $datos["iva"], PDO::PARAM_STR);
+		$comp->bindParam(":ObjetoImp", $datos["impuesto"], PDO::PARAM_STR);
+		$comp->bindParam(":id_producto", $datos["id"], PDO::PARAM_INT);
+
+		if ($comp->execute()) {
 
 			return "ok";
 		} else {
@@ -429,8 +453,9 @@ class ModeloProductos
 		// echo $table;
 	}
 
-	static public function mdlEliminarProductoReal($valor){
-		
+	static public function mdlEliminarProductoReal($valor)
+	{
+
 		$stmt = Conexion::conectar()->prepare("DELETE FROM productosfacturas WHERE id = :id");
 
 		$stmt->bindParam(":id", $valor, PDO::PARAM_INT);
@@ -456,5 +481,27 @@ class ModeloProductos
 		$stmt->close();
 
 		$stmt = null;
+	}
+
+
+	static public function mdlVerProductoEditar($idProducto)
+	{
+
+		$stmt = Conexion::conectar()->prepare("SELECT
+													*
+												FROM
+													productosfacturas a
+												INNER JOIN comp_prod_factura b ON a.id = b.id_producto
+												LEFT JOIN complemento_producto c ON a.id = c.id_producto
+												WHERE
+													a.id = :id");
+
+		$stmt->bindParam(":id", $idProducto, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
 	}
 }

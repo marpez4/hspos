@@ -96,3 +96,129 @@ $(".tablaAltaProductos tbody").on("click", "button.btnEliminarProducto", functio
 	})
 
 })
+
+
+$(".tablaAltaProductos tbody").on("click", "button.btnEditarProducto", function () {
+
+	$(".chosen-select").select2({
+		dropdownAutoWidth: true,
+		width: '100%'
+	});
+
+	var idProducto = $(this).attr("idProducto");
+
+	var datos = new FormData();
+	datos.append("idProductoVerEditar", idProducto);
+
+	$("#id_productoEd").val(idProducto);
+
+	$.ajax({
+
+		url: "ajax/productos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function (respuesta) {
+
+			$("#editarNombre").val(respuesta["nombre"]);
+
+			$("#editarCodigo").val(respuesta["codigo"]);
+
+			$("#editarDescripcion").val(respuesta["descripcion"]);
+
+			$("#editarCategoria").val(respuesta["id_categoria"]);
+
+			$("#editarStock").val(respuesta["stock"]);
+
+			$("#editarPrecioCompra").val(respuesta["precio_compra"]);
+
+			$("#editarPrecioVenta").val(respuesta["precio_venta"]);
+
+			$("#editarPrecioClienteF").val(respuesta["precio_cliente"]);
+
+			$("#editarPrecioMl").val(respuesta["precio_ml"]);
+
+
+
+			$("#editarClave").val(respuesta["UnitCode"]).trigger("change");
+
+			$("#editarUnidad").val(respuesta["Unit"]).trigger("change");
+
+			$("#editarIva").val(respuesta["Taxes"]).trigger("change");
+
+			$("#editarObjetoImpuesto").val(respuesta["ObjetoImp"]).trigger("change");
+
+			//    alert(respuesta["marca"]);
+
+			if (respuesta["marca"] != null) {
+
+				$("#computadorasEditar").removeClass("hidden");
+
+				$("#editarMarca").val(respuesta["marca"]);
+
+				$("#editarRam").val(respuesta["ram"]);
+
+				$("#editarProcesedor").val(respuesta["procesador"]);
+
+				$("#editarPantalla").val(respuesta["tam_pantalla"]);
+
+				$("#editarGraficos").val(respuesta["graficos"]);
+
+				$("#editarSsd").val(respuesta["ssd"]);
+
+				$("#editarHhd").val(respuesta["hhd"]);
+
+				// AGREGAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
+
+				$("#editarMarca").attr("required", true);
+
+				$("#editarRam").attr("required", true);
+
+				$("#editarProcesedor").attr("required", true);
+
+				$("#editarPantalla").attr("required", true);
+
+				$("#editarGraficos").attr("required", true);
+
+				$("#editarSsd").attr("required", true);
+
+				$("#editarHhd").attr("required", true);
+
+			} else if (respuesta["marca"] == null) {
+
+				$("#computadorasEditar").addClass("hidden");
+
+				// QUITAMOS EL ATRIBUTO REQUIRED EN LOS CAMPOS 
+
+				$("#editarMarca").attr("required", false);
+
+				$("#editarRam").attr("required", false);
+
+				$("#editarProcesedor").attr("required", false);
+
+				$("#editarPantalla").attr("required", false);
+
+				$("#editarGraficos").attr("required", false);
+
+				$("#editarSsd").attr("required", false);
+
+				$("#editarHhd").attr("required", false);
+
+			}
+
+			if (respuesta["imagen"] != "") {
+
+				$("#imagenActual").val(respuesta["imagen"]);
+
+				$(".previsualizar").attr("src", respuesta["imagen"]);
+
+			}
+
+		}
+
+	})
+
+})

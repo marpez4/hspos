@@ -1,92 +1,4 @@
-<script src="/ext/hspos/extra/FacturamaJs/facturama.api.js"></script>
-
-<?php
-
-if ($_SESSION["perfil"] == "Vendedor") {
-
-    echo '<script>
-
-    window.location = "inicio";
-
-  </script>';
-
-    return;
-}
-
-?>
-
-<div class="content-wrapper">
-
-    <section class="content-header">
-
-        <h1>
-
-            Administrar productos
-
-        </h1>
-
-        <ol class="breadcrumb">
-
-            <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
-            <li class="active">Administrar productos</li>
-
-        </ol>
-
-    </section>
-
-    <section class="content">
-
-        <div class="box">
-
-            <div class="box-header with-border">
-
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProductofac">
-
-                    Agregar producto
-
-                </button>
-
-            </div>
-
-            <div class="box-body">
-
-                <table class="table table-bordered table-striped dt-responsive tablaAltaProductos" width="100%">
-
-                    <thead>
-
-                        <tr>
-
-                            <th style="width:10px">#</th>
-                            <th>Imagen</th>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio de compra</th>
-                            <th>Precio de venta</th>
-                            <th>Precio en ML</th>
-                            <th>Precio Cliente F.</th>
-                            <th>Agregado</th>
-                            <th>Acciones</th>
-
-                        </tr>
-
-                    </thead>
-
-                </table>
-
-                <input type="hidden" value="<?php echo $_SESSION['perfil']; ?>" id="perfilOculto">
-
-            </div>
-
-        </div>
-
-    </section>
-
-</div>
-
-
-<div id="modalAgregarProductofac" class="modal fade" role="dialog">
+<div id="modalEditarProducto" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -102,7 +14,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                    <h4 class="modal-title">Agregar producto</h4>
+                    <h4 class="modal-title">Editar producto</h4>
 
                 </div>
 
@@ -111,7 +23,9 @@ if ($_SESSION["perfil"] == "Vendedor") {
                 ======================================-->
 
                 <div class="modal-body">
-                    <div class="box-body">                       
+                    <div class="box-body">
+
+                        <input type="hidden" id="id_productoEd" name="id_productoEd">
 
                         <!-- Nombre Interno -->
 
@@ -123,7 +37,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
-                                <input type="text" class="form-control input-lg" name="nuevaNombre" required>
+                                <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" required>
 
                             </div>
 
@@ -139,7 +53,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                 <span class="input-group-addon"><i class="fa fa-code"></i></span>
 
-                                <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" required>
+                                <input type="text" class="form-control input-lg" id="editarCodigo" name="editarCodigo" required>
 
                             </div>
 
@@ -155,7 +69,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
-                                <input type="number" class="form-control input-lg" id="nuevoStock" name="nuevoStock" required>
+                                <input type="number" class="form-control input-lg" id="editarStock" name="editarStock" required>
 
                             </div>
 
@@ -171,7 +85,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
-                                <textarea name="nuevaDescripcion" cols="2" rows="2" class="form-control"></textarea>
+                                <textarea name="editarDescripcion" id="editarDescripcion" cols="2" rows="2" class="form-control"></textarea>
 
                             </div>
 
@@ -187,7 +101,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
+                                <select class="form-control input-lg" id="editarCategoria" name="editarCategoria" required>
 
                                     <option value="">Selecionar categoría</option>
 
@@ -213,7 +127,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                         <!-- INICIA FORM COMPUTADORAS -->
 
-                        <div id="computadoras" name="computadoras" class="hidden">
+                        <div id="computadorasEditar" name="computadorasEditar" class="hidden">
 
                             <div class="form-group row">
 
@@ -225,7 +139,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-bars"></i></span>
 
-                                        <input type="text" class="form-control input-lg" name="nuevaMarca" id="nuevaMarca">
+                                        <input type="text" class="form-control input-lg" name="editarMarca" id="editarMarca">
 
                                     </div>
 
@@ -240,7 +154,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
                                         <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
 
-                                        <select class="form-control input-lg" id="nuevaRam" name="nuevaRam" required>
+                                        <select class="form-control input-lg" id="editarRam" name="editarRam" required>
 
                                             <option value="">Selecionar RAM</option>
 
@@ -272,7 +186,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
-                                        <input type="text" class="form-control input-lg" name="nuevaProcesedor" id="nuevaProcesedor">
+                                        <input type="text" class="form-control input-lg" name="editarProcesedor" id="editarProcesedor">
 
                                     </div>
                                 </div>
@@ -285,7 +199,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-desktop"></i></span>
 
-                                        <input type="text" class="form-control input-lg" name="nuevaPantalla" id="nuevaPantalla" placeholder="Ingresar pantalla">
+                                        <input type="text" class="form-control input-lg" name="editarPantalla" id="editarPantalla" placeholder="Ingresar pantalla">
 
                                     </div>
 
@@ -299,7 +213,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-microchip"></i></span>
 
-                                        <select class="form-control input-lg" name="nuevaGraficos" id="nuevaGraficos" required>
+                                        <select class="form-control input-lg" name="editarGraficos" id="editarGraficos" required>
 
                                             <option value="">Selecionar Gráficos</option>
 
@@ -332,7 +246,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
 
-                                        <select class="form-control input-lg" name="nuevaSsd" id="nuevaSsd" required>
+                                        <select class="form-control input-lg" name="editarSsd" id="editarSsd" required>
 
                                             <option value="">Seleciona SSD</option>
 
@@ -364,7 +278,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                         <span class="input-group-addon"><i class="fa fa-hdd-o"></i></span>
 
-                                        <select class="form-control input-lg" name="nuevaHhd" id="nuevaHhd" required>
+                                        <select class="form-control input-lg" name="editarHhd" id="editarHhd" required>
 
                                             <option value="">Seleciona HHD</option>
 
@@ -407,7 +321,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editarPrecioCompra" name="editarPrecioCompra" step="any" min="0" required>
 
                                 </div>
 
@@ -423,7 +337,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioClienteF" name="nuevoPrecioClienteF" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editarPrecioClienteF" name="editarPrecioClienteF" step="any" min="0" required>
 
                                 </div>
 
@@ -439,7 +353,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-money"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioMl" name="nuevoPrecioMl" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editarPrecioMl" name="editarPrecioMl" step="any" min="0" required>
 
                                 </div>
 
@@ -455,7 +369,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" step="any" min="0" required>
 
                                 </div>
 
@@ -474,7 +388,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaIva" name="nuevaIva" required>
+                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="editarIva" name="editarIva" required>
 
                                         <option value="">Seleciona</option>
                                         <option value=".16">IVA 16%</option>
@@ -496,7 +410,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaClave" name="nuevaClave" required>
+                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="editarClave" name="editarClave" required>
 
                                         <option value="">Seleciona una clave</option>
 
@@ -528,7 +442,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaUnidad" name="nuevaUnidad" required>
+                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="editarUnidad" name="editarUnidad" required>
 
                                         <option value="">Seleciona la unidad</option>
 
@@ -560,13 +474,13 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="nuevaImpuesto" name="nuevaImpuesto" required>
+                                    <select style="height: 100%; width: 100%" class="form-control chosen-select" id="editarObjetoImpuesto" name="editarObjetoImpuesto" required>
 
                                         <option value="">Seleciona una opción</option>
                                         <option value="01">01-No objeto de impuesto</option>
                                         <option value="02">02-Si objeto de impuesto</option>
                                         <option value="03">03-Si objeto del impuesto y no obligado al desglose</option>
-                                        <option value="04">04-Si objeto de impuesto y no causa impuesto</option>
+                                        <option value="04">04-Si objeto de impuesto y no causa im puesto</option>
 
                                     </select>
 
@@ -584,11 +498,13 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                             <div class="panel">SUBIR IMAGEN</div>
 
-                            <input type="file" class="nuevaImagen" name="nuevaImagen">
+                            <input type="file" class="nuevaImagen" name="editarImagen" id="editarImagen">
 
                             <p class="help-block">Peso máximo de la imagen 2MB</p>
 
                             <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+                            <input type="hidden" name="imagenActual" id="imagenActual">
 
                         </div>
 
@@ -610,8 +526,8 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
                 <?php
 
-                $crearProducto = new ControladorProductos();
-                $crearProducto->ctrCrearProducto();
+                $editarProducto = new ControladorProductos();
+                $editarProducto->ctrEditarProducto();
 
                 ?>
             </form>
@@ -621,7 +537,3 @@ if ($_SESSION["perfil"] == "Vendedor") {
     </div>
 
 </div>
-
-<?php
-include "modals/modalEditarProducto.php";
-?>
