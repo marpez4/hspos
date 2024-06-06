@@ -160,11 +160,11 @@ if ($xml) {
 
                   <td>
 
-                    <div class="btn-group">';            
+                    <div class="btn-group">';
 
               $respuestaFolio = ControladorFacturacion::ctrMostrarFacturasEmitidas($value["codigo"]);
 
-              if ($respuestaFolio == null || $respuestaFolio["estatus"] == 0 ) {
+              if ($respuestaFolio == null || $respuestaFolio["estatus"] == 0) {
 
                 echo '<button class="btn btn-success btnAgregarFactura" codigoVentaFactura="' . $value["codigo"] . '" data-toggle="modal" data-target="#modalAgregarFactura"><i class="fa fa-address-card"></i></button>';
               } else {
@@ -178,11 +178,20 @@ if ($xml) {
 
               $respuestaClienteMostrador = ControladorClientes::ctrMostrarClientesMostrador($item, $value["codigo"]);
 
-              echo '<button class="btn btn-info btnImprimirFactura" id_cliente="'.$value["id_cliente"].'" registroCM = "'.$respuestaClienteMostrador["codigo_venta"].'" codigoVenta="' . $value["codigo"] . '">
+              if ($respuestaClienteMostrador == null) {
+
+                echo '<button class="btn btn-info btnImprimirFactura" id_cliente="' . $value["id_cliente"] . '" codigoVenta="' . $value["codigo"] . '">
 
                         <i class="fa fa-print"></i>
 
                       </button>';
+              } else {
+                echo '<button class="btn btn-info btnImprimirFactura" id_cliente="' . $value["id_cliente"] . '" registroCM = "' . $respuestaClienteMostrador["codigo_venta"] . '" codigoVenta="' . $value["codigo"] . '">
+
+                        <i class="fa fa-print"></i>
+
+                      </button>';
+              }
 
               if ($_SESSION["perfil"] == "Administrador") {
 
@@ -211,9 +220,9 @@ if ($xml) {
 
         // SOLICITAMOS EL MODAL PARA LA AGREGAR LA FACURA
 
-        require_once "/modals/modal-agregarFactura.php";
+        require_once "modals/modal-agregarFactura.php";
         require_once "cliente_mostrador.php";
-                
+
 
         ?>
 
