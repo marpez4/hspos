@@ -178,7 +178,7 @@ if ($xml) {
 
               $respuestaClienteMostrador = ControladorClientes::ctrMostrarClientesMostrador($item, $value["codigo"]);
 
-              if ($respuestaClienteMostrador == null) {
+              if ($respuestaClienteMostrador == null || $respuestaClienteMostrador == '') {
 
                 echo '<button class="btn btn-info btnImprimirFactura" id_cliente="' . $value["id_cliente"] . '" codigoVenta="' . $value["codigo"] . '">
 

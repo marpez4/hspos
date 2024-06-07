@@ -205,8 +205,9 @@ EOF;
 
 			$valorUnitario = number_format($item["precio"], 2);
 			$precioTotal = number_format($item["subTotal"], 2);
-			$totalProductos += $item["subTotal"];
-			$totalProductos = number_format($totalProductos, 2);
+
+			$totalProductos += $item["subTotal"];			
+
 			$partida = $key + 1;
 			$bloque4 = <<<EOF
 
@@ -245,6 +246,8 @@ EOF;
 
 			$pdf->writeHTML($bloque4, false, false, false, false, '');
 		}
+		
+		$totalProductos = number_format($totalProductos, 2);
 
 		$bloque5 = <<<EOF
 
@@ -307,7 +310,7 @@ EOF;
 
 		//$pdf->Output('factura.pdf', 'D');
 		ob_end_clean();
-		$pdf->Output('factura.pdf', 'I');
+		$pdf->Output('notaVenta-'.$valorVenta .'.pdf', 'I');
 	}
 }
 

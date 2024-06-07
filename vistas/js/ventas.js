@@ -1036,7 +1036,7 @@ IMPRIMIR FACTURA
 
 $(".tablas").on("click", ".btnImprimirFactura", function () {
 
-	if ($(this).attr("id_cliente") == 21 && $(this).attr("registroCM") == "") {
+	if ($(this).attr("id_cliente") == 21 && $(this).attr("registroCM") == undefined) {
 
 		$("#modalAgregarCM").modal("show");
 
