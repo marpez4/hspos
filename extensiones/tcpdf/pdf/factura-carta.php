@@ -112,19 +112,24 @@ class imprimirFactura
 
 		$pdf->AddPage();
 
-		// Tamaño de la página A4
-		$anchoPagina = 210; // mm
-		$altoPagina = 297; // mm
+		$pdf->SetFooterMargin(0);
 
-		// Tamaño de la marca de agua
-		$anchoMarcaDeAgua = 100; // mm
-		$altoMarcaDeAgua = 100; // mm
+		// get the current page break margin
+		$bMargin = $pdf->getBreakMargin();
 
-		// Calcular coordenadas para centrar la marca de agua
-		$x = ($anchoPagina - $anchoMarcaDeAgua) / 2;
-		$y = ($altoPagina - $altoMarcaDeAgua) / 2;
+		// get current auto-page-break mode
+		$auto_page_break = $pdf->getAutoPageBreak();
 
-		$pdf->Image('https://hellssystems.com/resources/marcaAgua.png', $x, $y, $anchoMarcaDeAgua, $altoMarcaDeAgua, '', '', '', false, 300, '', false, false, 0);
+		// disable auto-page-break
+		$pdf->SetAutoPageBreak(true, 0);
+
+		// set background image
+		$img_file = 'https://hellssystems.com/resources/cartaVenta2.jpg';
+		$pdf->Image($img_file, 0, 0, 225, 305, '', '', '', false, 300, '', false, false, 0);
+
+		// set the starting point for the page content
+		$pdf->setPageMark();
+		$pdf->setPrintFooter(false);
 		// ---------------------------------------------------------
 
 		$bloque1 = <<<EOF
@@ -133,37 +138,19 @@ class imprimirFactura
 		
 		<tr>
 			
-			<td style="width:150px"><img src="https://hellssystems.com/resources/logoWeb.png"></td>
+			<td></td>
 
-			<td style="background-color:white; width:140px">
+			<td style="width:140px">
 				
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
-					
-					<br>
-					 León Gto, México
-
-					<br>
-					Dirección: Blvd. Vicente Valtierra #2703 Col. San Manuel
-
-				</div>
+				
 
 			</td>
 
-			<td style="background-color:white; width:140px">
-
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
-					
-					<br>
-					Teléfonos: (477) 3112875 ó 4776632304
-					
-					<br>
-					soporte_hell@hotmail.com
-
-				</div>
+			<td style="width:140px">
 				
 			</td>
 
-			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>FACTURA N.<br>$valorVenta</td>
+			<td style="width:110px; text-align:center; color:white"><br><br>Folio venta: <br>$valorVenta</td>
 
 		</tr>
 
@@ -177,41 +164,13 @@ EOF;
 
 		$bloque2 = <<<EOF
 
-	<table>
-		
-		<tr>
-			
-			<td style="width:540px"><img src="images/back.jpg"></td>
-		
-		</tr>
+		<div style="text-align:right;">
+    		<h3>León, Guanajuato a $diaExPr de  $mesExPr de  $añoExPr</h3>
+		</div>
 
-	</table>
-
-	<table style="font-size:10px; padding:5px 10px;">
-	
-		<tr>
-		
-			<td style="background-color:white; width:390px">
-
-			<u style="color:#3F51B5; font-size:14">Sr.(a): $nombreCliente </u>
-
-			</td>
-
-			<td style="background-color:white; width:150px; text-align:right">
-			
-				$diaExPr de $mesExPr del $añoExPr
-
-			</td>
-
-		</tr>
-
-		<tr>
-		
-		<td style="border-bottom: 1px solid #666; background-color:white; width:540px"></td>
-
-		</tr>
-
-	</table>
+		<div style="text-align:right;">
+			<h2><u>Sr.(a)  $nombreCliente </u></h2>
+		</div>
 
 EOF;
 
@@ -225,11 +184,11 @@ EOF;
 
 		<tr>
 		
-		<td style="border: 1px solid #666; background-color:white; width:77px; text-align:center; font-size:8px;">POSICIÓN<br>(PARTIDA)</td>
-		<td style="border: 1px solid #666; background-color:white; width:72px; text-align:center; font-size:8px;">CANTIDAD</td>
-		<td style="border: 1px solid #666; background-color:white; width:218px; text-align:center; font-size:8px;">DESCRIPCIÓN CORTA DE LOS PRODUCTOS PROPUESTOS POR LA EMPRESA MARCA Y MODELO</td>
-		<td style="border: 1px solid #666; background-color:white; width:99px; text-align:center; font-size:8px;">IMPORTE NETO UNITARIO (SIN IVA)</td>
-		<td style="border: 1px solid #666; background-color:white; width:90px; text-align:center; font-size:8px;">IMPORTE NETO TOTAL (SIN IVA)</td>
+		<td style="border: 1px solid #666; width:77px; text-align:center; font-size:8px;">POSICIÓN<br>(PARTIDA)</td>
+		<td style="border: 1px solid #666; width:72px; text-align:center; font-size:8px;">CANTIDAD</td>
+		<td style="border: 1px solid #666; width:218px; text-align:center; font-size:8px;">DESCRIPCIÓN CORTA DE LOS PRODUCTOS PROPUESTOS POR LA EMPRESA MARCA Y MODELO</td>
+		<td style="border: 1px solid #666; width:99px; text-align:center; font-size:8px;">IMPORTE NETO UNITARIO (SIN IVA)</td>
+		<td style="border: 1px solid #666; width:90px; text-align:center; font-size:8px;">IMPORTE NETO TOTAL (SIN IVA)</td>
 
 		</tr>
 
@@ -240,11 +199,14 @@ EOF;
 		$pdf->writeHTML($bloque3, false, false, false, false, '');
 
 		// ---------------------------------------------------------
+		$totalProductos = 0;
 
 		foreach ($productos as $key => $item) {
 
 			$valorUnitario = number_format($item["precio"], 2);
 			$precioTotal = number_format($item["subTotal"], 2);
+			$totalProductos += $item["subTotal"];
+			$totalProductos = number_format($totalProductos, 2);
 			$partida = $key + 1;
 			$bloque4 = <<<EOF
 
@@ -252,23 +214,23 @@ EOF;
 
 		<tr>
 			
-			<td style="border: 1px solid #666; color:#333; background-color:white; width:77px; text-align:center">
+			<td style="border: 1px solid #666; color:#333; width:77px; text-align:center">
 				$partida
 			</td>
 			
-			<td style="border: 1px solid #666; color:#333; background-color:white; width:72px; text-align:center">
+			<td style="border: 1px solid #666; color:#333; width:72px; text-align:center">
 				$item[cantidad]
 			</td>
 
-			<td style="border: 1px solid #666; color:#333; background-color:white; width:218px; text-align:center">
+			<td style="border: 1px solid #666; color:#333; width:218px; text-align:center">
 				$item[descripcion]
 			</td>
 
-			<td style="border: 1px solid #666; color:#333; background-color:white; width:99px; text-align:center">$ 
+			<td style="border: 1px solid #666; color:#333; width:99px; text-align:center">$ 
 				$valorUnitario
 			</td>
 
-			<td style="border: 1px solid #666; color:#333; background-color:white; width:90px; text-align:center">$ 
+			<td style="border: 1px solid #666; color:#333; width:90px; text-align:center">$ 
 				$precioTotal
 			</td>
 
@@ -290,23 +252,23 @@ EOF;
 
 			<tr>
 				
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:77px; text-align:center">
+				<td style="border: 1px solid #666; color:#333; width:77px; text-align:center">
 					
 				</td>
 				
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:72px; text-align:center">
+				<td style="border: 1px solid #666; color:#333; width:72px; text-align:center">
 					
 				</td>
 
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:218px; text-align:center">
+				<td style="border: 1px solid #666; color:#333; width:218px; text-align:center">
 					
 				</td>
 
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:99px; text-align:center">$ 
+				<td style="border: 1px solid #666; color:#333; width:99px; text-align:center">Total, sin IVA
 					
 				</td>
 
-				<td style="border: 1px solid #666; color:#333; background-color:white; width:90px; text-align:center">$ 
+				<td style="border: 1px solid #666; color:#333; width:90px; text-align:center">$$totalProductos
 					
 				</td>
 
@@ -337,6 +299,9 @@ EOF;
 
 
 		$pdf->writeHTML($bloque6, false, false, false, false, '');
+
+		// ---------------------------------------------------------
+
 		// ---------------------------------------------------------
 		//SALIDA DEL ARCHIVO 
 
